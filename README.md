@@ -1,11 +1,3 @@
----
-title: 2016-11-4未命名文件 
-tags: 新建,模板,小书匠
-grammar_cjkRuby: true
----
-
-
-
 # Teaching-Assistant-System
 # 软件工程教学辅助系统  
 ## Specification
