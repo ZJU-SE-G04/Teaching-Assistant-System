@@ -5,18 +5,42 @@
     vertical-align: middle;
 }
 
+.coursename {
+    display: block;
+    font-size:25px;
+    line-height: 30px;
+}
 #nameLink {
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
+#header_topBar {
+    background: #eeeeee;
+}
+
+#header_courseNameBar {
+    background: #f8f8f8;
+    border: #e2e2e2 1px solid;
+    height: 60px;
+}
+
+#header_courseName {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 .f-f0 {
     font-family: "Arial","Hiragino Sans GB","Microsoft YaHei", 微软雅黑, "Helvetica", "sans-serif";
 }
-.f-fc9 {
+.f-fc0 {
     color: #999;
 }
 .f-thide, .f-nowrp {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+.right-border {
+    border-right: #e2e2e2 1px solid;
 }

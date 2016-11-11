@@ -5,31 +5,37 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>header</title>
-    <link href="bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+    <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/header.css" rel="stylesheet">
 
 </head>
 <body>
 
-<style>
-    #topBar {
-        background: #eeeeee;
-    }
-</style>
-<div class="container" id="topBar">
-    <div class="row">
+<div class="container">
+    <div class="row" id="header_topBar">
         <div class="col-md-6"><img src="img/logo.png" alt="499x100" class="img-responsive"></div>
-        <div class="col-md-4 col-md-offset-2" id="nameLink">
-            <div class="nickname f-f0 f-fc9 f-thide">
+        <div class="col-md-2 col-md-offset-4" id="nameLink">
+            <div class="nickname f-f0 f-fc0 f-thide">
                 你好,
-                <a id="username">谢俊东</div>
+                <a id="username">谢俊东</a>
             </div>
         </div>
 
     </div>
+    <div class="row" id="header_courseNameBar">
+        <div style="margin: 5px 0px 5px 0px;">
+            <div class="col-md-2 right-border">
+                <img src="img/zju_logo.png" alt="134x50" class="img-responsive"/>
+            </div>
+            <div class="col-md-10" id="header_courseName">
+                <div class="coursename f-f0 f-fc0"> 软件工程管理</div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<script src="jquery-3.1.1.js"></script>
-<script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+
+<!--<script src="jquery/jquery-3.1.1.min.js"></script>-->
+<!--<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>-->
 </body>
 </html>
