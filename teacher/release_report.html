@@ -8,19 +8,33 @@
     <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap-theme.css">
     <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script src="../jquery/jquery-3.1.1.js"></script>
+    <script src="../bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+    <style>
+        .icon-black {
+            color: black;
+        }
+    </style>
 </head>
 <body>
-<h2>发布新实验报告</h2>
 <form action="http://www.baidu.com" class="form-horizontal">
+    <!--<div class="form-group">-->
+    <!--<div class="col-sm-1 control-label"></div>-->
+    <!--<h3 class="col-sm-9" style="margin-bottom: 0">发布新实验报告</h3>-->
+    <!--</div>-->
+    <!--<hr width="83%">-->
+    <div class="container">
+        <h3 class="page-header">发布新实验报告</h3>
+    </div>
     <div class="form-group">
         <label for="id" class="col-sm-2 control-label">实验报告编号</label>
-        <div class="col-sm-8">
+        <div class="col-sm-9">
             <input type="text" class="form-control" id="id" placeholder="输入实验报告编号">
         </div>
     </div>
     <div class="form-group">
         <label for="name" class="col-sm-2 control-label">实验报告名称</label>
-        <div class="col-sm-8">
+        <div class="col-sm-9">
             <input type="text" class="form-control" id="name" placeholder="输入实验报告名称">
         </div>
     </div>
@@ -30,6 +44,98 @@
             <input type="date" class="form-control" id="deadline">
         </div>
     </div>
+    <div class="form-group">
+        <label for="detail" class="col-sm-2 control-label">详细信息</label>
+        <div class="col-sm-9">
+            <textarea name="detail" id="detail" rows="3" class="form-control" placeholder="输入详细信息"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="fileTemplate" class="col-sm-2 control-label">实验报告模板</label>
+        <div class="col-sm-9">
+            <input style="margin-top: 1mm;" type="file" id="fileTemplate">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-2 control-label"></div>
+        <div class="col-sm-9">
+            <button type="submit" class="btn btn-primary">
+                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 发布
+            </button>
+        </div>
+    </div>
 </form>
+<br>
+<!--<div class="form-horizontal">-->
+<!--<div class="form-group">-->
+<!--<div class="col-sm-1 control-label"></div>-->
+<!--<h3 class="col-sm-9" style="margin-bottom: 0">批改实验报告</h3>-->
+<!--</div>-->
+<!--<hr width="83%">-->
+<!--&lt;!&ndash;<div class="container dropdown">&ndash;&gt;-->
+<!--&lt;!&ndash;<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu" data-toggle="dropdown">&ndash;&gt;-->
+<!--&lt;!&ndash;选择实验报告编号&ndash;&gt;-->
+<!--&lt;!&ndash;<span class="caret"></span>&ndash;&gt;-->
+<!--&lt;!&ndash;</button>&ndash;&gt;-->
+<!--&lt;!&ndash;<ul class="dropdown-menu">&ndash;&gt;-->
+<!--&lt;!&ndash;<li><a href="#">实验报告1</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;<li><a href="#">实验报告2</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;<li><a href="#">实验报告3</a></li>&ndash;&gt;-->
+<!--&lt;!&ndash;</ul>&ndash;&gt;-->
+<!--&lt;!&ndash;</div>&ndash;&gt;-->
+<!--</div>-->
+
+<div class="container">
+    <h3 class="page-header">批改实验报告</h3>
+</div>
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>实验报告编号</th>
+            <th>实验报告名称</th>
+            <th>截止日期</th>
+            <th>剩余批改份数</th>
+            <th>点评</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>实验报告1</td>
+            <td>学习使用网桥</td>
+            <td>2016-11-15</td>
+            <td>15/90</td>
+            <td>
+                <a href="http://www.baidu.com" class="icon-black">
+                    <span class="glyphicon glyphicon-arrow-right"></span>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>实验报告2</td>
+            <td>学习使用路由器</td>
+            <td>2016-12-05</td>
+            <td>90/90</td>
+            <td>
+                <a href="http://www.baidu.com" class="icon-black">
+                    <span class="glyphicon glyphicon-arrow-right"></span>
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td>实验报告3</td>
+            <td>学习使用服务器</td>
+            <td>2016-12-15</td>
+            <td>90/90</td>
+            <td>
+                <a href="http://www.baidu.com" class="icon-black">
+                    <span class="glyphicon glyphicon-arrow-right"></span>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
 </body>
 </html>
