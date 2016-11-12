@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>批改实验报告</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script src="../jquery/jquery-3.1.1.js"></script>
+    <script src="../bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+</head>
+<body>
+<div class="container">
+    <h3 class="page-header">批改实验报告</h3>
+    <table class="table">
+        <thead>
+        <tr class="">
+            <th>姓名</th>
+            <th>学号</th>
+            <th>实验报告名称</th>
+            <th>最后提交时间</th>
+            <th>下载</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>谢俊南</td>
+            <td>3140101002</td>
+            <td>report_001.zip</td>
+            <td>2016-11-15 22:00:00</td>
+            <td>
+                <a href="http://www.baidu.com" class="icon-black" style="text-decoration: none">
+                    &nbsp;&nbsp;<span class="glyphicon glyphicon-arrow-down"></span>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<form action="http://www.baidu.com" class="form-horizontal" style="margin-left: -12mm;">
+    <div class="form-group">
+        <label for="score" class="col-sm-2 control-label">打分</label>
+        <div class="col-sm-1">
+            <input type="text" id="score" class="form-control">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="comment" class="col-sm-2 control-label">点评</label>
+        <div class="col-sm-3">
+            <textarea name="comment" id="comment" rows="3" class="form-control" placeholder="输入实验报告评价"></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-2 control-label"></div>
+        <div class="col-sm-3">
+            <button type="submit" class="btn btn-primary">
+                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 提交并批改下一份
+            </button>
+        </div>
+    </div>
+</form>
+<br>
+
+<!--姓名 学号 实验报告名称 完成状态 提交时间 成绩 批改-->
+<div class="container">
+    <h3 class="page-header">查看所有学生报告</h3>
+    <table class="table text-center">
+        <thead>
+        <tr>
+            <th class="text-center">姓名</th>
+            <th class="text-center">学号</th>
+            <th class="text-center">实验报告名称</th>
+            <th class="text-center">完成状态</th>
+            <th class="text-center">最后提交时间</th>
+            <th class="text-center">成绩</th>
+            <th class="text-center">批改</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>谢俊东</td>
+            <td>3140101001</td>
+            <td>report_001.zip</td>
+            <td>已完成</td>
+            <td>2016-11-01 21:30:00</td>
+            <td>98</td>
+            <td>
+                已批改
+            </td>
+        </tr>
+        <tr>
+            <td>谢俊南</td>
+            <td>3140101002</td>
+            <td>report_001.zip</td>
+            <td>已完成</td>
+            <td>2016-11-15 22:00:00</td>
+            <td>--</td>
+            <td>
+                <a href="correct_report.html">批改</a>
+            </td>
+        </tr>
+        <tr>
+            <td>谢俊西</td>
+            <td>3140101003</td>
+            <td>report_001.zip</td>
+            <td>已完成</td>
+            <td>2016-11-15 22:00:00</td>
+            <td>--</td>
+            <td>
+                <a href="correct_report.html">批改</a>
+            </td>
+        </tr><tr>
+            <td>谢俊北</td>
+            <td>3140101004</td>
+            <td>report_001.zip</td>
+            <td>未完成</td>
+            <td>--</td>
+            <td>--</td>
+            <td>
+                --
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
