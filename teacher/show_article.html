@@ -8,6 +8,7 @@
     <link href="../bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/stu_learn.css">
+    <link rel="stylesheet" href="../css/show_article.css">
 
 </head>
 <body>
@@ -16,18 +17,16 @@
 <div class="container">
     <div class="row" id="mainBody">
         <div class="col-md-2" id="left-side">
-            <div id="tabs" class="nav nav-pills">
-                <ul>
-                    <li class="active"><a href="#notice" data-toggle="tab">公告</a></li>
+                <ul  class="nav navbar-btn">
+                    <li class="active" ><a href="#notice" data-toggle="tab">公告<span class="sr-only">(current)</span></a></li>
                     <li class="tab-style"><a href="#article" data-toggle="tab">最新文章</a></li>
                     <li class="tab-style"><a href="#courseware" data-toggle="tab">课程资料</a></li>
-                    <li class="tab-style"><a href="#report" data-toggle="tab">实验报告与文档</a></li>
+                    <li class="tab-style"><a href="#report" data-toggle="tab">报告与文档</a></li>
                     <li class="tab-style"><a href="#exercise" data-toggle="tab">作业与测验</a></li>
                     <li class="tab-style"><a href="#studentInfo" data-toggle="tab">学生信息</a></li>
                     <li class="tab-style"><a href="#TAInfo" data-toggle="tab">助教信息</a></li>
 
                 </ul>
-            </div>
         </div>
         <div class="col-md-10 tab-content" id="learn_content">
             <div id="notice" class="tab-pane in active">
@@ -67,7 +66,8 @@
 
             </div>
             <div id="article" class="tab-pane">
-                <button type="button" class="btn btn-primary">撰写新文章</button>
+                <button type="button"  class="btn btn-primary" id="show_article_button" >撰写新文章</button>
+
             </div>
             <div id="courseware" class="tab-pane">
                 课程资料
