@@ -1,0 +1,32 @@
+#tabs {
+    text-align: center;
+}
+
+#tabs ul {
+    padding-left: 0px;
+    padding-bottom: 0px;
+    background-color: #ffffff;
+}
+#tabs ul li {
+    margin-top: -1px;
+    border: #e2e2e2 1px solid;
+    list-style-type: none;
+    width: 100%;
+}
+
+#tabs ul li a {
+    font-size: 16px;
+    line-height: 40px;
+    font-family: "Arial", "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, "Helvetica", "sans-serif";
+    color: #000;
+
+}
+
+#tabs ul li:hover {
+
+}
+#learn_content {
+    border: #e2e2e2 1px solid;
+    background: #fff;
+    height: auto;
+}
