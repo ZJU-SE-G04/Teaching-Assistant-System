@@ -86,7 +86,7 @@
                 </div>
             </div>
             <div id="courseware" class="tab-pane in active">
-                <button class="btn-block btn-default btn-lg">
+                <button class="btn-block btn-default btn-lg" id="ppt_btn">
                     <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">课件</span>
                 </button>
 
@@ -142,6 +142,26 @@
 
 <script src="../jquery/jquery-3.1.1.min.js"></script>
 <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-<script src="../jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<!--<script src="../jquery-ui-1.12.1.custom/jquery-ui.js"></script>-->
+<script>
+    $(document).ready(
+            $("#ppt_btn").click(function () {
+                        var content = $(this).next();
+                        if (content[0].style.display == 'none') {
+                            content.show();
+                        } else {
+                            content.css("display", "none");
+                        }
+                    }
+            )
+
+    );
+
+    $(document).ready(function () {
+        var courseID =
+        htmlObj = $.ajax({url:"http://localhost/get_course_intro.php?courseID=", async:true});
+        $("#course_introduce").html(htmlObj.responseText);
+    });
+</script>
 </body>
 </html>
