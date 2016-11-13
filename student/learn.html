@@ -86,45 +86,45 @@
                 </div>
             </div>
             <div id="courseware" class="tab-pane in active">
-                <button class="btn-block btn-default btn-lg" id="ppt_btn">
-                    <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">课件</span>
-                </button>
+                <div class="titleBox" id="ppt_btn">
+                    <span class="glyphicon glyphicon-menu-down"></span><span class="f-title">课件</span>
+                </div>
 
-                <div id="course_ppt">
-                    <div about="material_line">
+                <div id="course_ppt" class="datum-content">
+                    <div class="each_datum">
                         <a>第一章ppt</a>
-                        <div about="download">
+                        <div class="download-btn">
                             <a> <span class="glyphicon glyphicon-download"></span> </a>
                         </div>
                     </div>
-                    <div about="material_line">
+                    <div class="each_datum">
                         <a>第二章ppt</a>
-                        <div about="download">
+                        <div class="download-btn">
                             <a><span class="glyphicon glyphicon-download"></span></a>
                         </div>
                     </div>
-                    <div about="material_line">
+                    <div class="each_datum">
                         <a>第三章ppt</a>
-                        <div about="download">
+                        <div class="download-btn">
                             <a><span class="glyphicon glyphicon-download"></span></a>
                         </div>
                     </div>
                 </div>
-                <button class="btn-block btn-default btn-lg">
+                <div class="titleBox">
                     <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">模板</span>
-                </button>
-                <button class="btn-block btn-default btn-lg">
+                </div>
+                <div class="titleBox">
                     <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">参考资料</span>
-                </button>
-                <button class="btn-block btn-default btn-lg">
+                </div>
+                <div class="titleBox">
                     <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">以往优秀作业</span>
-                </button>
-                <button class="btn-block btn-default btn-lg">
+                </div>
+                <div class="titleBox">
                     <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">教学视频</span>
-                </button>
-                <button class="btn-block btn-default btn-lg">
+                </div>
+                <div class="titleBox">
                     <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">教学音频</span>
-                </button>
+                </div>
             </div>
             <div id="article" class="tab-pane">
                 文章
@@ -145,23 +145,25 @@
 <!--<script src="../jquery-ui-1.12.1.custom/jquery-ui.js"></script>-->
 <script>
     $(document).ready(
-            $("#ppt_btn").click(function () {
-                        var content = $(this).next();
+            $(".titleBox").click(function () {
+                        var content = $(this).next(".datum-content");
+                        var arrow_btn = $(this).children()[0];
                         if (content[0].style.display == 'none') {
                             content.show();
+                            arrow_btn.className = "glyphicon glyphicon-menu-up";
                         } else {
                             content.css("display", "none");
+                            arrow_btn.className = "glyphicon glyphicon-menu-down";
                         }
                     }
             )
-
     );
 
-    $(document).ready(function () {
-        var courseID =
-        htmlObj = $.ajax({url:"http://localhost/get_course_intro.php?courseID=", async:true});
-        $("#course_introduce").html(htmlObj.responseText);
-    });
+    //    $(document).ready(function () {
+    //        var courseID =
+    //        htmlObj = $.ajax({url:"http://localhost/get_course_intro.php?courseID=", async:true});
+    //        $("#course_introduce").html(htmlObj.responseText);
+    //    });
 </script>
 </body>
 </html>
