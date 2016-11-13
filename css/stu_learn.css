@@ -1,32 +1,122 @@
-#tabs {
-    text-align: center;
-}
+/*#tabs {*/
+    /*text-align: center;*/
+/*}*/
 
-#tabs ul {
-    padding-left: 0px;
-    padding-bottom: 0px;
-    background-color: #ffffff;
-}
-#tabs ul li {
-    margin-top: -1px;
-    border: #e2e2e2 1px solid;
-    list-style-type: none;
-    width: 100%;
-}
+/*#tabs ul {*/
+    /*padding-left: 0px;*/
+    /*padding-bottom: 0px;*/
+    /*background-color: #ffffff;*/
+/*}*/
+/*#tabs ul li {*/
+    /*margin-top: -1px;*/
+    /*border: #e2e2e2 1px solid;*/
+    /*list-style-type: none;*/
+    /*width: 100%;*/
+    /*padding: 0 0 0 0;*/
+/*}*/
 
-#tabs ul li a {
-    font-size: 16px;
-    line-height: 40px;
-    font-family: "Arial", "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, "Helvetica", "sans-serif";
-    color: #000;
+/*#tabs ul li.active {*/
+    /*background: #13A654;*/
+/*}*/
 
-}
+/*#tabs ul li a.active {*/
+    /*color: white;*/
+/*}*/
+/*#tabs ul li a {*/
+    /*font-size: 16px;*/
+    /*line-height: 40px;*/
+    /*font-family: "Arial", "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, "Helvetica", "sans-serif";*/
+    /*color: #000;*/
 
-#tabs ul li:hover {
+/*}*/
 
-}
+/*#tabs ul li:hover {*/
+    /*background: #eeeeee;*/
+/*}*/
 #learn_content {
-    border: #e2e2e2 1px solid;
-    background: #fff;
-    height: auto;
+}
+
+#intro_course_part {
+    background: #F8F8F8;
+    padding: 0 20px 0 20px;
+    margin: 20px 0px 0 0;
+    float: left;
+    width: 70%;
+}
+
+#intro_course_part p {
+    font-size: 12px;
+    line-height: 25px;
+}
+#intro_teacher_part {
+    margin-top: 20px;
+    padding: 0 15px 10px 15px;
+    background: #F8F8F8;
+    float: right;
+    width: 25%;
+}
+
+#intro_teacher_part h4 {
+    margin-left: 12px;
+}
+
+#courseware {
+    margin-right: 15px;
+}
+#courseware button {
+    text-align: left;
+    margin: 5px 0 10px 0;
+}
+
+#course_ppt .download-btn {
+    float: right;
+    vertical-align: middle;
+}
+
+#course_ppt .download-btn {
+    cursor: pointer;
+}
+
+
+#course_ppt .each_datum {
+    padding: 0px 10px 0 35px;
+    border-bottom: #e2e2e2 1px dashed;
+}
+
+#course_ppt .each_datum a{
+    font-size: 15px;
+    line-height: 30px ;
+    font-family: "Arial","Hiragino Sans GB","Microsoft YaHei", 微软雅黑, "Helvetica", "sans-serif";
+    cursor: pointer;
+}
+
+
+#course_ppt .each_datum:last-child {
+    border-bottom: none;
+}
+
+#courseware .titleBox {
+    background-color: #c3cdc6;
+    padding: 8px 15px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+#courseware .titleBox:hover {
+    background-color: #d2eff7;
+}
+
+#courseware .titleBox .glyphicon {
+    margin-right: 10px;
+}
+
+.datum-content {
+
+}
+
+.f-title {
+    font-size: 15px;
+    line-height: 25px ;
+    font-family: "Arial","Hiragino Sans GB","Microsoft YaHei", 微软雅黑, "Helvetica", "sans-serif";
 }
