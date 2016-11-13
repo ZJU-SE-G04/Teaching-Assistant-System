@@ -1,5 +1,5 @@
 #删除已有数据库
-drop database teaching_db;
+drop database if exists teaching_db;
 #先创建好数据库并打开	设置UTF-8编码格式
 create database teaching_db
 CHARACTER SET 'utf8'  
@@ -147,7 +147,7 @@ create table courseware_table(
 	lesson_id varchar(10),
 	courseware_name varchar(100),
 	courseware_info varchar(200),
-	courseware_kind varhcar(20),
+	courseware_kind varchar(20),
 	constraint foreign key (lesson_id) references lesson_table(lesson_id) on delete cascade
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -213,3 +213,10 @@ create table response_table(
 	constraint foreign key (topic_id) references topic_table(topic_id) on delete cascade
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+#留言
+create table words_table(
+	name varchar(30),
+	time datetime,
+	flag bool,
+	content varchar(300)
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
