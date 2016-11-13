@@ -7,11 +7,11 @@ if(page_number<5){
     document.getElementById("page_five").style.display="none";
 }
 if(page_number<4){
-    document.getElementById("page_five").style.display="none";
+    document.getElementById("page_four").style.display="none";
 }
 if(page_number<3){
-    document.getElementById("page_five").style.display="none";
+    document.getElementById("page_three").style.display="none";
 }
 if(page_number<2){
-    document.getElementById("page_five").style.display="none";
+    document.getElementById("page_two").style.display="none";
 }
