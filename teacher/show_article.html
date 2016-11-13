@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/stu_learn.css">
     <link rel="stylesheet" href="../css/show_article.css">
+    <link rel="stylesheet" href="../css/add_TA.css">
 
 </head>
 
@@ -107,7 +108,7 @@
                     <li><a id="page_three" href="#">3</a></li>
                     <li><a id="page_four" href="#">4</a></li>
                     <li><a id="page_five" href="#">5</a></li>
-                    <li class="disabled"><a id="page_last" href="#">6&raquo;</a></li>
+                    <li class="disabled"><a id="page_last" href="#">最后一页&raquo;</a></li>
                 </ul>
 
 
@@ -129,10 +130,59 @@
                 作业与测验
             </div>
             <div id="studentInfo" class="tab-pane">
-                学生信息
+                <div class="row">
+                <div class="col-sm-10">
+                    <h3>以下是本课程的选课学生名单</h3>
+                </div>
+                <div class="col-sm-2">
+                    <button type="button"  class="btn btn-primary" id="add_student_button">添加选课学生</button>
+                </div>
+                </div>
+                <table class="table table-striped">
+                <tr><th>学号</th><th>姓名</th><th>院系</th><th>专业</th><th>团队名称</th>
+                </tr><tr><th>3130101437</th><th>章世超</th><th>计算机学院</th><th>软件工程</th><th>激流勇进</th>
+                    </tr>
+                    <tr><th>3130101437</th><th>章世超</th><th>计算机学院</th><th>软件工程</th><th>激流勇进</th>
+                    </tr>
+                </table>
             </div>
+
+
+
             <div id="TAInfo" class="tab-pane">
-                助教信息
+                    <div class="row">
+                        <div class="col-sm-10">
+                            <h3>以下是本课程的助教名单</h3>
+                        </div>
+                        <div class="col-sm-2">
+                            <button type="button"  class="btn btn-primary" id="add_TA_button" onclick="addTA()">添加课程助教</button>
+                        </div>
+                    </div>
+                    <table class="table table-striped" id="TAInfoTable">
+                        <tr><th>学号</th><th>姓名</th><th>院系</th><th>专业</th></tr>
+                        <tr><th>3130101437</th><th>章世超</th><th>计算机学院</th><th>软件工程</th></tr>
+                        <tr><th>3130101437</th><th>章世超</th><th>计算机学院</th><th>软件工程</th></tr>
+                    </table>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p>添加<div class="form-group">
+                            <select class="form-control">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+                        </div>名助教</p>
+                        </div>
+                        <div class="col-sm-5">
+                            <button type="button"  class="btn btn-primary">添加选项框</button>
+                        </div>
+                    <div class="col-sm-4">
+                        <button type="button"  class="btn btn-primary" id="add_Record" >确定录入</button>
+                    </div>
+                </div>
+                </div>
             </div>
         </div>
     </div>
@@ -142,6 +192,7 @@
 <script src="../jquery/jquery-3.1.1.min.js"></script>
 <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script src="../jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-<script src="../JavaScript/teacher_JavaScript/turn_page_show_article.js"></script>
+<script src="../js/teacher_JavaScript/turn_page_show_article.js"></script>
+<script src="../js/teacher_JavaScript/add_TA.js"></script>
 </body>
 </html>
