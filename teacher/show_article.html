@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="../css/show_article.css">
 
 </head>
+
 <body>
 
 <iframe src="../header.html" frameborder="0" width="100%" id="header"></iframe>
@@ -97,15 +98,20 @@
                         </div>
                 </div>
 
+
+
                 <ul class="pagination pagination-sm">
-                    <li><a href="#">&laquo;第一页</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li class="active"><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li class="disabled"><a href="#">6&raquo;</a></li>
+                    <li><a id="page_first" class="active" href="#">&laquo;第一页</a></li>
+                    <li><a id="page_one" href="#test">1</a></li>
+                    <li><a id="page_two" href="#">2</a></li>
+                    <li><a id="page_three" href="#">3</a></li>
+                    <li><a id="page_four" href="#">4</a></li>
+                    <li><a id="page_five" href="#">5</a></li>
+                    <li class="disabled"><a id="page_last" href="#">6&raquo;</a></li>
                 </ul>
+
+
+
 
             </div>
 
@@ -136,5 +142,6 @@
 <script src="../jquery/jquery-3.1.1.min.js"></script>
 <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script src="../jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+<script src="../JavaScript/teacher_JavaScript/turn_page_show_article.js"></script>
 </body>
 </html>
