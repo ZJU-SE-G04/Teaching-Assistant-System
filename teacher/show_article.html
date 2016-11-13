@@ -17,8 +17,8 @@
 <div class="container">
     <div class="row" id="mainBody">
         <div class="col-md-2" id="left-side">
-                <ul  class="nav navbar-btn">
-                    <li class="active" ><a href="#notice" data-toggle="tab">公告<span class="sr-only">(current)</span></a></li>
+                <ul  class="nav nav-pills nav-stacked">
+                    <li class="active" ><a href="#notice" data-toggle="tab">公告</a></li>
                     <li class="tab-style"><a href="#article" data-toggle="tab">最新文章</a></li>
                     <li class="tab-style"><a href="#courseware" data-toggle="tab">课程资料</a></li>
                     <li class="tab-style"><a href="#report" data-toggle="tab">报告与文档</a></li>
@@ -29,7 +29,7 @@
                 </ul>
         </div>
         <div class="col-md-10 tab-content" id="learn_content">
-            <div id="notice" class="tab-pane in active">
+            <div id="notice" class="tab-pane">
                 <div>
                     <h3 class="page-header">公告</h3>
                 </div>
@@ -65,15 +65,54 @@
                 </div>
 
             </div>
-            <div id="article" class="tab-pane">
-                <button type="button"  class="btn btn-primary" id="show_article_button" >撰写新文章</button>
+            <div id="article" class="tab-pane in active">
 
-                <div class="panel panel-default" id="show_article_margin">
-                    <div class="panel-heading">这里是文章标题</div>
-                    <div class="panel-body">Panel Content</div>
+                <div class="row">
+                    <div class="col-sm-8">
+                      <h3>以下是已经发布的文章</h3>
+                    </div>
+                    <div class="col-sm-4">
+                        <button type="button"  class="btn btn-primary" id="show_article_button" >撰写新文章</button>
+                    </div>
                 </div>
 
+                <div class="panel panel-default" >
+                        <div class="panel-heading">
+
+                            <div class="row">
+                                <div class="col-sm-9">
+                                   热烈庆祝长者90大寿！
+                                </div>
+                                <div class="col-sm-1">
+                                    膜法师
+                                </div>
+                                <div class="col-sm-2">
+                                    2016-11-9
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">这里是部分文章内容，<=140字
+                            注：需要后端返回文章作者，文章标题，发布时间，文章不超过140字内容
+                            同时为了实现翻页，需要返回文章数量
+                        </div>
+                </div>
+
+                <ul class="pagination pagination-sm">
+                    <li><a href="#">&laquo;第一页</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li class="active"><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">5</a></li>
+                    <li class="disabled"><a href="#">6&raquo;</a></li>
+                </ul>
+
             </div>
+
+
+
+
+
             <div id="courseware" class="tab-pane">
                 课程资料
             </div>
