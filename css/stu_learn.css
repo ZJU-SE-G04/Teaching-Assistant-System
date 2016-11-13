@@ -60,32 +60,63 @@
     margin-left: 12px;
 }
 
+#courseware {
+    margin-right: 15px;
+}
 #courseware button {
     text-align: left;
     margin: 5px 0 10px 0;
 }
 
-#course_ppt div div[about="download"]{
+#course_ppt .download-btn {
     float: right;
     vertical-align: middle;
 }
 
-#course_ppt div div[about="download"] {
-    cursor: pointer;
-}
-#course_ppt div[about="material_line"] a{
-    font-size: 15px;
-    line-height: 25px ;
-    font-family: "Arial","Hiragino Sans GB","Microsoft YaHei", 微软雅黑, "Helvetica", "sans-serif";
+#course_ppt .download-btn {
     cursor: pointer;
 }
 
-#course_ppt div[about="material_line"] {
+
+#course_ppt .each_datum {
     padding: 0px 10px 0 35px;
     border-bottom: #e2e2e2 1px dashed;
 }
 
+#course_ppt .each_datum a{
+    font-size: 15px;
+    line-height: 30px ;
+    font-family: "Arial","Hiragino Sans GB","Microsoft YaHei", 微软雅黑, "Helvetica", "sans-serif";
+    cursor: pointer;
+}
 
-#course_ppt div[about="material_line"]:last-child {
+
+#course_ppt .each_datum:last-child {
     border-bottom: none;
+}
+
+#courseware .titleBox {
+    background-color: #c3cdc6;
+    padding: 8px 15px;
+    cursor: pointer;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+#courseware .titleBox:hover {
+    background-color: #d2eff7;
+}
+
+#courseware .titleBox .glyphicon {
+    margin-right: 10px;
+}
+
+.datum-content {
+
+}
+
+.f-title {
+    font-size: 15px;
+    line-height: 25px ;
+    font-family: "Arial","Hiragino Sans GB","Microsoft YaHei", 微软雅黑, "Helvetica", "sans-serif";
 }

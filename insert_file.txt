@@ -81,7 +81,7 @@ insert into comment_table values(1,'3140101111','2016-7-7 12:00:00','good',2,nul
 insert into comment_table values(1,'3140101111','2016-7-7 12:00:00','good',3,null);
 
 #课件
-insert into courseware_table values('ABCDE1','课件1','www.baidu.com');
+insert into courseware_table values('ABCDE1','课件1','www.baidu.com','百度');
 
 
 #作业
@@ -105,4 +105,7 @@ insert into response_table values(1,'3140105555','2016-9-10 8:00:00','good',4,2)
 insert into response_table values(5,'111111','2016-9-10 8:00:00','yes',2,null);
 
 
-
+#留言
+insert into words_table values('游客','2016-7-7',false,'给力');
+insert into words_table values('路人A','2016-7-8',false,'强无敌');
+insert into words_table values('路人B','2016-7-9',false,'666666');
