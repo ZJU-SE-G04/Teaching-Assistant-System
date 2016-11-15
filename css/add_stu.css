@@ -1,19 +1,19 @@
 
-#add_TA_button{
-    float: right;
+#add_stu_button{
+    float: left;
     margin-top: 10px;
 }
 
 
-#add_TA_select{
+#add_stu_select{
     margin-top: 10px;
 }
 
-#add_TA_hint{
+#add_stu_hint{
     margin-top: 15px;
 }
 
-#add_TA_final{
+#add_stu_final{
     margin-top: 10px;
 
 }
