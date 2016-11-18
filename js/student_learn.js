@@ -90,11 +90,17 @@ $(document).ready(
             });
         });
         // 讨论区
-        $("#discuss_home_page").hide();
-        $("#issue_post_page").show();
+        $("#issue_post_btn").click(function () {
+            $("#discuss_home_page").hide();
+            $("#issue_post_page").show();
+        });
 
 
-        // $("#discuss_home_page").show();
-        // $("#issue_post_page").hide();
+        $("a[href='#discuss_area_pane']").click(function () {
+            $("#discuss_home_page").show();
+            $("#issue_post_page").hide();
+        })
+        $("#discuss_home_page").show();
+        $("#issue_post_page").hide();
     });
 
