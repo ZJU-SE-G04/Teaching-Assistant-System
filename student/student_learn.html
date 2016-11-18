@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/stu_learn.css">
 
+    <script type="text/javascript" src="../utf8-php-2/ueditor.config.js"></script>
+    <script type="text/javascript" src="../utf8-php-2/ueditor.all.js"></script>
 </head>
 <body>
 
@@ -143,9 +145,9 @@
             <div id="discuss_area_pane" class="tab-pane in active">
                 <div id="discuss_home_page">
                     <div class="bottom-line" id="discuss_header">
-                        <span class="float-l f-discuss-header">讨论区</span>
+                        <span class="left f-discuss-header">讨论区</span>
                         <div class="search_post_area">
-                            <div class="dropdown float-l" id="choose_posts_catagory">
+                            <div class="dropdown left" id="choose_posts_catagory">
                                 <button class="btn btn-default dropdown-toggle" type="button" id="posts_catagory_ddMenu"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                                     <div class="inline">全部答疑区</div>
@@ -159,10 +161,10 @@
                                 </ul>
                             </div>
                             <input type="search" name="search_post" class="search_post_btn" placeholder="按照帖子标题搜索"/>
-                            <div class="u-btn u-btn-whiteBlue"><span>搜索</span></div>
+                            <div class="u-btn btn-whiteBlue"><span>搜索</span></div>
                         </div>
                     </div>
-                    <div class="u-btn u-btn-whiteBlue" id="issue_post">发起主题</div>
+                    <div class="btn-whiteBlue p-btn" id="issue_post">发起主题</div>
                     <div class="page-header f-sub-border">子版块</div>
                     <div class="post-border-item">
                         <a href="#">老师答疑区</a>
@@ -177,8 +179,42 @@
                         <div>与小组内成员私密交流的小版块</div>
                     </div>
                 </div>
+
+                <!--发布帖子的页面-->
                 <div id="issue_post_page">
 
+                    <div class="dropdown" id="select_posts_catagory">
+                        <em class="f-sign">*</em>
+                        <div class="inline">所属讨论区板块</div>
+                        <div>
+                            <button class="btn btn-default dropdown-toggle" type="button" id="sel_post_catagory_ddMenu"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                <div class="inline f-placeholder">请选择主题所属板块</div>
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="posts_catagory_ddMenu">
+                                <li><a href="#">老师答疑区</a></li>
+                                <li><a href="#">综合讨论区</a></li>
+                                <li><a href="#">小组讨论区</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="post-title-field">
+                        <em class="f-sign">*</em>
+                        <div class="inline">请输入标题</div>
+                        <input type="text" name="post_title">
+
+                        <!-- 加载编辑器的容器 -->
+                    </div>
+                    <div>
+                        <div>
+                            <em class="f-sign">*</em>
+                            <div class="inline"> 内容</div>
+                        </div>
+                        <script id="container" name="content" type="text/plain"></script>
+
+                        <div class="btn-whiteBlue p-btn" id="submit_post_btn">发表</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -188,7 +224,11 @@
 
 <script src="../jquery/jquery-3.1.1.js"></script>
 <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-<!--<script src="../jquery-ui-1.12.1.custom/jquery-ui.js"></script>-->
+
 <script src="../js/student_learn.js"></script>
+
+<script type="text/javascript">
+    var ue = UE.getEditor('container');
+</script>
 </body>
 </html>
