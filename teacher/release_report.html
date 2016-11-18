@@ -6,8 +6,6 @@
 
     <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.css">
     <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap-theme.css">
-    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="../css/content.css">
     <link rel="stylesheet" href="../css/stu_learn.css">
@@ -21,11 +19,11 @@
 </head>
 <body>
 <iframe src="../header.html" frameborder="0" width="100%"></iframe>
-<div class="container">
+<div class="container-fluid">
     <div class="row" id="mainBody">
         <div class="col-md-2" id="left-side">
-            <div id="tabs" class="nav nav-pills">
-                <ul>
+            <div id="tabs">
+                <ul class="navbar-btn nav">
                     <li class="active"><a href="#notice" data-toggle="tab">公告</a></li>
                     <li class="tab-style"><a href="#course_introduce" data-toggle="tab">课程介绍</a></li>
                     <li class="tab-style"><a href="#courseware" data-toggle="tab">课件资料</a></li>
@@ -35,7 +33,7 @@
                 </ul>
             </div>
         </div>
-        <div class="col-md-10 tab-content" id="learn_content">
+        <div class="col-md-10 tab-content" id="tab_content_area">
             <div id="notice" class="tab-pane in active">
 
                 <!------------------------------------>
@@ -142,7 +140,7 @@
             <div id="course_introduce" class="tab-pane">
                 课程介绍
             </div>
-            <div id="courseware" class="tab-pane">
+            <div id="courseware_pane" class="tab-pane">
                 课件资料
             </div>
             <div id="article" class="tab-pane">

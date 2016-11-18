@@ -6,5 +6,11 @@
 
 #show_article_margin{
    margin-top: 10px;
+    float: right;
 }
 
+
+#add_student_button{
+    float: right;
+    margin-top: 10px;
+}
