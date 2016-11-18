@@ -1,0 +1,19 @@
+#pageContent {
+    margin-top: 20px;
+}
+
+.content-blk, .old {
+    display: none;
+}
+
+.row > h2, .row > h6 {
+    text-align: center;
+}
+
+.clickable:hover {
+    cursor: pointer;
+    color: red;
+}
+.badge:hover {
+    background-color: grey!important;
+}

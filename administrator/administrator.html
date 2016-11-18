@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>管理员</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script src="../jquery/jquery-3.1.1.min.js"></script>
+    <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    -->
+    <link rel="stylesheet" href="http://w3schools.bootcss.com/lib/w3.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="administrator.css">
+    <script src="administrator.js"></script>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row" id="header_topBar">
+        <div class="col-sm-6"><img src="../img/logo_gray_large.png" alt="258x71" class="img-responsive"></div>
+        <div class="col-sm-2 col-sm-offset-4" id="nameLink">
+            <div style="margin-left: 20px">
+                <div class="nickname f-f0 f-fc-gray f-thide">
+                    你好,
+                    <a id="username" class="f-fc-gray">谢俊东</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row" id="header_courseNameBar">
+        <div style="margin: 5px 0 5px 0;">
+            <div class="col-xs-2 right-border">
+                <img src="../img/logo_zju.png" alt="134x50" class="img-responsive"/>
+            </div>
+            <div class="col-xs-10" style="margin-top:16px">
+                <div class="coursename f-f0 f-fc-black"><strong>管理员</strong><br></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row" id="pageContent">
+        <div class="col-sm-2">
+            <ul class="nav nav-pills nav-stacked">
+                <li class="order-nav" id="message"><a href="#">查看留言</a></li>
+                <li class="order-nav" id="article"><a href="#">管理文章评论</a></li>
+                <li class="order-nav" id="post"><a href="#">管理帖子和评论</a></li>
+                <li class="order-nav" id="lesson"><a href="#">添加课程</a></li>
+                <li class="order-nav" id="teacher"><a href="#">添加教师</a></li>
+                <li class="order-nav" id="link"><a href="#">管理友情链接</a></li>
+                <li class="order-nav" id="update"><a href="#">发布网站更新信息</a></li>
+             </ul>
+        </div>
+        <div class="col-sm-10">
+
+            <div class="content-blk message">
+                <div class="row">
+                    <div class="col-sm-10 col-sm-offset-1">
+                        <div class="panel-group" id="messageLoop">
+                            <div class="panel panel-default old w3-hover-shadow w3-animate-zoom"> <!--loop start-->
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-xs-11">
+                                            <strong class="x-name"></strong>&nbsp;于&nbsp;<strong class="x-time"></strong>&nbsp;留言:
+                                        </div>
+                                        <div class="col-xs-1">
+                                            <span class="glyphicon glyphicon-trash w3-large clickable"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-body x-content"></div>
+                            </div>  <!--loop end-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-blk article">
+                <div class="row">
+                    <div class="col-sm-10 col-sm-offset-1">
+                        <div class="panel-group" id="articleLoop">
+                            <div class="panel panel-default old w3-hover-shadow w3-animate-zoom">  <!--loop start-->
+                                <div class="panel-heading w3-hover-grey clickable"><strong class="x-title"></strong></div>
+                                <div class="panel-body x-article-digest"></div>
+                                <div class="panel-footer">
+                                    <div class="row">
+                                        <div class="col-md-2 col-md-offset-8 col-xs-6 col-xs-offset-2">
+                                            <span class="x-time"></span>
+                                        </div>
+                                        <div class="col-md-2 col-xs-4">
+                                            <span>评论&nbsp;&nbsp;</span><span class="badge w3-green x-comment-num clickable"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>  <!--loop end-->
+                        </div>
+                        <div id="articleDetail">
+                            <div class="row">
+                                    <button type="button" class="btn btn-primary w3-right" id="articleBack">
+                                        返回列表 <span class="glyphicon glyphicon-share-alt"></span>
+                                    </button>
+                            </div>
+                            <div class="row">
+                                <h2 class="x-title"></h2>
+                                <h6>
+                                    <span class="glyphicon glyphicon-user"></span> 作者：<span class="x-author"></span>&nbsp;&nbsp;
+                                    <span class="glyphicon glyphicon-time"></span> 发表时间：<span class="x-time"></span>
+                                </h6><br>
+                                <p class="x-body"></p>
+                                <hr>
+                                <div class="panel-group" id="commentLoop">
+                                    <div class="panel panel-default old w3-hover-shadow">  <!--loop start-->
+                                        <div class="panel-heading">
+                                            <div class="row">
+                                                <div class="col-md-1">第&nbsp;<strong class="x-floor"></strong>&nbsp;楼</div>
+                                                <div class="col-md-2"><strong class="x-floorMaster"></strong><span class="is-reply"> 回复 第&nbsp;<strong class="x-re_floor"></strong>&nbsp;楼</span></div>
+                                                <div class="col-md-2"><span class="x-time"></span></div>
+                                                <div class="col-md-1 col-md-offset-6"><span class="glyphicon glyphicon-trash w3-large clickable"></span></div>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body"><p class="x-content"></p></div>
+                                    </div>  <!--loop end-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="content-blk post">ddd</div>
+
+            <div class="content-blk lesson">eee</div>
+
+            <div class="content-blk teacher">eee</div>
+
+            <div class="content-blk link">ddddsww</div>
+
+            <div class="content-blk update">bs</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
