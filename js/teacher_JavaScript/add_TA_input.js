@@ -4,21 +4,25 @@
 
 function  addTAInput() {
     var addTANumber=3;
+    var parent=document.createElement("div");
+    parent.id="deletedAddTA";
+    var grandparent=document.getElementById("TAInfo");
+    grandparent.appendChild(parent);
     var newNode=document.createElement("h3");
     newNode.innerHTML="输入助教信息";
-    var parent=document.getElementById("TAInfo");
     parent.appendChild(newNode);
 
     var newNodeForm=document.createElement("form");
-    parent.appendChild(newNode);
+    newNodeForm.id="addedForm"
+    parent.appendChild(newNodeForm);
 
-    var newNodeDivRow=document.createElement("row");
+    var newNodeDivRow=document.createElement("div");
     newNodeDivRow.className="row"
     parent.appendChild(newNodeDivRow);
 
 
     newNodeDivRow.innerHTML="<div class='col-sm-3'><label>学号</label> " +
-        " </div> <div class='col-sm-3'> " + "<label >学号</label> " + "</div>" +
+        " </div> <div class='col-sm-3'> " + "<label >姓名</label> " + "</div>" +
         " <div class='col-sm-3'> <label>院系</label>  </div>" +
         " <div class='col-sm-3'> <label >专业</label> </div>";
 
@@ -34,18 +38,33 @@ function  addTAInput() {
     }
 
 
-    var newNodeButton=document.createElement("button");
+    var newNodeButton=document.createElement("div");
+    newNodeButton.className="row";
     parent.appendChild(newNodeButton);
-    newNodeButton.type="button";
-    newNodeButton.className="btn btn-primary";
-    newNodeButton.id="add_stu_button";
-    newNodeButton.innerHTML="确定录入";
+    newNodeButton.innerHTML= " <div class='col-sm-9'>"+
+        "<button type='button'  class='btn btn-primary' id='cancel_TA_button' onclick='cancelTA()'>取消录入</button></div>"+
+        " <div class='col-sm-3'>"+
+        " <button type='button'  class='btn btn-primary' id='add_TA_final'>确定录入</button></div>";
 
     var disabledButton=document.getElementById("add_TA_button");
-    disabledButtong.disabled=true;
+    disabledButton.disabled=true;
 
 }
 
+
+function  cancelTA() {
+
+
+    var parent=document.getElementById("TAInfo");
+    // document.write(parent.innerHTML);
+    var child=document.getElementById("deletedAddTA");
+     // document.write(child.innerHTML);
+    var x=parent.removeChild(child);
+    var disabledButton=document.getElementById("add_TA_button");
+    disabledButton.disabled=false;
+
+    // document.write("a");
+}
 
 // <form>
 // <div class="row">

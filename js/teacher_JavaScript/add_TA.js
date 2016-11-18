@@ -20,10 +20,6 @@ function addTA() {
         tab.rows[rownum+j].cells[2].innerHTML = "<b>房地产设计院</b>";
         tab.rows[rownum+j].cells[3].innerHTML = "<b>建筑景观</b>";
     }
-
-
-
-
-
-
+    
 }
+

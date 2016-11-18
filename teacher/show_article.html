@@ -71,7 +71,7 @@
 
             </div>
             <div id="article" class="tab-pane">
-
+            <div id="articleList">
                 <div class="row">
                     <div class="col-sm-8">
                       <h3>以下是已经发布的文章</h3>
@@ -85,8 +85,8 @@
                         <div class="panel-heading">
 
                             <div class="row">
-                                <div class="col-sm-9">
-                                   热烈庆祝长者90大寿！
+                                <div class="col-sm-9" onclick="showArticleDetails()">
+                                <label>  热烈庆祝长者90大寿！</label>
                                 </div>
                                 <div class="col-sm-1">
                                     膜法师
@@ -101,6 +101,9 @@
                             同时为了实现翻页，需要返回文章数量
                         </div>
                 </div>
+                </div>
+
+
 
 
 
@@ -156,8 +159,6 @@
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
                         </select></div>
                     </div>
                     <div class="col-sm-2">
@@ -178,9 +179,9 @@
 
 
                     <table class="table table-striped" id="TAInfoTable">
-                        <tr><th>学号</th><th>姓名</th><th>院系</th><th>专业</th></tr>
-                        <tr><th>3130101437</th><th>章世超</th><th>计算机学院</th><th>软件工程</th></tr>
-                        <tr><th>3130101437</th><th>章世超</th><th>计算机学院</th><th>软件工程</th></tr>
+                        <tr><th>学号</th><th>姓名</th><th>院系</th><th>专业</th><th>操作</th></tr>
+                        <tr><th>3130101437</th><th>章世超</th><th>计算机学院</th><th>软件工程</th><th>删除</th></tr>
+                        <tr><th>3130101437</th><th>章世超</th><th>计算机学院</th><th>软件工程</th><th>删除</th></tr>
                     </table>
                     <div class="row" id="TA_info_row">
 
@@ -192,8 +193,6 @@
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
                             </select></div>
                         </div>
                         <div class="col-sm-2">
@@ -241,15 +240,22 @@
                     <!--</div>-->
 
 
-                    <!--<button type="button"  class="btn btn-primary" id="add_stu_button" onclick="addTA()">确定录入</button>-->
+                <!--<div class="row">-->
+                <!--<div class="col-sm-9">-->
+                <!--<button type="button"  class="btn btn-primary" id="cancel_TA_button" >取消录入</button>-->
+                <!--</div>-->
+                    <!--<div class="col-sm-3">-->
+
+                    <!--<button type="button"  class="btn btn-primary" id="add_TA_final">确定录入</button>-->
+                    <!--</div>-->
+                <!--</div>-->
                 <!--</form>-->
 
 
             </div>
             </div>
         </div>
-    </div>
-</div>
+    </div></div>
 
 
 <script src="../jquery/jquery-3.1.1.min.js"></script>

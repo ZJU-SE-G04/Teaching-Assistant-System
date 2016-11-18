@@ -15,5 +15,11 @@
 
 #add_TA_final{
     margin-top: 10px;
+    float: right;
 
+}
+
+#cancel_TA_button{
+    float: right;
+    margin-top: 10px;
 }
