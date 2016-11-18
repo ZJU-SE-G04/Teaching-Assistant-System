@@ -1,42 +1,27 @@
-/*#tabs {*/
-    /*text-align: center;*/
-/*}*/
-
-/*#tabs ul {*/
-    /*padding-left: 0px;*/
-    /*padding-bottom: 0px;*/
-    /*background-color: #ffffff;*/
-/*}*/
-/*#tabs ul li {*/
-    /*margin-top: -1px;*/
-    /*border: #e2e2e2 1px solid;*/
-    /*list-style-type: none;*/
-    /*width: 100%;*/
-    /*padding: 0 0 0 0;*/
-/*}*/
-
-/*#tabs ul li.active {*/
-    /*background: #13A654;*/
-/*}*/
-
-/*#tabs ul li a.active {*/
-    /*color: white;*/
-/*}*/
-/*#tabs ul li a {*/
-    /*font-size: 16px;*/
-    /*line-height: 40px;*/
-    /*font-family: "Arial", "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, "Helvetica", "sans-serif";*/
-    /*color: #000;*/
-
-/*}*/
-
-/*#tabs ul li:hover {*/
-    /*background: #eeeeee;*/
-/*}*/
-#learn_content {
+/*---------------------------通用------------------------------*/
+.f-title {
+    font-size: 15px;
+    line-height: 25px ;
+    font-family: "Arial","Hiragino Sans GB","Microsoft YaHei", 微软雅黑, "Helvetica", "sans-serif";
 }
 
-#intro_course_part {
+.bottom-line {
+    border-bottom: #000000 1px solid;
+}
+
+.float-r {
+    float: right;
+}
+
+.float-l {
+    float: left;
+}
+
+.inline {
+    display: inline-block;
+}
+/*--------------------------课程信息---------------------------*/
+#course_detail {
     background: #F8F8F8;
     padding: 0 20px 0 20px;
     margin: 20px 0px 0 0;
@@ -44,11 +29,11 @@
     width: 70%;
 }
 
-#intro_course_part p {
+#course_detail p {
     font-size: 12px;
     line-height: 25px;
 }
-#intro_teacher_part {
+#teacher_list {
     margin-top: 20px;
     padding: 0 15px 10px 15px;
     background: #F8F8F8;
@@ -56,14 +41,15 @@
     width: 25%;
 }
 
-#intro_teacher_part h4 {
+#teacher_list h4 {
     margin-left: 12px;
 }
 
-#courseware {
+/*----------------------------课件资料-------------------------------*/
+#courseware_pane {
     margin-right: 15px;
 }
-#courseware button {
+#courseware_pane button {
     text-align: left;
     margin: 5px 0 10px 0;
 }
@@ -95,28 +81,92 @@
     border-bottom: none;
 }
 
-#courseware .titleBox {
-    background-color: #c3cdc6;
+#courseware_pane .titleBox {
+    background-color: #E8F9FF;
     padding: 8px 15px;
     cursor: pointer;
     margin-bottom: 10px;
     margin-top: 10px;
 }
 
-#courseware .titleBox:hover {
+#courseware_pane .titleBox:hover {
     background-color: #d2eff7;
 }
 
-#courseware .titleBox .glyphicon {
+#courseware_pane .titleBox .glyphicon {
     margin-right: 10px;
 }
 
-.datum-content {
+/*-----------------------------------讨论区-----------------------------*/
 
+.f-discuss-header {
+    font-size: 18px;
+    line-height: 35px ;
+    font-family: "Arial","Hiragino Sans GB","Microsoft YaHei", 微软雅黑, "Helvetica", "sans-serif";
 }
 
-.f-title {
-    font-size: 15px;
+#choose_posts_catagory {
+    margin: 0px 5px 0px 5px;
+
+}
+input[name="search_post"] {
+    margin: 0px 5px 0px 5px;
+    padding: 0px 5px 0px 5px;
+    height: 34px;
+    width: 250px;
+}
+
+#discuss_header {
+    min-height: 45px;
+}
+
+.search_post_btn {
+    margin: 0px 5px 0px 5px;
+}
+
+.search_post_area {
+    float: right;
+}
+
+.u-btn {
+    height: 34px;
+    margin-left: 10px;
+    border: 1px #337AB9 solid;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 26px;
+    text-align: center;
+    padding: 3px 18px;
+    display: inline-block;
+}
+
+.u-btn-whiteBlue {
+    background-color: #fff;
+    color: #337AB9;
+}
+
+#issue_post {
+    margin: 30px 0px 30px 0px;
+    background-color: #337ab9;
+    color: #fff;
+}
+
+#issue_post:hover {
+    background-color: #2aabd2;
+    border: 1px #2aabd2 solid;
+}
+
+.f-sub-border {
+    font-size: 18px;
     line-height: 25px ;
-    font-family: "Arial","Hiragino Sans GB","Microsoft YaHei", 微软雅黑, "Helvetica", "sans-serif";
+    font-family: "Arial", "Hiragino Sans GB", "Microsoft YaHei", 黑体, "Helvetica", "sans-serif";
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+
+.post-border-item {
+    border-bottom: 1px #eee solid;
+    padding-bottom: 9px;
+    padding-top: 9px;
 }

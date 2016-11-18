@@ -23,17 +23,17 @@
     <div class="row" id="mainBody">
         <div class="col-md-2" id="left-side">
                 <ul  class="nav nav-pills nav-stacked">
-                    <li class="tab-style" ><a href="#notice" data-toggle="tab">公告</a></li>
-                    <li class="tab-style"><a href="#article" data-toggle="tab">最新文章</a></li>
+                    <li class="tab-style"><a href="#notice" data-toggle="tab">公告</a></li>
+                    <li class="active"><a href="#article" data-toggle="tab" onclick="returnToArticleList()">最新文章</a></li>
                     <li class="tab-style"><a href="#courseware" data-toggle="tab">课程资料</a></li>
                     <li class="tab-style"><a href="#report" data-toggle="tab">报告与文档</a></li>
                     <li class="tab-style"><a href="#exrcise" data-toggle="tab">作业与测验</a></li>
                     <li class="tab-style"><a href="#studentInfo" data-toggle="tab">学生信息</a></li>
-                    <li class="active"><a href="#TAInfo" data-toggle="tab">助教信息</a></li>
+                    <li class="tab-style"><a href="#TAInfo" data-toggle="tab">助教信息</a></li>
 
                 </ul>
         </div>
-        <div class="col-md-10 tab-content" id="learn_content">
+        <div class="col-md-10 tab-content" id="tab_content_area">
             <div id="notice" class="tab-pane">
                 <div>
                     <h3 class="page-header">公告</h3>
@@ -70,23 +70,22 @@
                 </div>
 
             </div>
-            <div id="article" class="tab-pane">
+            <div id="article" class="tab-pane in active">
             <div id="articleList">
                 <div class="row">
                     <div class="col-sm-8">
                       <h3>以下是已经发布的文章</h3>
                     </div>
                     <div class="col-sm-4">
-                        <button type="button"  class="btn btn-primary" id="show_article_button" >撰写新文章</button>
+                        <button type="button"  class="btn btn-primary" id="show_article_button" onclick="showArticleDetails()">撰写新文章</button>
                     </div>
                 </div>
-
                 <div class="panel panel-default" >
                         <div class="panel-heading">
 
                             <div class="row">
-                                <div class="col-sm-9" onclick="showArticleDetails()">
-                                <label>  热烈庆祝长者90大寿！</label>
+                                <div class="col-sm-9" id="articleTitle" onclick="showArticleDetails()" onmouseover="this.style.cursor='pointer';beRed();" onmouseleave="beBlack()">
+                                 热烈庆祝长者90大寿!
                                 </div>
                                 <div class="col-sm-1">
                                     膜法师
@@ -101,12 +100,6 @@
                             同时为了实现翻页，需要返回文章数量
                         </div>
                 </div>
-                </div>
-
-
-
-
-
                 <ul class="pagination pagination-sm">
                     <li><a id="page_first" class="active" href="#">&laquo;第一页</a></li>
                     <li><a id="page_one" href="#test">1</a></li>
@@ -116,17 +109,10 @@
                     <li><a id="page_five" href="#">5</a></li>
                     <li class="disabled"><a id="page_last" href="#">最后一页&raquo;</a></li>
                 </ul>
-
-
-
-
             </div>
 
-
-
-
-
-            <div id="courseware" class="tab-pane">
+            </div>
+            <div id="courseware_pane" class="tab-pane">
                 课程资料
             </div>
             <div id="report" class="tab-pane">
@@ -170,10 +156,7 @@
                     </div>
                 </div>
             </div>
-
-
-
-            <div id="TAInfo" class="tab-pane in active">
+            <div id="TAInfo" class="tab-pane">
 
                             <h3>以下是本课程的助教名单</h3>
 
@@ -261,9 +244,13 @@
 <script src="../jquery/jquery-3.1.1.min.js"></script>
 <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script src="../jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-<script src="../js/teacher_JavaScript/turn_page_show_article.js"></script>
+
+<!--以下是achao导入的js文件-->
 <script src="../js/teacher_JavaScript/add_TA.js"></script>
 <script src="../js/teacher_JavaScript/add_TA_input.js"></script>
+<script src="../js/teacher_JavaScript/add_artcicle.js"></script>
+
+
 
 </body>
 </html>

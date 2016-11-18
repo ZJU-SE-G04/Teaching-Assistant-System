@@ -56,9 +56,7 @@ function  cancelTA() {
 
 
     var parent=document.getElementById("TAInfo");
-    // document.write(parent.innerHTML);
     var child=document.getElementById("deletedAddTA");
-     // document.write(child.innerHTML);
     var x=parent.removeChild(child);
     var disabledButton=document.getElementById("add_TA_button");
     disabledButton.disabled=false;
