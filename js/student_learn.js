@@ -16,17 +16,53 @@ page_state = {
 
 $(document).ready(
     function () {
-        var courseID = "001";
+        var courseID = "ABCDE1";
 
         function get_course_intro() {
             $("#teacher_info_detail").hide();
             $("#course_detail").show();
             $("#teacher_list").show();
-            var htmlObj = $.ajax({
-                url: "http://localhost/get_course_intro.php?courseID=" + courseID, async: true,
+            // var htmlObj = $.ajax({
+            //     url: "get_course_intro.php?courseID=" + courseID, async: true,
+            //     success: function (result) {
+            //         jsonObj = $.parseJSON(result);
+            //         //TODO
+            //     }
+            // });
+            $.ajax({
+                url: "get_course_teacher.php?courseID=" + courseID, async: true,
                 success: function (result) {
-                    jsonObj = $.parseJSON(result);
-                    //TODO
+                    var jsonObj = result;
+                    for(var i = 0; i < jsonObj.length; i++) {
+                        var teacher_id = jsonObj[i].id;
+                        var name = jsonObj[i].name;
+                        console.log("teacher id:" + teacher_id);
+                        $("#teacher_list ul").html("");
+                        $("#teacher_list ul").append($("<li></li>").append($("<a></a>").attr("id", teacher_id).text(name)));
+                    }
+                    $("#teacher_list ul li a").click(function () {
+                        var teacher_id = $(this).attr("id");
+                        var teacher_name = $(this).text();
+                        htmlObj = $.ajax({
+                            url: "get_teacher_intro.php?teacherID=" + teacher_id, async: true,
+                            success: function (result) {
+
+                                var jsonObj = result;
+                                var teacher_info_detail = jsonObj["introduction"];
+                                console.log(teacher_info_detail);
+                                $("#course_detail").hide();
+                                $("#teacher_list").hide();
+                                $("#teacher_info_detail").show();
+                                $("#teacher_info_detail div h3").text(teacher_name);
+                                $("#teacher_info_detail p").text(teacher_info_detail);
+                                // var teacher_info_pane = $("<div class='tab-pane' id='teacher_info_pane'></div>");
+                                // teacher_info_pane.append("<div class='page-header'><h3>" + teacher_name + "</h3></div>");
+                                // teacher_info_pane.append($("<p></p>").text(teacher_info_detail));
+                                // $("#tab_content_area").append(teacher_info_pane);
+                                // cur_state = page_state.SHOW_TEACHER_INFO;
+                            }
+                        });
+                    });
                 }
             })
         }
@@ -46,26 +82,6 @@ $(document).ready(
             }
         );
 
-        $("#teacher_list ul li a").click(function () {
-            var thisDOM = $(this)[0];
-            var teacher_id = thisDOM.id;
-            var teacher_name = thisDOM.innerHTML;
-            htmlObj = $.ajax({
-                url: "http://localhost/get_teacher_intro.php?teacherID=" + teacher_id, async: true,
-                success: function (result) {
-                    jsonObj = $.parseJSON(result);
-                    var teacher_info_detail = jsonObj["introduction"];
-                    $("#course_detail").hide();
-                    $("#teacher_list").hide();
-                    $("#teacher_info_detail").show();
-                    var teacher_info_pane = $("<div class='tab-pane' id='teacher_info_pane'></div>");
-                    teacher_info_pane.append("<div class='page-header'><h3>" + teacher_name + "</h3></div>");
-                    teacher_info_pane.append($("<p></p>").text(teacher_info_detail));
-                    $("#tab_content_area").append(teacher_info_pane);
-                    cur_state = page_state.SHOW_TEACHER_INFO;
-                }
-            });
-        });
 
         $("#choose_posts_catagory ul li a").click(function () {
             console.log($(this).html());
