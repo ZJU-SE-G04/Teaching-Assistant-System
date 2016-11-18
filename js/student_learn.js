@@ -33,7 +33,7 @@ $(document).ready(
                 url: "get_course_teacher.php?courseID=" + courseID, async: true,
                 success: function (result) {
                     var jsonObj = result;
-                    for(var i = 0; i < jsonObj.length; i++) {
+                    for (var i = 0; i < jsonObj.length; i++) {
                         var teacher_id = jsonObj[i].id;
                         var name = jsonObj[i].name;
                         console.log("teacher id:" + teacher_id);
@@ -55,11 +55,6 @@ $(document).ready(
                                 $("#teacher_info_detail").show();
                                 $("#teacher_info_detail div h3").text(teacher_name);
                                 $("#teacher_info_detail p").text(teacher_info_detail);
-                                // var teacher_info_pane = $("<div class='tab-pane' id='teacher_info_pane'></div>");
-                                // teacher_info_pane.append("<div class='page-header'><h3>" + teacher_name + "</h3></div>");
-                                // teacher_info_pane.append($("<p></p>").text(teacher_info_detail));
-                                // $("#tab_content_area").append(teacher_info_pane);
-                                // cur_state = page_state.SHOW_TEACHER_INFO;
                             }
                         });
                     });
@@ -86,12 +81,20 @@ $(document).ready(
         $("#choose_posts_catagory ul li a").click(function () {
             console.log($(this).html());
             $("#posts_catagory_ddMenu div").html($(this).html());
-        })
-    });
+        });
 
-//    $(document).ready(function () {
-//        var courseID =
-//        htmlObj = $.ajax({url:"http://localhost/get_course_intro.php?courseID=", async:true});
-//        $("#course_introduce").html(htmlObj.responseText);
-//    });
+        $("#submit_post_btn").click(function () {
+            var ueContent = UE.getEditor('container').getContent();
+            $.post("getUEditorContent.php", {myEditor:ueContent}, function (result, status) {
+                    alert(result);
+            });
+        });
+        // 讨论区
+        $("#discuss_home_page").hide();
+        $("#issue_post_page").show();
+
+
+        // $("#discuss_home_page").show();
+        // $("#issue_post_page").hide();
+    });
 

@@ -1,4 +1,7 @@
 /*---------------------------通用------------------------------*/
+a, button {
+    cursor: pointer;
+}
 .f-title {
     font-size: 15px;
     line-height: 25px ;
@@ -13,12 +16,17 @@
     float: right;
 }
 
-.float-l {
+.left {
     float: left;
 }
 
 .inline {
     display: inline-block;
+}
+
+#container {
+    width: 700px;
+    height: 180px;
 }
 /*--------------------------课程信息---------------------------*/
 #course_detail {
@@ -39,6 +47,7 @@
     background: #F8F8F8;
     float: right;
     width: 25%;
+
 }
 
 #teacher_list h4 {
@@ -141,18 +150,28 @@ input[name="search_post"] {
     display: inline-block;
 }
 
-.u-btn-whiteBlue {
+.btn-whiteBlue {
     background-color: #fff;
     color: #337AB9;
 }
 
-#issue_post {
+
+.p-btn {
     margin: 30px 0px 30px 0px;
     background-color: #337ab9;
     color: #fff;
+    height: 34px;
+    border: 1px #337AB9 solid;
+    border-radius: 3px;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 26px;
+    text-align: center;
+    padding: 3px 18px;
+    display: inline-block;
 }
 
-#issue_post:hover {
+.p-btn:hover {
     background-color: #2aabd2;
     border: 1px #2aabd2 solid;
 }
@@ -169,4 +188,39 @@ input[name="search_post"] {
     border-bottom: 1px #eee solid;
     padding-bottom: 9px;
     padding-top: 9px;
+}
+
+/*发布帖子页面*/
+.f-placeholder {
+    font-size: 15px;
+    color: #999999;
+}
+
+#sel_post_catagory_ddMenu {
+    margin-bottom: 15px;
+}
+#sel_post_catagory_ddMenu .f-placeholder {
+    margin-right: 10px;
+}
+
+.f-sign {
+    font-weight: bold;
+    color: #cc3333;
+    padding-right: 5px;
+    vertical-align: middle;
+}
+
+input[name="post_title"] {
+    display: block;
+    width: 500px;
+}
+
+.post-title-field {
+    padding-bottom: 15px;
+}
+
+
+#submit_post_btn {
+    margin-top: 50px;
+    margin-left: 0px;
 }
