@@ -9,19 +9,16 @@
 	// 创建连接
 	$conn = new mysqli($servername, $username, $password,$dbname);
 	$conn->query("set names utf8;");
-	$teacher_id=$_GET["teacher_ID"];//获取教师账号
-	//$teacher_id="111111";
+	//$teacher_id=$_GET["teacher_ID"];//获取教师账号
+	$teacher_id="111111";
 
-	$result = $conn->query("select * from teacher_table where id='".$teacher_id."';");
+	$result = $conn->query("select introduction from teacher_table where id='".$teacher_id."';");
 
-	$outp = "";
-	while($rs = $result->fetch_array(MYSQLI_ASSOC)) {
-		if ($outp != "") {$outp .= ",";}
-		//$outp .= '"name":"'  . $rs["name"] . '",';
-		$outp .= '"{introduction":"'   . $rs["introduction"]        . '"}';
+	$arr = [];
+	while($row = mysqli_fetch_assoc($result)) {
+		$arr[] = $row;
 	}
-	//$outp ='['.$outp.']';
+	echo json_encode($arr, JSON_UNESCAPED_UNICODE);
 	$conn->close();
 
-	echo($outp);
 ?>
