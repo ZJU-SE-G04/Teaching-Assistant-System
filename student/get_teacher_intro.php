@@ -14,9 +14,9 @@
 
 	$result = $conn->query("select introduction from teacher_table where id='".$teacher_id."';");
 
-	$arr = [];
+	//$arr = [];
 	while($row = mysqli_fetch_assoc($result)) {
-		$arr[] = $row;
+		$arr = $row;
 	}
 	echo json_encode($arr, JSON_UNESCAPED_UNICODE);
 	$conn->close();
