@@ -77,8 +77,10 @@ insert into notice_table values(null,'ABCDE2','222222','通知1','这只是测�
 insert into article_table values(null,'ABCDE1','111111','文章1','这只是测试','2016-6-6 19:03:22');
 insert into article_table values(null,'ABCDE2','222222','文章1','这只是测试','2016-6-6 19:03:22');
 
-insert into comment_table values(1,'3140101111','2016-7-7 12:00:00','good',2,null);
-insert into comment_table values(1,'3140101111','2016-7-7 12:00:00','good',3,null);
+insert into comment_table values(1,'3140101111','2016-7-7 12:00:00','good',2);
+insert into comment_table values(1,'3140101111','2016-7-7 12:00:00','good',3);
+insert into re_comment_table values(1,'3140102222','2016-7-7 12:10:00','good2',2,1,'3140101111');
+insert into re_comment_table values(1,'3140103333','2016-7-7 12:12:00','good3',2,2,'3140102222');
 
 #课件
 insert into courseware_table values('ABCDE1','课件1','www.baidu.com','百度');
@@ -99,10 +101,10 @@ insert into topic_table values(null,'ABCDE1',false,false,'3140102222','2016-9-9 
 insert into topic_table values(null,'ABCDE1',false,true,'3140102222','2016-9-9 16:00:00','内部话题1','测试用的');
 insert into topic_table values(null,'ABCDE1',true,false,'3140102222','2016-9-9 16:00:00','答疑1','测试用的');
 
-insert into response_table values(1,'3140104444','2016-9-10 8:00:00','good',2,null);
-insert into response_table values(1,'3140104444','2016-9-10 8:00:00','good',3,null);
-insert into response_table values(1,'3140105555','2016-9-10 8:00:00','good',4,2);
-insert into response_table values(5,'111111','2016-9-10 8:00:00','yes',2,null);
+insert into response_table values(1,'3140104444','2016-9-10 8:00:00','good',2);
+insert into response_table values(1,'3140104444','2016-9-10 8:00:00','good',3);
+insert into re_response_table values(1,'3140105555','2016-9-10 8:00:00','good',2,2,'3140104444');
+insert into response_table values(5,'111111','2016-9-10 8:00:00','yes',2);
 
 
 #留言
