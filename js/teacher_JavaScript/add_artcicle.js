@@ -44,12 +44,27 @@ function showArticleDetails(){
     "<div class='col-sm-2'>"+time+"</div> </div> " +
     "</div> <div class='panel-body'>"+content +"</div>";
 
-    var commentHead=document.createElement("h3");
-    commentHead.innerHTML="评论";
+    // var commentHead=document.createElement("h3");
+    // commentHead.innerHTML="评论";
+    // articleDetails.appendChild(commentHead);
+
+    var commentHead=document.createElement("span");
+    commentHead.className="left f-discuss-header";
+    commentHead.innerHTML="讨论区";
     articleDetails.appendChild(commentHead);
+    //
+    // var hr=document.createElement("hr");
+    // articleDetails.appendChild(hr);
+
 
     var articleList=document.getElementById("articleList");
     articleList.style.display="none";
+
+
+    var commentNumber=5;
+    if(commentNumber>0){
+
+    }
 
 
 }
@@ -57,7 +72,7 @@ function showArticleDetails(){
 
 function beRed() {
     var articleTitle=document.getElementById("articleTitle");
-    articleTitle.style.color="#FF0000";
+    articleTitle.style.color="#03a9f4";
 
 }
 
