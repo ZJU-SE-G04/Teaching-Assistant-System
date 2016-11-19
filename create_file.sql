@@ -137,11 +137,24 @@ create table comment_table(
 	time datetime,
 	content varchar(300),
 	floor int,
-	re_floor int,
 	primary key(article_id,floor),
 	constraint foreign key (id) references user_table(id) on delete cascade,
 	constraint foreign key (article_id) references article_table(article_id) on delete cascade
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+#二级评论：
+create table re_comment_table(
+	article_id int,
+	id varchar(10),
+	time datetime,
+	content varchar(300),
+	floor int,#楼层号
+	re_floor int,#楼中楼层号
+	re_id varchar(10),#回复人ID
+	primary key(article_id,floor,re_floor),
+	constraint foreign key (id) references user_table(id) on delete cascade,
+	constraint foreign key (article_id) references article_table(article_id) on delete cascade
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 #课件表：
 create table courseware_table(
 	lesson_id varchar(10),
@@ -207,8 +220,21 @@ create table response_table(
 	time datetime,
 	content varchar(300),
 	floor int,
-	re_floor int,
 	primary key(topic_id,floor),
+	constraint foreign key (id) references user_table(id) on delete cascade,
+	constraint foreign key (topic_id) references topic_table(topic_id) on delete cascade
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#二级回复
+create table re_response_table(
+	topic_id int,
+	id varchar(10),
+	time datetime,
+	content varchar(300),
+	floor int,#楼层号
+	re_floor int,#楼中楼层号
+	re_id varchar(10),#回复人ID
+	primary key(topic_id,floor,re_floor),
 	constraint foreign key (id) references user_table(id) on delete cascade,
 	constraint foreign key (topic_id) references topic_table(topic_id) on delete cascade
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
