@@ -8,9 +8,9 @@
     <link href="../bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/stu_learn.css">
-    <link rel="stylesheet" href="../css/show_article.css">
-    <link rel="stylesheet" href="../css/add_TA.css">
-    <link rel="stylesheet" href="../css/add_stu.css">
+    <link rel="stylesheet" href="achao/css/show_article.css">
+    <link rel="stylesheet" href="achao/css/add_TA.css">
+    <link rel="stylesheet" href="achao/css/add_stu.css">
 
 
 
@@ -29,7 +29,7 @@
                     <li class="tab-style"><a href="#report" data-toggle="tab">报告与文档</a></li>
                     <li class="tab-style"><a href="#exrcise" data-toggle="tab">作业与测验</a></li>
                     <li class="tab-style"><a href="#studentInfo" data-toggle="tab">学生信息</a></li>
-                    <li class="tab-style"><a href="#TAInfo" data-toggle="tab">助教信息</a></li>
+                    <li class="tab-style"><a href="#TAInfo" data-toggle="tab" id="TA" onclick="showTAInfo()" >助教信息</a></li>
 
                 </ul>
         </div>
@@ -161,30 +161,23 @@
                             <h3>以下是本课程的助教名单</h3>
 
 
-                <div class="pl-container">
-                    <ul>
-                       <li class="pl-list">
-                           <div>
-                               用户A
-                           </div>
-                           <div>
-                           Good Article!
-                       </div>
-                           <div>
-                               2016-11-09 23:45
-                           </div>
-                       </li>
-                        <li class="pl-list">
-                            sss
-                        </li>
-                    </ul>
-                    </div>
+    <div class="d_post_content_main">
+        <div class="p_content  p_content p_content_nameplate"><div class="save_face_bg_hidden save_face_bg_0"><a class="save_face_card"></a>
+        </div>        <cc><div id="post_content_96672474007" class="d_post_content j_d_post_content  clearfix">
+            从小梦想浙大</div><br></cc><br><div class="user-hide-post-down" style="display: none;"></div>
+            <div class="achievement_medal_section"></div></div>
+        <div class="core_reply">
+            a
+</div>
+    </div>
 
-                <table class="table table-striped" id="TAInfoTable">
-                        <tr><th>学号</th><th>姓名</th><th>院系</th><th>专业</th><th>操作</th></tr>
-                        <tr><th>3130101437</th><th>章世超</th><th>计算机学院</th><th>软件工程</th><th>删除</th></tr>
-                        <tr><th>3130101437</th><th>章世超</th><th>计算机学院</th><th>软件工程</th><th>删除</th></tr>
-                    </table>
+
+
+                <!--<table class="table table-striped" id="TAInfoTable">-->
+                        <!--<tr><th>学号</th><th>姓名</th><th>院系</th><th>专业</th><th>操作</th></tr>-->
+                        <!--<tr><th>3130101437</th><th>章世超</th><th>计算机学院</th><th>软件工程</th><th>删除</th></tr>-->
+                        <!--<tr><th>3130101437</th><th>章世超</th><th>计算机学院</th><th>软件工程</th><th>删除</th></tr>-->
+                    <!--</table>-->
                     <div class="row" id="TA_info_row">
 
                         <div  class="col-sm-2" id="add_TA_hint">
@@ -200,10 +193,6 @@
                         <div class="col-sm-2">
                             <button type="button"  class="btn btn-primary" id="add_TA_button" onclick="addTAInput()">添加课程助教</button>
                         </div>
-
-
-
-
                 </div>
 
 
@@ -265,9 +254,8 @@
 <script src="../jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 
 <!--以下是achao导入的js文件-->
-<script src="../js/teacher_JavaScript/add_TA.js"></script>
-<script src="../js/teacher_JavaScript/add_TA_input.js"></script>
-<script src="../js/teacher_JavaScript/add_artcicle.js"></script>
+<script src="achao/js/add_TA.js"></script>
+<script src="achao/js/add_artcicle.js"></script>
 
 
 

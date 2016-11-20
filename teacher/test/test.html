@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title>Title</title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="1404.47">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo}
+    span.s1 {color: #66187a}
+    span.s2 {color: #7a7a43}
+    span.s3 {color: #018001}
+    span.s4 {color: #458383}
+    span.s5 {color: #011480}
+    span.s6 {color: #0432ff}
+  </style>
+  <script src="../../jquery/jquery-3.1.1.js"></script>
+
+  <script>
+    $(document).ready(function(){
+      $('#button').click(function(){
+        $.ajax({
+          type:"POST",
+          url:"get_course_teacher.php",
+          dataType:"json",
+          success:function(result){
+            var jsonObj = result;
+            for (var i = 0; i < jsonObj.length; i++) {
+              var lesson_id= jsonObj[i].lesson_id;
+             window.alert(lesson_id);
+
+            }
+          }
+        });
+        return false;
+      });
+    });
+
+  </script>
+</head>
+<body>
+<button id="button" onclick="click()">ss</button>
+
+$.ajax({
+url: "get_course_teacher.php?courseID=" + courseID, async: true,
+success: function (result) {
+var jsonObj = result;
+for (var i = 0; i < jsonObj.length; i++) {
+var teacher_id = jsonObj[i].id;
+var name = jsonObj[i].name;
+console.log("teacher id:" + teacher_id);
+
+}
+
+}
+})
+
+
+
+<p class="p1"><span class="s1"><b><i>$</i></b></span>.<span class="s2">ajax</span>({<br>
+<span class="Apple-converted-space">    </span><span class="s1"><b>url</b></span>: <span class="s3"><b>"get_course_teacher.php?courseID=" </b></span>+ <span class="s4">courseID</span>, <span class="s1"><b>async</b></span>: <span class="s5"><b>true</b></span>,<br>
+<span class="Apple-converted-space">    </span><span class="s2">success</span>: <span class="s5"><b>function </b></span>(result) {<br>
+<span class="Apple-converted-space">        </span><span class="s5"><b>var </b></span><span class="s4">jsonObj </span>= result;<br>
+<span class="Apple-converted-space">        </span><span class="s5"><b>for </b></span>(<span class="s5"><b>var </b></span><span class="s4">i </span>= <span class="s6">0</span>; <span class="s4">i </span>&lt; <span class="s4">jsonObj</span>.<span class="s1"><b>length</b></span>; <span class="s4">i</span>++) {<br>
+<span class="Apple-converted-space">            </span><span class="s5"><b>var </b></span><span class="s4">teacher_id </span>= <span class="s4">jsonObj</span>[<span class="s4">i</span>].<span class="s1"><b>id</b></span>;<br>
+<span class="Apple-converted-space">            </span><span class="s5"><b>var </b></span><span class="s4">name </span>= <span class="s4">jsonObj</span>[<span class="s4">i</span>].<span class="s1"><b>name</b></span>;<br>
+<span class="Apple-converted-space">            </span><span class="s1"><b>console</b></span>.<span class="s2">log</span>(<span class="s3"><b>"teacher id:" </b></span>+ <span class="s4">teacher_id</span>);<br>
+<span class="Apple-converted-space">            </span><br>
+<span class="Apple-converted-space">        </span>}<br>
+<span class="Apple-converted-space">               </span><br>
+<span class="Apple-converted-space">    </span>}<br>
+})</p>
+</body>
+</html>
