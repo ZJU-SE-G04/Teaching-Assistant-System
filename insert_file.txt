@@ -26,6 +26,12 @@ insert into orgnize_table values('3140103333',1);
 insert into lesson_table values('ABCDE1','软件需求工程','周五3，4，5；周六9，10','玉泉曹光彪西202；玉泉曹光彪西503','本课程blablablablablablablablabla......');
 insert into lesson_table values('ABCDE2','软件工程管理','周三3，4，5','玉泉曹光彪西202','本课程blablablablablablablablabla......');
 
+#班级
+insert into class_table values(null,'ABCDE1');
+insert into class_table values(null,'ABCDE1');
+insert into class_table values(null,'ABCDE2');
+insert into class_table values(null,'ABCDE2');
+
 #老师，学生，助教绑定
 insert into student_table values('3140101111','李白','古中文学院','诗歌系');
 insert into student_table values('3140102222','周州','计算机科学与技术学院','软件工程系');
@@ -36,17 +42,17 @@ insert into student_table values('3140105555','TonyStack','超能力者学院','
 #insert into student_table values('3140104444','StevePack','超能力者学院','蜘蛛系');
 #外键主键正确
 
-insert into study_table values('3140101111','ABCDE1');
-insert into study_table values('3140102222','ABCDE1');
-insert into study_table values('3140103333','ABCDE1');
-insert into study_table values('3140104444','ABCDE1');
-insert into study_table values('3140105555','ABCDE1');
-insert into study_table values('3140101111','ABCDE2');
-insert into study_table values('3140102222','ABCDE2');
-insert into study_table values('3140103333','ABCDE2');
-#insert into study_table values('3140101111','ABCDE2');
-#insert into study_table values('3140101111','ABCDE3');
-#insert into study_table values('3140100000','ABCDE2');
+insert into study_table values('3140101111','ABCDE1',1);
+insert into study_table values('3140102222','ABCDE1',1);
+insert into study_table values('3140103333','ABCDE1',1);
+insert into study_table values('3140104444','ABCDE1',2);
+insert into study_table values('3140105555','ABCDE1',2);
+insert into study_table values('3140101111','ABCDE2',3);
+insert into study_table values('3140102222','ABCDE2',3);
+insert into study_table values('3140103333','ABCDE2',4);
+#insert into study_table values('3140101111','ABCDE2',4);
+#insert into study_table values('3140101111','ABCDE3',4);
+#insert into study_table values('3140100000','ABCDE2',3);
 #外键主键正确
 
 insert into teacher_table values('111111','李毅','知名球星及百度最大贴吧blablablabla...');
@@ -54,8 +60,10 @@ insert into teacher_table values('222222','陈称','编不出了blablablabla....
 #insert into teacher_table values('222222','陈称','编不出了blablablabla.....');
 #insert into teacher_table values('333333','陈称','编不出了blablablabla.....');
 
-insert into teach_table values('111111','ABCDE1');
-insert into teach_table values('222222','ABCDE2');
+insert into teach_table values('111111','ABCDE1',1);
+insert into teach_table values('111111','ABCDE1',2);
+insert into teach_table values('222222','ABCDE2',3);
+insert into teach_table values('222222','ABCDE2',4);
 #insert into teach_table values('111111','ABCDE1');
 #insert into teach_table values('333333','ABCDE1');
 #insert into teach_table values('111111','ABCDE3');
@@ -65,8 +73,10 @@ insert into teach_table values('222222','ABCDE2');
 insert into assitant_table values('3140106666','SteveRojes','超能力者学院','指挥系');
 #insert into assitant_table values('3140107777','SteveRojes','超能力者学院','指挥系');
 
-insert into assit_table values('3140106666','ABCDE1');
-insert into assit_table values('3140106666','ABCDE2');
+insert into assit_table values('3140106666','ABCDE1',1);
+insert into assit_table values('3140106666','ABCDE1',2);
+insert into assit_table values('3140106666','ABCDE2',3);
+insert into assit_table values('3140106666','ABCDE2',4);
 #insert into assit_table values('3140106666','ABCDE1');
 #外键主键正确
 
@@ -87,8 +97,8 @@ insert into courseware_table values('ABCDE1','课件1','www.baidu.com','百度')
 
 
 #作业
-insert into work_table values(null,'作业1','ABCDE1','111111',0,'2016-10-23');
-insert into work_table values(null,'实验1','ABCDE1','111111',1,'2016-10-23');
+insert into work_table values(null,'作业1','ABCDE1',1,'111111',0,'2016-10-23');
+insert into work_table values(null,'实验1','ABCDE1',2,'111111',1,'2016-10-23');
 
 insert into question_table values(1,'1+1=?','2');
 insert into question_table values(1,'1+2=?','3');
