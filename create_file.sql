@@ -53,6 +53,14 @@ create table lesson_table(
 	primary key(lesson_id)
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+#班级表
+create table class_table(
+	class_id int not null auto_increment,#自增的班级号
+	lesson_id varchar(10),#课程号
+	primary key(class_id),
+	constraint foreign key (lesson_id) references lesson_table(lesson_id) on delete cascade
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 #教师学生助教信息和绑定
 #教师信息和绑定表：
 create table teacher_table(
@@ -65,9 +73,11 @@ create table teacher_table(
 create table teach_table(
 	id varchar(10),
 	lesson_id varchar(10),
+	class_id int,
 	constraint foreign key (id) references user_table(id) on delete cascade,
 	constraint foreign key (lesson_id) references lesson_table(lesson_id) on delete cascade,
-	primary key(id,lesson_id)
+	constraint foreign key (class_id) references class_table(class_id) on delete cascade,
+	primary key(id,class_id)
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #学生信息和绑定表
@@ -82,9 +92,11 @@ create table student_table(
 create table study_table(
 	id varchar(10),
 	lesson_id varchar(10),
+	class_id int,
 	constraint foreign key (id) references user_table(id) on delete cascade,
 	constraint foreign key (lesson_id) references lesson_table(lesson_id) on delete cascade,
-	primary key(id,lesson_id)
+	constraint foreign key (class_id) references class_table(class_id) on delete cascade,
+	primary key(id,class_id)
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #助教信息和绑定表
@@ -99,9 +111,11 @@ create table assitant_table(
 create table assit_table(
 	id varchar(10),
 	lesson_id varchar(10),
+	class_id int,
 	constraint foreign key (id) references user_table(id) on delete cascade,
 	constraint foreign key (lesson_id) references lesson_table(lesson_id) on delete cascade,
-	primary key(id,lesson_id)
+	constraint foreign key (class_id) references class_table(class_id) on delete cascade,
+	primary key(id,class_id)
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -171,11 +185,13 @@ create table work_table(
 	work_id int not null auto_increment,#自增属性
 	work_name varchar(100),
 	lesson_id varchar(10),
+	class_id int,
 	id varchar(10),
 	flag int,
 	ddl datetime,
 	primary key(work_id),
 	constraint foreign key (id) references user_table(id) on delete cascade,
+	constraint foreign key (class_id) references class_table(class_id) on delete cascade,
 	constraint foreign key (lesson_id) references lesson_table(lesson_id) on delete cascade
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 #题目表
