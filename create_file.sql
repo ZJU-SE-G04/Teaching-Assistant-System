@@ -47,8 +47,6 @@ create table orgnize_table(
 create table lesson_table(
 	lesson_id varchar(10),
 	lesson_name varchar(20),
-	begin_time varchar(60),#用字符串存储所有上课时间
-	lesson_address varchar(200),
 	lesson_info varchar(1000),
 	primary key(lesson_id)
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -57,6 +55,8 @@ create table lesson_table(
 create table class_table(
 	class_id int not null auto_increment,#自增的班级号
 	lesson_id varchar(10),#课程号
+	begin_time varchar(60),#用字符串存储所有上课时间
+	lesson_address varchar(200),
 	primary key(class_id),
 	constraint foreign key (lesson_id) references lesson_table(lesson_id) on delete cascade
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
