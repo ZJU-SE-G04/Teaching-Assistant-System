@@ -23,14 +23,14 @@ insert into orgnize_table values('3140103333',1);
 #校验结果：外键正确判断。自增正确
 
 #课程
-insert into lesson_table values('ABCDE1','软件需求工程','周五3，4，5；周六9，10','玉泉曹光彪西202；玉泉曹光彪西503','本课程blablablablablablablablabla......');
-insert into lesson_table values('ABCDE2','软件工程管理','周三3，4，5','玉泉曹光彪西202','本课程blablablablablablablablabla......');
+insert into lesson_table values('ABCDE1','软件需求工程','本课程blablablablablablablablabla......');
+insert into lesson_table values('ABCDE2','软件工程管理','本课程blablablablablablablablabla......');
 
 #班级
-insert into class_table values(null,'ABCDE1');
-insert into class_table values(null,'ABCDE1');
-insert into class_table values(null,'ABCDE2');
-insert into class_table values(null,'ABCDE2');
+insert into class_table values(null,'ABCDE1','周五3，4，5；周六9，10','玉泉曹光彪西202；玉泉曹光彪西503');
+insert into class_table values(null,'ABCDE1','周二3，4，5；周六9，10','玉泉曹光彪西202；玉泉曹光彪西503');
+insert into class_table values(null,'ABCDE2','周三3，4，5','玉泉曹光彪西202');
+insert into class_table values(null,'ABCDE2','周四3，4，5','玉泉曹光彪西202');
 
 #老师，学生，助教绑定
 insert into student_table values('3140101111','李白','古中文学院','诗歌系');
