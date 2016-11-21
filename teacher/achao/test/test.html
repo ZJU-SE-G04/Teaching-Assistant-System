@@ -6,7 +6,9 @@
   <title>Title</title>
   <meta name="Generator" content="Cocoa HTML Writer">
   <meta name="CocoaVersion" content="1404.47">
+
   <style type="text/css">
+
     p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Menlo}
     span.s1 {color: #66187a}
     span.s2 {color: #7a7a43}
@@ -22,7 +24,7 @@
       $('#button').click(function(){
         $.ajax({
           type:"POST",
-          url:"get_course_teacher.php",
+          url:"get_course_teacher.php?class_id="+cours,
           dataType:"json",
           success:function(result){
             var jsonObj = result;
@@ -40,11 +42,11 @@
   </script>
 </head>
 <body>
-<button id="button" onclick="click()">ss</button>
+<button id="3" onclick="click()">ss</button>
 
 $.ajax({
-url: "get_course_teacher.php?courseID=" + courseID, async: true,
-success: function (result) {
+url: "get_course_teacher.php?courseID=" + tcourseID, async: true,
+success: function (resul) {
 var jsonObj = result;
 for (var i = 0; i < jsonObj.length; i++) {
 var teacher_id = jsonObj[i].id;

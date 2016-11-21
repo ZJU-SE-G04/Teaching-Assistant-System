@@ -131,9 +131,18 @@ function  cancelTA() {
 
 function showTAInfo(){
 
-    var exist=document.getElementById("TAInfoTable");
+    var course_name="软件工程管理";
+    var class_id=1;
+
+
+    var exist=document.getElementById("TA_info_row");
     if(exist==null) {
 
+
+        var head=document.createElement("h3");
+        head.innerHTML="以下是"+course_name+class_id+"班的助教名单";
+        var parent = document.getElementById("TAInfo");
+        parent.appendChild(head);
 
         var table = document.createElement("table");
         table.className = "table table-striped";
@@ -148,20 +157,31 @@ function showTAInfo(){
             "major": "SE"
         }, {"assistant_id": "3130101437", "assistant_name": "阿超", "department": "CS", "major": "SE"}];
         for (var i = 0; i < jsonObj.length; i++) {
-            var assistantID = jsonObj[i].assistant_id;
-            var assistantName = jsonObj[i].assistant_name;
+            var assistant_id= jsonObj[i].assistant_id;
+            var assistant_name = jsonObj[i].assistant_name;
             var department = jsonObj[i].department;
             var major = jsonObj[i].major;
-            table.innerHTML += "<tr><th>" + assistantID + "</th><th>" + assistantName + "</th><th>" + department + "</th><th>" + major + "</th><th><a href='delete_TA.php?assistantID=$assistantID'>删除</a></th></tr>"
-
-
+            table.innerHTML += "<tr><th>" + assistant_id + "</th><th>" + assistant_name + "</th><th>" + department + "</th><th>" + major + "</th><th><a href='delete_TA.php?assistantID=$assistantID'>删除</a></th></tr>"
         }
-        var parent = document.getElementById("TAInfo");
-        var afterNode = document.getElementById("TA_info_row");
-        parent.insertBefore(table, afterNode);
+        parent.appendChild(table);
 
+        var TA_info_row=document.createElement("div");
+        TA_info_row.className="row";
+        TA_info_row.id="TA_info_row";
+        TA_info_row.innerHTML= "<div  class='col-sm-2' id='add_TA_hint'> " +
+            "<p  style='float: right'>我要添加助教数量:</p></div> " +
+            "<div  class='col-sm-1' id='add_TA_select' >  <div class='form-group'> " +
+            "<select class='form-control'> " +
+            "<option>1</option> " +
+            "<option>2</option> " +
+            "<option>3</option> " +
+            "</select></div> </div> " +
+            "<div class='col-sm-2'> " +
+            "<button type='button'  class='btn btn-primary' id='add_TA_button' onclick='addTAInput()'>添加课程助教</button> " +
+            "</div>";
+        parent.appendChild(TA_info_row);
+        // var afterNode = document.getElementById("TA_info_row");
     }
-
 }
 
 // <table class="table table-striped" id="TAInfoTable">

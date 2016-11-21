@@ -80,3 +80,61 @@ function beBlack() {
     var articleTitle=document.getElementById("articleTitle");
     articleTitle.style.color="#000000";
 }
+
+
+// 显示二级回复列表
+
+function showReResponse() {
+    var jsonObj= [{
+        "user_name": "游客10068",
+        "re_user_name": "NULL",
+        "content": "For one second.",
+        "re_floor": "1"
+    }, {
+        "user_name": "阿超",
+        "re_user_name": "游客10068",
+        "content": "你是世界之王",
+        "re_floor": "2"
+    }];
+
+    var parent=document.getElementById("response_time_button");
+    var child=document.createElement("div");
+    child.className="re-response-wrapper";
+
+    var grandchild=document.createElement("div");
+    grandchild.className="re-response-list";
+    child.appendChild(grandchild);
+
+
+
+
+
+
+    var ggrandchild;
+    for(var i=0;i<jsonObj.length;i++){
+        ggrandchild=document.createElement("li");
+        var user_name=jsonObj[i].user_name;
+        var re_user_name=jsonObj[i].re_user_name;
+        var content=jsonObj[i].content;
+        ggrandchild.className="re-response-li"
+        ggrandchild.innerHTML="<span>"+user_name+"</span> <span>回复</span>" +
+            "<span>"
+        if(re_user_name!="NULL") {
+            ggrandchild.innerHTML+=re_user_name + "</span><span>:&nbsp;&nbsp;" + content + "</span>";
+        }
+        else{
+            ggrandchild.innerHTML+=re_user_name + "</span><span>:&nbsp;&nbsp;" + content + "</span>";
+
+        }
+
+        grandchild.appendChild(ggrandchild);
+
+
+    }
+
+
+
+
+
+    parent.appendChild(child);
+}
