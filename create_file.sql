@@ -270,6 +270,7 @@ create table response_table(
 	constraint foreign key (topic_id) references topic_table(topic_id) on delete cascade
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
 #二级回复
 create table re_response_table(
 	topic_id int,
