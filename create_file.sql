@@ -47,10 +47,18 @@ create table orgnize_table(
 create table lesson_table(
 	lesson_id varchar(10),
 	lesson_name varchar(20),
-	begin_time varchar(60),#用字符串存储所有上课时间
-	lesson_address varchar(200),
 	lesson_info varchar(1000),
 	primary key(lesson_id)
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#班级表
+create table class_table(
+	class_id int not null auto_increment,#自增的班级号
+	lesson_id varchar(10),#课程号
+	begin_time varchar(60),#用字符串存储所有上课时间
+	lesson_address varchar(200),
+	primary key(class_id),
+	constraint foreign key (lesson_id) references lesson_table(lesson_id) on delete cascade
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #教师学生助教信息和绑定
@@ -65,9 +73,11 @@ create table teacher_table(
 create table teach_table(
 	id varchar(10),
 	lesson_id varchar(10),
+	class_id int,
 	constraint foreign key (id) references user_table(id) on delete cascade,
 	constraint foreign key (lesson_id) references lesson_table(lesson_id) on delete cascade,
-	primary key(id,lesson_id)
+	constraint foreign key (class_id) references class_table(class_id) on delete cascade,
+	primary key(id,class_id)
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #学生信息和绑定表
@@ -82,9 +92,11 @@ create table student_table(
 create table study_table(
 	id varchar(10),
 	lesson_id varchar(10),
+	class_id int,
 	constraint foreign key (id) references user_table(id) on delete cascade,
 	constraint foreign key (lesson_id) references lesson_table(lesson_id) on delete cascade,
-	primary key(id,lesson_id)
+	constraint foreign key (class_id) references class_table(class_id) on delete cascade,
+	primary key(id,class_id)
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 #助教信息和绑定表
@@ -99,9 +111,11 @@ create table assitant_table(
 create table assit_table(
 	id varchar(10),
 	lesson_id varchar(10),
+	class_id int,
 	constraint foreign key (id) references user_table(id) on delete cascade,
 	constraint foreign key (lesson_id) references lesson_table(lesson_id) on delete cascade,
-	primary key(id,lesson_id)
+	constraint foreign key (class_id) references class_table(class_id) on delete cascade,
+	primary key(id,class_id)
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -137,11 +151,24 @@ create table comment_table(
 	time datetime,
 	content varchar(300),
 	floor int,
-	re_floor int,
 	primary key(article_id,floor),
 	constraint foreign key (id) references user_table(id) on delete cascade,
 	constraint foreign key (article_id) references article_table(article_id) on delete cascade
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+#二级评论：
+create table re_comment_table(
+	article_id int,
+	id varchar(10),
+	time datetime,
+	content varchar(300),
+	floor int,#楼层号
+	re_floor int,#楼中楼层号
+	re_id varchar(10),#回复人ID
+	primary key(article_id,floor,re_floor),
+	constraint foreign key (id) references user_table(id) on delete cascade,
+	constraint foreign key (article_id) references article_table(article_id) on delete cascade
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 #课件表：
 create table courseware_table(
 	lesson_id varchar(10),
@@ -153,16 +180,47 @@ create table courseware_table(
 
 
 #作业部分：
+
+#实验表
+create table report_table(
+	report_id int not null auto_increment,#自增属性
+	report_name varchar(100),#实验名
+	lesson_id varchar(10),#课程号
+	class_id int,#班级号
+	id varchar(10),#布置教师
+	file varchar(60),#模板文件路径
+	ddl datetime,#DDL
+	primary key(report_id),
+	constraint foreign key (id) references user_table(id) on delete cascade,
+	constraint foreign key (lesson_id) references lesson_table(lesson_id) on delete cascade
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#报告表
+create table commit_table(
+	report_id int,#实验号
+	id varchar(10),#学生号
+	file varchar(60),#学生提交的文件路径
+	filename varchar(30),#学生提交的文件名
+	commit_time datetime,#提交时间
+	score int,#分数，默认-1
+	comment varchar(300),#评价
+	state int,#是否批改状态
+	primary key(report_id,id),
+	constraint foreign key (id) references user_table(id) on delete cascade,
+	constraint foreign key (report_id) references report_table(report_id) on delete cascade
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 #作业表
 create table work_table(
 	work_id int not null auto_increment,#自增属性
 	work_name varchar(100),
 	lesson_id varchar(10),
+	class_id int,
 	id varchar(10),
-	flag int,
 	ddl datetime,
 	primary key(work_id),
 	constraint foreign key (id) references user_table(id) on delete cascade,
+	constraint foreign key (class_id) references class_table(class_id) on delete cascade,
 	constraint foreign key (lesson_id) references lesson_table(lesson_id) on delete cascade
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 #题目表
@@ -207,8 +265,22 @@ create table response_table(
 	time datetime,
 	content varchar(300),
 	floor int,
-	re_floor int,
 	primary key(topic_id,floor),
+	constraint foreign key (id) references user_table(id) on delete cascade,
+	constraint foreign key (topic_id) references topic_table(topic_id) on delete cascade
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+#二级回复
+create table re_response_table(
+	topic_id int,
+	id varchar(10),
+	time datetime,
+	content varchar(300),
+	floor int,#楼层号
+	re_floor int,#楼中楼层号
+	re_id varchar(10),#回复人ID
+	primary key(topic_id,floor,re_floor),
 	constraint foreign key (id) references user_table(id) on delete cascade,
 	constraint foreign key (topic_id) references topic_table(topic_id) on delete cascade
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -23,8 +23,14 @@ insert into orgnize_table values('3140103333',1);
 #校验结果：外键正确判断。自增正确
 
 #课程
-insert into lesson_table values('ABCDE1','软件需求工程','周五3，4，5；周六9，10','玉泉曹光彪西202；玉泉曹光彪西503','本课程blablablablablablablablabla......');
-insert into lesson_table values('ABCDE2','软件工程管理','周三3，4，5','玉泉曹光彪西202','本课程blablablablablablablablabla......');
+insert into lesson_table values('ABCDE1','软件需求工程','本课程blablablablablablablablabla......');
+insert into lesson_table values('ABCDE2','软件工程管理','本课程blablablablablablablablabla......');
+
+#班级
+insert into class_table values(null,'ABCDE1','周五3，4，5；周六9，10','玉泉曹光彪西202；玉泉曹光彪西503');
+insert into class_table values(null,'ABCDE1','周二3，4，5；周六9，10','玉泉曹光彪西202；玉泉曹光彪西503');
+insert into class_table values(null,'ABCDE2','周三3，4，5','玉泉曹光彪西202');
+insert into class_table values(null,'ABCDE2','周四3，4，5','玉泉曹光彪西202');
 
 #老师，学生，助教绑定
 insert into student_table values('3140101111','李白','古中文学院','诗歌系');
@@ -36,17 +42,17 @@ insert into student_table values('3140105555','TonyStack','超能力者学院','
 #insert into student_table values('3140104444','StevePack','超能力者学院','蜘蛛系');
 #外键主键正确
 
-insert into study_table values('3140101111','ABCDE1');
-insert into study_table values('3140102222','ABCDE1');
-insert into study_table values('3140103333','ABCDE1');
-insert into study_table values('3140104444','ABCDE1');
-insert into study_table values('3140105555','ABCDE1');
-insert into study_table values('3140101111','ABCDE2');
-insert into study_table values('3140102222','ABCDE2');
-insert into study_table values('3140103333','ABCDE2');
-#insert into study_table values('3140101111','ABCDE2');
-#insert into study_table values('3140101111','ABCDE3');
-#insert into study_table values('3140100000','ABCDE2');
+insert into study_table values('3140101111','ABCDE1',1);
+insert into study_table values('3140102222','ABCDE1',1);
+insert into study_table values('3140103333','ABCDE1',1);
+insert into study_table values('3140104444','ABCDE1',2);
+insert into study_table values('3140105555','ABCDE1',2);
+insert into study_table values('3140101111','ABCDE2',3);
+insert into study_table values('3140102222','ABCDE2',3);
+insert into study_table values('3140103333','ABCDE2',4);
+#insert into study_table values('3140101111','ABCDE2',4);
+#insert into study_table values('3140101111','ABCDE3',4);
+#insert into study_table values('3140100000','ABCDE2',3);
 #外键主键正确
 
 insert into teacher_table values('111111','李毅','知名球星及百度最大贴吧blablablabla...');
@@ -54,8 +60,10 @@ insert into teacher_table values('222222','陈称','编不出了blablablabla....
 #insert into teacher_table values('222222','陈称','编不出了blablablabla.....');
 #insert into teacher_table values('333333','陈称','编不出了blablablabla.....');
 
-insert into teach_table values('111111','ABCDE1');
-insert into teach_table values('222222','ABCDE2');
+insert into teach_table values('111111','ABCDE1',1);
+insert into teach_table values('111111','ABCDE1',2);
+insert into teach_table values('222222','ABCDE2',3);
+insert into teach_table values('222222','ABCDE2',4);
 #insert into teach_table values('111111','ABCDE1');
 #insert into teach_table values('333333','ABCDE1');
 #insert into teach_table values('111111','ABCDE3');
@@ -65,8 +73,10 @@ insert into teach_table values('222222','ABCDE2');
 insert into assitant_table values('3140106666','SteveRojes','超能力者学院','指挥系');
 #insert into assitant_table values('3140107777','SteveRojes','超能力者学院','指挥系');
 
-insert into assit_table values('3140106666','ABCDE1');
-insert into assit_table values('3140106666','ABCDE2');
+insert into assit_table values('3140106666','ABCDE1',1);
+insert into assit_table values('3140106666','ABCDE1',2);
+insert into assit_table values('3140106666','ABCDE2',3);
+insert into assit_table values('3140106666','ABCDE2',4);
 #insert into assit_table values('3140106666','ABCDE1');
 #外键主键正确
 
@@ -77,20 +87,30 @@ insert into notice_table values(null,'ABCDE2','222222','通知1','这只是测�
 insert into article_table values(null,'ABCDE1','111111','文章1','这只是测试','2016-6-6 19:03:22');
 insert into article_table values(null,'ABCDE2','222222','文章1','这只是测试','2016-6-6 19:03:22');
 
-insert into comment_table values(1,'3140101111','2016-7-7 12:00:00','good',2,null);
-insert into comment_table values(1,'3140101111','2016-7-7 12:00:00','good',3,null);
+insert into comment_table values(1,'3140101111','2016-7-7 12:00:00','good',2);
+insert into comment_table values(1,'3140101111','2016-7-7 12:00:00','good',3);
+insert into re_comment_table values(1,'3140102222','2016-7-7 12:10:00','good2',2,1,'3140101111');
+insert into re_comment_table values(1,'3140103333','2016-7-7 12:12:00','good3',2,2,'3140102222');
 
 #课件
 insert into courseware_table values('ABCDE1','课件1','www.baidu.com','百度');
 
 
 #作业
-insert into work_table values(null,'作业1','ABCDE1','111111',0,'2016-10-23');
-insert into work_table values(null,'实验1','ABCDE1','111111',1,'2016-10-23');
+insert into work_table values(null,'作业1','ABCDE1',1,'111111','2016-10-23');
+insert into work_table values(null,'作业2','ABCDE1',2,'111111','2016-10-23');
 
 insert into question_table values(1,'1+1=?','2');
 insert into question_table values(1,'1+2=?','3');
 insert into question_table values(1,'1+3=?','4');
+
+#实验
+insert into report_table values(null,'实验1','ABCDE1',1,'111111','www.baidu.com','2016-10-23');
+insert into report_table values(null,'实验2','ABCDE1',2,'111111','www.4399.com','2016-10-23');
+
+insert into commit_table values(1,'111111','www.google.com','haha','2016-11-20',66,'good',1);
+insert into commit_table values(1,'222222','www.google.com','haha','2016-11-20',-1,'',0);
+
 
 #论坛
 insert into topic_table values(null,'ABCDE1',false,false,'3140101111','2016-9-9 16:00:00','话题1','测试用的');
@@ -99,10 +119,10 @@ insert into topic_table values(null,'ABCDE1',false,false,'3140102222','2016-9-9 
 insert into topic_table values(null,'ABCDE1',false,true,'3140102222','2016-9-9 16:00:00','内部话题1','测试用的');
 insert into topic_table values(null,'ABCDE1',true,false,'3140102222','2016-9-9 16:00:00','答疑1','测试用的');
 
-insert into response_table values(1,'3140104444','2016-9-10 8:00:00','good',2,null);
-insert into response_table values(1,'3140104444','2016-9-10 8:00:00','good',3,null);
-insert into response_table values(1,'3140105555','2016-9-10 8:00:00','good',4,2);
-insert into response_table values(5,'111111','2016-9-10 8:00:00','yes',2,null);
+insert into response_table values(1,'3140104444','2016-9-10 8:00:00','good',2);
+insert into response_table values(1,'3140104444','2016-9-10 8:00:00','good',3);
+insert into re_response_table values(1,'3140105555','2016-9-10 8:00:00','good',2,2,'3140104444');
+insert into response_table values(5,'111111','2016-9-10 8:00:00','yes',2);
 
 
 #留言

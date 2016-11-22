@@ -1,10 +1,26 @@
 # Teaching-Assistant-System
 ## Specification&&Requirements
 
+## 连接远程数据库
+- 远程连接数据库即可对数据库进行增删改查
+- Windows下命令：mysql -uzjuseG04 -h 120.77.34.254 -p  
+password:exciting
+- Linux or Mac命令 ./mysql -uzjuseG04 -h 120.77.34.254 -p  
+password:exciting
+- php文件连接函数中，服务器ip把localhost改为120.77.34.254，账号改为zjuseG04,密码改为exciting  
+端口名仍为3306，数据库名仍为teaching_db
+- 后端统一include 'connect.php'连接远程数据库
+
 ## 命名规范
 - 变量：小驼峰命名  例：bookTicket
 - 数据表名，字段名：下划线 例如：stu_name
 - 伪类：中划线 例：.icon-black {color: black;}
+
+#### 需要二次迭代的内容
+- 消息通知（评论区以及讨论区、答疑区的回复通知、被删帖通知）
+- 搜索功能
+- topic自动增加标签
+
 
 ### 教师需求:
 #### (以下内容为工程需求总则，并根据访谈以及例会内容补充)

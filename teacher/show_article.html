@@ -8,9 +8,9 @@
     <link href="../bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/stu_learn.css">
-    <link rel="stylesheet" href="../css/show_article.css">
-    <link rel="stylesheet" href="../css/add_TA.css">
-    <link rel="stylesheet" href="../css/add_stu.css">
+    <link rel="stylesheet" href="achao/css/show_article.css">
+    <link rel="stylesheet" href="achao/css/add_TA.css">
+    <link rel="stylesheet" href="achao/css/add_stu.css">
 
 
 
@@ -24,12 +24,12 @@
         <div class="col-md-2" id="left-side">
                 <ul  class="nav nav-pills nav-stacked">
                     <li class="tab-style"><a href="#notice" data-toggle="tab">公告</a></li>
-                    <li class="tab-style"><a href="#article" data-toggle="tab">最新文章</a></li>
+                    <li class="active"><a href="#article" data-toggle="tab" onclick="returnToArticleList()">最新文章</a></li>
                     <li class="tab-style"><a href="#courseware" data-toggle="tab">课程资料</a></li>
                     <li class="tab-style"><a href="#report" data-toggle="tab">报告与文档</a></li>
-                    <li class="tab-style"><a href="#exrcise" data-toggle="tab">作业与测验</a></li>
-                    <li class="tab-style"><a href="#studentInfo" data-toggle="tab">学生信息</a></li>
-                    <li class="active"><a href="#TAInfo" data-toggle="tab">助教信息</a></li>
+                    <li class="tab-style"><a href="#class" data-toggle="tab">班级信息管理</a></li>
+                    <li class="tab-style"><a href="#stuInfo" data-toggle="tab" onclick="showStuInfo()">学生信息</a></li>
+                    <li class="tab-style"><a href="#TAInfo" data-toggle="tab" id="TA" onclick="showTAInfo()" >助教信息</a></li>
 
                 </ul>
         </div>
@@ -70,23 +70,22 @@
                 </div>
 
             </div>
-            <div id="article" class="tab-pane">
-
+            <div id="article" class="tab-pane in active">
+            <div id="articleList">
                 <div class="row">
                     <div class="col-sm-8">
                       <h3>以下是已经发布的文章</h3>
                     </div>
                     <div class="col-sm-4">
-                        <button type="button"  class="btn btn-primary" id="show_article_button" >撰写新文章</button>
+                        <button type="button"  class="btn btn-primary" id="show_article_button" onclick="showArticleDetails()">撰写新文章</button>
                     </div>
                 </div>
-
                 <div class="panel panel-default" >
                         <div class="panel-heading">
 
                             <div class="row">
-                                <div class="col-sm-9">
-                                   热烈庆祝长者90大寿！
+                                <div class="col-sm-9" id="articleTitle" onclick="showArticleDetails()" onmouseover="this.style.cursor='pointer';beRed();" onmouseleave="beBlack()">
+                                 热烈庆祝长者90大寿!
                                 </div>
                                 <div class="col-sm-1">
                                     膜法师
@@ -101,9 +100,6 @@
                             同时为了实现翻页，需要返回文章数量
                         </div>
                 </div>
-
-
-
                 <ul class="pagination pagination-sm">
                     <li><a id="page_first" class="active" href="#">&laquo;第一页</a></li>
                     <li><a id="page_one" href="#test">1</a></li>
@@ -113,97 +109,79 @@
                     <li><a id="page_five" href="#">5</a></li>
                     <li class="disabled"><a id="page_last" href="#">最后一页&raquo;</a></li>
                 </ul>
-
-
-
-
             </div>
-
-
-
-
-
-            <div id="courseware_pane" class="tab-pane">
-                课程资料
+            </div>
+            <div id="courseware" class="tab-pane">
             </div>
             <div id="report" class="tab-pane">
-                实验报告与文档
             </div>
             <div id="exercise" class="tab-pane">
-                作业与测验
             </div>
-            <div id="studentInfo" class="tab-pane">
-
-
-                    <h3>以下是本课程的选课学生名单</h3>
-
-
-
-                <table class="table table-striped">
-                <tr><th>学号</th><th>姓名</th><th>院系</th><th>专业</th><th>团队名称</th>
-                </tr><tr><th>3130101437</th><th>章世超</th><th>计算机学院</th><th>软件工程</th><th>激流勇进</th>
-                    </tr>
-                    <tr><th>3130101437</th><th>章世超</th><th>计算机学院</th><th>软件工程</th><th>激流勇进</th>
-                    </tr>
-                </table>
-
-                <div class="row">
-
-                    <div  class="col-sm-2" id="add_stu_hint">
-                        <p  style="float: right">我要添加学生数量:</p></div>
-                    <div  class="col-sm-1" id="add_stu_select" >  <div class="form-group">
-                        <select class="form-control">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select></div>
-                    </div>
-                    <div class="col-sm-2">
-                        <button type="button"  class="btn btn-primary" id="add_student_button" >添加选课学生</button>
-                    </div>
-
-                    <div class="col-sm-7"  id="add_stu_final">
-                        <button type="button"  class="btn btn-primary" style="float: right" onclick="addTA()">确定录入</button>
-                    </div>
-                </div>
+            <div id="class" class="tab-pane">
             </div>
-
-
-
-            <div id="TAInfo" class="tab-pane in active">
-
-                            <h3>以下是本课程的助教名单</h3>
-
-
-                    <table class="table table-striped" id="TAInfoTable">
-                        <tr><th>学号</th><th>姓名</th><th>院系</th><th>专业</th></tr>
-                        <tr><th>3130101437</th><th>章世超</th><th>计算机学院</th><th>软件工程</th></tr>
-                        <tr><th>3130101437</th><th>章世超</th><th>计算机学院</th><th>软件工程</th></tr>
-                    </table>
-                    <div class="row" id="TA_info_row">
-
-                        <div  class="col-sm-2" id="add_TA_hint">
-                            <p  style="float: right">我要添加助教数量:</p></div>
-
-                        <div  class="col-sm-1" id="add_TA_select" >  <div class="form-group">
-                            <select class="form-control">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select></div>
-                        </div>
-                        <div class="col-sm-2">
-                            <button type="button"  class="btn btn-primary" id="add_TA_button" onclick="addTAInput()">添加课程助教</button>
-                        </div>
+            <div id="stuInfo" class="tab-pane">
 
 
 
 
-                </div>
+
+                <!--<table class="table table-striped">-->
+                <!--<tr><th>学号</th><th>姓名</th><th>院系</th><th>专业</th><th>团队名称</th>-->
+                <!--</tr><tr><th>3130101437</th><th>章世超</th><th>计算机学院</th><th>软件工程</th><th>激流勇进</th>-->
+                    <!--</tr>-->
+                    <!--<tr><th>3130101437</th><th>章世超</th><th>计算机学院</th><th>软件工程</th><th>激流勇进</th>-->
+                    <!--</tr>-->
+                <!--</table>-->
+
+                <!--<div class="row">-->
+
+                    <!--<div  class="col-sm-2" id="add_stu_hint">-->
+                        <!--<p  style="float: right">我要添加学生数量:</p></div>-->
+                    <!--<div  class="col-sm-1" id="add_stu_select" >  <div class="form-group">-->
+                        <!--<select class="form-control">-->
+                            <!--<option>1</option>-->
+                            <!--<option>2</option>-->
+                            <!--<option>3</option>-->
+                        <!--</select></div>-->
+                    <!--</div>-->
+                    <!--<div class="col-sm-2">-->
+                        <!--<button type="button"  class="btn btn-primary" id="add_student_button" >添加选课学生</button>-->
+                    <!--</div>-->
+
+                    <!--<div class="col-sm-7"  id="add_stu_final">-->
+                        <!--<button type="button"  class="btn btn-primary" style="float: right" onclick="addTA()">确定录入</button>-->
+                    <!--</div>-->
+                <!--</div>-->
+            </div>
+            <div id="TAInfo" class="tab-pane">
+
+
+
+
+
+
+                <!--<table class="table table-striped" id="TAInfoTable">-->
+                        <!--<tr><th>学号</th><th>姓名</th><th>院系</th><th>专业</th><th>操作</th></tr>-->
+                        <!--<tr><th>3130101437</th><th>章世超</th><th>计算机学院</th><th>软件工程</th><th>删除</th></tr>-->
+                        <!--<tr><th>3130101437</th><th>章世超</th><th>计算机学院</th><th>软件工程</th><th>删除</th></tr>-->
+                    <!--</table>-->
+
+
+            <!--<div class="row" id="TA_info_row">-->
+                        <!--<div  class="col-sm-2" id="add_TA_hint">-->
+                            <!--<p  style="float: right">我要添加助教数量:</p></div>-->
+
+                        <!--<div  class="col-sm-1" id="add_TA_select" >  <div class="form-group">-->
+                            <!--<select class="form-control">-->
+                                <!--<option>1</option>-->
+                                <!--<option>2</option>-->
+                                <!--<option>3</option>-->
+                            <!--</select></div>-->
+                        <!--</div>-->
+                        <!--<div class="col-sm-2">-->
+                            <!--<button type="button"  class="btn btn-primary" id="add_TA_button" onclick="addTAInput()">添加课程助教</button>-->
+                        <!--</div>-->
+                <!--</div>-->
 
 
 
@@ -241,23 +219,34 @@
                     <!--</div>-->
 
 
-                    <!--<button type="button"  class="btn btn-primary" id="add_stu_button" onclick="addTA()">确定录入</button>-->
+                <!--<div class="row">-->
+                <!--<div class="col-sm-9">-->
+                <!--<button type="button"  class="btn btn-primary" id="cancel_TA_button" >取消录入</button>-->
+                <!--</div>-->
+                    <!--<div class="col-sm-3">-->
+
+                    <!--<button type="button"  class="btn btn-primary" id="add_TA_final">确定录入</button>-->
+                    <!--</div>-->
+                <!--</div>-->
                 <!--</form>-->
 
 
             </div>
             </div>
         </div>
-    </div>
-</div>
+    </div></div>
 
 
 <script src="../jquery/jquery-3.1.1.min.js"></script>
 <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script src="../jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-<script src="../js/teacher_JavaScript/turn_page_show_article.js"></script>
-<script src="../js/teacher_JavaScript/add_TA.js"></script>
-<script src="../js/teacher_JavaScript/add_TA_input.js"></script>
+
+<!--以下是achao导入的js文件-->
+<script src="achao/js/add_TA.js"></script>
+<script src="achao/js/add_artcicle.js"></script>
+<script src="achao/js/add_stu.js"></script>
+
+
 
 </body>
 </html>
