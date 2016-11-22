@@ -9,7 +9,6 @@ password:exciting
 password:exciting
 - php文件连接函数中，服务器ip把localhost改为120.77.34.254，账号改为zjuseG04,密码改为exciting  
 端口名仍为3306，数据库名仍为teaching_db
-hou'duan后端shi'yong后端使用include'connect.php'lai来lian'jie来连接yuan'cheng来连接远程shu'ju'ku来连接远程数据库
 
 ## 命名规范
 - 变量：小驼峰命名  例：bookTicket
