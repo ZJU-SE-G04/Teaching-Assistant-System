@@ -110,9 +110,9 @@ $(document).ready(function(){
             var tmp = $("#articleLoop").children(".old").clone().removeClass("old").addClass("new").show();
             tmp.attr("id", x.article_id);
             tmp.find(".x-title").html(x.title);
-            tmp.find(".x-article-digest").html(x.articleDigest);
+            tmp.find(".x-contentDigest").html(x.articleDigest);
             tmp.find(".x-time").html(x.time);
-            tmp.find(".x-comment-num").html(x.commentNum);
+            tmp.find(".x-commentNum").html(x.commentNum);
             $("#articleLoop").append(tmp);
         }
         $("#articleLoop").find(".panel-heading").click(articleShow);  //all heading created
@@ -120,7 +120,7 @@ $(document).ready(function(){
     $("#article").click(articleUpdate);
 
 ////////////////////////////
-    var detailRecord = {
+    var articleDetail = {
         "article": {
             "title": "redis和memcache的区别",
             "author": "AlexandraStan",
@@ -163,7 +163,7 @@ $(document).ready(function(){
         ]
     }
     /*
-    var detailRecord = "";
+    var articleDetail = "";
     */
     function articleShow() {
         $("#articleLoop").hide();
@@ -172,17 +172,17 @@ $(document).ready(function(){
         var id = $(this).parent().attr("id");
         /*
         $.get("getArticleDetail.php?article_id="+id, function (data) {
-            detailRecord = data;
+            articleDetail = JSON.parse(data);
         })
         */
-        $("#articleDetail").find(".x-title").html(detailRecord["article"]["title"]);
-        $("#articleDetail").find(".x-author").html(detailRecord["article"]["author"]);
-        $("#articleDetail").find(".x-time").html(detailRecord["article"]["time"]);
-        $("#articleDetail").find(".x-body").html(detailRecord["article"]["body"]);
+        $("#articleDetail").find(".x-title").html(articleDetail["article"]["title"]);
+        $("#articleDetail").find(".x-author").html(articleDetail["article"]["author"]);
+        $("#articleDetail").find(".x-time").html(articleDetail["article"]["time"]);
+        $("#articleDetail").find(".x-body").html(articleDetail["article"]["body"]);
 
         $("#commentLoop").children(".new").remove();
-        for (var i in detailRecord["comment"]) {
-            var x = detailRecord["comment"][i];
+        for (var i in articleDetail["comment"]) {
+            var x = articleDetail["comment"][i];
             var tmp = $("#commentLoop").children(".old").clone().removeClass("old").addClass("new").show();
 
             if (x.re_floor == 0)
@@ -201,15 +201,177 @@ $(document).ready(function(){
 
     function deleteComment() {
         var ids = $(this).attr("id");
-        $.get("deleteMessage.php?"+ids);
+        $.get("deleteArticleComment.php?"+ids);
         $(this).parents(".panel").slideUp(function () { $(this).remove() });
     }
 
-    $("#articleBack").click(function () {
-        $("#articleDetail").hide();
-        $("#articleLoop").show();
-    });
+    $("#articleBack").click(articleUpdate);
 
 
 ///////////////////////////////////////////////////////////////////////////////
+    var topicRecords = [
+        {
+            "id": 12312431,
+            "lesson": "软件工程管理",
+            "kind": "答疑",
+            "sight": "团队可见",
+            "author": "小明",
+            "time": "2014-08-22 20:14",
+            "title": "关于计算最长的字符串长度，为什么s传不进去",
+            "responseNum": 13
+        },
+        {
+            "id": 35112441,
+            "lesson": "软件工程管理",
+            "kind": "答疑",
+            "sight": "团队可见",
+            "author": "小明",
+            "time": "2014-04-12 20:15",
+            "title": "关于计算最长的字符串长度，为什么s传不进去",
+            "responseNum": 19
+        },
+        {
+            "id": 55312431,
+            "lesson": "软件工程管理",
+            "kind": "答疑",
+            "sight": "团队可见",
+            "author": "小明",
+            "time": "2014-03-22 10:34",
+            "title": "关于计算最长的字符串长度，为什么s传不进去",
+            "responseNum": 53
+        },
+    ]
+    /*
+    var topicRecords = "";
+    */
+    function topicUpdate() {  //click tab, click topicback
+        $("#topicDetail").hide();
+        $("#topicLoop").show();
+
+        /*
+        $.get("getTopicList.php", function (data) {
+            topicRecords = JSON.parse(data);
+        })
+        */
+
+        $("#topicLoop").children(".new").remove();
+        for (var i in topicRecords) {
+            var x = topicRecords[i];
+            var tmp = $("#topicLoop").children(".old").clone().removeClass("old").addClass("new").show();
+            tmp.attr("id", x.id);
+            tmp.find(".x-title").html(x.title);
+            tmp.find(".x-author").html(x.author);
+            tmp.find(".x-lesson").html(x.lesson);
+            tmp.find(".x-kind").html(x.kind);
+            tmp.find(".x-sight").html(x.sight);
+            tmp.find(".x-time").html(x.time);
+            tmp.find(".x-responseNum").html(x.responseNum);
+            $("#topicLoop").append(tmp);
+        }
+        $("#topicLoop").find(".panel-heading").click(topicShow);
+    }
+    $("#topic").click(topicUpdate);
+
+/////////////////
+    var topicDetail = {
+        topic: {
+            "id": 1224234,
+            "title": "Vim cryptmethod uses SHA-256 for password-based key derivation",
+            "author": "atopuncw",
+            "content": "On L421-L423 of src/blowfish.c, a sha256_key() function is created for password-based key derivation with a salt for blowfish. Unfortunately, even with 1,000 rounds, SHA-256 is designed to be fast, and can be parallelized with GPUs when brute forcing a file. Instead, the Blowfish key should be derived using bcrypt or scrypt. Both defeat parallelization on GPUs, and scrypt further defeats FPGAs.",
+            "lesson": "软件需求工程",
+            "kind": "答疑",
+            "sight": "团队可见",
+            "time": "2014-03-22 10:34",
+            "responseNum": 32
+        },
+        response: [
+            {
+                "id": 2313213,
+                "floor": 6,
+                "floorMaster": "小明",
+                "reFloor": 4,
+                "time": "2016-3-21 5:34",
+                "content": "Indeed. Bad recommendation on my part, although I wouldn't recommend Argon2 quite yet either. Scrypt seems to be the most fitting here."
+            },
+            {
+                "id": 5215213,
+                "floor": 6,
+                "floorMaster": "小明",
+                "reFloor": 0,
+                "time": "2016-3-21 5:34",
+                "content": "Indeed. Bad recommendation on my part, although I wouldn't recommend Argon2 quite yet either. Scrypt seems to be the most fitting here."
+            },
+            {
+                "id": 7613213,
+                "floor": 6,
+                "floorMaster": "小明",
+                "reFloor": 4,
+                "time": "2016-3-21 5:34",
+                "content": "Indeed. Bad recommendation on my part, although I wouldn't recommend Argon2 quite yet either. Scrypt seems to be the most fitting here."
+            },
+        ]
+    }
+
+    /*
+    var topicDetail = {};
+    */
+
+    function topicShow () {  //only called when clicking heading
+        $("#topicLoop").hide();
+        $("#topicDetail").show();
+
+        /*
+        $.get("getTopicDetail.php", function (data) {
+            topicDetail = JSON.parse(data);
+        });
+        */
+
+        $("#topicBack").click(topicUpdate);
+
+        var topicDetailDiv = $("#topicDetail").find(".panel:first");
+        topicDetailDiv.find(".x-title").html(topicDetail.topic.title);
+        topicDetailDiv.find(".x-author").html(topicDetail.topic.author);
+        topicDetailDiv.find(".x-content").html(topicDetail.topic.content);
+        topicDetailDiv.find(".x-lesson").html(topicDetail.topic.lesson);
+        topicDetailDiv.find(".x-kind").html(topicDetail.topic.kind);
+        topicDetailDiv.find(".x-sight").html(topicDetail.topic.sight);
+        topicDetailDiv.find(".x-time").html(topicDetail.topic.time);
+        topicDetailDiv.find(".x-responseNum").html(topicDetail.topic.responseNum);
+        topicDetailDiv.find(".glyphicon-trash").click(function () {
+            deleteTopic(this, topicDetail.topic.id)
+        });
+
+        var topicResponseDiv = $("#topicResponseLoop");
+        topicResponseDiv.find(".new").remove();
+        for (var i in topicDetail.response) {
+            var x = topicDetail.response[i];
+
+            var tmp = topicResponseDiv.find(".old").clone().removeClass("old").addClass("new").show();
+            tmp.find(".x-floor").html(x.floor);
+            tmp.find(".x-floorMaster").html(x.floorMaster);
+            if (x.reFloor == 0)
+                tmp.find(".is-reply").hide();
+            else
+                tmp.find(".x-reFloor").html(x.reFloor);
+            tmp.find(".x-time").html(x.time);
+            tmp.find(".x-content").html(x.content);
+            tmp.find(".glyphicon-trash").click(function () {
+                deleteResponse(this, x.id);
+            });
+            topicResponseDiv.append(tmp);
+        }
+    }
+
+    function deleteTopic(thisElement, topicId) {  //trash icon
+        $.get("deleteTopic.php?id="+topicId);
+        $(thisElement).parents(".panel").slideUp(function () { topicUpdate() });
+    }
+    function deleteResponse(thisElement, responseId) {  //trash icon
+        $.get("deleteResponse.php?id="+responseId);
+        $(thisElement).parents(".panel").slideUp(function () { $(this).remove() });
+    }
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+
 });
