@@ -180,6 +180,36 @@ create table courseware_table(
 
 
 #作业部分：
+
+#实验表
+create table report_table(
+	report_id int not null auto_increment,#自增属性
+	report_name varchar(100),#实验名
+	lesson_id varchar(10),#课程号
+	class_id int,#班级号
+	id varchar(10),#布置教师
+	file varchar(60),#模板文件路径
+	ddl datetime,#DDL
+	primary key(report_id),
+	constraint foreign key (id) references user_table(id) on delete cascade,
+	constraint foreign key (lesson_id) references lesson_table(lesson_id) on delete cascade
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#报告表
+create table commit_table(
+	report_id int,#实验号
+	id varchar(10),#学生号
+	file varchar(60),#学生提交的文件路径
+	filename varchar(30),#学生提交的文件名
+	commit_time datetime,#提交时间
+	score int,#分数，默认-1
+	comment varchar(300),#评价
+	state int,#是否批改状态
+	primary key(report_id,id),
+	constraint foreign key (id) references user_table(id) on delete cascade,
+	constraint foreign key (report_id) references report_table(report_id) on delete cascade
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 #作业表
 create table work_table(
 	work_id int not null auto_increment,#自增属性
@@ -187,7 +217,6 @@ create table work_table(
 	lesson_id varchar(10),
 	class_id int,
 	id varchar(10),
-	flag int,
 	ddl datetime,
 	primary key(work_id),
 	constraint foreign key (id) references user_table(id) on delete cascade,
@@ -240,6 +269,7 @@ create table response_table(
 	constraint foreign key (id) references user_table(id) on delete cascade,
 	constraint foreign key (topic_id) references topic_table(topic_id) on delete cascade
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 #二级回复
 create table re_response_table(
