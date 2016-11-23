@@ -236,10 +236,10 @@
 
                     <div class="content-blk class">
 
-                        <div class="panel panel-primary">
+                        <div class="panel panel-primary w3-hover-shadow w3-animate-zoom">
                             <div class="panel-heading"><h2>输入班级信息</h2></div>
                             <div class="panel-body">
-                                <form class="form-horizontal">
+                                <form class="form-horizontal" id="classForm">
                                     <div class="form-group">
                                         <label class="control-label col-sm-2">课程号：</label>
                                         <div class="col-sm-10">
@@ -249,8 +249,14 @@
                                     <div class="form-group">
                                         <label class="control-label col-sm-2">上课时间：</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="beginTime1" required placeholder="时间一">
-                                            <input type="text" class="form-control" id="beginTime2" placeholder="时间二（选填）">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="beginTime1" required placeholder="时间一">
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="beginTime2" placeholder="时间二（选填）">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -267,12 +273,13 @@
                                 </form>
                             </div>
                         </div>
+                        <div id="xxx"></div>
 
                     </div>
 
                     <div class="content-blk teacher">
 
-                        <div class="panel panel-primary">
+                        <div class="panel panel-primary w3-hover-shadow w3-animate-zoom">
                             <div class="panel-heading"><h2>输入教师信息</h2></div>
                             <div class="panel-body">
                                 <form class="form-horizontal">
@@ -307,7 +314,7 @@
 
                     <div class="content-blk lesson">
 
-                        <div class="panel panel-primary">
+                        <div class="panel panel-primary w3-hover-shadow w3-animate-zoom">
                             <div class="panel-heading"><h2>输入课程信息</h2></div>
                             <div class="panel-body">
                                 <form class="form-horizontal">
@@ -367,9 +374,70 @@
 
                     </div>
 
-                    <div class="content-blk link">link</div>
+                    <div class="content-blk link">
 
-                    <div class="content-blk update">update</div>
+                        <div class="panel panel-primary w3-hover-shadow w3-animate-zoom">
+                            <div class="panel-heading"><h2>输入链接信息</h2></div>
+                            <div class="panel-body">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2">链接名：</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="linkName" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2">链接地址：</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="linkAddress" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-10 col-sm-offset-2">
+                                            <button type="submit" class="btn btn-primary">提交</button>
+                                        </div>
+                                    </div>
+                                </form>
+
+                                <fieldset>
+                                    <legend>已有链接：</legend>
+                                    <table class="table table-hover table-responsive table-condensed table-striped">
+                                        <tbody>
+                                        <tr class="old">
+                                            <th class="x-linkName"></th>
+                                            <th class="x-linkAddress"></th>
+                                            <th><span class="glyphicon glyphicon-trash w3-large clickable"></span></th>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </fieldset>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="content-blk update">
+
+                        <div class="panel panel-primary w3-hover-shadow w3-animate-zoom">
+                            <div class="panel-heading"><h2>输入更新日志</h2></div>
+                            <div class="panel-body">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2">更新信息：</label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" rows="7" id="updataInfo" required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-10 col-sm-offset-2">
+                                            <button type="submit" class="btn btn-primary">提交</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
 
                 </div>
             </div>

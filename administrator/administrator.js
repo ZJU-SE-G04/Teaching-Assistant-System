@@ -373,5 +373,14 @@ $(document).ready(function(){
     }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
+    $("#classForm").submit(function () {
+        var data = {};
+        data["lessonId"] = $("#lessonIdClass").value();
+        data["beginTime1"] = $("#beginTime1");
+        data["beginTime2"] = $("#beginTime2");
+        data["lessonAddress"] = $("#lessonAddress");
+        $.post("addClass.php", data);
+        $("#xxx").html(data);
+    });
 
 });
