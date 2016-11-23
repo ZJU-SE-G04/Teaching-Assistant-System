@@ -26,12 +26,12 @@
         <div class="col-md-2" id="left-side">
                 <ul  class="nav nav-pills nav-stacked">
                     <li class="tab-style"><a href="#notice" data-toggle="tab">公告</a></li>
-                    <li class="active"><a href="#article" data-toggle="tab" onclick="returnToArticleList()">最新文章</a></li>
+                    <li class="tab-style"><a href="#article" data-toggle="tab" onclick="returnToArticleList()">最新文章</a></li>
                     <li class="tab-style"><a href="#courseWare" data-toggle="tab">课程资料</a></li>
                     <li class="tab-style"><a href="#report" data-toggle="tab">报告与文档</a></li>
                     <li class="tab-style"><a href="#class" data-toggle="tab">班级信息管理</a></li>
                     <li class="tab-style"><a href="#stuInfo" data-toggle="tab" onclick="showStuInfo()">学生信息</a></li>
-                    <li class="tab-style"><a href="#TAInfo" data-toggle="tab" id="TA" onclick="showTAInfo()" >助教信息</a></li>
+                    <li class="active"><a href="#TAInfo" data-toggle="tab" id="TA" onclick="showTAInfo()" >助教信息</a></li>
 
                 </ul>
         </div>
@@ -72,7 +72,7 @@
                 </div>
 
             </div>
-            <div id="article" class="tab-pane in active">
+            <div id="article" class="tab-pane">
             <div id="articleList">
                 <div class="row">
                     <div class="col-sm-8">
@@ -155,9 +155,9 @@
                     <!--</div>-->
                 <!--</div>-->
             </div>
-            <div id="TAInfo" class="tab-pane">
+            <div id="TAInfo" class="tab-pane in active">
                 <div class="response-container">
-                    <ul>
+                    <ul style="padding-left: 0px">
                         <li class="response-list">
                             <div class="response-list-main">
                                 <div class="response-list-nick">章世超</div>
@@ -165,27 +165,44 @@
                                 <div class="response-list-btm">时间：2016-11-09 19:38</div>
                             </div></li>
                         <li class="response-list">
+
+
+
                             <div class="response-list-main">
                                 <div class="response-list-nick">游客10000</div>
                                 <div class="response-list-content">Fuck</div>
-                                <div class="response-list-btm">
 
+                                <div class="row">
                                     <div class="col-sm-10"><div class="response-list-btm">时间: 2016-11-09 19:40</div></div>
-                                    <div class="col-sm-2"> <p class="response-huifu" onclick="showReResponse()">回复</p></div>
+                                    <div class="col-sm-2"> <div class="response-huifu" onclick="showReResponse()">收起回复</div></div>
+                                    <div class="re-response-wrapper">
+                                        <div class="re-response-list"><ul>
+                                            <li class="re-response-li">
+
+                                                <span class="re-response-user-name">Ling&nbsp;</span><span>回复</span><span class="re-response-user-name">Xu</span><span>:&nbsp;&nbsp;苟利国家生死以，岂因祸福避趋之。苟利国家生死以，岂因祸福避趋之。苟利国家生死以，岂因祸福避趋之。苟利国家生死以，岂因祸福避趋之。苟利国家生死以，岂因祸福避趋之。苟利国家生死以，岂因祸福避趋之。苟利国家生死以，岂因祸福避趋之。</span>
+                                                <div class="re-response-huifu-time">
+                                                    <span class="re-response-time">2015-12-13 10：35&nbsp;&nbsp;&nbsp;</span><span class="re-response-huifu">回复</span>
+                                                </div>
+                                            </li>
+                                            <li class="re-response-li"><span class="re-response-user-name">Ling</span><span>:&nbsp;&nbsp;My God</span>
+                                                <div class="re-response-huifu-time">
+                                                    <span class="re-response-time">2015-12-13 10：35&nbsp;&nbsp;&nbsp;</span><span class="re-response-huifu">回复</span>
+                                                </div>
+                                            </li>
+                                            <li class="re-response-li">
+                                                <button class="btn btn-xs btn-default" style="float: right;margin-bottom: 5px">我也说一句</button>
+                                                <textarea class="re-response-textarea"></textarea>
+                                                <button class="btn btn-xs btn-primary" style="float: right">发表</button>
+                                            </li>
+                                        </ul>
+                                        </div>
+                                    </div>
                                 </div>
-
-                                <div class="re-response-wrapper">
-                                    <div class="re-response-list"><ul>
-                                        <li class="re-response-li"><span>Ling</span><span>回复</span><span>Xu</span><span>:&nbsp;&nbsp;还有两年</span>
-                                            <div></div>
-                                        </li>
-                                        <li class="re-response-li"><span>Ling</span><span>回复</span><span>Xu</span><span>:&nbsp;&nbsp;还有两年</span></li></ul></div></div>
                             </div>
-
-
                         </li>
                     </ul>
                 </div>
+
 
                 <!--<table class="table table-striped" id="TAInfoTable">-->
                         <!--<tr><th>学号</th><th>姓名</th><th>院系</th><th>专业</th><th>操作</th></tr>-->
