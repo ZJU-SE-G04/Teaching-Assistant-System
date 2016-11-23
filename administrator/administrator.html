@@ -4,15 +4,18 @@
     <title>管理员</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--
+
+    <link rel="stylesheet" href="w3.css">
     <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
     <script src="../jquery/jquery-3.1.1.min.js"></script>
     <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-    -->
+
+    <!--
     <link rel="stylesheet" href="http://w3schools.bootcss.com/lib/w3.css">
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
     <script src="http://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    -->
 
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="administrator.css">
@@ -51,18 +54,20 @@
             <ul class="nav nav-pills nav-stacked">
                 <li class="order-nav" id="message"><a href="#">查看留言</a></li>
                 <li class="order-nav" id="article"><a href="#">管理文章评论</a></li>
-                <li class="order-nav" id="post"><a href="#">管理帖子和评论</a></li>
-                <li class="order-nav" id="lesson"><a href="#">添加课程</a></li>
+                <li class="order-nav" id="topic"><a href="#">管理帖子和评论</a></li>
+                <li class="order-nav" id="class"><a href="#">添加班级</a></li>
                 <li class="order-nav" id="teacher"><a href="#">添加教师</a></li>
+                <li class="order-nav" id="lesson"><a href="#">添加课程</a></li>
                 <li class="order-nav" id="link"><a href="#">管理友情链接</a></li>
                 <li class="order-nav" id="update"><a href="#">发布网站更新信息</a></li>
              </ul>
         </div>
         <div class="col-sm-10">
+            <div class="row">
+                <div class="col-sm-10 col-sm-offset-1">
 
-            <div class="content-blk message">
-                <div class="row">
-                    <div class="col-sm-10 col-sm-offset-1">
+                    <div class="content-blk message">
+
                         <div class="panel-group" id="messageLoop">
                             <div class="panel panel-default old w3-hover-shadow w3-animate-zoom"> <!--loop start-->
                                 <div class="panel-heading">
@@ -75,44 +80,45 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="panel-body x-content"></div>
+                                <div class="panel-body"><p class="x-content"></p></div>
                             </div>  <!--loop end-->
                         </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="content-blk article">
-                <div class="row">
-                    <div class="col-sm-10 col-sm-offset-1">
+                    </div>
+
+                    <div class="content-blk article">
+
                         <div class="panel-group" id="articleLoop">
                             <div class="panel panel-default old w3-hover-shadow w3-animate-zoom">  <!--loop start-->
-                                <div class="panel-heading w3-hover-grey clickable"><strong class="x-title"></strong></div>
-                                <div class="panel-body x-article-digest"></div>
+                                <div class="panel-heading w3-hover-grey clickable">
+                                    <span class="glyphicon glyphicon-file"></span>&nbsp;<strong class="x-title"></strong>
+                                </div>
+                                <div class="panel-body"><p class="x-contentDigest"></p></div>
                                 <div class="panel-footer">
                                     <div class="row">
                                         <div class="col-md-2 col-md-offset-8 col-xs-6 col-xs-offset-2">
                                             <span class="x-time"></span>
                                         </div>
                                         <div class="col-md-2 col-xs-4">
-                                            <span>评论&nbsp;&nbsp;</span><span class="badge w3-green x-comment-num clickable"></span>
+                                            <span>评论&nbsp;&nbsp;</span><span class="badge w3-green x-commentNum clickable"></span>
                                         </div>
                                     </div>
                                 </div>
                             </div>  <!--loop end-->
                         </div>
+
                         <div id="articleDetail">
                             <div class="row">
-                                    <button type="button" class="btn btn-primary w3-right" id="articleBack">
-                                        返回列表 <span class="glyphicon glyphicon-share-alt"></span>
-                                    </button>
+                                <button type="button" class="btn btn-primary w3-right" id="articleBack">
+                                    返回列表&nbsp;<span class="glyphicon glyphicon-share-alt"></span>
+                                </button>
                             </div>
                             <div class="row">
                                 <h2 class="x-title"></h2>
-                                <h6>
+                                <h5><small>
                                     <span class="glyphicon glyphicon-user"></span> 作者：<span class="x-author"></span>&nbsp;&nbsp;
                                     <span class="glyphicon glyphicon-time"></span> 发表时间：<span class="x-time"></span>
-                                </h6><br>
+                                </small></h5><br>
                                 <p class="x-body"></p>
                                 <hr>
                                 <div class="panel-group" id="commentLoop">
@@ -130,19 +136,243 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
+
+                    <div class="content-blk topic">
+
+                        <div class="panel-group" id="topicLoop">
+                            <div class="panel panel-default old w3-hover-shadow w3-animate-zoom">  <!--loop start-->
+                                <div class="panel-heading w3-hover-grey clickable">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <span class="glyphicon glyphicon-hand-right"></span>&nbsp;
+                                            <strong class="x-title"></strong>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <span class="glyphicon glyphicon-user"></span>&nbsp;<small class="x-author"></small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <span class="label label-primary x-lesson"></span>
+                                            <span class="label label-success x-kind"></span>
+                                            <span class="label label-info x-sight"></span>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <span class="x-time"></span>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <span>回帖&nbsp;&nbsp;</span><span class="badge w3-green x-responseNum clickable"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>  <!--loop end-->
+                        </div>
+
+                        <div id="topicDetail">
+                            <div class="row">
+                                <button type="button" class="btn btn-primary w3-right" id="topicBack">
+                                    返回列表&nbsp;<span class="glyphicon glyphicon-share-alt"></span>
+                                </button>
+                            </div>
+                            <div class="row">
+                                <div class="panel panel-info w3-hover-shadow w3-animate-zoom">
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <span class="glyphicon glyphicon-hand-right"></span>&nbsp;
+                                                <strong class="x-title"></strong>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <span class="glyphicon glyphicon-user"></span>&nbsp;<small class="x-author"></small>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <span class="glyphicon glyphicon-trash w3-large clickable"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <p class="x-content"></p>
+                                    </div>
+                                    <div class="panel-footer">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <span class="label label-primary x-lesson"></span>
+                                                <span class="label label-success x-kind"></span>
+                                                <span class="label label-info x-sight"></span>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <span class="x-time"></span>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <span>回帖&nbsp;&nbsp;</span><span class="badge w3-green x-responseNum clickable"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="panel-group" id="topicResponseLoop">
+                                    <div class="panel panel-default old w3-hover-shadow w3-animate-zoom">  <!--loop start-->
+                                        <div class="panel-heading">
+                                            <div class="row">
+                                                <div class="col-md-1">第&nbsp;<strong class="x-floor"></strong>&nbsp;楼</div>
+                                                <div class="col-md-2"><strong class="x-floorMaster"></strong><span class="is-reply"> 回复 第&nbsp;<strong class="x-reFloor"></strong>&nbsp;楼</span></div>
+                                                <div class="col-md-2"><span class="x-time"></span></div>
+                                                <div class="col-md-1 col-md-offset-6"><span class="glyphicon glyphicon-trash w3-large clickable"></span></div>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body"><p class="x-content"></p></div>
+                                    </div>  <!--loop end-->
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="content-blk class">
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading"><h2>输入班级信息</h2></div>
+                            <div class="panel-body">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2">课程号：</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="lessonIdClass" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2">上课时间：</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="beginTime1" required placeholder="时间一">
+                                            <input type="text" class="form-control" id="beginTime2" placeholder="时间二（选填）">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2">上课地点：</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="lessonAddress" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-10 col-sm-offset-2">
+                                            <button type="submit" class="btn btn-primary">提交</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="content-blk teacher">
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading"><h2>输入教师信息</h2></div>
+                            <div class="panel-body">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2">教师ID:</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="id" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2">教师姓名:</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="name" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2">介绍:</label>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" rows="5" id="introduction" required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-10 col-sm-offset-2">
+                                            <button type="submit" class="btn btn-primary">提交</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="content-blk lesson">
+
+                        <div class="panel panel-primary">
+                            <div class="panel-heading"><h2>输入课程信息</h2></div>
+                            <div class="panel-body">
+                                <form class="form-horizontal">
+                                    <div class="form-group">
+                                        <label  class="control-label col-sm-2">课程号：</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="lessonId" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label  class="control-label col-sm-2">课程名：</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="lessonName" required>
+                                        </div>
+                                    </div>
+                                    <fieldset>
+                                        <legend><h4>课程信息</h4></legend>
+                                        <div class="form-group">
+                                            <label  class="control-label col-sm-2">国际国内背景：</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="background">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label  class="control-label col-sm-2">课时安排：</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="classHour">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label  class="control-label col-sm-2">教学计划：</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="teachPlan">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label  class="control-label col-sm-2">使用教材：</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="textBook">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label  class="control-label col-sm-2">考核方式：</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" class="form-control" id="evaluation">
+                                            </div>
+                                        </div>
+                                    </fieldset>
+                                    <div class="form-group">
+                                        <div class="col-sm-10 col-sm-offset-2">
+                                            <button type="submit" class="btn btn-primary">提交</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="content-blk link">link</div>
+
+                    <div class="content-blk update">update</div>
+
                 </div>
             </div>
-
-            <div class="content-blk post">ddd</div>
-
-            <div class="content-blk lesson">eee</div>
-
-            <div class="content-blk teacher">eee</div>
-
-            <div class="content-blk link">ddddsww</div>
-
-            <div class="content-blk update">bs</div>
         </div>
     </div>
 </div>
