@@ -14,12 +14,12 @@ insert into user_table values('222222','2222','Chen',3,'2222te@zju.edu.cn',null,
 insert into team_table values(null,'GoGo','1234');
 insert into team_table values(null,'Wings','6666');
 
-insert into orgnize_table values('3140101111',1);
-insert into orgnize_table values('3140102222',1);
-#insert into orgnize_table values('3140103333',0);
-insert into orgnize_table values('3140104444',2);
-insert into orgnize_table values('3140105555',2);
-insert into orgnize_table values('3140103333',1);
+insert into orgnize_table values('3140101111',1,true);
+insert into orgnize_table values('3140102222',1,false);
+#insert into orgnize_table values('3140103333',0,true);
+insert into orgnize_table values('3140104444',2,true);
+insert into orgnize_table values('3140105555',2,false);
+insert into orgnize_table values('3140103333',1,true);
 #校验结果：外键正确判断。自增正确
 
 #课程
@@ -113,11 +113,11 @@ insert into commit_table values(1,'222222','www.google.com','haha','2016-11-20',
 
 
 #论坛
-insert into topic_table values(null,'ABCDE1',false,false,'3140101111','2016-9-9 16:00:00','话题1','测试用的');
-insert into topic_table values(null,'ABCDE1',false,false,'3140101111','2016-9-9 16:00:00','话题2','测试用的');
-insert into topic_table values(null,'ABCDE1',false,false,'3140102222','2016-9-9 16:00:00','话题3','测试用的');
-insert into topic_table values(null,'ABCDE1',false,true,'3140102222','2016-9-9 16:00:00','内部话题1','测试用的');
-insert into topic_table values(null,'ABCDE1',true,false,'3140102222','2016-9-9 16:00:00','答疑1','测试用的');
+insert into topic_table values(null,'ABCDE1',1,'3140101111','2016-9-9 16:00:00','话题1','测试用的');
+insert into topic_table values(null,'ABCDE1',1,'3140101111','2016-9-9 16:00:00','话题2','测试用的');
+insert into topic_table values(null,'ABCDE1',1,'3140102222','2016-9-9 16:00:00','话题3','测试用的');
+insert into topic_table values(null,'ABCDE1',2,'3140102222','2016-9-9 16:00:00','内部话题1','测试用的');
+insert into topic_table values(null,'ABCDE1',0,'3140102222','2016-9-9 16:00:00','答疑1','测试用的');
 
 insert into response_table values(1,'3140104444','2016-9-10 8:00:00','good',2);
 insert into response_table values(1,'3140104444','2016-9-10 8:00:00','good',3);
