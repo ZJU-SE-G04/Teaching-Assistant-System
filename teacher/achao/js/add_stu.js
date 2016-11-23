@@ -77,6 +77,7 @@ function showStuInfo(){
 
 
     var exist=document.getElementById("stu_info_row");
+
     if(exist==null) {
         var head=document.createElement("h3");
         head.innerHTML="以下是"+course_name+class_id+"班的学生名单";
@@ -91,47 +92,60 @@ function showStuInfo(){
         var tbody=document.createElement("tbody");
         table.appendChild(tbody);
 
-        var jsonObj = [{
+        var jsonObj = [
+            {
             "stu_id": "3130101437",
             "stu_name": "阿超",
             "department": "CS",
             "major": "SE",
             "team_name":"政治局"
-        }, {"assistant_id": "3130101437", "assistant_name": "阿超", "department": "CS", "major": "SE"},{
-            "assistant_id": "3130101437",
-            "assistant_name": "阿超",
-            "department": "CS",
-            "major": "SE",
-            "team_name":"楼外楼"
-        },{
-            "assistant_id": "3130101437",
-            "assistant_name": "阿超",
+        },
+            {"stu_id": "3130101415", "stu_name": "阿超", "department": "CS", "major": "SE","team_name":"赛艇队"},
+            {
+                "stu_id": "3130101437",
+                "stu_name": "阿超",
+                "department": "CS",
+                "major": "SE",
+                "team_name":"青芝坞"
+            },{
+            "stu_id": "3130101437",
+            "stu_name": "哈哈哈",
             "department": "CS",
             "major": "SE",
             "team_name":"青芝坞"
         }];
         for (var i = 0; i < jsonObj.length; i++) {
-            var assistant_id= jsonObj[i].assistant_id;
-            var assistant_name = jsonObj[i].assistant_name;
+            var stu_id= jsonObj[i].stu_id;
+            var stu_name = jsonObj[i].stu_name;
             var department = jsonObj[i].department;
             var major = jsonObj[i].major;
-            tbody.innerHTML += "<tr><th>" + assistant_id + "</th><th>" + assistant_name + "</th><th>" + department + "</th><th>" + major + "</th><th><a href='delete_TA.php?assistantID=$assistantID'>删除</a></th></tr>"
+            var team_name=jsonObj[i].team_name;
+            tbody.innerHTML += "<tr><th>" + stu_id + "</th><th>" + stu_name + "</th><th>" + department + "</th><th>" + major +"</th><th>"+ team_name+ "</th><th><a href='delete_stu.php?'>删除</a></th></tr>";
         }
         parent.appendChild(table);
 
         var stu_info_row=document.createElement("div");
         stu_info_row.className="row";
         stu_info_row.id="stu_info_row";
-        stu_info_row.innerHTML= "<div  class='col-sm-2' id='add_TA_hint'> " +
-            "<p  style='float: right'>我要添加助教数量:</p></div> " +
-            "<div  class='col-sm-1' id='add_TA_select' >  <div class='form-group'> " +
-            "<select id='addTANumberSelect' class='form-control' onchange='addTAInput()'> " +
+        stu_info_row.innerHTML= "<div  class='col-sm-3' id='add_stu_hint'> " +
+            "<p  style='float: right'>手动添加学生数量:</p></div> " +
+            "<div  class='col-sm-1' id='add_stu_select' >  <div class='form-group'> " +
+            "<select id='addStuNumberSelect' class='form-control' onchange='addStuInput()'> " +
             "<option>0</option> "+
             "<option>1</option> " +
             "<option>2</option> " +
             "<option>3</option> " +
             "</select></div> </div> ";
         parent.appendChild(stu_info_row);
+
+
+        var add_multi_stu=document.createElement("div");
+        add_multi_stu.className="row";
+        add_multi_stu.id="add_multi_stu";
+        add_multi_stu.innerHTML= "<div  class='col-sm-3' id='add_multi_stu_hint'> " +
+            "<p  style='float: right'>用Excel批量导入学生:</p></div> " +
+            "<div  class='col-sm-1' id='add_stu_select' >  </div> ";
+        parent.appendChild(add_multi_stu);
         // var afterNode = document.getElementById("stu_info_row");
     }
 }
