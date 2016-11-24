@@ -268,7 +268,10 @@ $(document).ready(function(){
             tmp.find(".x-responseNum").html(x.responseNum);
             $("#topicLoop").append(tmp);
         }
-        $("#topicLoop").find(".panel-heading").click(topicShow);
+        $("#topicLoop").find(".panel-heading").click(function () {
+            var topicId = $(this).parents(".panel").attr("id");
+            topicShow(topicId);
+        });
     }
     $("#topic").click(topicUpdate);
 
@@ -287,15 +290,13 @@ $(document).ready(function(){
         },
         response: [
             {
-                "id": 2313213,
-                "floor": 6,
+                "floor": 8,
                 "floorMaster": "小明",
                 "reFloor": 4,
                 "time": "2016-3-21 5:34",
                 "content": "Indeed. Bad recommendation on my part, although I wouldn't recommend Argon2 quite yet either. Scrypt seems to be the most fitting here."
             },
             {
-                "id": 5215213,
                 "floor": 6,
                 "floorMaster": "小明",
                 "reFloor": 0,
@@ -303,8 +304,7 @@ $(document).ready(function(){
                 "content": "Indeed. Bad recommendation on my part, although I wouldn't recommend Argon2 quite yet either. Scrypt seems to be the most fitting here."
             },
             {
-                "id": 7613213,
-                "floor": 6,
+                "floor": 1,
                 "floorMaster": "小明",
                 "reFloor": 4,
                 "time": "2016-3-21 5:34",
@@ -317,12 +317,12 @@ $(document).ready(function(){
     var topicDetail = {};
     */
 
-    function topicShow () {  //only called when clicking heading
+    function topicShow (topicId) {  //only called when clicking heading
         $("#topicLoop").hide();
         $("#topicDetail").show();
 
         /*
-        $.get("getTopicDetail.php", function (data) {
+        $.get("getTopicDetail.php?topic_id=" + topicId, function (data) {
             topicDetail = JSON.parse(data);
         });
         */
@@ -356,31 +356,128 @@ $(document).ready(function(){
                 tmp.find(".x-reFloor").html(x.reFloor);
             tmp.find(".x-time").html(x.time);
             tmp.find(".x-content").html(x.content);
-            tmp.find(".glyphicon-trash").click(function () {
-                deleteResponse(this, x.id);
-            });
+            deleteResponse(tmp, topicDetail.topic.id, x.floor);
             topicResponseDiv.append(tmp);
         }
     }
 
     function deleteTopic(thisElement, topicId) {  //trash icon
-        $.get("deleteTopic.php?id="+topicId);
+        $.get("deleteTopic.php?topic_id="+topicId);
         $(thisElement).parents(".panel").slideUp(function () { topicUpdate() });
     }
-    function deleteResponse(thisElement, responseId) {  //trash icon
-        $.get("deleteResponse.php?id="+responseId);
-        $(thisElement).parents(".panel").slideUp(function () { $(this).remove() });
+    function deleteResponse(tmp, topicId, floor) {  //trash icon
+        tmp.find(".glyphicon-trash").click(function () {
+            $.get("deleteResponse.php?topic_id=" + topicId + "&floor=" + floor);
+            tmp.slideUp(function () {
+                $(this).remove()
+            });
+        })
     }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
     $("#classForm").submit(function () {
         var data = {};
-        data["lessonId"] = $("#lessonIdClass").value();
-        data["beginTime1"] = $("#beginTime1");
-        data["beginTime2"] = $("#beginTime2");
-        data["lessonAddress"] = $("#lessonAddress");
+        data["lessonId"] = $("#lessonIdClass").val();
+        data["beginTime1"] = $("#beginTime1").val();
+        data["beginTime2"] = $("#beginTime2").val();
+        data["lessonAddress"] = $("#lessonAddress").val();
         $.post("addClass.php", data);
-        $("#xxx").html(data);
     });
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+    $("#teacherForm").submit(function () {
+        var data = {}
+        data["teacherId"] = $("#teacherId").val()
+        data["teacherName"] = $("#teacherName").val()
+        data["teacherIntroduction"] = $("#teacherIntroduction").val()
+        $.post("addTeacher.php", data)
+    })
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+    $("#lessonForm").submit(function () {
+        var data = {}
+        data["lessonId"] = $("#lessonId").val()
+        data["lessonName"] = $("#lessonName").val()
+        var lessonInfo = {}
+        lessonInfo["国际国内背景"] = $("#background").val()
+        lessonInfo["课时安排"] = $("#classHour").val()
+        lessonInfo["教学计划"] = $("#teachplan").val()
+        lessonInfo["使用教材"] = $("#textBook").val()
+        lessonInfo["考核方式"] = $("#evaluation").val()
+        data["lessonInfo"] = JSON.stringify(lessonInfo)
+        $.post("addLesson.php", data)
+    })
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+    $("#link").click(linkUpdate)
+
+    $("#linkForm").submit(function () {
+        var data = {}
+        data["linkName"] = $("#linkName").val()
+        data["linkAddress"] = $("#linkAddress").val()
+        $.post("addLink.php", data)
+        linkUpdate()
+    })
+
+    var linkRecords = [
+        {
+            "linkId": 22342134,
+            "linkName": "浙江大学现代教务管理系统",
+            "linkAddress": "http://jwbinfosys.zju.edu.cn"
+        },
+        {
+            "linkId": 89742134,
+            "linkName": "CC98论坛",
+            "linkAddress": "http://www.cc98.org"
+        },
+        {
+            "linkId": 12342134,
+            "linkName": "Google",
+            "linkAddress": "http://www.google.com"
+        },
+        {
+            "linkId": 15342134,
+            "linkName": "浙江大学软件学院",
+            "linkAddress": "http://www.cst.zju.edu.cn"
+        },
+        {
+            "linkId": 95342134,
+            "linkName": "哔哩哔哩弹幕视频网",
+            "linkAddress": "http://www.bilibili.com"
+        },
+    ]
+    /*
+    var linkRecords = ""
+    */
+    function linkUpdate() {
+        /*
+        $.get("getLinkList.php", data)
+        linkRecords = JSON.parse(data)
+        */
+
+        $("#linkTable").find(".new").remove()
+        for (var i in linkRecords) {
+            var x = linkRecords[i]
+            var tmp = $("#linkTable").find(".old").clone().removeClass("old").addClass("new").show()
+
+            tmp.find(".x-linkName").html(x.linkName)
+            tmp.find(".x-linkAddress").attr("href", x.linkAddress).html(x.linkAddress)
+            deleteLink(tmp, x.linkId)
+            $("#linkTable").find("tbody").append(tmp)
+        }
+    }
+    function deleteLink(tmp, id) {
+        tmp.find(".glyphicon-trash").click(function () {
+            $.get("deleteLink.php?linkId=" + id)
+            $(this).parents("tr").slideUp(function () { this.remove() })
+        })
+    }
+
+/////////////////////////////////////////////////////////////////////////////////////////////
+    $("#updataForm").submit(function () {
+        var data = {}
+        data["updateInfo"] = $("#updataInfo").val()
+        $.post("addUpdataInfo.php", data)
+    })
 
 });
