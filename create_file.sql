@@ -191,6 +191,7 @@ create table report_table(
 	id varchar(10),#布置教师
 	file varchar(60),#模板文件路径
 	ddl datetime,#DDL
+	detail varchar(300),#实验要求
 	primary key(report_id),
 	constraint foreign key (id) references user_table(id) on delete cascade,
 	constraint foreign key (lesson_id) references lesson_table(lesson_id) on delete cascade
@@ -219,6 +220,7 @@ create table work_table(
 	class_id int,#班级号
 	id varchar(10),#发布人账号
 	ddl datetime,#截止时间
+	detail varchar(300),#实验要求
 	primary key(work_id),
 	constraint foreign key (id) references user_table(id) on delete cascade,
 	constraint foreign key (class_id) references class_table(class_id) on delete cascade,
@@ -227,12 +229,30 @@ create table work_table(
 #题目表
 create table question_table(
 	work_id int,#作业号
+	number int,#题目序号
 	question varchar(1000),#问题
-	answer varchar(1000),#答案
+	answer varchar(100),#答案
+	constraint foreign key (work_id) references work_table(work_id) on delete cascade
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+#问答题表
+create table ask_table(
+	work_id int,#作业号
+	number int,#题目序号
+	question varchar(1000),#问题
 	constraint foreign key (work_id) references work_table(work_id) on delete cascade
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-#得分表
+#存储问答题答案，方便给老师看
+create table answer_table(
+	id varchar(10),#学生学号
+	work_id int,#作业号
+	number int,#题目序号
+	answer varchar(1000),#答案
+	constraint foreign key (work_id) references work_table(work_id) on delete cascade,
+	constraint foreign key (id) references user_table(id) on delete cascade
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#得分表，得分是一次作业选择题问答题一起的，批改问答题后将问答题得分直接加上即可
 create table score_table(
 	id varchar(10),#学生账号
 	work_id int,#作业号
