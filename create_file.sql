@@ -231,7 +231,11 @@ create table question_table(
 	work_id int,#作业号
 	number int,#题目序号
 	question varchar(1000),#问题
-	answer varchar(100),#答案
+	a varchar(300),
+	b varchar(300),
+	c varchar(300),
+	d varchar(300),#四个选项
+	answer varchar(10),#答案
 	constraint foreign key (work_id) references work_table(work_id) on delete cascade
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 #问答题表
