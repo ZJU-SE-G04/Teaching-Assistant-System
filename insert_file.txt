@@ -104,9 +104,9 @@ insert into courseware_table values('ABCDE2','第一次课程PPT','www.baidu.com
 insert into work_table values(null,'作业1','ABCDE1',1,'111111','2016-10-23','请按时完成。');
 insert into work_table values(null,'作业2','ABCDE1',2,'111111','2016-10-23','不按时就算了。');
 
-insert into question_table values(1,1,'1+1=?','2');
-insert into question_table values(1,2,'1+2=?','3');
-insert into question_table values(1,3,'1+3=?','4');
+insert into question_table values(1,1,'1+1=?','1','2','3','4','b');
+insert into question_table values(1,2,'1+2=?','1','2','3','4','c');
+insert into question_table values(1,3,'1+3=?','1','2','3','4','d');
 insert into ask_table values(1,1,'why 1+1=2?');
 insert into ask_table values(1,2,'why 1+2=3?');
 insert into ask_table values(1,3,'set x=1,y=2.what is the answer of x+y*y?');
