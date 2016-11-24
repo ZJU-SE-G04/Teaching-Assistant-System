@@ -192,7 +192,7 @@
      <td><pre><code>{
   "lessonId": 2342343,
   "lessonName": "xxx",
-  "lessonInfo": "{"国际国内背景":"xxx","课时安排":"xxx","使用教材":"xxxx","考核方式":"xxx"}"
+  "lessonInfo": '{"国际国内背景":"xxx","课时安排":"xxx","使用教材":"xxxx","考核方式":"xxx"}'
 }</code></pre></td>
      <td></td>
      <td>lessonInfo当做字符串存</td>
