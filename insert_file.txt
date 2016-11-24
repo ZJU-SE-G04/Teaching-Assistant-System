@@ -94,22 +94,34 @@ insert into re_comment_table values(1,'3140103333','2016-7-7 12:12:00','good3',2
 
 #课件
 insert into courseware_table values('ABCDE1','课件1','www.baidu.com','百度');
+insert into courseware_table values('ABCDE1','第一次课程PPT','www.baidu.com','PPT');
+insert into courseware_table values('ABCDE1','第二次课程PPT','www.baidu.com','PPT');
+insert into courseware_table values('ABCDE1','实验1样例','www.baidu.com','Exp');
+insert into courseware_table values('ABCDE2','第一次课程PPT','www.baidu.com','PPT');
 
 
 #作业
-insert into work_table values(null,'作业1','ABCDE1',1,'111111','2016-10-23');
-insert into work_table values(null,'作业2','ABCDE1',2,'111111','2016-10-23');
+insert into work_table values(null,'作业1','ABCDE1',1,'111111','2016-10-23','请按时完成。');
+insert into work_table values(null,'作业2','ABCDE1',2,'111111','2016-10-23','不按时就算了。');
 
-insert into question_table values(1,'1+1=?','2');
-insert into question_table values(1,'1+2=?','3');
-insert into question_table values(1,'1+3=?','4');
+insert into question_table values(1,1,'1+1=?','2');
+insert into question_table values(1,2,'1+2=?','3');
+insert into question_table values(1,3,'1+3=?','4');
+insert into ask_table values(1,1,'why 1+1=2?');
+insert into ask_table values(1,2,'why 1+2=3?');
+insert into ask_table values(1,3,'set x=1,y=2.what is the answer of x+y*y?');
+
+insert into answer_table values('111111',1,1,'blablablablablablablabla');
+insert into answer_table values('111111',1,2,'blablablablablablablabla');
+insert into answer_table values('111111',1,3,'1+4=5');
 
 #实验
-insert into report_table values(null,'实验1','ABCDE1',1,'111111','www.baidu.com','2016-10-23');
-insert into report_table values(null,'实验2','ABCDE1',2,'111111','www.4399.com','2016-10-23');
+insert into report_table values(null,'实验1','ABCDE1',1,'111111','www.baidu.com','2016-10-23','学习使用航天母舰');
+insert into report_table values(null,'实验2','ABCDE1',2,'111111','www.4399.com','2016-10-23','学习发射破坏死光');
 
 insert into commit_table values(1,'111111','www.google.com','haha','2016-11-20',66,'good',1);
 insert into commit_table values(1,'222222','www.google.com','haha','2016-11-20',-1,'',0);
+
 
 
 #论坛
