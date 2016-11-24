@@ -74,7 +74,7 @@
             lesson_id=xxx, class_id=xxx,
             <br>work_id=xxx, stu_id=xxx
         </td>
-        <td>{（注意看清JSON的格式！）
+        <td>{（注意看清JSON的格式！）<br>
             "work_name": "xxx",<br>
             "question":[<br>
             {"number": xxx,<br>
