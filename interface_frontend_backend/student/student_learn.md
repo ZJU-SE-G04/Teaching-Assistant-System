@@ -70,15 +70,32 @@
     <tr>
         <td>获取某一测试题目</td>
         <td>quiz_and_report.php</td>
-        <td>action=request_quiz_detail, courseID=xxx, quizID=xxx, studentID=xxx</td>
-        <td>
-            [{question_id=1、2、3(每个测试的id都从1开始，1、2、3...),A=xxx, B=xxx, C=xxx, D=xxx},{}]
+        <td>action=request_quiz_detail,<br>
+            lesson_id=xxx, class_id=xxx,
+            <br>work_id=xxx, stu_id=xxx
+        </td>
+        <td>{（注意看清JSON的格式！）
+            "work_name": "xxx",<br>
+            "question":[<br>
+            {"number": xxx,<br>
+            "question_type": "option",<br>
+            "question": "xxx",<br>
+            "a": "xxx", "B": "xxx", "C": "xxx", "D": "xxx"},<br>
+            {"number": xxx,<br>
+            "question_type": "essay",<br>
+            "question": "xxx"<br>
+            }]<br>
+            }
         </td>
     </tr>
     <tr>
         <td>提交quiz结果</td>
         <td>quiz_and_report.php</td>
-        <td>action=submit_quiz_result, courseID=xxx, quizID=xxx, studentID=xxx, 1=C, 2=B, 3=D, 4=A, 5=C,...（如果第1题没有选择答案，那么1以及1的值不会被post过去，我不知道后端可以怎么解决）</td>
+        <td>action=submit_quiz_result, lesson_id=xxx, <br>
+            class_id=xxx, work_id=xxx, stu_id=xxx,<br>
+            1=C, 2=B, 3=D, 4=A, 5=C,... <br>
+            （如果第1题没有选择答案，<br>那么1以及1的值不会被post过去，<br>我不知道后端可以怎么解决）
+        </td>
         <td>成功/失败</td>
     </tr>
     </tbody>
