@@ -21,17 +21,30 @@
     <tr>
         <td>获取测试列表</td>
         <td>quiz_and_report.php</td>
-        <td>action=request_quiz_list, courseID=xxx, studentID=xxx</td>
+        <td>action=request_quiz_list,lesson_id=xxx, class_id=xxx, stu_id=xxx（学生id，为了方便你辨别，我用了stu_id）</td>
         <td>
-            [{"quiz_id":"xxx", "state"="0/1"(未完成或已完成), "deadline""xxx", "title"="xxx", "detail"="xxx", "score"=xxx, quiz_link=(可能需要)},{...}]
+            [{"work_id": xxx,<br>
+            "work_name":"xxx",<br>
+            "ddl":"2016-12-05 23:59:59",<br>
+            "state": 0/1(未完成或已完成),<br>
+            "score": xxx(score_table)},<br>
+            {...}]
         </td>
     </tr>
     <tr>
         <td>获取实验报告列表</td>
         <td>quiz_and_report.php</td>
-        <td>action=request_report_list, courseID=xxx, studentID=xxx</td>
+        <td>action=request_report_list, lesson_id=xxx, class_id, stu_id=xxx</td>
         <td>
-            [{report_id=xxx, state=0/1(未提交或已提交), deadline=xxx, title=xxx, detail=xxx, score=xxx, report_upload_link=(可能需要)},{...}]
+            [{"report_id": xxx,<br>
+            "report_name": "xxx",<br>
+            "state": 0/1(未提交或已提交),<br>
+            "ddl": "xxx",<br>
+            "detail": "xxx",<br>
+            "file": "http://www.baidu.com/1.docx",<br>
+            "score": xxx,<br>
+            "comment": "xxx"},<br>
+            {...}]
         </td>
     </tr>
     <tr>
