@@ -48,10 +48,10 @@ function showArticleDetails(){
     // commentHead.innerHTML="评论";
     // articleDetails.appendChild(commentHead);
 
-    var commentHead=document.createElement("span");
-    commentHead.className="left f-discuss-header";
-    commentHead.innerHTML="讨论区";
-    articleDetails.appendChild(commentHead);
+    // var commentHead=document.createElement("span");
+    // commentHead.className="left f-discuss-header";
+    // commentHead.innerHTML="讨论区";
+    // articleDetails.appendChild(commentHead);
     //
     // var hr=document.createElement("hr");
     // articleDetails.appendChild(hr);
@@ -60,11 +60,44 @@ function showArticleDetails(){
     var articleList=document.getElementById("articleList");
     articleList.style.display="none";
 
+    var response=document.createElement("div");
+    articleDetails.appendChild(response);
+    response.className="response-container";
+    response.innerHTML=" <ul style='padding-left: 0px'> " +
+    "<li class='response-list'> " +
+    "<div class='response-list-main'> " +
+        "<div class='response-list-nick'>章世超</div> " +
+        "<div class='response-list-content'>Good Article</div> " +
+        "<div class='response-list-btm'>时间：2016-11-09 19:38</div> " +
+        "</div></li> <li class='response-list'> " +
+        "<div class='response-list-main'> " +
+        "<div class='response-list-nick'>游客10000</div> " +
+        "<div class='response-list-content'>Fuck</div> " +
+        "<div class='row'> " +
+        "<div class='col-sm-10'><div class='response-list-btm'>时间: 2016-11-09 19:40</div></div> " +
+        "<div class='col-sm-2'> <div class='response-huifu' onclick='showReResponse()'>收起回复</div></div> " +
+        "<div class='re-response-wrapper'> " +
+        "<div class='re-response-list'><ul> " +
+        "<li class='re-response-li'> " +
+        "<span class='re-response-user-name'>Ling&nbsp;</span><span>回复</span><span class='re-response-user-name'>Xu</span><span>:&nbsp;&nbsp;苟利国家生死以，岂因祸福避趋之。苟利国家生死以，岂因祸福避趋之。苟利国家生死以，岂因祸福避趋之。苟利国家生死以，岂因祸福避趋之。苟利国家生死以，岂因祸福避趋之。苟利国家生死以，岂因祸福避趋之。苟利国家生死以，岂因祸福避趋之。</span> " +
+        "<div class='re-response-huifu-time'> " +
+        "<span class='re-response-time'>2015-12-13 10：35&nbsp;&nbsp;&nbsp;</span><span class='re-response-huifu'>回复</span> " +
+        "</div> " +
+        "</li> " +
+        "<li class='re-response-li'><span class='re-response-user-name'>Ling</span><span>:&nbsp;&nbsp;My God</span> " +
+        "<div class='re-response-huifu-time'> " +
+        "<span class='re-response-time'>2015-12-13 10：35&nbsp;&nbsp;&nbsp;</span><span class='re-response-huifu'>回复</span> " +
+        "</div> " +
+        "</li> " +
+        "<li class='re-response-li'> " +
+        "<button class='btn btn-xs btn-default' style='float: right;margin-bottom: 5px'>我也说一句</button> " +
+        "<textarea class='re-response-textarea'></textarea> " +
+        "<button class='btn btn-xs btn-primary' style='float: right'>发表</button> " +
+        "</li> </ul> </div> </div> </div> </div> </li> </ul>";
 
-    var commentNumber=5;
-    if(commentNumber>0){
 
-    }
+
+
 
 
 }
