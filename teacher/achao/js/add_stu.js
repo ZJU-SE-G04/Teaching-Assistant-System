@@ -68,21 +68,25 @@
 //     }
 // }
 
-
+var class_id="X621525";
 
 function showStuInfo(){
 
     var course_name="软件工程管理";
-    var class_id=1;
+    var class_time="周二345";
+    document.getElementById("stu_course_name").innerHTML=course_name;
+    document.getElementById("stu_class_time").innerHTML=class_time;
+
+
 
 
     var exist=document.getElementById("stu_info_row");
 
     if(exist==null) {
-        var head=document.createElement("h3");
-        head.innerHTML="以下是"+course_name+class_id+"班的学生名单";
+        // var head=document.createElement("h3");
+        // head.innerHTML="以下是"+course_name+class_id+"班的学生名单";
         var parent = document.getElementById("stuInfo");
-        parent.appendChild(head);
+        // parent.appendChild(head);
 
         var table = document.createElement("table");
         table.id = "StuInfoTable";
@@ -186,7 +190,7 @@ function addStuInput() {
         parent.appendChild(newNodeDivRow);
 
         var newNodeForm = document.createElement("form");
-        newNodeForm.action="add_stu.php";
+        newNodeForm.action="add_stu.php?class_id="+class_id;
         newNodeForm.method="post";
         newNodeForm.id = "addedFormStu";
         parent.appendChild(newNodeForm);

@@ -1,4 +1,4 @@
-### 助教模块
+### 管理助教模块
 
 
 |功能名      |前端调用后端的URL                             | 后端返回前端的数据(json)                   |备注          |后端是否完成    |
@@ -8,7 +8,7 @@
 |根据助教id删除一行的助教信息|delete_TA.php?class_id=xxx&id=xxx | 删除成功：{"success":1,error_message:"null"};删除失败：{"success":0,"error_messgae":"xxx"}|成功或失败返回的是整数1或0|否
 
 
-### 学生模块
+### 管理学生模块
 
 
 |功能名      |前端调用后端的URL                             | 后端返回前端的数据(json)                   |备注          |后端是否完成    |
@@ -18,6 +18,10 @@
 |根据id删除一行的助教信息|delete_stu.php?class_id=xxx&id=xxx | 删除成功：{"success":1,error_message:"null"};删除失败：{"success":0,"error_messgae":"xxx"}|成功或失败返回的是整数1或0|否
 |用Excel批量导入学生信息|add_stu_excel.php?class_id=xxx&file=xxx| 导入成功：{"success":1,error_message:"null"};导入失败：{"success":0,"error_messgae":"xxx"}|导入的信息包括学号,姓名,院系,专业,每次导入都是对原有学生信息的重置,注意!不是添加!成功或失败返回的是整数1或0|否
 
+### 管理班级
+|功能名      |前端调用后端的URL                             | 后端返回前端的数据(json)                   |备注          |后端是否完成    |
+|-----------------|-------------------------------------------|--------------------------------------------|---------------|----------|
+|显示当前课程的所有班级的class_id和上课时间|show_class.php?course_id=xxx| [{"class_id":"xxx", "begin_time":"xxx"}{"class_id":"xxx", "begin_time":"xxx"}...]|无|否
 
 
 ### To be continued……

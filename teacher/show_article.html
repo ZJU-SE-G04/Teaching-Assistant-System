@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,10 +8,19 @@
     <link href="../bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/stu_learn.css">
+
+
     <link rel="stylesheet" href="achao/css/show_article.css">
     <link rel="stylesheet" href="achao/css/add_TA.css">
     <link rel="stylesheet" href="achao/css/add_stu.css">
-    <link rel="stylesheet" href="../css/response.css">
+    <link rel="stylesheet" href="achao/css/class_manage.css">
+
+
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/bootstrap-select-1.12.1/js/bootstrap-select.js">
+
+
+
+
 
 
 
@@ -28,9 +37,9 @@
                 <ul  class="nav nav-pills nav-stacked">
                     <li class="tab-style"><a href="#notice" data-toggle="tab">公告</a></li>
                     <li class="active"><a href="#article" data-toggle="tab">最新文章</a></li>
-                    <li class="tab-style"><a href="#courseWare" data-toggle="tab">课程资料</a></li>
+                    <li class="tab-style"><a href="#courseware" data-toggle="tab">课程资料</a></li>
                     <li class="tab-style"><a href="#report" data-toggle="tab">报告与文档</a></li>
-                    <li class="tab-style"><a href="#class" data-toggle="tab">班级信息管理</a></li>
+                    <li class="tab-style"><a href="#class" data-toggle="tab" onclick="show_class()">班级信息管理</a></li>
                     <li class="tab-style"><a href="#stuInfo" data-toggle="tab" onclick="showStuInfo()">学生信息</a></li>
                     <li class="tab-style"><a href="#TAInfo" data-toggle="tab" id="TA" onclick="showTAInfo()" >助教信息</a></li>
 
@@ -84,13 +93,15 @@
                     </div>
                 </div>
 
-                <section>
-                    <article class="blog_list">
-                        <header class="blog_list_left">
-                            <span class></span>
-                        </header>
-                    </article>
-                </section>
+
+                <!--梦断代码的样式-->
+                <!--<section>-->
+                    <!--<article class="blog_list">-->
+                        <!--<header class="blog_list_left">-->
+                            <!--<span class></span>-->
+                        <!--</header>-->
+                    <!--</article>-->
+                <!--</section>-->
 
 
 
@@ -125,16 +136,75 @@
                 </ul>
             </div>
             </div>
-            <div id="courseWare" class="tab-pane">
+            <div id="courseware" class="tab-pane">
+                    <div class="titleBox" id="ppt_btn">
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-title">课件</span>
+                    </div>
+
+                    <div id="course_ppt" class="datum-content">
+                        <div class="each_datum">
+                            <a>第一章ppt</a>
+                            <div class="download-btn">
+                                <a> <span class="glyphicon glyphicon-download"></span> </a>
+                            </div>
+                        </div>
+                        <div class="each_datum">
+                            <a>第二章ppt</a>
+                            <div class="download-btn">
+                                <a><span class="glyphicon glyphicon-download"></span></a>
+                            </div>
+                        </div>
+                        <div class="each_datum">
+                            <a>第三章ppt</a>
+                            <div class="download-btn">
+                                <a><span class="glyphicon glyphicon-download"></span></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="titleBox">
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">模板</span>
+                    </div>
+                    <div class="titleBox">
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">参考资料</span>
+                    </div>
+                    <div class="titleBox">
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">以往优秀作业</span>
+                    </div>
+                    <div class="titleBox">
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">教学视频</span>
+                    </div>
+                    <div class="titleBox">
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">教学音频</span>
+                    </div>
             </div>
             <div id="report" class="tab-pane">
             </div>
             <div id="exercise" class="tab-pane">
             </div>
             <div id="class" class="tab-pane">
+                <!--<h3>你当前所在的班级是:<span id="course_name">xxx</span><span id="class_time">xxx</span></h3><h3>你当前所在的班级是:<span id="course_name">xxx</span><span id="class_time">xxx</span></h3>-->
+                <div class="bs-callout bs-callout-info">
+               <h4>你当前所在的班级是:</h4>
+                    <span id="class_manage_course_name">课程名</span><span id="class_manage_class_time">班级时间</span>
+                </div>
+
+
+
+                <select class="form-control" id="class_manage_select" onchange="change_class()">
+                    <option>春周二345</option>
+                    <option>夏周一678</option>
+                    <option>春夏周四910周五34</option>
+                </select>
+                    <button class="btn-primary">确认更改</button>
+
+
+
             </div>
             <div id="stuInfo" class="tab-pane">
+                <div class="bs-callout bs-callout-info">
+                    <h4>以下是<span id="stu_course_name">软件工程管理</span><span id="stu_class_time">周二345</span>班的学生信息</h4>
 
+                </div>
 
 
 
@@ -169,6 +239,12 @@
             </div>
             <div id="TAInfo" class="tab-pane">
 
+
+                <div class="bs-callout bs-callout-info">
+                    <h4>以下是<span id="TA_course_name">软件工程管理</span><span id="TA_class_time">周二345</span>班的助教信息</h4>
+
+                </div>
+            </div>
                 <!--<table class="table table-striped" id="TAInfoTable">-->
                         <!--<tr><th>学号</th><th>姓名</th><th>院系</th><th>专业</th><th>操作</th></tr>-->
                         <!--<tr><th>3130101437</th><th>章世超</th><th>计算机学院</th><th>软件工程</th><th>删除</th></tr>-->
@@ -254,6 +330,7 @@
 <script src="achao/js/add_TA.js"></script>
 <script src="achao/js/add_artcicle.js"></script>
 <script src="achao/js/add_stu.js"></script>
+<script src="achao/js/class_manage.js"></script>
 
 
 
