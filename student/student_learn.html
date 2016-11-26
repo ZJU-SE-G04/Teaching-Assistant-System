@@ -19,18 +19,26 @@
     <div class="row" id="mainBody">
         <div class="col-md-2" id="left-side">
             <div id="tabs" class="">
-                <ul class="navbar-btn nav">
-                    <li class=""><a href="#notice" data-toggle="tab">公告</a></li>
+                <ul class="nav-pills nav nav-stacked">
+                    <li class=""><a href="#notice_pane" data-toggle="tab">公告</a></li>
                     <li class=""><a href="#course_intro_pane" data-toggle="tab">课程介绍</a></li>
-                    <li class=""><a href="#courseware" data-toggle="tab">课件资料</a></li>
+                    <li class=""><a href="#courseware_pane" data-toggle="tab">课件资料</a></li>
                     <li class=""><a href="#article_pane" data-toggle="tab">教师文章</a></li>
                     <li class=""><a href="#examin_pane" data-toggle="tab">测验与作业</a></li>
                     <li class="active"><a href="#discuss_area_pane" data-toggle="tab">讨论区</a></li>
+                    <li class=""><a data-toggle="tab" href="#create_team_pane">创建队伍</a></li>
+                    <li class=""><a data-toggle="tab" href="#join_team_pane">加入队伍</a></li>
+                    <!--<li class="">-->
+                    <!--<a href="#">组队</a>-->
+                    <!--<ul class="dropdown-menu pull-right" role="menu">-->
+                    <!--</ul>-->
+
+                    <!--</li>-->
                 </ul>
             </div>
         </div>
         <div class="col-md-10 tab-content" id="tab_content_area">
-            <div id="notice" class="tab-pane">
+            <div id="notice_pane" class="tab-pane">
                 公告
             </div>
             <div id="course_intro_pane" class="tab-pane">
@@ -164,7 +172,7 @@
                             <div class="u-btn btn-whiteBlue"><span>搜索</span></div>
                         </div>
                     </div>
-                    <div class="btn-whiteBlue p-btn" id="issue_post_btn">发起主题</div>
+                    <div class="btn-whiteBlue p-btn" id="goto_issue_post_page_btn">发起主题</div>
                     <div class="page-header f-sub-border">子版块</div>
                     <div class="post-border-item">
                         <a href="#">老师答疑区</a>
@@ -182,39 +190,273 @@
 
                 <!--发布帖子的页面-->
                 <div id="issue_post_page">
-
-                    <div class="dropdown" id="select_posts_catagory">
-                        <em class="f-sign">*</em>
-                        <div class="inline">所属讨论区板块</div>
-                        <div>
-                            <button class="btn btn-default dropdown-toggle" type="button" id="sel_post_catagory_ddMenu"
-                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                <div class="inline f-placeholder">请选择主题所属板块</div>
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="posts_catagory_ddMenu">
-                                <li><a href="#">老师答疑区</a></li>
-                                <li><a href="#">综合讨论区</a></li>
-                                <li><a href="#">小组讨论区</a></li>
-                            </ul>
+                    <div class="back_text">
+                        <span class="glyphicon glyphicon-menu-left"></span>
+                        <a href="#" class="f-title">返回</a>
+                    </div>
+                    <form action="getUEditorContent.php" method="post">
+                        <div class="dropdown" id="select_posts_catagory">
+                            <div class="field-label-margin">
+                                <em class="f-sign">*</em>
+                                <div class="inline">所属讨论区板块</div>
+                            </div>
+                            <div>
+                                <button class="btn btn-default dropdown-toggle" type="button"
+                                        id="sel_post_catagory_ddMenu"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    <div class="inline f-placeholder">请选择主题所属板块</div>
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="posts_catagory_ddMenu">
+                                    <li><a href="#">老师答疑区</a></li>
+                                    <li><a href="#">综合讨论区</a></li>
+                                    <li><a href="#">小组讨论区</a></li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                    <div class="post-title-field">
-                        <em class="f-sign">*</em>
-                        <div class="inline">请输入标题</div>
-                        <input type="text" name="post_title">
+                        <div class="post-title-field">
+                            <div class="field-label-margin">
+                                <em class="f-sign">*</em>
+                                <div class="inline">请输入标题</div>
+                            </div>
+                            <input type="text" name="post_title" class=""/>
 
-                        <!-- 加载编辑器的容器 -->
-                    </div>
-                    <div>
+                            <!-- 加载编辑器的容器 -->
+                        </div>
                         <div>
+                            <div class="field-label-margin">
+                                <em class="f-sign">*</em>
+                                <div class="inline"> 内容</div>
+                            </div>
+                            <script id="container" name="content" type="text/plain"></script>
+
+                            <div class="btn-whiteBlue p-btn" id="submit_post_btn">发表</div>
+                        </div>
+                    </form>
+                </div>
+
+                <!--某一个帖子板块-->
+                <div id="posts_border_page">
+                    <h4 id="posts_border_name">老师答疑区</h4>
+                    <div class="posts-container">
+                        <ul class="posts-ul">
+                            <li class="posts-list">
+                                <div class="">
+                                    <div class="posts-list-title">CMMI成熟度模型的几个问题</div>
+                                    <div class="posts-list-btm">
+                                        <span class="posts-list-nick inline">章世超</span>
+                                        &nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;
+                                        <span class="posts-list-btm">时间：2016-11-09 19:38</span>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="posts-list">
+                                <div class="">
+                                    <div class="posts-list-title">软件需求访谈的具体时间是什么</div>
+                                    <div class="posts-list-btm">
+
+                                        <span class="posts-list-nick">游客10000</span>
+
+                                        &nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;
+                                        <span class="response-list-date">时间: 2016-11-09 19:40</span>
+                                    </div>
+                                </div>
+
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div id="post_detail_page">
+
+                    <div class="back_text">
+                        <span class="glyphicon glyphicon-menu-left"></span>
+                        <a href="#" class="f-title">返回</a>
+                    </div>
+                    <div class="post-detail">
+                        <span class="f-post-title">gcc的输入问题</span>
+                        <div class="f-post-content">
+                            <p>老师，gcc是在什么地方输入的？不然出现不了命令行工具的安装对话框</p>
+                            <p>在讲计算机的语言的时候，展示的图片上应该是16进制代码，</p>
+                            <p>计算机可以直接运行16进制代码吗？</p>
+                            <p>还是只可以直接运行二进制代码</p>
+
+                        </div>
+                        <div class="post-detail-btm">
+                            <span class="f-post-author">张士超</span>&nbsp;&nbsp;|&nbsp;&nbsp; <span
+                                class="f-post-date">2016-11-09 19:38</span>
+                        </div>
+                        <!--<button class="p-btn left">回复</button>-->
+                    </div>
+
+                    <p class="f-post-comment-num">共100回复</p>
+                    <div class="posts-container">
+                        <ul class="posts-ul">
+                            <li class="posts-list">
+                                <div class="">
+                                    <div class="posts-list-title">同时学两种语言会容易混淆吗？</div>
+                                    <div class="posts-list-btm">
+                                        <span class="posts-list-nick inline">章世超</span>
+                                        &nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;
+                                        <span class="posts-list-btm">时间：2016-11-09 19:38</span>
+                                        <a class="post-comment-btn right">评论</a>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="posts-list">
+                                <div class="">
+                                    <div class="posts-list-title">坑，什么叫用linux自己可以搞定，，，我用vmware装的ubantu..很搞不定</div>
+                                    <div class="posts-list-btm">
+
+                                        <span class="posts-list-nick">游客10001</span>
+
+                                        &nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;
+                                        <span class="response-list-date">时间: 2016-11-09 19:40</span>
+                                        <a class="post-comment-btn right">评论</a>
+                                    </div>
+                                    <div class="post-comments-area">
+                                        <div class="post-comment">
+                                            <div class="post-comment-content">谢谢老师</div>
+                                            <div class="posts-list-btm">
+                                                <span class="nick-color">野子</span>
+                                                &nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;
+                                                <span class="response-list-date">时间: 2016-11-09 19:40</span>
+                                                <a class="post-comment-btn right">回复</a>
+                                            </div>
+                                        </div>
+                                        <div class="post-comment">
+                                            <div class="post-comment-content">原来如此,我懂了</div>
+                                            <div class="posts-list-btm">
+                                                <span class="nick-color">天马行空</span>
+                                                &nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;
+                                                <span class="response-list-date">时间: 2016-11-09 19:40</span>
+                                                <a class="post-comment-btn right">回复</a>
+                                            </div>
+                                        </div>
+
+                                        <div class="add-post-comment">
+                                            添加评论...
+                                            <!--<textarea name="post-comment" id="" cols="30" rows="10" placeholder="添加评论..."></textarea>-->
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li class="posts-list">
+                                <div class="">
+                                    <div class="posts-list-title">是有区别，但是也有联系。各有各的好处!</div>
+                                    <div class="posts-list-btm">
+
+                                        <span class="posts-list-nick">游客10000</span>
+
+                                        &nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;
+                                        <span class="response-list-date">时间: 2016-11-09 19:40</span>
+                                        <a class="post-comment-btn right">评论</a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <div>
+                            <script id="ueditor_container" name="content" type="text/plain" class="ueditor"></script>
+                        </div>
+                        <button class="p-btn">发表回复</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="create_team_pane" class="tab-pane">
+
+                <div id="team_name_field" class="form-field">
+                    <div class="field-label-margin">
+                        <em class="f-sign">*</em>
+                        <span class="inline">请输入团队名</span>
+                    </div>
+                    <input type="text">
+                </div>
+                <div id="team_password_field" class="form-field">
+                    <div class="field-label-margin">
+                        <em class="f-sign">*</em>
+                        <span class="inline">请输入加入团队的密码</span>
+                    </div>
+                    <input type="password">
+                </div>
+                <div id="team_rePassword_field" class="form-field">
+                    <div class="field-label-margin">
+                        <em class="f-sign">*</em>
+                        <span class="inline">请再次输入加入团队的密码</span>
+                    </div>
+                    <input type="password">
+                </div>
+
+                <div class="btn-whiteBlue p-btn" id="create_team_btn">创建队伍</div>
+            </div>
+            <div id="join_team_pane" class="tab-pane ">
+                <div id="join_team_by_apply_pane">
+                    <div class="f-prompt">
+                        <span>已知团队名和密码？</span><a href="#" id="direct_join_team_link">直接加入</a>
+                    </div>
+                    <div class="page-header">
+                        <h4>队伍列表</h4>
+                    </div>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th width="44%">队伍名称</th>
+                            <th width="44%">队伍容量</th>
+                            <th width="12%">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>亦可赛艇</td>
+                            <td>4/6</td>
+                            <td><a href="">申请加入</a></td>
+                        </tr>
+                        <tr>
+                            <td>苟利国家</td>
+                            <td>2/6</td>
+                            <td><a href="">申请加入</a></td>
+                        </tr>
+                        <tr>
+                            <td>去玩儿</td>
+                            <td>2/6</td>
+                            <td><a href="">申请加入</a></td>
+                        </tr>
+                        <tr>
+                            <td>生死以</td>
+                            <td>2/6</td>
+                            <td><a href="">申请加入</a></td>
+                        </tr>
+                        <tr>
+                            <td>岂因祸福</td>
+                            <td>2/6</td>
+                            <td><a href="">申请加入</a></td>
+                        </tr>
+                        <tr>
+                            <td>避趋之</td>
+                            <td>2/6</td>
+                            <td><a href="">申请加入</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div id="join_team_by_pass_pane">
+                    <div class="form-field">
+                        <div class="field-label-margin">
                             <em class="f-sign">*</em>
-                            <div class="inline"> 内容</div>
+                            <span class="inline">请输入团队名</span>
                         </div>
-                        <script id="container" name="content" type="text/plain"></script>
-
-                        <div class="btn-whiteBlue p-btn" id="submit_post_btn">发表</div>
+                        <input type="text">
                     </div>
+                    <div class="form-field">
+                        <div class="field-label-margin">
+                            <em class="f-sign">*</em>
+                            <span class="inline">请输入团队密码</span>
+                        </div>
+                        <input type="password">
+                    </div>
+                    <div class="btn-whiteBlue p-btn">加入队伍</div>
                 </div>
             </div>
         </div>
@@ -229,6 +471,7 @@
 
 <script type="text/javascript">
     var ue = UE.getEditor('container');
+    var uec = UE.getEditor('ueditor_container')
 </script>
 </body>
 </html>

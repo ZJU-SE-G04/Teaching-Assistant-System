@@ -1,18 +1,25 @@
 /*---------------------------通用------------------------------*/
+body {
+    /*font-family: "Arial","Hiragino Sans GB","Microsoft YaHei", 微软雅黑, "Helvetica", "sans-serif";*/
+}
+
+textarea {
+
+}
 a, button {
     cursor: pointer;
 }
 .f-title {
     font-size: 15px;
-    line-height: 25px ;
+    line-height: 1.66 ;
     font-family: "Arial","Hiragino Sans GB","Microsoft YaHei", 微软雅黑, "Helvetica", "sans-serif";
 }
 
 .bottom-line {
-    border-bottom: #000000 1px solid;
+    border-bottom: #eee 1px solid;
 }
 
-.float-r {
+.right {
     float: right;
 }
 
@@ -24,10 +31,48 @@ a, button {
     display: inline-block;
 }
 
-#container {
-    width: 700px;
-    height: 180px;
+.block {
+    display: block;
 }
+
+.divider-color {
+    color: #d9dde1;
+}
+/*#container {*/
+    /*width: 700px;*/
+    /*height: auto;*/
+/*}*/
+
+.ueditor {
+    margin-top: 30px;
+    height: 200px;
+}
+
+input:focus {
+    border: 1px solid #337AB7;
+}
+
+.nick-color {
+    color: #337ab7;
+}
+
+
+/*侧边导航栏*/
+#tabs>ul>li>ul {
+    display: none;
+}
+
+#tabs>ul>li:hover ul{
+    display: block;
+}
+/*#tabs>ul>li:hover ul li a:visited {*/
+    /*background-color: #0000cc;*/
+/*}*/
+
+#tab_content_area {
+    padding-bottom: 100px;
+}
+
 /*--------------------------课程信息---------------------------*/
 #course_detail {
     background: #F8F8F8;
@@ -39,7 +84,7 @@ a, button {
 
 #course_detail p {
     font-size: 12px;
-    line-height: 25px;
+    line-height: 2.1;
 }
 #teacher_list {
     margin-top: 20px;
@@ -80,9 +125,8 @@ a, button {
 
 #course_ppt .each_datum a{
     font-size: 15px;
-    line-height: 30px ;
+    line-height: 2;
     font-family: "Arial","Hiragino Sans GB","Microsoft YaHei", 微软雅黑, "Helvetica", "sans-serif";
-    cursor: pointer;
 }
 
 
@@ -142,7 +186,6 @@ input[name="search_post"] {
     margin-left: 10px;
     border: 1px #337AB9 solid;
     border-radius: 3px;
-    cursor: pointer;
     font-size: 14px;
     line-height: 26px;
     text-align: center;
@@ -157,18 +200,20 @@ input[name="search_post"] {
 
 
 .p-btn {
-    margin: 30px 0px 30px 0px;
     background-color: #337ab9;
     color: #fff;
     height: 34px;
     border: 1px #337AB9 solid;
     border-radius: 3px;
-    cursor: pointer;
     font-size: 14px;
     line-height: 26px;
     text-align: center;
     padding: 3px 18px;
     display: inline-block;
+}
+
+#goto_issue_post_page_btn {
+    margin: 30px 0px 30px 0px;
 }
 
 .p-btn:hover {
@@ -216,11 +261,206 @@ input[name="post_title"] {
 }
 
 .post-title-field {
-    padding-bottom: 15px;
+    margin-bottom: 15px;
 }
 
 
 #submit_post_btn {
     margin-top: 50px;
     margin-left: 0px;
+}
+
+#select_posts_catagory>div:first-child {
+    margin: 5px 0px;
+}
+
+/*显示帖子列表页面*/
+
+#posts_border_page {
+    padding: 0 24px 0 24px;
+}
+.posts-container {
+    border-top: 1px solid #d9dde1;
+    /*margin: 0 24px 0 24px;*/
+}
+.posts-ul {
+    padding-left: 0px;
+    margin: 0;
+}
+.posts-container .posts-list {
+    padding: 0.7em 0 0.7em 0;
+    border-bottom: 1px solid #d9dde1;
+    list-style:none;
+    overflow: hidden;
+}
+
+.posts-container .posts-list-title {
+    line-height: 1.2;
+    margin-bottom: 8px;
+    font-weight: normal;
+}
+.posts-container .response-list-content {
+    margin-top: 3px;
+    font-size: 14px;
+    color: #14191e;
+    line-height: 24px;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    overflow: auto;
+}
+.posts-container .posts-list-btm {
+    font-size: 12px;
+}
+
+.posts-container .posts-list-nick {
+    color: #337ab7;
+}
+.posts-container .response-list-date {
+    color: #93999f;
+}
+
+/***************************************单个帖子详情页面******************************/
+#post_detail_page {
+    margin: 10px 200px 0 5px;
+}
+.post-detail {
+    background: #F8F8F8;
+    /*width: 75%;*/
+    padding: 0px 20px 10px 20px;
+    margin-bottom: 40px;
+}
+
+.post-detail:after {
+    content: '.';
+    visibility: hidden;
+    clear: both;
+    height:0;
+    display: block;
+}
+.post-detail-btm {
+    font-size: 12px;
+    border-bottom: 1px #d9dde1 solid;
+    padding-bottom: 5px;
+    margin-bottom: 10px;
+}
+.f-post-title {
+    font-size: 1.25em;
+    line-height: 3;
+}
+
+.f-post-content {
+    font-size: 0.9em;
+    line-height: 1.2;
+    color: #666;
+}
+
+.f-post-date {
+    color: #999;
+}
+.f-post-author {
+    font-size: 0.9em;
+    color: #337ab7;
+}
+
+.f-post-comment-num {
+    line-height: 1.5;
+    font-size: 1.1em;
+}
+
+.post-comment-btn {
+    margin-right: 5px;
+}
+
+.post-comments-area {
+    /*border-radius: 2%;*/
+    margin-top: 5px;
+    padding: 10px 10px;
+    border: 1px solid #d9dde1;
+    float: right;
+    width: 75%;
+    font-size: 0.9em;
+    line-height: 1.2;
+}
+
+.post-comment {
+    border-bottom: 1px #d9dde1 solid;
+    padding-bottom: 6px;
+    margin-bottom: 8px;
+}
+
+.post-comments-area .post-comment:nth-last-child(2){
+    border-bottom: none;
+    /*margin-bottom: -8px;*/
+}
+.post-comments-area .post-comment-content {
+    margin-bottom: 8px;
+}
+
+.add-post-comment {
+    border: 1px #d9dde1 solid;
+    padding: 10px 5px;
+
+}
+
+.add-post-comment:hover {
+    cursor: pointer;
+
+}
+
+
+
+
+
+
+/*返回按键*/
+.back_text {
+    margin: 5px 0px 15px 0px;
+    padding: 5px 0 5px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.back_text span {
+}
+.back_text a {
+    color: #000;
+    /*line-height: 20px;*/
+}
+
+.post-title-field>div {
+    margin: 0 0 5px 0;
+}
+
+.field-label-margin {
+    margin: 5px 0px 5px 0;
+}
+
+
+/***********************************************************************************************/
+/******************************************组队区*********************************************/
+/***********************************************************************************************/
+
+/*创建队伍页面*/
+
+#create_team_pane input {
+    width: 40%;
+}
+
+.form-field {
+    margin: 20px 0 20px 0;
+}
+
+#create_team_btn {
+    margin-top: 10px;
+}
+
+/*加入队伍页面*/
+#join_team_pane {
+    width: 80%;
+}
+.f-prompt {
+    font-size: 20px;
+}
+
+#join_team_by_pass_pane input {
+    width: 40%;
 }
