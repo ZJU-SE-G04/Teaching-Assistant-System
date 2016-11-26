@@ -3,21 +3,13 @@
  * Created by dddong on 16/11/17.
  */
 
-var cur_state;
-page_state = {
-    SHOW_NOTICE: 1,
-    SHOW_COURSE_INTRO: 2,
-    SHOW_TEACHER_INFO: 3,
-    SHOW_COURSEWARE: 4,
-    SHOW_ARTICLES: 5,
-    SHOW_EXERCISES: 6,
-    SHOW_DISCUSS_AREA: 7
-};
 
 $(document).ready(
     function () {
+        //课程号，从首页传过来的参数获得
         var courseID = "ABCDE1";
 
+        //获取课程信息，包括课程所有老师
         function get_course_intro() {
             $("#teacher_info_detail").hide();
             $("#course_detail").show();
@@ -64,6 +56,7 @@ $(document).ready(
 
         $("a[href='#course_intro_pane']").click(get_course_intro);
 
+        //课件资料页面改变下拉列表项的箭头
         $(".titleBox").click(function () {
                 var content = $(this).next(".datum-content");
                 var arrow_btn = $(this).children()[0];
@@ -83,24 +76,69 @@ $(document).ready(
             $("#posts_catagory_ddMenu div").html($(this).html());
         });
 
+        //发布帖子
         $("#submit_post_btn").click(function () {
+            var flag = true;
+            var title_input = $("input[name='post_title']");
+            if(title_input.text() === "") {
+                title_input.after("帖子标题不能为空");
+                flag = false;
+            }
+            var border_selector = $("#sel_post_catagory_ddMenu");
+            console.log(border_selector.text());
+            if(border_selector.text() === "") {
+                border_selector.after($("<span></span>").text("请选择帖子所属的板块"));
+                flag = false;
+            }
+            if(flag !== true) return;
+
             var ueContent = UE.getEditor('container').getContent();
             $.post("getUEditorContent.php", {myEditor:ueContent}, function (result, status) {
                     alert(result);
             });
         });
         // 讨论区
-        $("#issue_post_btn").click(function () {
+
+        //显示发布帖子的界面
+        $("#goto_issue_post_page_btn").click(function () {
             $("#discuss_home_page").hide();
             $("#issue_post_page").show();
+            $(".back_text a").click(function () {
+                $("#discuss_home_page").show();
+                $("#issue_post_page").hide();
+            });
         });
 
+        $("a[href='#join_team_pane']").click(function () {
+            $("#join_team_by_apply_pane").show();
+            $("#join_team_by_pass_pane").hide();
+        })
 
+        //显示讨论区主界面
         $("a[href='#discuss_area_pane']").click(function () {
             $("#discuss_home_page").show();
             $("#issue_post_page").hide();
+        });
+
+        //点击直接加入队伍的连接，通过团队名字和密码加入
+        $("#direct_join_team_link").click(function () {
+            $("#join_team_by_apply_pane").hide();
+            $("#join_team_by_pass_pane").show();
         })
-        $("#discuss_home_page").show();
+
+        $(".add-post-comment").click(function () {
+            
+        })
+        //设置初始状态
+        //讨论区
+        $("#discuss_home_page").hide();
         $("#issue_post_page").hide();
+        $("#posts_border_page").hide();
+        $("#post_detail_page").show();
+
+
+        //加入队伍区
+        $("#join_team_by_apply_pane").show();
+        $("#join_team_by_pass_pane").hide();
     });
 

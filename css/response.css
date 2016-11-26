@@ -1,11 +1,11 @@
-.response-container {
+.posts-container {
     border-top: 1px solid #d9dde1;
     margin-right: 200px;
 }
-.response-ul{
+.posts-ul {
     padding-left: 0px;
 }
-.response-container .response-list {
+.posts-container .posts-list {
     padding: 20px 24px;
     /*padding-top: 20px;*/
     border-bottom: 1px solid #d9dde1;
@@ -17,12 +17,12 @@
 /*margin-left: 0px;*/
 
 /*}*/
-.response-container .response-list-nick {
+.posts-container .posts-list-nick {
     line-height: 1.2;
     margin-bottom: 8px;
     font-weight: bold;
 }
-.response-container .response-list-content {
+.posts-container .response-list-content {
     margin-top: 3px;
     font-size: 14px;
     color: #14191e;
@@ -31,7 +31,7 @@
     white-space: pre-wrap;
     overflow: auto;
 }
-.response-container .response-list-btm {
+.posts-container .posts-list-btm {
     font-size: 12px;
     color: #93999f;
     margin-top: 15px;

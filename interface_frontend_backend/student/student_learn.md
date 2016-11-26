@@ -6,7 +6,7 @@
 |获取该课程所有老师姓名| get_course_teacher.php?courseID=xxx   | [{"id":"xxx", "name":"xxx"},{"id":"xxx", "name":"xxx"},...]                               |无  |是
 |获取某个老师的详细介绍| get_teacher_intro.php?teacherID=xxx   | {"introduction":"xxxxxxxx"}                                                               |无|是
 |获取所有课件资料     | get_courseware.php?courseID=xxx       |[{"courseware_name":"xxx", "courseware_info":"xxx", "courseware_kind":"xxx"}, {"courseware_name":"xxx", "courseware_info":"xxx", "course_kind":"xxx"}]|无|否
-
+|获取所有老师答疑区的帖子列表|posts_handler.php?action=fetch&courseID=xxx&post_kind=0 | [{" 
 ###选择测试或实验报告
 <table>
     <thead>
