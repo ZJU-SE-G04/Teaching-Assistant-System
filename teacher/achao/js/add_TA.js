@@ -185,30 +185,30 @@ function showTAInfo(){
         var table = document.createElement("table");
         table.id = "TAInfoTable";
         table.className="table table-striped";
-        table.innerHTML = "<tr><th>学号</th><th>姓名</th><th>院系</th><th>专业</th><th>操作</th></tr>";
+        table.innerHTML = "<tr><th>学号</th><th>姓名</th><th>院系</th><th>专业</th><th>删除</th><th>编辑</th></tr>";
 
         var tbody=document.createElement("tbody");
         table.appendChild(tbody);
 
         var jsonObj = [{
-            "assistant_id": "3130101437",
-            "assistant_name": "阿超",
+            "id": "3130101437",
+            "name": "阿超",
             "department": "CS",
             "major": "SE"
-        }, {"assistant_id": "3130101437", "assistant_name": "阿超", "department": "CS", "major": "SE"},{
-            "assistant_id": "3130101437",
-            "assistant_name": "阿超",
+        }, {"id": "3130101437", "name": "阿超", "department": "CS", "major": "SE"},{
+            "id": "3130101437",
+            "name": "阿超",
             "department": "CS",
             "major": "SE"
         },{
-            "assistant_id": "3130101437",
-            "assistant_name": "阿超",
+            "id": "3130101437",
+            "name": "阿超",
             "department": "CS",
             "major": "SE"
         }];
         for (var i = 0; i < jsonObj.length; i++) {
-            var assistant_id= jsonObj[i].assistant_id;
-            var assistant_name = jsonObj[i].assistant_name;
+            var assistant_id= jsonObj[i].id;
+            var assistant_name = jsonObj[i].name;
             var department = jsonObj[i].department;
             var major = jsonObj[i].major;
             tbody.innerHTML += "<tr><th>" + assistant_id + "</th><th>" + assistant_name + "</th><th>" + department + "</th><th>" + major + "</th><th><a href='delete_TA.php?assistant_id="+assistant_id+"'>删除</a></th></tr>"

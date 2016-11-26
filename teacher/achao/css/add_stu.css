@@ -17,3 +17,15 @@
     margin-top: 10px;
 
 }
+
+#cancel_stu_button{
+    float: right;
+    margin-top: 10px;
+}
+
+/*确定录入button*/
+#add_stu_final{
+    margin-top: 10px;
+    float: right;
+
+}

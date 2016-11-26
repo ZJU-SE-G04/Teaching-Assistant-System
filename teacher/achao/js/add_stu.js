@@ -228,9 +228,9 @@ function addStuInput() {
         newNodeButton.className = "row";
         newNodeForm.appendChild(newNodeButton);
         newNodeButton.innerHTML = " <div class='col-sm-9'>" +
-            "<button type='button'  class='btn btn-primary' id='cancel_Stu_button' onclick='cancelStu()'>取消录入</button></div>" +
+            "<button type='button'  class='btn btn-primary' id='cancel_stu_button' onclick='cancelStu()'>取消录入</button></div>" +
             " <div class='col-sm-3'>" +
-            " <input type='submit'  class='btn btn-primary' id='add_Stu_final' value='确定录入'></div>";
+            " <input type='submit'  class='btn btn-primary' id='add_stu_final' value='确定录入'></div>";
         //
         // var disabledButton=document.getElementById("add_Stu_button");
         // disabledButton.disabled=true;
@@ -238,93 +238,10 @@ function addStuInput() {
 
     oldAddStuNumber=newAddStuNumber;
 }
-// function  addStuInput() {
-//     var addStuNumberSelect=document.getElementById("addStuNumberSelect");
-//     var index=addStuNumberSelect.selectedIndex;
-//     var newAddStuNumber=addStuNumberSelect[index].value;
-//
-//     if(newAddStuNumber==oldAddStuNumber){
-//         return;
-//     }
-//     if(newAddStuNumber==0){
-//         document.getElementById("StuInfo").removeChild(document.getElementById("deletedAddStu"));
-//         oldAddStuNumber=newAddStuNumber;
-//         return;
-//
-//     }
-//
-//
-//     if( document.getElementById("deletedAddStu")==null) {
-//         var parent = document.createElement("div");
-//         parent.id = "deletedAddStu";
-//         var grandparent = document.getElementById("stuInfo");
-//         grandparent.appendChild(parent);
-//         var newNode = document.createElement("h3");
-//         newNode.innerHTML = "输入学生信息";
-//         parent.appendChild(newNode);
-//
-//         var newNodeDivRow = document.createElement("div");
-//         newNodeDivRow.className = "row";
-//         parent.appendChild(newNodeDivRow);
-//
-//         var newNodeForm = document.createElement("form");
-//         newNodeForm.action="add_stu.php";
-//         newNodeForm.method="post";
-//         newNodeForm.id = "addedFormStu";
-//         parent.appendChild(newNodeForm);
-//
-//
-//
-//         var allInputRowsStu=document.createElement("div");
-//         allInputRowsStu.id="allInputRowsStu";
-//         newNodeForm.appendChild(allInputRowsStu);
-//
-//
-//
-//
-//         newNodeDivRow.innerHTML = "<div class='col-sm-3'><label>学号</label> " +
-//             " </div> <div class='col-sm-3'> " + "<label >姓名</label> " + "</div>" +
-//             " <div class='col-sm-3'> <label>院系</label>  </div>" +
-//             " <div class='col-sm-3'> <label >专业</label> </div>";
-//     }
-//     else {
-//         var allInputRowsStu=document.getElementById("allInputRowsStu");
-//     }
-//
-//
-//     if(newAddStuNumber>oldAddStuNumber) {
-//         for (var i = 0; i < newAddStuNumber-oldAddStuNumber; i++) {
-//             var child = document.createElement("div");
-//             child.className = "addedStuRow";
-//             child.innerHTML = "<div class='row'><div class='col-sm-3'><input class='form-control' name='Stu_id[]' placeholder='学号'> " +
-//                 "</div> <div class='col-sm-3'> <input class='form-control'  name='Stu_name[]' placeholder='姓名'>" +
-//                 " </div> <div class='col-sm-3'> <input class='form-control'  name='department[]' placeholder='院系'> " +
-//                 "</div> <div class='col-sm-3'> <input class='form-control' name='major[]' placeholder='专业'></div></div>";
-//             allInputRows.appendChild(child);
-//         }
-//     }
-//     else {
-//         var  x=document.getElementsByClassName("addedStuRow");
-//         for (var i = oldAddStuNumber-newAddStuNumber; i >0; i--) {
-//             allInputRows.removeChild(x[i-1]);
-//         }
-//
-//     }
-//
-//
-//     if(document.getElementById("add_Stu_final")==null) {
-//         var newNodeButton = document.createElement("div");
-//         newNodeButton.className = "row";
-//         newNodeForm.appendChild(newNodeButton);
-//         newNodeButton.innerHTML = " <div class='col-sm-9'>" +
-//             "<button type='button'  class='btn btn-primary' id='cancel_Stu_button' onclick='cancelStu()'>取消录入</button></div>" +
-//             " <div class='col-sm-3'>" +
-//             " <input type='submit'  class='btn btn-primary' id='add_Stu_final' value='确定录入'></div>";
-//         //
-//         // var disabledButton=document.getElementById("add_Stu_button");
-//         // disabledButton.disabled=true;
-//     }
-//
-//     oldAddStuNumber=newAddStuNumber;
-//
-// }
+
+
+function cancelStu() {
+    document.getElementById("stuInfo").removeChild(document.getElementById("deletedAddStu"));
+    oldAddTANumber=0;
+
+}
