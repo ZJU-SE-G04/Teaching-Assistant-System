@@ -146,6 +146,6 @@ insert into response_table values(5,'111111','2016-9-10 8:00:00','yes',2);
 
 
 #留言
-insert into words_table values('游客','2016-7-7',false,'给力');
-insert into words_table values('路人A','2016-7-8',false,'强无敌');
-insert into words_table values('路人B','2016-7-9',false,'666666');
+insert into words_table values(null,'游客','2016-7-7',false,'给力');
+insert into words_table values(null,'路人A','2016-7-8',false,'强无敌');
+insert into words_table values(null,'路人B','2016-7-9',false,'666666');

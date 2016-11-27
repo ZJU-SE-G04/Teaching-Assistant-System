@@ -310,8 +310,10 @@ create table re_response_table(
 
 #留言
 create table words_table(
+	id int not null auto_increment,#主键，非空自增
 	name varchar(30),#留言人，可以为空
 	time datetime,#留言时间
 	flag bool,#朕已阅
-	content varchar(300)
+	content varchar(300),
+	primary key(id)
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
