@@ -6,7 +6,10 @@
 |获取该课程所有老师姓名| get_course_teacher.php?courseID=xxx   | [{"id":"xxx", "name":"xxx"},{"id":"xxx", "name":"xxx"},...]                               |无  |是
 |获取某个老师的详细介绍| get_teacher_intro.php?teacherID=xxx   | {"introduction":"xxxxxxxx"}                                                               |无|是
 |获取所有课件资料     | get_courseware.php?courseID=xxx       |[{"courseware_name":"xxx", "courseware_info":"xxx", "courseware_kind":"xxx"}, {"courseware_name":"xxx", "courseware_info":"xxx", "course_kind":"xxx"}]|无|否
-|获取所有老师答疑区的帖子列表|posts_handler.php?action=fetch&courseID=xxx&post_kind=0 | [{" 
+|获取某个板块的所有帖子列表|posts_handler.php?action=fetchAll&courseID=xxx&post_kind=0 | [{"topic_id","title":"xxx", "datetime":"xxx", "publisher":"xxx"}, ... ]|请求参数中post_kind,值为0表示老师答疑区,值为1表示综合讨论区,值为2表示小组答疑区|否 
+|获取某个帖子的详情|posts_handler.php?action=fetchDetail&courseID=xxx&topic_id=xxx    | {"title":"xxx", "content", "xxxxxx", "datetime":"xxx", "publisher":"xxx"}|无|否
+|获取某个帖子的所有一级回复(只获取第一页)|
+|获取某个帖子的所有二级回复(只获取第一页)|
 ###选择测试或实验报告
 <table>
     <thead>
