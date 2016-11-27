@@ -137,7 +137,22 @@
             </div>
             </div>
             <div id="courseware" class="tab-pane">
-                    <div class="titleBox" id="ppt_btn">
+
+                <select class="form-control">
+                    <option>课件</option>
+                    <option>模板</option>
+                    <option>参考资料</option>
+                    <option>以往优秀作业</option>
+                    <option>教学视频</option>
+                    <option>教学音频</option>
+                </select>
+                <form action="add_courseware?courseware_name=xxx" method="post" enctype="multipart/form-data">
+                    <input type="file" name='file'><input type='submit' value='submit'>
+                </form>
+
+
+
+            <div class="titleBox" id="ppt_btn">
                         <span class="glyphicon glyphicon-menu-down"></span><span class="f-title">课件</span>
                     </div>
 
@@ -204,6 +219,7 @@
                 <div class="bs-callout bs-callout-info">
                     <h4>以下是<span id="stu_course_name">软件工程管理</span><span id="stu_class_time">周二345</span>班的学生信息</h4>
                 </div>
+
 
 
 

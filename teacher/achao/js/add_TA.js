@@ -23,6 +23,8 @@ function  addTAInput() {
     }
 
 
+    var allInputRows;
+
     if( document.getElementById("deletedAddTA")==null) {
         var parent = document.createElement("div");
         parent.id = "deletedAddTA";
@@ -44,7 +46,7 @@ function  addTAInput() {
 
        
 
-        var allInputRows=document.createElement("div");
+        allInputRows=document.createElement("div");
         allInputRows.id="allInputRows";
         newNodeForm.appendChild(allInputRows);
 
@@ -57,7 +59,7 @@ function  addTAInput() {
             " <div class='col-sm-3'> <label >专业</label> </div>";
     }
     else {
-       var allInputRows=document.getElementById("allInputRows");
+        allInputRows=document.getElementById("allInputRows");
     }
 
 
@@ -208,8 +210,3 @@ function showTAInfo(){
     }
 }
 
-
-function  deleteTA() {
-
-
-}
