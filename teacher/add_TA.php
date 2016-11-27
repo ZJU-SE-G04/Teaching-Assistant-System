@@ -11,7 +11,7 @@
 	$su=1;
 	$erm='null';
 	for ($i=0;$i<sizeof($_POST['TA_id']);$i++){
-		$id=$_POST['TA_id'][$i];
+		$id=$_POST['TA_ID'][$i];
 		$name=$_POST['TA_name'][$i];
 		$dep=$_POST['department'][$i];
 		$maj=$_POST['major'][$i];
