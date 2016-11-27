@@ -157,7 +157,7 @@ function showTAInfo(){
 
 
 
-
+        var parent=document.getElementById("TAInfo");
 
         var table = document.createElement("table");
         table.id = "TAInfoTable";
