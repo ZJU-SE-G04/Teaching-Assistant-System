@@ -15,6 +15,8 @@
 		$name=$_POST['TA_name'][$i];
 		$dep=$_POST['department'][$i];
 		$maj=$_POST['major'][$i];
+		//如果没有这个账号就先在USER表中增加该账号
+		$result=$conn->query('insert into user_table values("'.$id.'","'.$id.'","'.$mame.'",2,null,null,null);');
 		$result=$conn->query('insert into assitant_table values("'.$id.'","'.$mame.'","'.$dep.'","'.$maj.'");');
 		$result=$conn->query('insert into assit_talbe values("'.$id.'","'.$lesson_id.'",'.$class_id.');');
 		if(!$result){
