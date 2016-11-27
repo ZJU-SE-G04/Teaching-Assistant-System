@@ -5,7 +5,7 @@
 	$course_id=$_GET["courseID"];//获取教师账号
 	//$course_id="ABCDE1";
 
-	$result = $conn->query("select distinct teach_table.id,name from teacher_table join teach_table on teacher_table.id=teach_table.id where lesson_id='".$course_id."';");
+	$result = $conn->query("select courseware_name,courseware_info,courseware_kind from courseware_table where lesson_id='".$course_id."';");
 
 	$arr = [];
 	while($row = mysqli_fetch_assoc($result)) {
@@ -15,6 +15,3 @@
 	$conn->close();
 
 ?>
-
-
-	
