@@ -1,4 +1,4 @@
-#删除已有数据库
+﻿#删除已有数据库
 drop database if exists teaching_db;
 #先创建好数据库并打开	设置UTF-8编码格式
 create database teaching_db
@@ -75,7 +75,7 @@ create table teach_table(
 	id varchar(10),#教师账号
 	lesson_id varchar(10),#课程号
 	class_id int,#班级号
-	constraint foreign key (id) references user_table(id) on delete cascade,
+	constraint foreign key (id) references teacher_table(id) on delete cascade,
 	constraint foreign key (lesson_id) references lesson_table(lesson_id) on delete cascade,
 	constraint foreign key (class_id) references class_table(class_id) on delete cascade,
 	primary key(id,class_id)
@@ -94,7 +94,7 @@ create table study_table(
 	id varchar(10),#学生账号
 	lesson_id varchar(10),#课程号
 	class_id int,#班级号
-	constraint foreign key (id) references user_table(id) on delete cascade,
+	constraint foreign key (id) references student_table(id) on delete cascade,
 	constraint foreign key (lesson_id) references lesson_table(lesson_id) on delete cascade,
 	constraint foreign key (class_id) references class_table(class_id) on delete cascade,
 	primary key(id,class_id)
@@ -113,7 +113,7 @@ create table assit_table(
 	id varchar(10),#助教账号
 	lesson_id varchar(10),#课程号
 	class_id int,#班级号
-	constraint foreign key (id) references user_table(id) on delete cascade,
+	constraint foreign key (id) references assitant_table(id) on delete cascade,
 	constraint foreign key (lesson_id) references lesson_table(lesson_id) on delete cascade,
 	constraint foreign key (class_id) references class_table(class_id) on delete cascade,
 	primary key(id,class_id)
@@ -261,7 +261,7 @@ create table score_table(
 	id varchar(10),#学生账号
 	work_id int,#作业号
 	score numeric(12,2),#分数
-	state varchar(20),#完成状态
+	state int,#完成状态
 	comment varchar(1000),#评价
 	primary key(id,work_id),
 	constraint foreign key (id) references user_table(id) on delete cascade,
