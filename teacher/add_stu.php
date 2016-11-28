@@ -10,11 +10,11 @@
 
 	$su=1;
 	$erm='null';
-	for ($i=0;$i<sizeof($_POST['id']);$i++){
-		$id=$_POST['id'][$i];
-		$name=$_POST['name'][$i];
-		$dep=$_POST['department'][$i];
-		$maj=$_POST['major'][$i];
+	for ($i=0;$i<sizeof($_GET['id']);$i++){
+		$id=$_GET['id'][$i];
+		$name=$_GET['name'][$i];
+		$dep=$_GET['department'][$i];
+		$maj=$_GET['major'][$i];
 		//如果没有这个账号就先在USER表中增加该账号
 		$result=$conn->query('insert into user_table values("'.$id.'","'.$id.'","'.$mame.'",1,null,null,null);');
 		$result=$conn->query('insert into student_table values("'.$id.'","'.$mame.'","'.$dep.'","'.$maj.'");');
@@ -26,7 +26,7 @@
 	}
 
 
-	$arr['success']=$su;
+	$arr['if_success']=$su;
 	$arr['error_message']=$erm;
 	echo json_encode($arr, JSON_UNESCAPED_UNICODE);
 	$conn->close();
