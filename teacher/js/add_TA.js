@@ -45,7 +45,7 @@ function  addTAInput() {
         
         var newNodeForm = document.createElement("form");
         newNodeForm.action="add_TA.php";
-        newNodeForm.method="post";
+        newNodeForm.method="get";
         newNodeForm.id = "addedForm";
         parent.appendChild(newNodeForm);
 
@@ -261,15 +261,6 @@ function addTAUpdate(old_id) {
             " <input type='submit'  class='btn btn-primary' id='update_TA_final' value='确定录入'></div>";
 
     }
-
-
-
-
-
-
-
-
-
 
 
 
