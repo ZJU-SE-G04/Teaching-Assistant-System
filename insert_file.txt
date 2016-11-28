@@ -1,6 +1,6 @@
 #source E:\lesson_new\Teaching-Assistant-System-master\Tables\create_file.sql
-#è¿™é‡Œè¯·æ‰‹åŠ¨å¤åˆ¶åˆ°mysqlæ§åˆ¶å°- -ä¸ç„¶sqlè„šæœ¬çš„ä¹±ç å¥½åƒæ²¡æ³•è§£å†³
-#æƒé™ç­‰çº§ï¼š1å­¦ç”Ÿï¼Œ2åŠ©æ•™ï¼Œ3æ•™å¸ˆï¼Œ4ç®¡ç†å‘˜
+#ÕâÀïÇëÊÖ¶¯¸´ÖÆµ½mysql¿ØÖÆÌ¨- -²»È»sql½Å±¾µÄÂÒÂëºÃÏñÃ»·¨½â¾ö
+#È¨ÏŞµÈ¼¶£º1Ñ§Éú£¬2Öú½Ì£¬3½ÌÊ¦£¬4¹ÜÀíÔ±
 insert into user_table values('3140101111','1111','Li',1,'1111@zju.edu.cn',null,null);
 insert into user_table values('3140102222','2222','Zhou',1,'2222@zju.edu.cn',null,null);
 insert into user_table values('3140103333','3333','Zhao',1,'3333@zju.edu.cn',null,null);
@@ -10,7 +10,7 @@ insert into user_table values('3140106666','6666','Steve',2,'6666@zju.edu.cn',nu
 insert into user_table values('111111','1111','Li',3,'1111te@zju.edu.cn',null,null);
 insert into user_table values('222222','2222','Chen',3,'2222te@zju.edu.cn',null,null);
 
-#ç»„é˜Ÿæµ‹è¯•
+#×é¶Ó²âÊÔ
 insert into team_table values(null,'GoGo','1234');
 insert into team_table values(null,'Wings','6666');
 
@@ -20,27 +20,27 @@ insert into orgnize_table values('3140102222',1,false);
 insert into orgnize_table values('3140104444',2,true);
 insert into orgnize_table values('3140105555',2,false);
 insert into orgnize_table values('3140103333',1,true);
-#æ ¡éªŒç»“æœï¼šå¤–é”®æ­£ç¡®åˆ¤æ–­ã€‚è‡ªå¢æ­£ç¡®
+#Ğ£Ñé½á¹û£ºÍâ¼üÕıÈ·ÅĞ¶Ï¡£×ÔÔöÕıÈ·
 
-#è¯¾ç¨‹
-insert into lesson_table values('ABCDE1','è½¯ä»¶éœ€æ±‚å·¥ç¨‹','æœ¬è¯¾ç¨‹blablablablablablablablabla......');
-insert into lesson_table values('ABCDE2','è½¯ä»¶å·¥ç¨‹ç®¡ç†','æœ¬è¯¾ç¨‹blablablablablablablablabla......');
+#¿Î³Ì
+insert into lesson_table values('ABCDE1','Èí¼şĞèÇó¹¤³Ì','±¾¿Î³Ìblablablablablablablablabla......');
+insert into lesson_table values('ABCDE2','Èí¼ş¹¤³Ì¹ÜÀí','±¾¿Î³Ìblablablablablablablablabla......');
 
-#ç­çº§
-insert into class_table values(null,'ABCDE1','å‘¨äº”3ï¼Œ4ï¼Œ5ï¼›å‘¨å…­9ï¼Œ10','ç‰æ³‰æ›¹å…‰å½ªè¥¿202ï¼›ç‰æ³‰æ›¹å…‰å½ªè¥¿503');
-insert into class_table values(null,'ABCDE1','å‘¨äºŒ3ï¼Œ4ï¼Œ5ï¼›å‘¨å…­9ï¼Œ10','ç‰æ³‰æ›¹å…‰å½ªè¥¿202ï¼›ç‰æ³‰æ›¹å…‰å½ªè¥¿503');
-insert into class_table values(null,'ABCDE2','å‘¨ä¸‰3ï¼Œ4ï¼Œ5','ç‰æ³‰æ›¹å…‰å½ªè¥¿202');
-insert into class_table values(null,'ABCDE2','å‘¨å››3ï¼Œ4ï¼Œ5','ç‰æ³‰æ›¹å…‰å½ªè¥¿202');
+#°à¼¶
+insert into class_table values(null,'ABCDE1','ÖÜÎå3£¬4£¬5£»ÖÜÁù9£¬10','ÓñÈª²Ü¹â±ëÎ÷202£»ÓñÈª²Ü¹â±ëÎ÷503');
+insert into class_table values(null,'ABCDE1','ÖÜ¶ş3£¬4£¬5£»ÖÜÁù9£¬10','ÓñÈª²Ü¹â±ëÎ÷202£»ÓñÈª²Ü¹â±ëÎ÷503');
+insert into class_table values(null,'ABCDE2','ÖÜÈı3£¬4£¬5','ÓñÈª²Ü¹â±ëÎ÷202');
+insert into class_table values(null,'ABCDE2','ÖÜËÄ3£¬4£¬5','ÓñÈª²Ü¹â±ëÎ÷202');
 
-#è€å¸ˆï¼Œå­¦ç”Ÿï¼ŒåŠ©æ•™ç»‘å®š
-insert into student_table values('3140101111','æç™½','å¤ä¸­æ–‡å­¦é™¢','è¯—æ­Œç³»');
-insert into student_table values('3140102222','å‘¨å·','è®¡ç®—æœºç§‘å­¦ä¸æŠ€æœ¯å­¦é™¢','è½¯ä»¶å·¥ç¨‹ç³»');
-insert into student_table values('3140103333','èµµå¿—æ•¬','ä½“æ“è‰ºæœ¯å­¦é™¢','å…¨çœŸç³»');
-insert into student_table values('3140104444','PeterPack','è¶…èƒ½åŠ›è€…å­¦é™¢','èœ˜è››ç³»');
-insert into student_table values('3140105555','TonyStack','è¶…èƒ½åŠ›è€…å­¦é™¢','è£…ç”²ç³»');
-#insert into student_table values('3140106666','PeterPack','è¶…èƒ½åŠ›è€…å­¦é™¢','èœ˜è››ç³»');
-#insert into student_table values('3140104444','StevePack','è¶…èƒ½åŠ›è€…å­¦é™¢','èœ˜è››ç³»');
-#å¤–é”®ä¸»é”®æ­£ç¡®
+#ÀÏÊ¦£¬Ñ§Éú£¬Öú½Ì°ó¶¨
+insert into student_table values('3140101111','Àî°×','¹ÅÖĞÎÄÑ§Ôº','Ê«¸èÏµ');
+insert into student_table values('3140102222','ÖÜÖİ','¼ÆËã»ú¿ÆÑ§Óë¼¼ÊõÑ§Ôº','Èí¼ş¹¤³ÌÏµ');
+insert into student_table values('3140103333','ÕÔÖ¾¾´','Ìå²ÙÒÕÊõÑ§Ôº','È«ÕæÏµ');
+insert into student_table values('3140104444','PeterPack','³¬ÄÜÁ¦ÕßÑ§Ôº','Ö©ÖëÏµ');
+insert into student_table values('3140105555','TonyStack','³¬ÄÜÁ¦ÕßÑ§Ôº','×°¼×Ïµ');
+#insert into student_table values('3140106666','PeterPack','³¬ÄÜÁ¦ÕßÑ§Ôº','Ö©ÖëÏµ');
+#insert into student_table values('3140104444','StevePack','³¬ÄÜÁ¦ÕßÑ§Ôº','Ö©ÖëÏµ');
+#Íâ¼üÖ÷¼üÕıÈ·
 
 insert into study_table values('3140101111','ABCDE1',1);
 insert into study_table values('3140102222','ABCDE1',1);
@@ -53,12 +53,12 @@ insert into study_table values('3140103333','ABCDE2',4);
 #insert into study_table values('3140101111','ABCDE2',4);
 #insert into study_table values('3140101111','ABCDE3',4);
 #insert into study_table values('3140100000','ABCDE2',3);
-#å¤–é”®ä¸»é”®æ­£ç¡®
+#Íâ¼üÖ÷¼üÕıÈ·
 
-insert into teacher_table values('111111','ææ¯…','çŸ¥åçƒæ˜ŸåŠç™¾åº¦æœ€å¤§è´´å§blablablabla...');
-insert into teacher_table values('222222','é™ˆç§°','ç¼–ä¸å‡ºäº†blablablabla.....');
-#insert into teacher_table values('222222','é™ˆç§°','ç¼–ä¸å‡ºäº†blablablabla.....');
-#insert into teacher_table values('333333','é™ˆç§°','ç¼–ä¸å‡ºäº†blablablabla.....');
+insert into teacher_table values('111111','ÀîÒã','ÖªÃûÇòĞÇ¼°°Ù¶È×î´óÌù°Éblablablabla...');
+insert into teacher_table values('222222','³Â³Æ','±à²»³öÁËblablablabla.....');
+#insert into teacher_table values('222222','³Â³Æ','±à²»³öÁËblablablabla.....');
+#insert into teacher_table values('333333','³Â³Æ','±à²»³öÁËblablablabla.....');
 
 insert into teach_table values('111111','ABCDE1',1);
 insert into teach_table values('111111','ABCDE1',2);
@@ -67,42 +67,42 @@ insert into teach_table values('222222','ABCDE2',4);
 #insert into teach_table values('111111','ABCDE1');
 #insert into teach_table values('333333','ABCDE1');
 #insert into teach_table values('111111','ABCDE3');
-#ä¸»é”®å¤–é”®æ­£ç¡®
+#Ö÷¼üÍâ¼üÕıÈ·
 
 
-insert into assitant_table values('3140106666','SteveRojes','è¶…èƒ½åŠ›è€…å­¦é™¢','æŒ‡æŒ¥ç³»');
-#insert into assitant_table values('3140107777','SteveRojes','è¶…èƒ½åŠ›è€…å­¦é™¢','æŒ‡æŒ¥ç³»');
+insert into assitant_table values('3140106666','SteveRojes','³¬ÄÜÁ¦ÕßÑ§Ôº','Ö¸»ÓÏµ');
+#insert into assitant_table values('3140107777','SteveRojes','³¬ÄÜÁ¦ÕßÑ§Ôº','Ö¸»ÓÏµ');
 
 insert into assit_table values('3140106666','ABCDE1',1);
 insert into assit_table values('3140106666','ABCDE1',2);
 insert into assit_table values('3140106666','ABCDE2',3);
 insert into assit_table values('3140106666','ABCDE2',4);
 #insert into assit_table values('3140106666','ABCDE1');
-#å¤–é”®ä¸»é”®æ­£ç¡®
+#Íâ¼üÖ÷¼üÕıÈ·
 
-#æ–‡ç« è¯„è®ºç­‰
-insert into notice_table values(null,'ABCDE1','111111','é€šçŸ¥1','è¿™åªæ˜¯æµ‹è¯•','2016-6-6 19:03:22');
-insert into notice_table values(null,'ABCDE2','222222','é€šçŸ¥1','è¿™åªæ˜¯æµ‹è¯•','2016-6-6 19:03:22');
+#ÎÄÕÂÆÀÂÛµÈ
+insert into notice_table values(null,'ABCDE1','111111','Í¨Öª1','ÕâÖ»ÊÇ²âÊÔ','2016-6-6 19:03:22');
+insert into notice_table values(null,'ABCDE2','222222','Í¨Öª1','ÕâÖ»ÊÇ²âÊÔ','2016-6-6 19:03:22');
 
-insert into article_table values(null,'ABCDE1','111111','æ–‡ç« 1','è¿™åªæ˜¯æµ‹è¯•','2016-6-6 19:03:22');
-insert into article_table values(null,'ABCDE2','222222','æ–‡ç« 1','è¿™åªæ˜¯æµ‹è¯•','2016-6-6 19:03:22');
+insert into article_table values(null,'ABCDE1','111111','ÎÄÕÂ1','ÕâÖ»ÊÇ²âÊÔ','2016-6-6 19:03:22');
+insert into article_table values(null,'ABCDE2','222222','ÎÄÕÂ1','ÕâÖ»ÊÇ²âÊÔ','2016-6-6 19:03:22');
 
 insert into comment_table values(1,'3140101111','2016-7-7 12:00:00','good',2);
 insert into comment_table values(1,'3140101111','2016-7-7 12:00:00','good',3);
 insert into re_comment_table values(1,'3140102222','2016-7-7 12:10:00','good2',2,1,'3140101111');
 insert into re_comment_table values(1,'3140103333','2016-7-7 12:12:00','good3',2,2,'3140102222');
 
-#è¯¾ä»¶
-insert into courseware_table values(null,'ABCDE1','è¯¾ä»¶1','www.baidu.com','ç™¾åº¦');
-insert into courseware_table values(null,'ABCDE1','ç¬¬ä¸€æ¬¡è¯¾ç¨‹PPT','www.baidu.com','PPT');
-insert into courseware_table values(null,'ABCDE1','ç¬¬äºŒæ¬¡è¯¾ç¨‹PPT','www.baidu.com','PPT');
-insert into courseware_table values(null,'ABCDE1','å®éªŒ1æ ·ä¾‹','www.baidu.com','Exp');
-insert into courseware_table values(null,'ABCDE2','ç¬¬ä¸€æ¬¡è¯¾ç¨‹PPT','www.baidu.com','PPT');
+#¿Î¼ş
+insert into courseware_table values(null,'ABCDE1','¿Î¼ş1','www.baidu.com','°Ù¶È');
+insert into courseware_table values(null,'ABCDE1','µÚÒ»´Î¿Î³ÌPPT','www.baidu.com','PPT');
+insert into courseware_table values(null,'ABCDE1','µÚ¶ş´Î¿Î³ÌPPT','www.baidu.com','PPT');
+insert into courseware_table values(null,'ABCDE1','ÊµÑé1ÑùÀı','www.baidu.com','Exp');
+insert into courseware_table values(null,'ABCDE2','µÚÒ»´Î¿Î³ÌPPT','www.baidu.com','PPT');
 
 
-#ä½œä¸š
-insert into work_table values(null,'ä½œä¸š1','ABCDE1',1,'111111','2016-10-23','è¯·æŒ‰æ—¶å®Œæˆã€‚');
-insert into work_table values(null,'ä½œä¸š2','ABCDE1',2,'111111','2016-10-23','ä¸æŒ‰æ—¶å°±ç®—äº†ã€‚');
+#×÷Òµ
+insert into work_table values(null,'×÷Òµ1','ABCDE1',1,'111111','2016-10-23','Çë°´Ê±Íê³É¡£');
+insert into work_table values(null,'×÷Òµ2','ABCDE1',2,'111111','2016-10-23','²»°´Ê±¾ÍËãÁË¡£');
 
 insert into question_table values(1,1,'1+1=?','1','2','3','4','b');
 insert into question_table values(1,2,'1+2=?','1','2','3','4','c');
@@ -121,9 +121,9 @@ insert into score_table values('3140103333',1,-1,0,'');
 insert into score_table values('3140104444',2,-1,0,'');
 insert into score_table values('3140105555',2,60,1,'');
 
-#å®éªŒ
-insert into report_table values(null,'å®éªŒ1','ABCDE1',1,'111111','www.baidu.com','2016-10-23','å­¦ä¹ ä½¿ç”¨èˆªå¤©æ¯èˆ°');
-insert into report_table values(null,'å®éªŒ2','ABCDE1',2,'111111','www.4399.com','2016-10-23','å­¦ä¹ å‘å°„ç ´åæ­»å…‰');
+#ÊµÑé
+insert into report_table values(null,'ÊµÑé1','ABCDE1',1,'111111','www.baidu.com','2016-10-23','Ñ§Ï°Ê¹ÓÃº½ÌìÄ¸½¢');
+insert into report_table values(null,'ÊµÑé2','ABCDE1',2,'111111','www.4399.com','2016-10-23','Ñ§Ï°·¢ÉäÆÆ»µËÀ¹â');
 
 insert into commit_table values(1,'3140101111','www.google.com','haha','2016-11-20',66,'good',1);
 insert into commit_table values(1,'3140102222','www.google.com','haha','2016-11-20',-1,'',0);
@@ -132,12 +132,12 @@ insert into commit_table values(2,'3140104444','www.google.com','haha','2016-11-
 insert into commit_table values(2,'3140105555','www.google.com','haha','2016-11-20',-1,'',0);
 
 
-#è®ºå›
-insert into topic_table values(null,'ABCDE1',1,'3140101111','2016-9-9 16:00:00','è¯é¢˜1','æµ‹è¯•ç”¨çš„');
-insert into topic_table values(null,'ABCDE1',1,'3140101111','2016-9-9 16:00:00','è¯é¢˜2','æµ‹è¯•ç”¨çš„');
-insert into topic_table values(null,'ABCDE1',1,'3140102222','2016-9-9 16:00:00','è¯é¢˜3','æµ‹è¯•ç”¨çš„');
-insert into topic_table values(null,'ABCDE1',2,'3140102222','2016-9-9 16:00:00','å†…éƒ¨è¯é¢˜1','æµ‹è¯•ç”¨çš„');
-insert into topic_table values(null,'ABCDE1',0,'3140102222','2016-9-9 16:00:00','ç­”ç–‘1','æµ‹è¯•ç”¨çš„');
+#ÂÛÌ³
+insert into topic_table values(null,'ABCDE1',1,'3140101111','2016-9-9 16:00:00','»°Ìâ1','²âÊÔÓÃµÄ');
+insert into topic_table values(null,'ABCDE1',1,'3140101111','2016-9-9 16:00:00','»°Ìâ2','²âÊÔÓÃµÄ');
+insert into topic_table values(null,'ABCDE1',1,'3140102222','2016-9-9 16:00:00','»°Ìâ3','²âÊÔÓÃµÄ');
+insert into topic_table values(null,'ABCDE1',2,'3140102222','2016-9-9 16:00:00','ÄÚ²¿»°Ìâ1','²âÊÔÓÃµÄ');
+insert into topic_table values(null,'ABCDE1',0,'3140102222','2016-9-9 16:00:00','´ğÒÉ1','²âÊÔÓÃµÄ');
 
 insert into response_table values(1,'3140104444','2016-9-10 8:00:00','good',2);
 insert into response_table values(1,'3140104444','2016-9-10 8:00:00','good',3);
@@ -145,7 +145,7 @@ insert into re_response_table values(1,'3140105555','2016-9-10 8:00:00','good',2
 insert into response_table values(5,'111111','2016-9-10 8:00:00','yes',2);
 
 
-#ç•™è¨€
-insert into words_table values(null,'æ¸¸å®¢','2016-7-7',false,'ç»™åŠ›');
-insert into words_table values(null,'è·¯äººA','2016-7-8',false,'å¼ºæ— æ•Œ');
-insert into words_table values(null,'è·¯äººB','2016-7-9',false,'666666');
+#ÁôÑÔ
+insert into words_table values(null,'ÓÎ¿Í','2016-7-7',false,'¸øÁ¦');
+insert into words_table values(null,'Â·ÈËA','2016-7-8',false,'Ç¿ÎŞµĞ');
+insert into words_table values(null,'Â·ÈËB','2016-7-9',false,'666666');
