@@ -10,9 +10,9 @@
 
 	$su=1;
 	$erm='null';
-	for ($i=0;$i<sizeof($_POST['TA_id']);$i++){
-		$id=$_POST['TA_ID'][$i];
-		$name=$_POST['TA_name'][$i];
+	for ($i=0;$i<sizeof($_POST['id']);$i++){
+		$id=$_POST['id'][$i];
+		$name=$_POST['name'][$i];
 		$dep=$_POST['department'][$i];
 		$maj=$_POST['major'][$i];
 		//如果没有这个账号就先在USER表中增加该账号
