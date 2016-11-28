@@ -5,7 +5,7 @@
 
 //一些全局变量
 
- var class_id=2;
+ var class_id2=2;
 
 // ------------------添加助教信息-------------------
 
@@ -49,6 +49,13 @@ function  addTAInput() {
         newNodeForm.id = "addedForm";
         parent.appendChild(newNodeForm);
 
+
+        var class_id_node=document.createElement("input");
+        class_id_node.value=class_id2;
+        class_id_node.name="class_id";
+        class_id_node.type="hidden";
+        newNodeForm.appendChild(class_id_node);
+
        
 
         allInputRows=document.createElement("div");
@@ -72,8 +79,8 @@ function  addTAInput() {
         for (var i = 0; i < newAddTANumber-oldAddTANumber; i++) {
             var child = document.createElement("div");
             child.className = "addedTARow";
-            child.innerHTML = "<div class='row'><div class='col-sm-3'><input class='form-control' name='TA_id[]' placeholder='学号'> " +
-                "</div> <div class='col-sm-3'> <input class='form-control'  name='TA_name[]' placeholder='姓名'>" +
+            child.innerHTML = "<div class='row'><div class='col-sm-3'><input class='form-control' name='id[]' placeholder='学号'> " +
+                "</div> <div class='col-sm-3'> <input class='form-control'  name='name[]' placeholder='姓名'>" +
                 " </div> <div class='col-sm-3'> <input class='form-control'  name='department[]' placeholder='院系'> " +
                 "</div> <div class='col-sm-3'> <input class='form-control' name='major[]' placeholder='专业'></div></div>";
             allInputRows.appendChild(child);
@@ -149,7 +156,7 @@ function showTAInfo(){
                     var department = jsonObj[i].department;
                     var major = jsonObj[i].major;
                     tbody.innerHTML += "<tr><th>" + assistant_id + "</th><th>" + assistant_name + "</th><th>" + department + "</th><th>" + major
-                        + "</th><th onclick='deleteTA("+assistant_id+","+class_id+")'>" +
+                        + "</th><th onclick='deleteTA("+assistant_id+")'>" +
                         "<span class='glyphicon glyphicon-trash' aria-hidden='true'></span></th><th onclick='addTAUpdate("+assistant_id+")'><span class='glyphicon glyphicon-edit'></span></th></tr>";
                 }
                 parent.appendChild(table);
@@ -178,7 +185,7 @@ function showTAInfo(){
 // ------------------delete  a TA's info-------------------------
 
 
-function deleteTA(assistant_id,class_id) {
+function deleteTA(assistant_id) {
     
     var jsonObj;
 
