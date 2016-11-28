@@ -10,7 +10,7 @@
 
 	$su=1;
 	$erm='null';
-	for ($i=0;$i<sizeof($_POST['TA_id']);$i++){
+	for ($i=0;$i<sizeof($_POST['id']);$i++){
 		$id=$_POST['id'][$i];
 		$name=$_POST['name'][$i];
 		$dep=$_POST['department'][$i];
