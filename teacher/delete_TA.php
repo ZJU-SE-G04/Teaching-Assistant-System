@@ -11,7 +11,7 @@
 	if(!$result){ $su=0;$erm=mysql_error();}
 	
 	
-	$arr['success']=$su;
+	$arr['if_success']=$su;
 	$arr['error_message']=$erm;
 	echo json_encode($arr, JSON_UNESCAPED_UNICODE);
 	$conn->close();
