@@ -2,75 +2,28 @@
  * Created by achao_zju on 22/11/2016.
  */
 
-
-// function showTAInfo(){
-//
-//     var course_name="软件工程管理";
-//     var class_id=1;
-//
-//
-//     var exist=document.getElementById("TA_info_row");
-//     if(exist==null) {
-//
-//
-//         var head=document.createElement("h3");
-//         head.innerHTML="以下是"+course_name+class_id+"班的助教名单";
-//         var parent = document.getElementById("TAInfo");
-//         parent.appendChild(head);
-//
-//         var table = document.createElement("table");
-//         table.id = "TAInfoTable";
-//         table.className="table table-striped";
-//         table.innerHTML = "<tr><th>学号</th><th>姓名</th><th>院系</th><th>专业</th><th>操作</th></tr>";
-//
-//         var tbody=document.createElement("tbody");
-//         table.appendChild(tbody);
-//
-//         var jsonObj = [{
-//             "assistant_id": "3130101437",
-//             "assistant_name": "阿超",
-//             "department": "CS",
-//             "major": "SE"
-//         }, {"assistant_id": "3130101437", "assistant_name": "阿超", "department": "CS", "major": "SE"},{
-//             "assistant_id": "3130101437",
-//             "assistant_name": "阿超",
-//             "department": "CS",
-//             "major": "SE"
-//         },{
-//             "assistant_id": "3130101437",
-//             "assistant_name": "阿超",
-//             "department": "CS",
-//             "major": "SE"
-//         }];
-//         for (var i = 0; i < jsonObj.length; i++) {
-//             var assistant_id= jsonObj[i].assistant_id;
-//             var assistant_name = jsonObj[i].assistant_name;
-//             var department = jsonObj[i].department;
-//             var major = jsonObj[i].major;
-//             tbody.innerHTML += "<tr><th>" + assistant_id + "</th><th>" + assistant_name + "</th><th>" + department + "</th><th>" + major + "</th><th><a href='delete_TA.php?assistantID=$assistantID'>删除</a></th></tr>"
-//         }
-//         parent.appendChild(table);
-//
-//         var TA_info_row=document.createElement("div");
-//         TA_info_row.className="row";
-//         TA_info_row.id="TA_info_row";
-//         TA_info_row.innerHTML= "<div  class='col-sm-2' id='add_TA_hint'> " +
-//             "<p  style='float: right'>我要添加助教数量:</p></div> " +
-//             "<div  class='col-sm-1' id='add_TA_select' >  <div class='form-group'> " +
-//             "<select id='addTANumberSelect' class='form-control' onchange='addTAInput()'> " +
-//             "<option>0</option> "+
-//             "<option>1</option> " +
-//             "<option>2</option> " +
-//             "<option>3</option> " +
-//             "</select></div> </div> ";
-//         parent.appendChild(TA_info_row);
-//         // var afterNode = document.getElementById("TA_info_row");
-//     }
-// }
-
-var class_id="X621525";
+var class_id="1";
 
 function showStuInfo(){
+
+
+
+    if (window.XMLHttpRequest){
+        xmlhttp=new XMLHttpRequest();
+    }
+
+    else{
+        xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+    var PageToSendTo = "show_stu_info.php?";
+    var class_id = "1";
+    var VariablePlaceholder = "class_id";
+    var UrlToSend = PageToSendTo + VariablePlaceholder + class_id;
+
+    xmlhttp.open("GET", UrlToSend, false);
+    xmlhttp.send();
+
 
     var course_name="软件工程管理";
     var class_time="周二345";
@@ -124,7 +77,7 @@ function showStuInfo(){
             var department = jsonObj[i].department;
             var major = jsonObj[i].major;
             var team_name=jsonObj[i].team_name;
-            tbody.innerHTML += "<tr><th>" + stu_id + "</th><th>" + stu_name + "</th><th>" + department + "</th><th>" + major +"</th><th>"+ team_name+ "</th><th><a href='delete_stu.php?'>删除</a></th></tr>";
+            tbody.innerHTML += "<tr><th>" + stu_id + "</th><th>" + stu_name + "</th><th>" + department + "</th><th>" + major +"</th><th>"+ team_name+ "</th><th><a href='delete_stu.php?id=stu_id&class_id=class_id'>删除</a></th></tr>";
         }
         parent.appendChild(table);
 

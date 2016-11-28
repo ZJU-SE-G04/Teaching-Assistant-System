@@ -12,7 +12,7 @@
 #add_TA_hint{
     margin-top: 15px;
 }
-
+/*/添加助教信息样式*/
 #add_TA_final{
     margin-top: 10px;
     float: right;
@@ -22,6 +22,17 @@
 #cancel_TA_button{
     float: right;
     margin-top: 10px;
+}
+
+ /*修改助教信息css*/
+#cancel_TA_button_update{
+    float: right;
+    margin-top: 10px;
+}
+
+#update_TA_final{
+    margin-top: 10px;
+    float: right;
 }
 
 
