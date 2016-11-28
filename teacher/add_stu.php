@@ -12,7 +12,17 @@
 	$erm='null';
 	for ($i=0;$i<sizeof($_GET['id']);$i++){
 		$id=$_GET['id'][$i];
+		if($id==null){
+			$su=0;
+			$erm='ID不能为空!';
+			break;
+		}
 		$name=$_GET['name'][$i];
+		if($name==null){
+			$su=0;
+			$erm='姓名不能为空!';
+			break;
+		}
 		$dep=$_GET['department'][$i];
 		$maj=$_GET['major'][$i];
 		//如果没有这个账号就先在USER表中增加该账号
@@ -21,7 +31,7 @@
 		$result=$conn->query('insert into study_table values("'.$id.'","'.$lesson_id.'",'.$class_id.');');
 		if(!$result){
 			$su=0;
-			$erm=mysql_error();
+			$erm='插入错误，请检查是否已存在或者非法格式！';
 		}
 	}
 

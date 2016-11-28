@@ -1,7 +1,7 @@
 <?php
 	//尚未测试
 	include 'connect.php';
-	$class_id=$_GET["class_id"];//获取教师账号
+	$class_id=$_GET["class_id"];//获取班级号
 	//$class_id=1;
 	if($class_id==null) echo 'SHIT';
 	$result=$conn->query('select * from class_table where class_id='.$class_id);
@@ -12,7 +12,17 @@
 	$erm='null';
 	for ($i=0;$i<sizeof($_GET['id']);$i++){
 		$id=$_GET['id'][$i];
+		if($id==null){
+			$su=0;
+			$erm='ID不能为空!';
+			break;
+		}
 		$name=$_GET['name'][$i];
+		if($name==null){
+			$su=0;
+			$erm='姓名不能为空!';
+			break;
+		}
 		$dep=$_GET['department'][$i];
 		$maj=$_GET['major'][$i];
 		//echo 'insert into assit_talbe values("'.$id.'","'.$lesson_id.'",'.$class_id.');';
@@ -22,7 +32,7 @@
 		$result=$conn->query('insert into assit_table values("'.$id.'","'.$lesson_id.'",'.$class_id.');');
 		if($result==null){
 			$su=0;
-			$erm=mysql_error();
+			$erm='插入错误，请检查是否已存在或者非法格式！';
 		}
 	}
 
