@@ -2,7 +2,7 @@
  * Created by achao_zju on 22/11/2016.
  */
 
-var class_id="1";
+
 
 function showStuInfo(){
 

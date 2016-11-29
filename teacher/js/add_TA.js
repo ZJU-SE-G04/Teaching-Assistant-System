@@ -5,11 +5,30 @@
 
 //一些全局变量
 
- var class_id2=2;
+
 
 // ------------------添加助教信息-------------------
 
 var oldAddTANumber=0;
+
+
+
+function addTA(){
+
+    var class_id_node=document.getElementById("class_id");
+    class_id=class_id_node.value;
+
+    
+
+    $.ajxa({
+        type:"GET",
+        url:"add_TA.php?class_id="+class_id,
+        success:function (result) {
+
+        }
+    })
+
+}
 
 
 function  addTAInput() {
@@ -51,7 +70,7 @@ function  addTAInput() {
 
 
         var class_id_node=document.createElement("input");
-        class_id_node.value=class_id2;
+        class_id_node.value=class_id;
         class_id_node.name="class_id";
         class_id_node.type="hidden";
         newNodeForm.appendChild(class_id_node);
@@ -76,7 +95,8 @@ function  addTAInput() {
 
 
     if(newAddTANumber>oldAddTANumber) {
-        for (var i = 0; i < newAddTANumber-oldAddTANumber; i++) {
+        var i;
+        for (i = 0; i < newAddTANumber-oldAddTANumber; i++) {
             var child = document.createElement("div");
             child.className = "addedTARow";
             child.innerHTML = "<div class='row'><div class='col-sm-3'><input class='form-control' name='id[]' placeholder='学号'> " +
@@ -88,7 +108,7 @@ function  addTAInput() {
     }
     else {
         var  x=document.getElementsByClassName("addedTARow");
-        for (var i = oldAddTANumber-newAddTANumber; i >0; i--) {
+        for (i = oldAddTANumber-newAddTANumber; i >0; i--) {
             allInputRows.removeChild(x[i-1]);
         }
 
@@ -111,6 +131,10 @@ function  addTAInput() {
 }
 
 
+
+
+
+
 function  cancelTA() {
 
     document.getElementById("TAInfo").removeChild(document.getElementById("deletedAddTA"));
@@ -129,7 +153,7 @@ function showTAInfo(){
 
     var jsonObj;
     // var course_name="软件工程管理";
-    
+
     $.ajax({
         type:"GET",
         url:"show_TA_info.php?class_id="+class_id,
@@ -191,11 +215,14 @@ function deleteTA(assistant_id) {
 
     $.ajax({
         type:"GET",
-        url:"show_TA_info.php?class_id="+class_id+"id="+assistant_id,
+        url:"delete_TA.php?class_id="+class_id+"id="+assistant_id,
         success:function(result){
             jsonObj = result;
-            if(jsonObj[success]==0) {
+            if(jsonObj["if_success"]==0) {
                 window.alert("删除失败");
+            }
+            else{
+                window.alert("删除成功");
             }
 
 
