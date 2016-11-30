@@ -291,9 +291,7 @@ function updateTA() {
 
         }
     });
-
-
-
+    
 
 }
 
@@ -321,7 +319,6 @@ function addTAUpdate(old_id) {
         parent.appendChild(newNodeDivRow);
 
         var newNodeForm = document.createElement("div");
-        newNodeForm.id = "updatedForm";
         parent.appendChild(newNodeForm);
 
         newNodeDivRow.innerHTML = "<div class='col-sm-3'><label>学号</label> " +

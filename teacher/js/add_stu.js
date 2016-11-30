@@ -6,6 +6,7 @@
 var oldAddStuNumber=0;
 
 
+var old_id_update_stu;
 
 //---------------show students' info-----------------
 
@@ -223,8 +224,112 @@ function  addStu(){
                 location.reload(true);
             }
         }
-    })
+    });
 
 
 }
 
+
+//------------ delete a students' information -----------------
+
+
+function deleteStu(stu_id) {
+    $.ajax({
+        type:"GET",
+        url:"delete_stu.php?class_id="+class_id+"&id="+stu_id,
+        success:function (result) {
+            var jsonObj=result;
+            if(jsonObj["if_success"]==0){
+                window.alert(jsonObj["error_message"]);
+            }
+            else {
+                window.alert("删除成功");
+                location.reload(true);
+            }
+        }
+    });
+    
+}
+
+//--------------  add form for updating ------------------------
+
+function addStuUpdate(old_id) {
+
+    old_id_update_stu=old_id;
+
+    if( document.getElementById("updatedAddStu")==null) {
+        var parent = document.createElement("div");
+        parent.id = "updatedAddStu";
+        var grandparent = document.getElementById("stuInfo");
+        grandparent.appendChild(parent);
+        var newNode = document.createElement("h3");
+        newNode.innerHTML = "修改学生信息";
+        parent.appendChild(newNode);
+
+        var newNodeDivRow = document.createElement("div");
+        newNodeDivRow.className = "row";
+        parent.appendChild(newNodeDivRow);
+
+        var newNodeForm = document.createElement("div");
+        parent.appendChild(newNodeForm);
+
+        //--------- 标题栏 ----------------
+        newNodeDivRow.innerHTML = "<div class='col-sm-3'><label>学号</label> " +
+            " </div> <div class='col-sm-3'> " + "<label >姓名</label> " + "</div>" +
+            " <div class='col-sm-3'> <label>院系</label>  </div>" +
+            " <div class='col-sm-3'> <label >专业</label> </div>";
+
+        var child = document.createElement("div");
+        child.className = "addedStuRow";
+        child.innerHTML = "<div class='row'><div class='col-sm-3'><input class='form-control update-stu-input' > " +
+            "</div> <div class='col-sm-3'> <input class='form-control update-stu-input' >" +
+            " </div> <div class='col-sm-3'> <input class='form-control update-stu-input' > " +
+            "</div> <div class='col-sm-3'> <input class='form-control update-stu-input'  ></div></div>";
+        newNodeForm.appendChild(child);
+
+
+        var newNodeButton = document.createElement("div");
+        newNodeButton.className = "row";
+        newNodeForm.appendChild(newNodeButton);
+        newNodeButton.innerHTML = " <div class='col-sm-9'>" +
+            "<button  class='btn btn-primary' id='cancel_TA_button_update' onclick='cancelUpdateStu()'>取消修改</button></div>" +
+            " <div class='col-sm-3'>" +
+            " <button  class='btn btn-primary' id='update_TA_final' onclick='updateStu()'>确定修改</div>";
+
+    }
+}
+
+
+// ---------- 取消修改学生信息 -------------
+
+
+function  cancelUpdateStu() {
+    document.getElementById("stuInfo").removeChild(document.getElementById("updatedAddStu"));
+}
+
+// ---------- 向后端发送修改学生信息 -------------
+
+
+function updateStu() {
+
+    var update_stu_input=document.getElementsByClassName("update-stu-input");
+    var arr="&id="+update_stu_input[0].value+"&name="+update_stu_input[1].value+"&department="+update_stu_input[2].value+"&major="+update_stu_input[3].value;
+
+    $.ajax({
+        type:"GET",
+        url:"update_stu.php?class_id="+class_id+"&old_id="+old_id_update_stu+arr,
+        success:function(result){
+            jsonObj = result;
+            if(jsonObj["if_success"]==0) {
+                window.alert("修改失败");
+                location.reload(true);
+            }
+            else{
+                window.alert("修改成功");
+                location.reload(true);
+            }
+        }
+    });
+
+
+}

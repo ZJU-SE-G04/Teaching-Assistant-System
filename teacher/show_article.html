@@ -21,6 +21,7 @@
 
 
 
+
 </head>
 
 <body>
@@ -41,29 +42,45 @@
                 </ul>
         </div>
         <div class="col-md-10 tab-content" id="tab_content_area">
-            <div id="notice" class="tab-pane">
-            </div>
+            <div id="notice" class="tab-pane"></div>
             <div id="article" class="tab-pane in active">
-                <div class="panel-group" id="articleLoop">
-                    <div class="panel panel-default old w3-hover-shadow w3-animate-zoom">  <!--loop start-->
-                        <div class="panel-heading w3-hover-grey clickable">
-                            <span class="glyphicon glyphicon-file"></span>&nbsp;xxx<strong class="x-title"></strong>
-                        </div>
-                        <div class="panel-body"><p class="x-contentDigest">..........</p></div>
-                        <div class="panel-footer">
-                            <div class="row">
-                                <div class="col-md-2 col-md-offset-8 col-xs-6 col-xs-offset-2">
-                                    <span class="x-time"></span>
-                                </div>
-                                <div class="col-md-2 col-xs-4">
-                                    <span>评论&nbsp;&nbsp;</span><span class="badge w3-green x-commentNum clickable"></span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>  <!--loop end-->
 
 
-            </div>
+                    <!-- 加载编辑器的容器 -->
+                    <script id="container" name="content" type="text/plain">
+        这里写你的初始化内容
+    </script>
+                    <!-- 配置文件 -->
+                    <script type="text/javascript" src="../js/ueditor.config.js"></script>
+                    <!-- 编辑器源码文件 -->
+                    <script type="text/javascript" src="../js/ueditor.all.js"></script>
+                    <!-- 实例化编辑器 -->
+                    <script type="text/javascript">
+                        var ue = UE.getEditor('container');
+                    </script>
+
+
+
+                <!--<div class="panel-group" id="articleLoop">-->
+                    <!--<div class="panel panel-default old w3-hover-shadow w3-animate-zoom">  &lt;!&ndash;loop start&ndash;&gt;-->
+                        <!--<div class="panel-heading w3-hover-grey clickable">-->
+                            <!--<span class="glyphicon glyphicon-file"></span>&nbsp;xxx<strong class="x-title"></strong>-->
+                        <!--</div>-->
+                        <!--<div class="panel-body"><p class="x-contentDigest">..........</p></div>-->
+                        <!--<div class="panel-footer">-->
+                            <!--<div class="row">-->
+                                <!--<div class="col-md-2 col-md-offset-8 col-xs-6 col-xs-offset-2">-->
+                                    <!--<span class="x-time"></span>-->
+                                <!--</div>-->
+                                <!--<div class="col-md-2 col-xs-4">-->
+                                    <!--<span>评论&nbsp;&nbsp;</span><span class="badge w3-green x-commentNum clickable"></span>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>  &lt;!&ndash;loop end&ndash;&gt;-->
+            <!--</div>-->
+
+
 
 
             <!--<div id="articleList">-->
@@ -202,79 +219,7 @@
                 <div class="bs-callout bs-callout-info">
                     <h4>以下是<span id="TA_course_name">软件工程管理</span><span id="TA_class_time">周二345</span>班的助教信息</h4>
                 </div>
-
             </div>
-                <!--<table class="table table-striped" id="TAInfoTable">-->
-                        <!--<tr><th>学号</th><th>姓名</th><th>院系</th><th>专业</th><th>操作</th></tr>-->
-                        <!--<tr><th>3130101437</th><th>章世超</th><th>计算机学院</th><th>软件工程</th><th>删除</th></tr>-->
-                        <!--<tr><th>3130101437</th><th>章世超</th><th>计算机学院</th><th>软件工程</th><th>删除</th></tr>-->
-                    <!--</table>-->
-
-
-            <!--<div class="row" id="TA_info_row">-->
-                        <!--<div  class="col-sm-2" id="add_TA_hint">-->
-                            <!--<p  style="float: right">我要添加助教数量:</p></div>-->
-
-                        <!--<div  class="col-sm-1" id="add_TA_select" >  <div class="form-group">-->
-                            <!--<select class="form-control">-->
-                                <!--<option>1</option>-->
-                                <!--<option>2</option>-->
-                                <!--<option>3</option>-->
-                            <!--</select></div>-->
-                        <!--</div>-->
-                        <!--<div class="col-sm-2">-->
-                            <!--<button type="button"  class="btn btn-primary" id="add_TA_button" onclick="addTAInput()">添加课程助教</button>-->
-                        <!--</div>-->
-                <!--</div>-->
-
-
-
-                <!--<form>-->
-                    <!--<div class="row">-->
-                    <!--<div class="col-sm-3">-->
-                        <!--<label >学号</label>-->
-                    <!--</div>-->
-                        <!--<div class="col-sm-3">-->
-                            <!--<label>学号</label>-->
-                        <!--</div>-->
-                        <!--<div class="col-sm-3">-->
-                            <!--<label>院系</label>-->
-                       <!--</div>-->
-                        <!--<div class="col-sm-3">-->
-                            <!--<label>专业</label>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                    <!--<div class="row">-->
-                        <!--<div class="col-sm-3">-->
-                            <!--<input class="form-control" placeholder="学号">-->
-                        <!--</div>-->
-                        <!--<div class="col-sm-3">-->
-
-                            <!--<input class="form-control"  placeholder="姓名">-->
-                        <!--</div>-->
-                        <!--<div class="col-sm-3">-->
-
-                            <!--<input class="form-control" placeholder="院系">-->
-                        <!--</div>-->
-                        <!--<div class="col-sm-3">-->
-
-                            <!--<input class="form-control" placeholder="专业">-->
-                        <!--</div>-->
-                    <!--</div>-->
-
-
-                <!--<div class="row">-->
-                <!--<div class="col-sm-9">-->
-                <!--<button type="button"  class="btn btn-primary" id="cancel_TA_button" >取消录入</button>-->
-                <!--</div>-->
-                    <!--<div class="col-sm-3">-->
-
-                    <!--<button type="button"  class="btn btn-primary" id="add_TA_final">确定录入</button>-->
-                    <!--</div>-->
-                <!--</div>-->
-                <!--</form>-->
-
-
             </div>
             </div>
         </div>
@@ -286,11 +231,15 @@
 <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script src="../jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 
-<!--以下是achao导入的js文件-->
+<!--以下是zhang shichao导入的js文件-->
 <script src="js/add_TA.js"></script>
 <script src="js/add_artcicle.js"></script>
 <script src="js/add_stu.js"></script>
 <script src="js/class_manage.js"></script>
+
+<!--发布文章的编辑器要用到的样式-->
+<!--<script type="text/javascript" src="../ueditor-1.4.3.3-for-example-for-release/ueditor.config.js"></script>-->
+<!--<script type="text/javascript" src="../ueditor-1.4.3.3-for-example-for-release/ueditor.all.js"></script>-->
 
 
 
