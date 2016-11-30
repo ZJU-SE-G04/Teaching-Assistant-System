@@ -321,7 +321,7 @@ function updateStu() {
         success:function(result){
             jsonObj = result;
             if(jsonObj["if_success"]==0) {
-                window.alert("修改失败");
+                window.alert(json["error_message"]);
                 location.reload(true);
             }
             else{

@@ -1,6 +1,8 @@
 /**
  * Created by achao_zju on 15/11/2016.
  */
+
+
 function  returnToArticleList() {
 
     var articleList=document.getElementById("articleList");
@@ -145,11 +147,7 @@ function showReResponse() {
     var grandchild=document.createElement("div");
     grandchild.className="re-response-list";
     child.appendChild(grandchild);
-
-
-
-
-
+    
 
     var ggrandchild;
     for(var i=0;i<jsonObj.length;i++){
@@ -173,9 +171,34 @@ function showReResponse() {
 
     }
 
-
-
-
-
     parent.appendChild(child);
+}
+
+
+// ----- write a article -----------
+
+
+function  writeArticle() {
+
+    var title=document.getElementById("article_title").value;
+    var content=ue.getContent();
+    var datetime=new Date().toLocaleString();
+
+
+    $.ajax({
+        type:"GET",
+        url:"add_article.php?lesson_id="+course_id+"&id="+user_id+"&title="+title+"&content="+content+"&datetime="+datetime,
+        success:function (result) {
+            var jsonObj=result;
+            if(jsonObj["if_success"]==1){
+                window.alert("文章发布成功");
+                location.reload(true);
+            }
+            else {
+                window.alert(jsonObj["error_message"]);
+            }
+        }
+    }
+    );
+
 }

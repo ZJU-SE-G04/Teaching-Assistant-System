@@ -14,96 +14,23 @@
     float: right;
     margin-top: 10px;
 }
-/*response样式*/
-/*.response-container {*/
-    /*border-top: 1px solid #d9dde1;*/
-/*}*/
-/*.response-ul{*/
-    /*padding-left: 0px;*/
-/*}*/
-/*.response-container .response-list {*/
-    /*padding: 20px 24px;*/
-    /*!*padding-top: 20px;*!*/
-    /*border-bottom: 1px solid #d9dde1;*/
-    /*list-style:none;*/
-/*}*/
-
-/*!*.re-response-container .response-list-main {*!*/
-    /*!*!*margin-left: 60px;*!*!*/
-    /*!*margin-left: 0px;*!*/
-
-/*!*}*!*/
-/*.response-container .response-list-nick {*/
-    /*line-height: 1.2;*/
-    /*margin-bottom: 8px;*/
-    /*font-weight: bold;*/
-/*}*/
-/*.response-container .response-list-content {*/
-    /*margin-top: 3px;*/
-    /*font-size: 14px;*/
-    /*color: #14191e;*/
-    /*line-height: 24px;*/
-    /*word-wrap: break-word;*/
-    /*white-space: pre-wrap;*/
-    /*overflow: auto;*/
-/*}*/
-/*.response-container .response-list-btm {*/
-    /*font-size: 12px;*/
-    /*color: #93999f;*/
-    /*margin-top: 15px;*/
-/*}*/
-
- /*!*"回复" 样式*!*/
-/*.response-huifu{*/
-
-    /*margin-top: 20px;*/
-    /*float: right;*/
-    /*font-size: 12px;*/
-    /*margin-bottom: 0px;*/
-/*}*/
 
 
-/*.re-response-wrapper{*/
-    /*margin-right: 5px;*/
-    /*margin-left: 0;*/
-    /*background: #f7f8fa;*/
-    /*width: 568px;*/
-    /*float: right;*/
-/*}*/
-/*!*core_rep*!*/
-/*.re-response-wrapper .re-response-list{*/
-    /*border-left: 1px solid #f0f1f2;*/
-    /*border-right: 1px solid #f0f1f2;*/
 
-/*}*/
-/*.re-response-li{*/
-    /*margin-top: 6px;*/
-    /*padding-top: 10px;*/
-    /*border-top: 1px #d7d7d7 dotted;*/
-    /*list-style:none;*/
-/*}*/
+/*发布文章的两个按钮*/
 
-/*.re-response-user-name{*/
-    /*color: #2d64b3;*/
-/*}*/
-/*.re-response-huifu-time{*/
-    /*float: right;*/
-/*}*/
-/*.re-response-huifu{*/
+#cancel_write_article{
+    float: right;
+    margin-top: 10px;
+}
+
+#final_write_article{
+    margin-top: 10px;
+    float: right;
+}
 
 
-    /*font-size: 12px;*/
-    /*margin-bottom: 0px;*/
-    /*margin-right: 10px;*/
-/*}*/
-/*.re-response-time{*/
-    /*color: #93999f;*/
-    /*font-size: 12px;*/
-    /*margin-bottom: 0px;*/
-/*}*/
-/*.re-response-textarea{*/
-   /*width: 100%;*/
-/*}*/
+
 
 
 /*博客样式*/
@@ -127,4 +54,10 @@
 .blog_list_left .author{
     display: block;
     margin-bottom: 0.5em;
+}
+
+/*发布文章时的标题*/
+.subtit {
+    margin: 6px 0px;
+    border-bottom-color: #f0f0f0;
 }
