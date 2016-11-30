@@ -28,7 +28,7 @@
 		//如果没有这个账号就先在USER表中增加该账号
 		$result=$conn->query('insert into user_table values("'.$id.'","'.$id.'","'.$name.'",1,null,null,null);');
 		$result=$conn->query('insert into student_table values("'.$id.'","'.$name.'","'.$dep.'","'.$maj.'");');
-		$result=$conn->query('insert into orgnize_table values("'.$id.'",1,0);');
+		$result=$conn->query('insert into orgnize_table values("'.$id.'",0,0);');
 		$result=$conn->query('insert into study_table values("'.$id.'","'.$lesson_id.'",'.$class_id.');');
 		if(!$result){
 			$su=0;
