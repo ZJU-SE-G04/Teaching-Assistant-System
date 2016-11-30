@@ -29,7 +29,7 @@
 		//echo 'update user_table set id="'.$id.'",password="'.$id.'" where id="'.$old_id.'";';
 		$result=$conn->query('update user_table set id="'.$id.'",password="'.$id.'" where id="'.$old_id.'";');
 		//再更新助教表信息，助课信息会级联更新
-		$result=$conn->query('update assitant_table set name="'.$name.'",department="'.$dep.'",major="'.$maj.'" where id="'.$id.'";');
+		$result=$conn->query('update student_table set name="'.$name.'",department="'.$dep.'",major="'.$maj.'" where id="'.$id.'";');
 		//echo 'update assitant_table set name="'.$name.'",department="'.$dep.'",major="'.$maj.'" where id="'.$id.'";';
 		if($result==null){
 			$su=0;
