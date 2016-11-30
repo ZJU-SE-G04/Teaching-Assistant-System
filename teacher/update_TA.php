@@ -33,7 +33,7 @@
 		//echo 'update assitant_table set name="'.$name.'",department="'.$dep.'",major="'.$maj.'" where id="'.$id.'";';
 		if($result==null){
 			$su=0;
-			$erm='插入错误，请检查是否已存在该学号或者非法格式！';
+			$erm='插入错误，请检查是否已经存在该学号！';
 		}
 	}
 
