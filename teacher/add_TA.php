@@ -32,7 +32,7 @@
 		$result=$conn->query('insert into assit_table values("'.$id.'","'.$lesson_id.'",'.$class_id.');');
 		if($result==null){
 			$su=0;
-			$erm='插入错误，请检查是否已存在或者非法格式！';
+			$erm='插入错误，请检查是否已经存在该学号！';
 		}
 	}
 
