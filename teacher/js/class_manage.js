@@ -2,7 +2,7 @@
  * Created by achao_zju on 26/11/2016.
  */
 
-var class_id=2;
+var class_id=1;
 
 function show_class() {
     var course_name="茶与健康";

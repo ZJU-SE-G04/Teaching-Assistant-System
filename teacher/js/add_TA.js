@@ -157,6 +157,7 @@ function  addTAInput() {
 
 
 
+// ------------------取消修改助教信息------------------------
 
 
 
@@ -166,6 +167,8 @@ function  cancelTA() {
     oldAddTANumber=0;
 
 }
+
+
 
 
 
@@ -245,7 +248,6 @@ function deleteTA(assistant_id) {
             jsonObj = result;
             if(jsonObj["if_success"]==0) {
                 window.alert("修改失败");
-                location.reload(true);
             }
             else{
                 window.alert("修改成功");
@@ -322,22 +324,10 @@ function addTAUpdate(old_id) {
         newNodeForm.id = "updatedForm";
         parent.appendChild(newNodeForm);
 
-
-        // var allInputRows_update_TA= document.createElement("div");
-        // allInputRows_update_TA.id = "allInputRows_update_TA";
-        // newNodeForm.appendChild(allInputRows_update_TA);
-
-
         newNodeDivRow.innerHTML = "<div class='col-sm-3'><label>学号</label> " +
             " </div> <div class='col-sm-3'> " + "<label >姓名</label> " + "</div>" +
             " <div class='col-sm-3'> <label>院系</label>  </div>" +
             " <div class='col-sm-3'> <label >专业</label> </div>";
-
-
-        // var old_id_div=document.createElement("div");
-        // old_id_div.innerHTML="<input class='form-control' type='hidden' value='"+old_id+"' name='old_id'>";
-        // parent.appendChild(old_id_div);
-
 
         var child = document.createElement("div");
         child.className = "addedTARow";
@@ -352,13 +342,21 @@ function addTAUpdate(old_id) {
         newNodeButton.className = "row";
         newNodeForm.appendChild(newNodeButton);
         newNodeButton.innerHTML = " <div class='col-sm-9'>" +
-            "<button  class='btn btn-primary' id='cancel_TA_button_update' onclick='cancelTA()'>取消修改</button></div>" +
+            "<button  class='btn btn-primary' id='cancel_TA_button_update' onclick='cancelUpdateTA()'>取消修改</button></div>" +
             " <div class='col-sm-3'>" +
             " <button  class='btn btn-primary' id='update_TA_final' onclick='updateTA()'>确定修改</div>";
 
     }
-
-
-
 }
+
+
+// ------------------取消修改助教信息-------------------------
+
+
+function  cancelUpdateTA() {
+    document.getElementById("TAInfo").removeChild(document.getElementById("updatedAddTA"));
+}
+
+
+
 
