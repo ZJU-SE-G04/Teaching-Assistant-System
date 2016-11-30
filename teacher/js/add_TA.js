@@ -5,30 +5,69 @@
 
 //一些全局变量
 
+var oldAddTANumber=0;//这是添加助教信息时，之前选择添加助教数量
+var old_id_update_TA;//用于更新助教信息
 
+// ------------------添加助教信息,发送请求给后端-------------------
 
-// ------------------添加助教信息-------------------
-
-var oldAddTANumber=0;
 
 
 
 function addTA(){
 
-    var class_id_node=document.getElementById("class_id");
-    class_id=class_id_node.value;
 
-    
 
-    $.ajxa({
+    var t_TA_id=document.getElementsByClassName("t-TA-id");
+    var t_TA_name=document.getElementsByClassName("t-TA-name");
+    var t_TA_department=document.getElementsByClassName("t-TA-department");
+    var t_TA_major=document.getElementsByClassName("t-TA-major");
+
+
+    var arr_value_id;
+    var arr_value_name;
+    var arr_value_department;
+    var arr_value_major;
+
+
+    var arr="";
+
+    for(var i=0;i<t_TA_id.length;i++){
+
+        arr_value_id=t_TA_id[i].value;
+        arr=arr+"&id[]="+arr_value_id;
+
+        arr_value_name=t_TA_name[i].value;
+        arr=arr+"&name[]="+arr_value_name;
+
+        arr_value_department=t_TA_department[i].value;
+        arr=arr+"&department[]="+arr_value_department;
+
+        arr_value_major=t_TA_major[i].value;
+        arr=arr+"&major[]="+arr_value_major;
+
+    }
+    // window.alert(arr);
+
+
+
+    $.ajax({
         type:"GET",
-        url:"add_TA.php?class_id="+class_id,
+        url:"add_TA.php?class_id="+class_id+arr,
         success:function (result) {
-
+            var jsonObj=result;
+            if(jsonObj["if_success"]==0){
+                window.alert(jsonObj["error_message"]);
+            }
+            else {
+                location.reload(true);
+            }
         }
     })
 
 }
+
+// ------------------添加输入框，输入框用于添加助教信息-------------------
+
 
 
 function  addTAInput() {
@@ -62,27 +101,13 @@ function  addTAInput() {
         newNodeDivRow.className = "row";
         parent.appendChild(newNodeDivRow);
         
-        var newNodeForm = document.createElement("form");
-        newNodeForm.action="add_TA.php";
-        newNodeForm.method="get";
+        var newNodeForm = document.createElement("div");
         newNodeForm.id = "addedForm";
         parent.appendChild(newNodeForm);
-
-
-        var class_id_node=document.createElement("input");
-        class_id_node.value=class_id;
-        class_id_node.name="class_id";
-        class_id_node.type="hidden";
-        newNodeForm.appendChild(class_id_node);
-
-       
 
         allInputRows=document.createElement("div");
         allInputRows.id="allInputRows";
         newNodeForm.appendChild(allInputRows);
-
-
-
 
         newNodeDivRow.innerHTML = "<div class='col-sm-3'><label>学号</label> " +
             " </div> <div class='col-sm-3'> " + "<label >姓名</label> " + "</div>" +
@@ -99,10 +124,10 @@ function  addTAInput() {
         for (i = 0; i < newAddTANumber-oldAddTANumber; i++) {
             var child = document.createElement("div");
             child.className = "addedTARow";
-            child.innerHTML = "<div class='row'><div class='col-sm-3'><input class='form-control' name='id[]' placeholder='学号'> " +
-                "</div> <div class='col-sm-3'> <input class='form-control'  name='name[]' placeholder='姓名'>" +
-                " </div> <div class='col-sm-3'> <input class='form-control'  name='department[]' placeholder='院系'> " +
-                "</div> <div class='col-sm-3'> <input class='form-control' name='major[]' placeholder='专业'></div></div>";
+            child.innerHTML = "<div class='row'><div class='col-sm-3'><input class='form-control t-TA-id' name='id[]' > " +
+                "</div> <div class='col-sm-3'> <input class='form-control t-TA-name'  name='name[]' >" +
+                " </div> <div class='col-sm-3'> <input class='form-control t-TA-department'  name='department[]' > " +
+                "</div> <div class='col-sm-3'> <input class='form-control t-TA-major' name='major[]' ></div></div>";
             allInputRows.appendChild(child);
         }
     }
@@ -122,7 +147,7 @@ function  addTAInput() {
         newNodeButton.innerHTML = " <div class='col-sm-9'>" +
             "<button type='button'  class='btn btn-primary' id='cancel_TA_button' onclick='cancelTA()'>取消录入</button></div>" +
             " <div class='col-sm-3'>" +
-            " <input type='submit'  class='btn btn-primary' id='add_TA_final' value='确定录入'></div>";
+            " <button  class='btn btn-primary' id='add_TA_final' onclick='addTA()'>确定录入</div>";
 
     }
 
@@ -215,14 +240,16 @@ function deleteTA(assistant_id) {
 
     $.ajax({
         type:"GET",
-        url:"delete_TA.php?class_id="+class_id+"id="+assistant_id,
+        url:"delete_TA.php?class_id="+class_id+"&id="+assistant_id,
         success:function(result){
             jsonObj = result;
             if(jsonObj["if_success"]==0) {
-                window.alert("删除失败");
+                window.alert("修改失败");
+                location.reload(true);
             }
             else{
-                window.alert("删除成功");
+                window.alert("修改成功");
+                location.reload(true);
             }
 
 
@@ -233,6 +260,41 @@ function deleteTA(assistant_id) {
 }
 
 
+// ------------------update a TA's info-------------------------
+
+
+function updateTA() {
+
+
+    var update_TA_input=document.getElementsByClassName("update-TA-input");
+
+    var arr="&id="+update_TA_input[0].value+"&name="+update_TA_input[1].value+"&department="+update_TA_input[2].value+"&major="+update_TA_input[3].value;
+
+
+    $.ajax({
+        type:"GET",
+        url:"update_TA.php?class_id="+class_id+"&old_id="+old_id_update_TA+arr,
+        success:function(result){
+            jsonObj = result;
+            if(jsonObj["if_success"]==0) {
+                window.alert("修改失败");
+                location.reload(true);
+            }
+            else{
+                window.alert("修改成功");
+                location.reload(true);
+
+            }
+
+
+        }
+    });
+
+
+
+
+}
+
 
 
 // ------------------add a form  for updating TA-------------------------
@@ -240,6 +302,8 @@ function deleteTA(assistant_id) {
 
 
 function addTAUpdate(old_id) {
+
+    old_id_update_TA=old_id;
 
     if( document.getElementById("updatedAddTA")==null) {
         var parent = document.createElement("div");
@@ -254,16 +318,14 @@ function addTAUpdate(old_id) {
         newNodeDivRow.className = "row";
         parent.appendChild(newNodeDivRow);
 
-        var newNodeForm = document.createElement("form");
-        newNodeForm.action = "update_TA.php";
-        newNodeForm.method = "post";
+        var newNodeForm = document.createElement("div");
         newNodeForm.id = "updatedForm";
         parent.appendChild(newNodeForm);
 
 
-        var allInputRows_update_TA= document.createElement("div");
-        allInputRows_update_TA.id = "allInputRows_update_TA";
-        newNodeForm.appendChild(allInputRows_update_TA);
+        // var allInputRows_update_TA= document.createElement("div");
+        // allInputRows_update_TA.id = "allInputRows_update_TA";
+        // newNodeForm.appendChild(allInputRows_update_TA);
 
 
         newNodeDivRow.innerHTML = "<div class='col-sm-3'><label>学号</label> " +
@@ -272,27 +334,27 @@ function addTAUpdate(old_id) {
             " <div class='col-sm-3'> <label >专业</label> </div>";
 
 
-        var old_id_div=document.createElement("div");
-        old_id_div.innerHTML="<input class='form-control' type='hidden' value='"+old_id+"' name='old_id'>";
-        parent.appendChild(old_id_div);
+        // var old_id_div=document.createElement("div");
+        // old_id_div.innerHTML="<input class='form-control' type='hidden' value='"+old_id+"' name='old_id'>";
+        // parent.appendChild(old_id_div);
 
 
         var child = document.createElement("div");
         child.className = "addedTARow";
-        child.innerHTML = "<div class='row'><div class='col-sm-3'><input class='form-control' name='TA_id[]' placeholder='学号'> " +
-            "</div> <div class='col-sm-3'> <input class='form-control'  name='TA_name[]' placeholder='姓名'>" +
-            " </div> <div class='col-sm-3'> <input class='form-control'  name='department[]' placeholder='院系'> " +
-            "</div> <div class='col-sm-3'> <input class='form-control' name='major[]' placeholder='专业'></div></div>";
-        allInputRows_update_TA.appendChild(child);
+        child.innerHTML = "<div class='row'><div class='col-sm-3'><input class='form-control update-TA-input' name='TA_id[]'> " +
+            "</div> <div class='col-sm-3'> <input class='form-control update-TA-input'  name='TA_name[]'>" +
+            " </div> <div class='col-sm-3'> <input class='form-control update-TA-input'  name='department[]' > " +
+            "</div> <div class='col-sm-3'> <input class='form-control update-TA-input' name='major[]' ></div></div>";
+        newNodeForm.appendChild(child);
 
 
         var newNodeButton = document.createElement("div");
         newNodeButton.className = "row";
         newNodeForm.appendChild(newNodeButton);
         newNodeButton.innerHTML = " <div class='col-sm-9'>" +
-            "<button type='button'  class='btn btn-primary' id='cancel_TA_button_update' onclick='cancelTA()'>取消录入</button></div>" +
+            "<button  class='btn btn-primary' id='cancel_TA_button_update' onclick='cancelTA()'>取消修改</button></div>" +
             " <div class='col-sm-3'>" +
-            " <input type='submit'  class='btn btn-primary' id='update_TA_final' value='确定录入'></div>";
+            " <button  class='btn btn-primary' id='update_TA_final' onclick='updateTA()'>确定修改</div>";
 
     }
 
