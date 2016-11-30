@@ -36,7 +36,7 @@
 ### 文章模块
 |功能名      |前端调用后端的URL                             | 后端返回前端的数据(json)                   |备注          |后端是否完成    |
 |-----------------|-------------------------------------------|--------------------------------------------|---------------|----------|
-|显示文章列表|show_article_list.php?course_id=xxx|[{"article_id":"xxx","title":"xxx","id":"xxx","short_content":"xxx"}{"article_id":"xxx","title":"xxx","id":"xxx","short_content":"xxx"}...]|id是发布人账号，short_content是文章内容前140个字符|否
+|显示文章列表|show_article_list.php?lesson_id=xxx|[{"article_id":"xxx","title":"xxx","id":"xxx","short_content":"xxx"}{"article_id":"xxx","title":"xxx","id":"xxx","short_content":"xxx"}...]|id是发布人账号，short_content是文章内容前140个字符|否
 |删除文章|delete_article.php?article_id=xxx|删除成功：{"if_success":1,error_message:"null"};删除失败：{"if_success":0,"error_messgae":"xxx"}|成功或失败返回的是整数1或0|否
 
 
