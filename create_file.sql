@@ -1,4 +1,4 @@
-﻿#删除已有数据库
+#删除已有数据库
 drop database if exists teaching_db;
 #先创建好数据库并打开	设置UTF-8编码格式
 create database teaching_db
@@ -175,7 +175,7 @@ create table courseware_table(
 	courseware_id int not null auto_increment,#课件标志号
 	lesson_id varchar(10),#课程号
 	courseware_name varchar(100),#课件名
-	courseware_info varchar(200),#课件地址
+	courseware_link varchar(200),#课件地址
 	courseware_kind varchar(20),#课件类型
 	primary key(courseware_id),
 	constraint foreign key (lesson_id) references lesson_table(lesson_id) on delete cascade on update cascade
