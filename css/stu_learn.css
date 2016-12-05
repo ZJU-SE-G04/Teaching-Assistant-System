@@ -177,27 +177,26 @@ input:focus {
     margin: 5px 0 10px 0;
 }
 
-#course_ppt .download-btn {
-    float: right;
+.courseware_list .download-btn {
     vertical-align: middle;
 }
 
-#course_ppt .download-btn {
+.courseware_list .download-btn {
     cursor: pointer;
 }
 
-#course_ppt .each_datum {
+.courseware_list .each_datum {
     padding: 0px 10px 0 35px;
     border-bottom: #e2e2e2 1px dashed;
 }
 
-#course_ppt .each_datum a {
+.courseware_list .each_datum a {
     font-size: 15px;
     line-height: 2;
     font-family: "Arial", "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, "Helvetica", "sans-serif";
 }
 
-#course_ppt .each_datum:last-child {
+.courseware_list .each_datum:last-child {
     border-bottom: none;
 }
 
