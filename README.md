@@ -7,7 +7,7 @@
 password:exciting
 - Linux or Mac命令 ./mysql -uzjuseG04 -h 120.77.34.254 -p  
 password:exciting
-- php文件连接函数中，服务器ip把localhost改为120.77.34.254，账号改为zjuseG04,密码改为exciting  
+- php文件连接函数中，服务器ip把localhost改为120.77.34.254，账号改为root,密码改为exciting
 端口名仍为3306，数据库名仍为teaching_db
 - 后端统一include 'connect.php'连接远程数据库
 

@@ -51,17 +51,20 @@
                 <div class="panel-group" style="padding-top:35px" id="articleLoop">
                     <div class="panel panel-default old w3-hover-shadow w3-animate-zoom">  <!--loop start-->
                         <div class="panel-heading w3-hover-grey clickable">
-                            <span class="glyphicon glyphicon-file"></span>&nbsp;<strong class="x-title"></strong><span class="glyphicon glyphicon-trash" style="float: right"></span>
+                            <span class="glyphicon glyphicon-file"></span>&nbsp;<strong class="x-title"></strong>
                         </div>
                         <div class="panel-body"><p class="x-contentDigest"></p></div>
                         <div class="panel-footer">
                             <div class="row">
-                                <div class="col-md-2 col-md-offset-8 col-xs-6 col-xs-offset-2">
+                                <div class="col-md-2 col-md-offset-6 col-xs-6 col-xs-offset-2">
                                     <span class="x-time"></span>
                                 </div>
                                 <div class="col-md-2 col-xs-4">
                                     <span>作者:&nbsp;&nbsp;</span><span class="x-commentNum "></span>
                                 </div>
+                                <div class="col-md-1 col-xs-4" ><span class="glyphicon glyphicon-trash x-trash" ></span></div>
+                                <div class="col-md-1 col-xs-4" ><span class="glyphicon glyphicon-edit x-edit" style="margin-left: 10px"  ></span></div>
+
                             </div>
                         </div>
                     </div>  <!--loop end-->
@@ -117,12 +120,37 @@
                         <div class='col-sm-9'>
                             <button  class='btn btn-primary' id="cancel_write_article" onclick='cancelArticle()'>取消发布</button></div>
                         <div class='col-sm-3'>
-                            <button  class='btn btn-primary' id="final_write_article" onclick='writeArticle()'>发布文章</div>
+                            <button  class='btn btn-primary' id="final_write_article" onclick='writeArticle()'>发布文章</button></div>
                     </div>
                 </div>
 
 
+                <div id="update_article">
+                    <p class="subtit" >文章标题</p>
+                    <input type="text" id="article_title_update" style="width:800px;">
+                    <p class="subtit">文章内容</p>
+
+                    <!-- 加载编辑器的容器 --><div>
+                    <script id="container_update" name="content" type="text/plain">
+        这里写你的初始化内容
+    </script>
+                    <!-- 配置文件 -->
+
+                    <!-- 实例化编辑器 -->
+                    <script type="text/javascript">
+                        var ue_update = UE.getEditor('container_update');
+                    </script></div>
+                    <div class="row">
+                        <div class='col-sm-9'>
+                            <button  class='btn btn-primary cancel-ok-button'  onclick='cancelArticle()'>取消修改</button></div>
+                        <div class='col-sm-3'>
+                            <button  class='btn btn-primary cancel-ok-button'  onclick='writeArticle()'>修改文章</button></div>
+                    </div>
                 </div>
+
+
+
+            </div>
 
 
 

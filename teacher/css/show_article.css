@@ -38,6 +38,12 @@
 
 
 
+
+.cancel-ok-button{
+    margin-top: 10px;
+    float: right;
+}
+
 /*发布文章时的标题*/
 .subtit {
     margin: 6px 0px;
