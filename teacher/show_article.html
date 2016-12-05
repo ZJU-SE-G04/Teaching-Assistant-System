@@ -20,7 +20,6 @@
     <link rel="stylesheet" href="../administrator/administrator.css">
 
     <!--发布文章的编辑器要用到的样式-->
-
     <script type="text/javascript" src="../ueditor-1.4.3.3-for-release/ueditor.config.js"></script>
     <script type="text/javascript" src="../ueditor-1.4.3.3-for-release/ueditor.all.js"></script>
 
@@ -35,8 +34,8 @@
     <div class="row" id="mainBody">
         <div class="col-md-2" id="left-side">
                 <ul  class="nav nav-pills nav-stacked">
-                    <li class="tab-style"><a href="#notice" data-toggle="tab">公告</a></li>
-                    <li class="active"><a href="#article" data-toggle="tab">最新文章</a></li>
+                    <li class="active"><a href="#notice" data-toggle="tab">公告</a></li>
+                    <li class="tab-style"><a href="#article" data-toggle="tab" onclick="articleUpdate()">最新文章</a></li>
                     <li class="tab-style"><a href="#courseware" data-toggle="tab">课程资料</a></li>
                     <li class="tab-style"><a href="#report" data-toggle="tab">报告与文档</a></li>
                     <li class="tab-style"><a href="#class" data-toggle="tab" onclick="show_class()">班级信息管理</a></li>
@@ -46,90 +45,102 @@
                 </ul>
         </div>
         <div class="col-md-10 tab-content" id="tab_content_area">
-            <div id="notice" class="tab-pane"></div>
-            <div id="article" class="tab-pane in active">
+            <div id="notice" class="tab-pane in active">aa</div>
+            <div id="article" class="tab-pane">
+                <div><button  class='btn btn-primary' id='write_article_button' onclick="showWriteArticle()" >撰写文章</button></div>
+                <div class="panel-group" style="padding-top:35px" id="articleLoop">
+                    <div class="panel panel-default old w3-hover-shadow w3-animate-zoom">  <!--loop start-->
+                        <div class="panel-heading w3-hover-grey clickable">
+                            <span class="glyphicon glyphicon-file"></span>&nbsp;<strong class="x-title"></strong><span class="glyphicon glyphicon-trash" style="float: right"></span>
+                        </div>
+                        <div class="panel-body"><p class="x-contentDigest"></p></div>
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col-md-2 col-md-offset-8 col-xs-6 col-xs-offset-2">
+                                    <span class="x-time"></span>
+                                </div>
+                                <div class="col-md-2 col-xs-4">
+                                    <span>作者:&nbsp;&nbsp;</span><span class="x-commentNum "></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>  <!--loop end-->
+                </div>
+
+
+                <div id="articleDetail">
+                    <div class="row">
+                        <button type="button" class="btn btn-primary w3-right" id="articleBack">
+                            返回列表&nbsp;<span class="glyphicon glyphicon-share-alt"></span>
+                        </button>
+                    </div>
+                    <div class="row">
+                        <h2 class="x-title"></h2>
+                        <h5><small>
+                            <span class="glyphicon glyphicon-user"></span> 作者：<span class="x-author"></span>&nbsp;&nbsp;
+                            <span class="glyphicon glyphicon-time"></span> 发表时间：<span class="x-time"></span>
+                        </small></h5><br>
+                        <p class="x-body"></p>
+                        <hr>
+                        <div class="panel-group" id="commentLoop">
+                            <div class="panel panel-default old w3-hover-shadow">  <!--loop start-->
+                                <div class="panel-heading">
+                                    <div class="row">
+                                        <div class="col-md-1">第&nbsp;<strong class="x-floor"></strong>&nbsp;楼</div>
+                                        <div class="col-md-2"><strong class="x-floorMaster"></strong><span class="is-reply"> 回复 第&nbsp;<strong class="x-re_floor"></strong>&nbsp;楼</span></div>
+                                        <div class="col-md-2"><span class="x-time"></span></div>
+                                        <div class="col-md-1 col-md-offset-6"><span class="glyphicon glyphicon-trash w3-large clickable"></span></div>
+                                    </div>
+                                </div>
+                                <div class="panel-body"><p class="x-content"></p></div>
+                            </div>  <!--loop end-->
+                        </div>
+                    </div>
+                    </div>
 
                 <div id="write_article">
-                <p class="subtit" >文章标题</p>
-               <input type="text" id="article_title" style="width:800px;">
-                <p class="subtit">文章内容</p>
+                    <p class="subtit" >文章标题</p>
+                    <input type="text" id="article_title" style="width:800px;">
+                    <p class="subtit">文章内容</p>
 
-                <!-- 加载编辑器的容器 --><div>
-                <script id="container" name="content" type="text/plain">
+                    <!-- 加载编辑器的容器 --><div>
+                    <script id="container" name="content" type="text/plain">
         这里写你的初始化内容
     </script>
-                <!-- 配置文件 -->
+                    <!-- 配置文件 -->
 
-                <!-- 实例化编辑器 -->
-                <script type="text/javascript">
-                    var ue = UE.getEditor('container');
-                </script></div>
+                    <!-- 实例化编辑器 -->
+                    <script type="text/javascript">
+                        var ue = UE.getEditor('container');
+                    </script></div>
                     <div class="row">
                         <div class='col-sm-9'>
-                            <button  class='btn btn-primary' id="cancel_write_article" onclick=''>取消发布</button></div>
+                            <button  class='btn btn-primary' id="cancel_write_article" onclick='cancelArticle()'>取消发布</button></div>
                         <div class='col-sm-3'>
                             <button  class='btn btn-primary' id="final_write_article" onclick='writeArticle()'>发布文章</div>
-                        </div>
+                    </div>
                 </div>
-            </div>
 
 
-                <!--<div class="panel-group" id="articleLoop">-->
-                    <!--<div class="panel panel-default old w3-hover-shadow w3-animate-zoom">  &lt;!&ndash;loop start&ndash;&gt;-->
-                        <!--<div class="panel-heading w3-hover-grey clickable">-->
-                            <!--<span class="glyphicon glyphicon-file"></span>&nbsp;xxx<strong class="x-title"></strong>-->
-                        <!--</div>-->
-                        <!--<div class="panel-body"><p class="x-contentDigest">..........</p></div>-->
-                        <!--<div class="panel-footer">-->
-                            <!--<div class="row">-->
-                                <!--<div class="col-md-2 col-md-offset-8 col-xs-6 col-xs-offset-2">-->
-                                    <!--<span class="x-time"></span>-->
-                                <!--</div>-->
-                                <!--<div class="col-md-2 col-xs-4">-->
-                                    <!--<span>评论&nbsp;&nbsp;</span><span class="badge w3-green x-commentNum clickable"></span>-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                    <!--</div>  &lt;!&ndash;loop end&ndash;&gt;-->
-            <!--</div>-->
-
-
-
-
-            <!--<div id="articleList">-->
-                <!--<div class="row">-->
-                    <!--<div class="col-sm-8">-->
-                      <!--<h3>以下是已经发布的文章</h3>-->
-                    <!--</div>-->
-                    <!--<div class="col-sm-4">-->
-                        <!--<button type="button"  class="btn btn-primary" id="show_article_button" onclick="showArticleDetails()">撰写新文章</button>-->
-                    <!--</div>-->
-                <!--</div>-->
+                </div>
 
 
 
 
 
 
-                <!--<div class="panel panel-default" >-->
-                        <!--<div class="panel-heading">-->
-                            <!--<div class="row">-->
-                                <!--<div class="col-sm-9" id="articleTitle" onclick="showArticleDetails()" onmouseover="this.style.cursor='pointer';beRed();" onmouseleave="beBlack()">-->
-                                 <!--热烈庆祝长者90大寿!-->
-                                <!--</div>-->
-                                <!--<div class="col-sm-1">-->
-                                    <!--膜法师-->
-                                <!--</div>-->
-                                <!--<div class="col-sm-2">-->
-                                    <!--2016-11-9-->
-                                <!--</div>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="panel-body">这里是部分文章内容，<=140字-->
-                            <!--注：需要后端返回文章作者，文章标题，发布时间，文章不超过140字内容-->
-                            <!--同时为了实现翻页，需要返回文章数量-->
-                        <!--</div>-->
-                <!--</div>-->
+
+
+
+
+
+
+
+
+
+
+
+
                 <!--<ul class="pagination pagination-sm">-->
                     <!--<li><a id="page_first" class="active" href="#">&laquo;第一页</a></li>-->
                     <!--<li><a id="page_one" href="#test">1</a></li>-->
@@ -240,8 +251,9 @@
 
 <!--以下是zhang shichao导入的js文件-->
 <script src="js/add_TA.js"></script>
-<script src="js/add_artcicle.js"></script>
 <script src="js/add_stu.js"></script>
+<!--<script src="../administrator/administrator.js"></script>-->
+<script src="js/add_article.js"></script>
 <script src="js/class_manage.js"></script>
 
 

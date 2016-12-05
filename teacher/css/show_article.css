@@ -29,32 +29,14 @@
     float: right;
 }
 
+/*---button for write a article---*/
 
-
-
-
-/*博客样式*/
-.blog_list{
-    margin-bottom: 5em;
-    position: relative;
+#write_article_button{
+    margin-top: 0px;
+    float: right;
 }
 
-.blog_list_left{
-    position: absolute;
-    top: 0.5em;
-    left: -200px;
-    width: 180px;
-    font-size: 85%;
-}
 
-.blog_list_left .date {
-    font-weight: bold;
-    font-size: 120%;
-}
-.blog_list_left .author{
-    display: block;
-    margin-bottom: 0.5em;
-}
 
 /*发布文章时的标题*/
 .subtit {
