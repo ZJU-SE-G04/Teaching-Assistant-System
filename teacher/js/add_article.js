@@ -1,11 +1,11 @@
-/**
- * Created by achao_zju on 15/11/2016.
- */
 
 
 
+//-------一些全局变量---------
 
 
+
+//-------
 $(document).ready(function() {
     $("#message").addClass("active");
     $(".content-blk.message").show();
@@ -34,14 +34,14 @@ var articleRecords = [
     {
         "article_id": 223456789,
         "title": "Java之JDK环境配置过程（图）",
-        "articleDigest": "1、在Windows7操作系统下，右键，点击属性，会出现如下界面 2、选择“高级系统设置”，如下 3、接着点击“环境变量”按钮，会出现如下图： 4、找到系统变量，点击“新建”按钮，这时会弹出一个窗口，分别在变量名和变量值框中填入：JAVA_HOME和JDK的路径C:\Program Files\Java\jdk1.7.0_05，点击“确定”；... ",
+        "articleDigest": "2、在Windows7操作系统下，右键，点击属性，会出现如下界面 2、选择“高级系统设置”，如下 3、接着点击“环境变量”按钮，会出现如下图： 4、找到系统变量，点击“新建”按钮，这时会弹出一个窗口，分别在变量名和变量值框中填入：JAVA_HOME和JDK的路径C:\Program Files\Java\jdk1.7.0_05，点击“确定”；... ",
         "time": "2013-06-22 12:31",
         "user_name": "12"
     },
     {
         "article_id": 323456789,
         "title": "Java之JDK环境配置过程（图）",
-        "articleDigest": "1、在Windows7操作系统下，右键，点击属性，会出现如下界面 2、选择“高级系统设置”，如下 3、接着点击“环境变量”按钮，会出现如下图： 4、找到系统变量，点击“新建”按钮，这时会弹出一个窗口，分别在变量名和变量值框中填入：JAVA_HOME和JDK的路径C:\Program Files\Java\jdk1.7.0_05，点击“确定”；... ",
+        "articleDigest": "3、在Windows7操作系统下，右键，点击属性，会出现如下界面 2、选择“高级系统设置”，如下 3、接着点击“环境变量”按钮，会出现如下图： 4、找到系统变量，点击“新建”按钮，这时会弹出一个窗口，分别在变量名和变量值框中填入：JAVA_HOME和JDK的路径C:\Program Files\Java\jdk1.7.0_05，点击“确定”；... ",
         "time": "2013-06-09 10:12",
         "user_name": "8"
     },
@@ -101,8 +101,6 @@ function  articleUpdate() {
         var tmp = $("#articleLoop").children(".old").clone().removeClass("old").addClass("new").show();
         tmp.attr("id", x.article_id);
         tmp.find(".x-trash").attr("onclick","deleteArticle("+x.article_id+")");
-        tmp.find(".x-edit").attr("onclick","updateArticle("+x.article_id+")");
-
         tmp.find(".x-title").html(x.title);
         tmp.find(".x-contentDigest").html(x.articleDigest);
         tmp.find(".x-time").html(x.time);
@@ -133,8 +131,7 @@ function  showWriteArticle() {
 function  writeArticle() {
     var title=document.getElementById("article_title").value;
     var content=ue.getContent();
-    var datetime=new Date().toLocaleString();
-    // window.alert(datetime);
+
     $.ajax({
             type:"GET",
             url:"add_article.php?lesson_id="+course_id+"&id="+user_id+"&title="+title+"&content="+content,
@@ -165,13 +162,52 @@ function  cancelArticle() {
 
 //-----------update an article ----------
 function updateArticle(article_id) {
-    $("#update_article").show();
-    $("#articleLoop").hide();
-    $("#write_article_button").hide()
+    var update_article=$("#update_article");
+    update_article.show();
+
+    var tmp=$("#articleDetail");
+    tmp.hide();
+    update_article.find(".x-button").attr("onclick","submitUpdateArticle("+article_id+")");
+
+    update_article.find("#article_title_update").val(tmp.find(".x-title").text());
+    ue_update.setContent(tmp.find(".x-content").text());
 }
 
 
+function  submitUpdateArticle(article_id) {
+    var tmp=$("#articleDetail");
+    var title=tmp.find(".x-title").text()
+    var content=tmp.find(".x-content").text()
 
+    $.ajax({
+      type:"GET",
+        url:"update_article.php?lesson_id="+course_id+"&article_id="+article_id+"&id="+user_id+"&title="+title+"&content="+content,
+        success:function (result) {
+            var jsonObj=result;
+            if(jsonObj[success]==1){
+                window.alert("修改成功");
+                location.reload();
+            }else {
+                window.alert("修改失败");
+            }
+        }
+
+    }
+    );
+
+
+}
+
+
+//----------cancel updating an article
+
+function cancelUpdateArticle(article_id) {
+    $("#update_article").hide();
+    $("#articleLoop").show();
+    $("#write_article_button").show()
+}
+
+//-----------delete an article
 function  deleteArticle(article_id) {
     $.ajax({
         type:"GET",
@@ -245,6 +281,7 @@ function articleShow() {
     $("#write_article_button").hide();
 
     var id = $(this).parent().attr("id");
+    article_id=id;
     /*
      $.get("getArticleDetail.php?article_id="+id, function (data) {
      articleDetail = JSON.parse(data);
@@ -252,8 +289,11 @@ function articleShow() {
      */
     $("#articleDetail").find(".x-title").html(articleDetail["article"]["title"]);
     $("#articleDetail").find(".x-author").html(articleDetail["article"]["author"]);
+    $("#articleDetail").find(".x-edit").attr("onclick","updateArticle("+id+")");
+    $("#articleDetail").find(".x-trash").attr("onclick","deleteArticle("+id+")");
     $("#articleDetail").find(".x-time").html(articleDetail["article"]["time"]);
     $("#articleDetail").find(".x-body").html(articleDetail["article"]["body"]);
+
 
     $("#commentLoop").children(".new").remove();
     for (var i in articleDetail["comment"]) {
@@ -293,68 +333,5 @@ function  returnToArticleList() {
 
 }
 
-
-//-----------
-
-function beRed() {
-    var articleTitle=document.getElementById("articleTitle");
-    articleTitle.style.color="#03a9f4";
-
-}
-
-function beBlack() {
-    var articleTitle=document.getElementById("articleTitle");
-    articleTitle.style.color="#000000";
-}
-
-
-// 显示二级回复列表
-
-function showReResponse() {
-    var jsonObj= [{
-        "user_name": "游客10068",
-        "re_user_name": "NULL",
-        "content": "For one second.",
-        "re_floor": "1"
-    }, {
-        "user_name": "阿超",
-        "re_user_name": "游客10068",
-        "content": "你是世界之王",
-        "re_floor": "2"
-    }];
-
-    var parent=document.getElementById("response_time_button");
-    var child=document.createElement("div");
-    child.className="re-response-wrapper";
-
-    var grandchild=document.createElement("div");
-    grandchild.className="re-response-list";
-    child.appendChild(grandchild);
-    
-
-    var ggrandchild;
-    for(var i=0;i<jsonObj.length;i++){
-        ggrandchild=document.createElement("li");
-        var user_name=jsonObj[i].user_name;
-        var re_user_name=jsonObj[i].re_user_name;
-        var content=jsonObj[i].content;
-        ggrandchild.className="re-response-li"
-        ggrandchild.innerHTML="<span>"+user_name+"</span> <span>回复</span>" +
-            "<span>"
-        if(re_user_name!="NULL") {
-            ggrandchild.innerHTML+=re_user_name + "</span><span>:&nbsp;&nbsp;" + content + "</span>";
-        }
-        else{
-            ggrandchild.innerHTML+=re_user_name + "</span><span>:&nbsp;&nbsp;" + content + "</span>";
-
-        }
-
-        grandchild.appendChild(ggrandchild);
-
-
-    }
-
-    parent.appendChild(child);
-}
 
 

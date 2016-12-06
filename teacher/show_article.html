@@ -56,14 +56,13 @@
                         <div class="panel-body"><p class="x-contentDigest"></p></div>
                         <div class="panel-footer">
                             <div class="row">
-                                <div class="col-md-2 col-md-offset-6 col-xs-6 col-xs-offset-2">
+                                <div class="col-md-2 col-md-offset-7 col-xs-6 col-xs-offset-2">
                                     <span class="x-time"></span>
                                 </div>
                                 <div class="col-md-2 col-xs-4">
                                     <span>作者:&nbsp;&nbsp;</span><span class="x-commentNum "></span>
                                 </div>
                                 <div class="col-md-1 col-xs-4" ><span class="glyphicon glyphicon-trash x-trash" ></span></div>
-                                <div class="col-md-1 col-xs-4" ><span class="glyphicon glyphicon-edit x-edit" style="margin-left: 10px"  ></span></div>
 
                             </div>
                         </div>
@@ -82,6 +81,9 @@
                         <h5><small>
                             <span class="glyphicon glyphicon-user"></span> 作者：<span class="x-author"></span>&nbsp;&nbsp;
                             <span class="glyphicon glyphicon-time"></span> 发表时间：<span class="x-time"></span>
+                            <span class="glyphicon glyphicon-edit x-edit" onclick="updateArticle()" >编辑文章</span>
+                            <span class="glyphicon glyphicon-trash x-trash" >删除文章</span>
+
                         </small></h5><br>
                         <p class="x-body"></p>
                         <hr>
@@ -142,9 +144,9 @@
                     </script></div>
                     <div class="row">
                         <div class='col-sm-9'>
-                            <button  class='btn btn-primary cancel-ok-button'  onclick='cancelArticle()'>取消修改</button></div>
+                            <button  class='btn btn-primary cancel-ok-button'  onclick='cancelUpdateArticle()'>取消修改</button></div>
                         <div class='col-sm-3'>
-                            <button  class='btn btn-primary cancel-ok-button'  onclick='writeArticle()'>修改文章</button></div>
+                            <button  class='btn btn-primary cancel-ok-button x-button' >修改文章</button></div>
                     </div>
                 </div>
 

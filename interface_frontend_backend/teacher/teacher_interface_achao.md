@@ -38,7 +38,8 @@
 |-----------------|-------------------------------------------|--------------------------------------------|---------------|----------|
 |显示文章列表|show_article_list.php?lesson_id=xxx|[{"article_id":"xxx","title":"xxx","id":"xxx","user_name":"xxx","short_content":"xxx","time":"xxx"}{"article_id":"xxx","title":"xxx","id":"xxx","user_name":"xxx","short_content":"xxx","time":"xxx"}...]|id是发布人账号，short_content是文章内容前140个字符,user_name是作者姓名|否
 |删除文章|delete_article.php?article_id=xxx|删除成功：{"if_success":1,error_message:"null"};删除失败：{"if_success":0,"error_messgae":"xxx"}|成功或失败返回的是整数1或0|否
-|发布文章|add_article.php?lesson_id=xxx&id=xxx&title=xxx&content=xxx&datetime=xxx|删除成功：{"if_success":1,error_message:"null"};删除失败：{"if_success":0,"error_messgae":"xxx"}|成功或失败返回的是整数1或0|是
+|发布文章|add_article.php?lesson_id=xxx&id=xxx&title=xxx&content=xxx|发布成功：{"if_success":1,error_message:"null"};发布失败：{"if_success":0,"error_messgae":"xxx"}|成功或失败返回的是整数1或0,时间由后端获取|是
+|文章|add_article.php?lesson_id=xxx&article_id=xxx&id=xxx&title=xxx&content=xxx|修改成功：{"if_success":1,error_message:"null"};修改失败：{"if_success":0,"error_messgae":"xxx"}|成功或失败返回的是整数1或0,时间由后端获取ex|是
 
 
 ### To be continued……
