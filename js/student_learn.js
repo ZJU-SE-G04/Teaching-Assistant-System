@@ -266,8 +266,8 @@ $(document).ready(
         //讨论区
         $("#discuss_home_page").hide();
         $("#issue_post_page").hide();
-        $("#posts_border_page").show();
-        $("#post_detail_page").hide();
+        $("#posts_border_page").hide();
+        $("#post_detail_page").show();
 
 
         //加入队伍区
