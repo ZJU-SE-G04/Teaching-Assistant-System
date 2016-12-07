@@ -20,32 +20,9 @@ $(document).ready(function() {
 
     $("#articleBack").click(articleUpdate);
 });
-// //////////////////////////////////////////////////////
 
 //////////////////////////////////////////////////////
-var articleRecords = [
-    {
-        "article_id": 123456789,
-        "title": "Java之JDK环境配置过程（图）",
-        "articleDigest": "1、在Windows7操作系统下，右键，点击属性，会出现如下界面 2、选择“高级系统设置”，如下 3、接着点击“环境变量”按钮，会出现如下图： 4、找到系统变量，点击“新建”按钮，这时会弹出一个窗口，分别在变量名和变量值框中填入：JAVA_HOME和JDK的路径C:\Program Files\Java\jdk1.7.0_05，点击“确定”；... ",
-        "time": "2013-06-29 00:35",
-        "user_name": "7"
-    },
-    {
-        "article_id": 223456789,
-        "title": "Java之JDK环境配置过程（图）",
-        "articleDigest": "2、在Windows7操作系统下，右键，点击属性，会出现如下界面 2、选择“高级系统设置”，如下 3、接着点击“环境变量”按钮，会出现如下图： 4、找到系统变量，点击“新建”按钮，这时会弹出一个窗口，分别在变量名和变量值框中填入：JAVA_HOME和JDK的路径C:\Program Files\Java\jdk1.7.0_05，点击“确定”；... ",
-        "time": "2013-06-22 12:31",
-        "user_name": "12"
-    },
-    {
-        "article_id": 323456789,
-        "title": "Java之JDK环境配置过程（图）",
-        "articleDigest": "3、在Windows7操作系统下，右键，点击属性，会出现如下界面 2、选择“高级系统设置”，如下 3、接着点击“环境变量”按钮，会出现如下图： 4、找到系统变量，点击“新建”按钮，这时会弹出一个窗口，分别在变量名和变量值框中填入：JAVA_HOME和JDK的路径C:\Program Files\Java\jdk1.7.0_05，点击“确定”；... ",
-        "time": "2013-06-09 10:12",
-        "user_name": "8"
-    },
-];
+
 /*
  var articleRecords = "";
  */
@@ -77,39 +54,27 @@ function  articleUpdate() {
     $("#articleLoop").show();
     $("#update_article").hide();
     $("#write_article_button").show();
-    // $.ajax({
-    //     type:"GET",
-    //     url:"show_article_list.php?lesson_id="+class_id,
-    //     success:function (result) {
-    //         var jsonObj=result;
-    //         $("#articleLoop").children(".new").remove();
-    //
-    //
-    //
-    //
-    //     }
-    //
-    //
-    //
-    //
-    // });
-
-
-    $("#articleLoop").children(".new").remove();
-    for (var i in articleRecords) {
-        var x = articleRecords[i];
-        var tmp = $("#articleLoop").children(".old").clone().removeClass("old").addClass("new").show();
-        tmp.attr("id", x.article_id);
-        tmp.find(".x-trash").attr("onclick","deleteArticle("+x.article_id+")");
-        tmp.find(".x-title").html(x.title);
-        tmp.find(".x-contentDigest").html(x.articleDigest);
-        tmp.find(".x-time").html(x.time);
-        tmp.find(".x-commentNum").html(x.user_name);
-        $("#articleLoop").append(tmp);
-     }
-    $("#articleLoop").find(".panel-heading").click(articleShow);  //all heading created
-
-
+    $.ajax({
+        type:"GET",
+        url:"show_article_list.php?lesson_id="+course_id,
+        success:function (result) {
+            window.alert(result);
+            var articleRecords=result;
+            $("#articleLoop").children(".new").remove();
+            for (var i in articleRecords) {
+                var x = articleRecords[i];
+                var tmp = $("#articleLoop").children(".old").clone().removeClass("old").addClass("new").show();
+                tmp.attr("id", x.article_id);
+                tmp.find(".x-trash").attr("onclick","deleteArticle("+x.article_id+")");
+                tmp.find(".x-title").html(x.title);
+                tmp.find(".x-contentDigest").html(x.short_content);
+                tmp.find(".x-time").html(x.time);
+                tmp.find(".x-commentNum").html(x.user_name);
+                $("#articleLoop").append(tmp);
+            }
+            $("#articleLoop").find(".panel-heading").click(articleShow);  //all heading created
+        }
+    });
 }
 
 
@@ -170,36 +135,35 @@ function updateArticle(article_id) {
     update_article.find(".x-button").attr("onclick","submitUpdateArticle("+article_id+")");
 
     update_article.find("#article_title_update").val(tmp.find(".x-title").text());
-    ue_update.setContent(tmp.find(".x-content").text());
+    ue_update.setContent(tmp.find(".x-body").text());
 }
 
 
 function  submitUpdateArticle(article_id) {
-    var tmp=$("#articleDetail");
-    var title=tmp.find(".x-title").text()
-    var content=tmp.find(".x-content").text()
-
+    var title=$("#update_article").find("#article_title_update").val();
+     window.alert(title);
+    var content=ue_update.getContent();
+    window.alert(content);
     $.ajax({
       type:"GET",
-        url:"update_article.php?lesson_id="+course_id+"&article_id="+article_id+"&id="+user_id+"&title="+title+"&content="+content,
+        url:"update_article.php?article_id="+article_id+"&title="+title+"&content="+content,
         success:function (result) {
             var jsonObj=result;
-            if(jsonObj[success]==1){
+            if(jsonObj["if_success"]==1){
                 window.alert("修改成功");
                 location.reload();
             }else {
-                window.alert("修改失败");
+                window.alert(jsonObj["error_message"]);
             }
         }
 
     }
     );
 
-
 }
 
 
-//----------cancel updating an article
+//----------cancel updating an article-----------------------
 
 function cancelUpdateArticle(article_id) {
     $("#update_article").hide();
@@ -207,7 +171,7 @@ function cancelUpdateArticle(article_id) {
     $("#write_article_button").show()
 }
 
-//-----------delete an article
+//-----------delete an article---------------------------
 function  deleteArticle(article_id) {
     $.ajax({
         type:"GET",

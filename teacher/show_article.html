@@ -7,13 +7,13 @@
     <title>浙江大学软件教学管理系统</title>
     <link href="../bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/header.css">
-    <link rel="stylesheet" href="../css/stu_learn.css">
 
 
     <link rel="stylesheet" href="css/show_article.css">
     <link rel="stylesheet" href="css/add_TA.css">
     <link rel="stylesheet" href="css/add_stu.css">
     <link rel="stylesheet" href="css/class_manage.css">
+    <link rel="stylesheet" href="css/courseware.css">
 
     <!--以下两个样式：文章区用到的样式-->
     <link rel="stylesheet" href="../administrator/w3.css">
@@ -36,7 +36,7 @@
                 <ul  class="nav nav-pills nav-stacked">
                     <li class="active"><a href="#notice" data-toggle="tab">公告</a></li>
                     <li class="tab-style"><a href="#article" data-toggle="tab" onclick="articleUpdate()">最新文章</a></li>
-                    <li class="tab-style"><a href="#courseware" data-toggle="tab">课程资料</a></li>
+                    <li class="tab-style"><a href="#courseware_pane" data-toggle="tab">课程资料</a></li>
                     <li class="tab-style"><a href="#report" data-toggle="tab">报告与文档</a></li>
                     <li class="tab-style"><a href="#class" data-toggle="tab" onclick="show_class()">班级信息管理</a></li>
                     <li  class="tab-style"><a href="#stuInfo" data-toggle="tab"  onclick="showStuInfo()">学生信息</a></li>
@@ -158,19 +158,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <!--<ul class="pagination pagination-sm">-->
                     <!--<li><a id="page_first" class="active" href="#">&laquo;第一页</a></li>-->
                     <!--<li><a id="page_one" href="#test">1</a></li>-->
@@ -182,7 +169,7 @@
                 <!--</ul>-->
             <!--</div>-->
 
-            <div id="courseware" class="tab-pane">
+            <div id="courseware_pane" class="tab-pane">
 
                 <select class="form-control">
                     <option>课件</option>
@@ -198,27 +185,27 @@
 
 
 
-            <div class="titleBox" id="ppt_btn">
+                    <div class="titleBox" id="ppt_btn">
                         <span class="glyphicon glyphicon-menu-down"></span><span class="f-title">课件</span>
                     </div>
 
                     <div id="course_ppt" class="datum-content">
                         <div class="each_datum">
-                            <a>第一章ppt</a>
+                            <a class="x-blue">第一章ppt</a>
                             <div class="download-btn">
-                                <a> <span class="glyphicon glyphicon-download"></span> </a>
+                                <a class="x-blue"> <span class="glyphicon glyphicon-download"></span> </a>
                             </div>
                         </div>
                         <div class="each_datum">
-                            <a>第二章ppt</a>
+                            <a class="x-blue">第二章ppt</a>
                             <div class="download-btn">
-                                <a><span class="glyphicon glyphicon-download"></span></a>
+                                <a class="x-blue"><span class="glyphicon glyphicon-download"></span></a>
                             </div>
                         </div>
                         <div class="each_datum">
-                            <a>第三章ppt</a>
+                            <a class="x-blue">第三章ppt</a>
                             <div class="download-btn">
-                                <a><span class="glyphicon glyphicon-download"></span></a>
+                                <a class="x-blue"><span class="glyphicon glyphicon-download"></span></a>
                             </div>
                         </div>
                     </div>
@@ -237,7 +224,7 @@
                     <div class="titleBox">
                         <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">教学音频</span>
                     </div>
-            </div>
+                </div>
             <div id="report" class="tab-pane">
             </div>
             <div id="exercise" class="tab-pane">
@@ -282,9 +269,9 @@
 <!--以下是zhang shichao导入的js文件-->
 <script src="js/add_TA.js"></script>
 <script src="js/add_stu.js"></script>
-<!--<script src="../administrator/administrator.js"></script>-->
 <script src="js/add_article.js"></script>
 <script src="js/class_manage.js"></script>
+<script src="js/courseware.js"></script>
 
 
 
