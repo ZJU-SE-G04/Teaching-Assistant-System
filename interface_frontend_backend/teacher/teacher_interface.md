@@ -40,6 +40,7 @@
 |删除文章|delete_article.php?article_id=xxx|删除成功：{"if_success":1,error_message:"null"};删除失败：{"if_success":0,"error_messgae":"xxx"}|成功或失败返回的是整数1或0|是
 |发布文章|add_article.php?lesson_id=xxx&id=xxx&title=xxx&content=xxx|发布成功：{"if_success":1,error_message:"null"};发布失败：{"if_success":0,"error_messgae":"xxx"}|成功或失败返回的是整数1或0,时间由后端获取|是
 |修改文章|update_article.php?article_id=xxx&title=xxx&content=xxx|修改成功：{"if_success":1,error_message:"null"};修改失败：{"if_success":0,"error_messgae":"xxx"}|成功或失败返回的是整数1或0,时间由后端获取|是
+|显示文章详情和评论区一级评论内容|show_article_detail.php?article_id=xxx|{"article_content":"xxx","comment_number":"xxx","comment":[{"id":"xxx","floor":"xxx","user_name":"xxx","time":"xxx","content":"xxx"}{"id":"xxx","floor":"xxx","user_name":"xxx","time":"xxx","content":"xxx"}......]}|article_content是文章的所有内容,comment_number是评论楼层数目,id是评论(一级)人id,user_name是评论(一级)人用户名,content是评论内容|否
 
 
 ### To be continued……
