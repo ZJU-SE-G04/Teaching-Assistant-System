@@ -1,0 +1,52 @@
+@import "stu_general.css";
+
+input {
+    width: 40%;
+}
+label.error {
+    color: red;
+    margin-left: 10px;
+}
+
+/*修改密码页面*/
+#modify_pass_pane {
+}
+#modify_pass_pane input {
+    width: 40%;
+    padding: 3px;
+}
+
+#mod_pass_submit_btn {
+    /*margin-top: 5px;*/
+}
+
+/***********************************************************************************************/
+/******************************************组队区*********************************************/
+/***********************************************************************************************/
+
+/*创建队伍页面*/
+
+#create_team_pane input {
+    width: 40%;
+}
+
+.form-field {
+    margin: 20px 0 20px 0;
+}
+
+#create_team_btn {
+    /*margin-top: 5px;*/
+}
+
+/*加入队伍页面*/
+#join_team_pane {
+    width: 80%;
+}
+
+.f-prompt {
+    font-size: 20px;
+}
+
+#join_team_by_pass_pane input {
+    width: 40%;
+}

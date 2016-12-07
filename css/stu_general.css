@@ -1,0 +1,136 @@
+/*---------------------------通用------------------------------*/
+body {
+    /*font-family: "Arial","Hiragino Sans GB","Microsoft YaHei", 微软雅黑, "Helvetica", "sans-serif";*/
+}
+
+/*样式清零*/
+input, button, select, textarea {
+    outline: none
+}
+
+textarea {
+    resize: none;
+    border: 1px solid #d9dde1;
+    padding: 10px 10px;
+    width: 100%;
+    min-height:100px;
+}
+
+
+a, button {
+    cursor: pointer;
+}
+
+.f-title {
+    font-size: 15px;
+    line-height: 1.66;
+    font-family: "Arial", "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, "Helvetica", "sans-serif";
+}
+
+.bottom-line {
+    border-bottom: #eee 1px solid;
+}
+
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+}
+
+.inline {
+    display: inline-block;
+}
+
+.block {
+    display: block;
+}
+
+.divider-color {
+    color: #d9dde1;
+}
+
+/*#container {*/
+/*width: 700px;*/
+/*height: auto;*/
+/*}*/
+
+.ueditor {
+    margin-top: 30px;
+    height: 200px;
+}
+
+/*input {*/
+    /*-webkit-box-sizing: content-box;*/
+    /*-moz-box-sizing: content-box;*/
+    /*box-sizing: content-box;*/
+/*}*/
+/*input:focus {*/
+    /*border: 1px solid #337AB7;*/
+
+/*}*/
+
+.nick-color {
+    color: #337AA7;
+}
+
+/**按钮**/
+
+.u-btn {
+    height: 34px;
+    margin-left: 10px;
+    border: 1px #337AB9 solid;
+    border-radius: 3px;
+    font-size: 14px;
+    line-height: 26px;
+    text-align: center;
+    padding: 3px 18px;
+    display: inline-block;
+}
+
+.btn-whiteBlue {
+    background-color: #fff;
+    color: #337AB9;
+}
+
+.p-btn {
+    background-color: #337ab9;
+    color: #fff;
+    height: 34px;
+    border: 1px #337AB9 solid;
+    border-radius: 3px;
+    font-size: 14px;
+    line-height: 26px;
+    text-align: center;
+    padding: 3px 18px;
+    display: inline-block;
+}
+
+
+.p-btn-sm {
+    background-color: #337ab9;
+    color: #fff;
+    height: 25px;
+    border: 1px #337AB9 solid;
+    border-radius: 3px;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    padding: 2px 8px;
+    display: inline-block;
+
+}
+
+
+
+.field-label-margin {
+    margin: 5px 0px 5px 0;
+}
+
+.f-sign {
+    font-weight: bold;
+    color: #cc3333;
+    padding-right: 5px;
+    vertical-align: middle;
+}
