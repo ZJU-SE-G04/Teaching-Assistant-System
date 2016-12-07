@@ -60,7 +60,7 @@
                                     <span class="x-time"></span>
                                 </div>
                                 <div class="col-md-2 col-xs-4">
-                                    <span>作者:&nbsp;&nbsp;</span><span class="x-commentNum "></span>
+                                    <span>作者:&nbsp;&nbsp;</span><span class="x-author"></span>
                                 </div>
                                 <div class="col-md-1 col-xs-4" ><span class="glyphicon glyphicon-trash x-trash" ></span></div>
 
@@ -68,6 +68,7 @@
                         </div>
                     </div>  <!--loop end-->
                 </div>
+
 
 
                 <div id="articleDetail">
@@ -87,20 +88,100 @@
                         </small></h5><br>
                         <p class="x-body"></p>
                         <hr>
-                        <div class="panel-group" id="commentLoop">
-                            <div class="panel panel-default old w3-hover-shadow">  <!--loop start-->
-                                <div class="panel-heading">
-                                    <div class="row">
-                                        <div class="col-md-1">第&nbsp;<strong class="x-floor"></strong>&nbsp;楼</div>
-                                        <div class="col-md-2"><strong class="x-floorMaster"></strong><span class="is-reply"> 回复 第&nbsp;<strong class="x-re_floor"></strong>&nbsp;楼</span></div>
-                                        <div class="col-md-2"><span class="x-time"></span></div>
-                                        <div class="col-md-1 col-md-offset-6"><span class="glyphicon glyphicon-trash w3-large clickable"></span></div>
+                        <!--<div class="panel-group" id="commentLoop">-->
+                            <!--<div class="panel panel-default old w3-hover-shadow">  &lt;!&ndash;loop start&ndash;&gt;-->
+                                <!--<div class="panel-heading">-->
+                                    <!--<div class="row">-->
+                                        <!--<div class="col-md-1">第&nbsp;<strong class="x-floor"></strong>&nbsp;楼</div>-->
+                                        <!--<div class="col-md-2"><strong class="x-floorMaster"></strong><span class="is-reply"> 回复 第&nbsp;<strong class="x-re_floor"></strong>&nbsp;楼</span></div>-->
+                                        <!--<div class="col-md-2"><span class="x-time"></span></div>-->
+                                        <!--<div class="col-md-1 col-md-offset-6"><span class="glyphicon glyphicon-trash w3-large clickable"></span></div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="panel-body"><p class="x-content"></p></div>-->
+                            <!--</div>  &lt;!&ndash;loop end&ndash;&gt;-->
+                        <!--</div>-->
+                    </div>
+
+                    <!--帖子详情页面-->
+                    <div id="post_detail_page">
+                        <p class="f-post-comment-num">共<span class="y-comment-number"></span>回复</p>
+                        <div class="posts-list-container">
+                            <ul class="posts-list-ul">
+                                <li class="posts-list-item" id="">
+                                    <div class="">
+                                        <div class="posts-list-item-title">同时学两种语言会容易混淆吗？</div>
+                                        <div class="posts-list-item-btm">
+                                            <span class="posts-list-item-nick inline y-name">章世超</span>
+                                            &nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;
+                                            <span class="posts-list-item-btm">时间：2016-11-09 19:38</span>
+                                            <a class="post-comment-btn right">评论</a>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="panel-body"><p class="x-content"></p></div>
-                            </div>  <!--loop end-->
+                                </li>
+                                <li class="posts-list-item old">
+                                    <div class="">
+                                        <div class="posts-list-item-title">坑，什么叫用linux自己可以搞定，，，我用vmware装的ubantu..很搞不定</div>
+                                        <div class="posts-list-item-btm">
+
+                                            <span class="posts-list-item-nick">游客10001</span>
+
+                                            &nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;
+                                            <span class="posts-list-item-date">时间: 2016-11-09 19:40</span>
+                                            <a class="post-comment-btn right">评论</a>
+                                        </div>
+                                        <div class="post-comments-area">
+                                            <div class="post-comment-area-body">
+                                                <div class="post-comment">
+                                                    <div class="post-comment-content">谢谢老师</div>
+                                                    <div class="posts-list-item-btm">
+                                                        <span class="nick-color">野子</span>
+                                                        &nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;
+                                                        <span class="posts-list-item-date">时间: 2016-11-09 19:40</span>
+                                                        <a class="post-comment-btn right">回复</a>
+                                                    </div>
+                                                </div>
+                                                <div class="post-comment">
+                                                    <div class="post-comment-content">原来如此,我懂了</div>
+                                                    <div class="posts-list-item-btm">
+                                                        <span class="nick-color">天马行空</span>
+                                                        &nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;
+                                                        <span class="posts-list-item-date">时间: 2016-11-09 19:40</span>
+                                                        <a class="post-comment-btn right">回复</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="add-post-comment">
+                                                添加评论...
+                                                <!--<textarea name="post-comment" id="" cols="30" rows="10" placeholder="添加评论..."></textarea>-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="posts-list-item">
+                                    <div class="">
+                                        <div class="posts-list-item-title">是有区别，但是也有联系。各有各的好处!</div>
+                                        <div class="posts-list-item-btm">
+
+                                            <span class="posts-list-item-nick">游客10000</span>
+
+                                            &nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;
+                                            <span class="posts-list-item-date">时间: 2016-11-09 19:40</span>
+                                            <a class="post-comment-btn right">评论</a>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+
+                            <div>
+                                <script id="ueditor_container" name="content" type="text/plain" class="ueditor"></script>
+                            </div>
+                            <button class="p-btn">发表回复</button>
                         </div>
                     </div>
+
+
                     </div>
 
                 <div id="write_article">
@@ -158,16 +239,7 @@
 
 
 
-                <!--<ul class="pagination pagination-sm">-->
-                    <!--<li><a id="page_first" class="active" href="#">&laquo;第一页</a></li>-->
-                    <!--<li><a id="page_one" href="#test">1</a></li>-->
-                    <!--<li><a id="page_two" href="#">2</a></li>-->
-                    <!--<li><a id="page_three" href="#">3</a></li>-->
-                    <!--<li><a id="page_four" href="#">4</a></li>-->
-                    <!--<li><a id="page_five" href="#">5</a></li>-->
-                    <!--<li class="disabled"><a id="page_last" href="#">最后一页&raquo;</a></li>-->
-                <!--</ul>-->
-            <!--</div>-->
+
 
             <div id="courseware_pane" class="tab-pane">
 
