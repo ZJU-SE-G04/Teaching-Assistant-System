@@ -124,13 +124,13 @@ input:focus {
 
 /****************************************侧边导航栏**************************/
 
-#tabs > ul > li > ul {
-    display: none;
-}
+/*#tabs > ul > li > ul {*/
+    /*display: none;*/
+/*}*/
 
-#tabs > ul > li:hover ul {
-    display: block;
-}
+/*#tabs > ul > li:hover ul {*/
+    /*display: block;*/
+/*}*/
 
 /*#tabs>ul>li:hover ul li a:visited {*/
 /*background-color: #0000cc;*/
@@ -482,33 +482,3 @@ input[name="post_title"] {
     margin: 5px 0px 5px 0;
 }
 
-/***********************************************************************************************/
-/******************************************组队区*********************************************/
-/***********************************************************************************************/
-
-/*创建队伍页面*/
-
-#create_team_pane input {
-    width: 40%;
-}
-
-.form-field {
-    margin: 20px 0 20px 0;
-}
-
-#create_team_btn {
-    margin-top: 10px;
-}
-
-/*加入队伍页面*/
-#join_team_pane {
-    width: 80%;
-}
-
-.f-prompt {
-    font-size: 20px;
-}
-
-#join_team_by_pass_pane input {
-    width: 40%;
-}

@@ -264,9 +264,9 @@ $(document).ready(
         //设置初始状态
 
         //讨论区
-        $("#discuss_home_page").show();
+        $("#discuss_home_page").hide();
         $("#issue_post_page").hide();
-        $("#posts_border_page").hide();
+        $("#posts_border_page").show();
         $("#post_detail_page").hide();
 
 

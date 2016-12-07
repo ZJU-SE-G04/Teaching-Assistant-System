@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>浙江大学软件教学管理系统</title>
     <link href="../bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://vjs.zencdn.net/5.8/video-js.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/stu_learn.css">
 
     <script type="text/javascript" src="../ueditor-1.4.3.3-for-release/ueditor.config.js"></script>
     <script type="text/javascript" src="../ueditor-1.4.3.3-for-release/ueditor.all.js"></script>
+
 </head>
 <body>
 
@@ -104,44 +106,39 @@
                 </div>
             </div>
             <div id="courseware_pane" class="tab-pane">
-                <div class="titleBox" id="ppt_btn">
-                    <span class="glyphicon glyphicon-menu-down"></span><span class="f-title">课件</span>
-                </div>
+                <div id="courseware_nonpreview_area">
+                    <div class="titleBox" id="ppt_ddMenu_title">
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-title">课件</span>
+                    </div>
 
-                <div id="course_ppt" class="datum-content">
-                    <div class="each_datum">
-                        <a>第一章ppt</a>
-                        <div class="download-btn">
-                            <a> <span class="glyphicon glyphicon-download"></span> </a>
-                        </div>
+                    <div id="course_ppts_list" class="courseware_list">
+                        <!--<div class="each_datum">-->
+                        <!--<a>第一章ppt</a>-->
+                        <!--<div class="download-btn">-->
+                        <!--<a> <span class="glyphicon glyphicon-download"></span> </a>-->
+                        <!--</div>-->
+                        <!--</div>-->
                     </div>
-                    <div class="each_datum">
-                        <a>第二章ppt</a>
-                        <div class="download-btn">
-                            <a><span class="glyphicon glyphicon-download"></span></a>
-                        </div>
+                    <div class="titleBox" id="tpl_ddMenu_title">
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">模板</span>
                     </div>
-                    <div class="each_datum">
-                        <a>第三章ppt</a>
-                        <div class="download-btn">
-                            <a><span class="glyphicon glyphicon-download"></span></a>
-                        </div>
+                    <div id="tpls_list" class="courseware_list"></div>
+                    <div class="titleBox" id="refMaterial_ddMenu_title">
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">参考资料</span>
                     </div>
-                </div>
-                <div class="titleBox">
-                    <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">模板</span>
-                </div>
-                <div class="titleBox">
-                    <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">参考资料</span>
-                </div>
-                <div class="titleBox">
-                    <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">以往优秀作业</span>
-                </div>
-                <div class="titleBox">
-                    <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">教学视频</span>
-                </div>
-                <div class="titleBox">
-                    <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">教学音频</span>
+                    <div id="refMaterial_list" class="courseware_list"></div>
+                    <div class="titleBox" id="past_hw_ddMenu_title">
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">以往优秀作业</span>
+                    </div>
+                    <div id="past_hw_list" class="courseware_list"></div>
+                    <div class="titleBox" id="teach_video_ddMenu_title">
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">教学视频</span>
+                    </div>
+                    <div id="teach_video_list" class="courseware_list"></div>
+                    <div class="titleBox" id="teach_audio_ddMenu_title">
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">教学音频</span>
+                    </div>
+                    <div id="teach_audio_list" class="courseware_list"></div>
                 </div>
             </div>
             <div id="article_pane" class="tab-pane">
@@ -262,6 +259,7 @@
                     </div>
                 </div>
 
+                <!--帖子详情页面-->
                 <div id="post_detail_page">
 
                     <div class="back_text">
@@ -281,7 +279,6 @@
                             <span class="f-post-author">张士超</span>&nbsp;&nbsp;|&nbsp;&nbsp; <span
                                 class="f-post-date">2016-11-09 19:38</span>
                         </div>
-                        <!--<button class="p-btn left">回复</button>-->
                     </div>
 
                     <p class="f-post-comment-num">共100回复</p>
@@ -458,6 +455,15 @@
         </div>
     </div>
 </div>
+<!--<video id="my-video" class="video-js" controls preload="auto" width="640" height="264"-->
+<!--poster="MY_VIDEO_POSTER.jpg" data-setup="{}">-->
+<!--<source src="../fushanxing.mp4">-->
+<!--&lt;!&ndash;<source src=../釜山行.webm" type='video/webm'>&ndash;&gt;-->
+<!--<p class="vjs-no-js">-->
+<!--To view this video please enable JavaScript, and consider upgrading to a web browser that-->
+<!--<a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>-->
+<!--</p>-->
+<!--</video>-->
 
 <script src="../jquery/jquery-3.1.1.js"></script>
 <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
@@ -468,5 +474,6 @@
     var ue = UE.getEditor('container');
     var uec = UE.getEditor('ueditor_container')
 </script>
+<script src="http://vjs.zencdn.net/5.8.8/video.js"></script>
 </body>
 </html>
