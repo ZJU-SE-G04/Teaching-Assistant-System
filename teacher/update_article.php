@@ -1,34 +1,29 @@
 <?php
-	//尚未测试
 	include 'connect.php';
-	$lesson_id=$_GET["lesson_id"];//获取班级号
+
 
 	$su=1;
 	$erm='null';
 
 	for($i=0;$i<1;$i++){
-		$id=$_GET['id'];
-		$id='111111';
-		if($id==null){
-			$su=0;
-			$erm='发帖人ID不能为空';
-			break;
-		}
+		$old_id=(int)$_GET['article_id'];
+
 		$title=$_GET['title'];
+		//$title='测试时间';
 		if($title==null){
 			$su=0;
 			$erm='请输入文章标题';
 			break;
 		}
 		$content=$_GET['content'];
+		//$content='时间应该是对的';
 		if($content==null){
 			$su=0;
 			$erm='文章内容不能为空';
 			break;
 		}
-		$datetime=date('Y-m-d H:i:s');
 
-		$result=$conn->query('insert into article_table values(null,"'.$lesson_id.'","'.$id.'","'.$title.'","'.$content.'","'.$datetime.'");');
+		$result=$conn->query('update article_table set title="'.$title.'",content="'.$content.'"where article_id='.$old_id.';');
 		
 		if($result==null){
 			$su=0;
