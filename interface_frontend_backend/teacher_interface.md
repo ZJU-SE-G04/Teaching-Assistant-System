@@ -42,7 +42,7 @@
 |修改文章|update_article.php?article_id=xxx&title=xxx&content=xxx|修改成功：{"if_success":1,error_message:"null"};修改失败：{"if_success":0,"error_messgae":"xxx"}|成功或失败返回的是整数1或0,时间由后端获取|是
 |显示文章详情和评论区一级评论内容|show_article_detail.php?article_id=xxx|{"article_content":"xxx","comment_number":"xxx","comment":[{"id":"xxx","floor":"xxx","user_name":"xxx","time":"xxx","content":"xxx"}{"id":"xxx","floor":"xxx","user_name":"xxx","time":"xxx","content":"xxx"}......]}|article_content是文章的所有内容,comment_number是评论楼层数目,id是评论(一级)人id,user_name是评论(一级)人用户名,content是评论内容|否
 |显示二级评论区内容|show_second_comment.php?article_id=xxx&floor=xxx|{"second_comment_number":"xxx","second_comment":[{"time":"xxx","id":"xxx","user_name":"xxx","re_id":"xxx","re_user_name":"xxx","content":"xxx","re_floor":"xxx"}{"time":"xxx","id":"xxx","user_name":"xxx","re_id":"xxx","re_user_name":"xxx","content":"xxx","re_floor":"xxx"}...]}|id是回复人id,re_id是被回复人id,user_name是回复人姓名,re_user_name是被回复人姓名|否
-
+|删除一条二级评论区内容|delete_second_comment.php?article_id=xxx&floor=xxx&re_floor=xxx|成功:{"if_success":1,"error_message":"null"},失败成功::{"if_success":0,"error_message":"xxx"}|失败要有具体错误信息,成功或失败返回的是整数1或0,时间由后端获取|否
 ### To be continued……
 - 其余尚未完成或者还未定型
 

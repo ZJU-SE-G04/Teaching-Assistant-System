@@ -330,7 +330,7 @@ function showSecondComment(article_id,floor) {
     var jsonObj=secondComment;
     
 
-    var posts_list_item=$(".posts-list-ul").find("#"+floor);
+    var posts_list_item=$(".posts-list-ul").find("#floor"+floor);
     var post_comment_area_body=posts_list_item.find(".post-comment-area-body");
     for (var i in secondComment["second_comment"]) {
         var tmp = post_comment_area_body.children(".old").clone().removeClass("old").addClass("new").show();
@@ -339,6 +339,7 @@ function showSecondComment(article_id,floor) {
         tmp.find(".x-name").html(x.user_name);
         tmp.find(".x-time").html(x.time);
         tmp.find(".x-content").html(x.content);
+        tmp.attr("id","floor"+floor+"re_floor"+x.re_floor);
         if(x.re_user_name!="NULL") {
             tmp.find(".x-re-name").html(x.re_user_name);
         }
@@ -369,23 +370,22 @@ function showSecondComment(article_id,floor) {
     });
 }
 
-
+//---------删除一个楼中楼回复,实现局部刷新-------------
 function deleteSecondComment(article_id,floor,re_floor) {
+     // $(".posts-list-ul").find("#floor"+floor).find("#floor"+floor+"re_floor"+re_floor).hide();
 
-    $(".posts-list-ul").find("#floor"+floor).hide();
-
-    // $.ajax({
-    //    type:"GET",
-    //     url:"delete_second_comment.php?article_id="+article_id+"&floor="+floor+"&re_floor="+re_floor,
-    //     success:function (result) {
-    //         if(result["if_success"]==1){
-    //             $x
-    //         }
-    //         else{
-    //             window.alert(result["err_message"]);
-    //         }
-    //     }
-    // });
+    $.ajax({
+       type:"GET",
+        url:"delete_second_comment.php?article_id="+article_id+"&floor="+floor+"&re_floor="+re_floor,
+        success:function (result) {
+            if(result["if_success"]==1){
+                $(".posts-list-ul").find("#floor"+floor).find("#floor"+floor+"re_floor"+re_floor).hide();
+            }
+            else{
+                window.alert(result["err_message"]);
+            }
+        }
+    });
 
 }
 
