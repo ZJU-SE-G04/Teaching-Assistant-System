@@ -41,7 +41,12 @@ function  articleUpdate() {
                 var x = articleRecords[i];
                 var tmp = $("#articleLoop").children(".old").clone().removeClass("old").addClass("new").show();
                 tmp.attr("id", x.article_id);
-                tmp.find(".x-trash").attr("onclick","deleteArticle("+x.article_id+")");
+                if(x.id==user_id) {
+                    tmp.find(".x-trash").attr("onclick", "deleteArticle(" + x.article_id + ")");
+                }
+                else {
+                    tmp.find(".x-trash").hide()
+                }
                 tmp.find(".x-title").html(x.title);
                 tmp.find(".x-contentDigest").html(x.short_content);
                 tmp.find(".x-time").html(x.time);
@@ -285,7 +290,7 @@ var secondComment={
 },
     {
         "time": "2016-11-10 18:06",
-        "id":"3140005555",
+        "id":"111111",
         "user_name":"蒋中正",
         "re_id":"3149998888",
         "re_user_name":"阎锡山",
@@ -320,10 +325,10 @@ function showSecondComment(article_id,floor) {
     
 
     var posts_list_item=$(".posts-list-ul").find("#"+floor);
-    var post_comment_area_body=posts_list_item.find(".post-comment-area-body")
-    for (var i in secondComment) {
+    var post_comment_area_body=posts_list_item.find(".post-comment-area-body");
+    for (var i in secondComment["second_comment"]) {
         var tmp = post_comment_area_body.children(".old").clone().removeClass("old").addClass("new").show();
-        var x=secondComment[i];
+        var x=secondComment["second_comment"][i];
         
         tmp.find(".x-name").html(x.user_name);
         tmp.find(".x-time").html(x.time);
@@ -335,7 +340,10 @@ function showSecondComment(article_id,floor) {
             tmp.find(".x-response").html("");
         }
         if(x.id!=user_id){
-            tmp.find(".x-delete").hide()
+            var x_delete=tmp.find(".x-delete");
+            x_delete.hide()
+            x_delete.attr("onclick","")
+            
         }
         post_comment_area_body.append(tmp);
         

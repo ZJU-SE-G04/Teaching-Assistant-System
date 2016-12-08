@@ -1,5 +1,4 @@
 <?php
-	//尚未测试
 	include 'connect.php';
 	$lesson_id=$_GET["lesson_id"];//获取班级号
 
@@ -8,7 +7,6 @@
 
 	for($i=0;$i<1;$i++){
 		$id=$_GET['id'];
-		$id='111111';
 		if($id==null){
 			$su=0;
 			$erm='发帖人ID不能为空';
