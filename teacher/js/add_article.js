@@ -35,7 +35,8 @@ function  articleUpdate() {
         url:"show_article_list.php?lesson_id="+course_id,
         success:function (result) {
             var articleRecords=result;
-            $("#articleLoop").children(".new").remove();
+            var articleLoop=$("#articleLoop");
+            articleLoop.children(".new").remove();
             for (var i in articleRecords) {
                 var x = articleRecords[i];
                 var tmp = $("#articleLoop").children(".old").clone().removeClass("old").addClass("new").show();
@@ -44,10 +45,10 @@ function  articleUpdate() {
                 tmp.find(".x-title").html(x.title);
                 tmp.find(".x-contentDigest").html(x.short_content);
                 tmp.find(".x-time").html(x.time);
-                tmp.find(".x-commentNum").html(x.user_name);
-                $("#articleLoop").append(tmp);
+                tmp.find(".x-author").html(x.user_name);
+                articleLoop.append(tmp);
             }
-            $("#articleLoop").find(".panel-heading").click(articleShow);  //all heading created
+            articleLoop.find(".panel-heading").click(articleShow);  //all heading created
         }
     });
 }
@@ -180,20 +181,21 @@ var articleDetail = {
             "content": "LZ我要成为你这样的男人 厉害！今年大三 看到你的博客 感觉自己什么都不会！能给点建议吗 比如现在该怎么选择前进的道路 或者 着重学习那些内容呢 现在学校还在上《算法设计》我现在就在算法设计的实验课上 无意间看到你的博客的 还是感觉楼主真的很牛逼啊 楼主大大 给点建议 指点指点明路。"
         },
         {
-            "id": "3140001111",
+            "id": "3140001112",
             "floor": 2,
             "user_name": "神",
             "time": "2016-11-10 18:03",
             "content": "LZ我要成为你这样的男人 厉害！今年大三 看到你的博客 感觉自己什么都不会！能给点建议吗 比如现在该怎么选择前进的道路 或者 着重学习那些内容呢 现在学校还在上《算法设计》我现在就在算法设计的实验课上 无意间看到你的博客的 还是感觉楼主真的很牛逼啊 楼主大大 给点建议 指点指点明路。"
         },
         {
+            "id": "3140001113",
             "floor": 3,
             "user_name": "长者",
             "time": "2016-9-14 18:43",
             "content": "LZ我要成为你这样的男人 厉害！今年大三 看到你的博客 感觉自己什么都不会！能给点建议吗 比如现在该怎么选择前进的道路 或者 着重学习那些内容呢 现在学校还在上《算法设计》我现在就在算法设计的实验课上 无意间看到你的博客的 还是感觉楼主真的很牛逼啊 楼主大大 给点建议 指点指点明路。"
-        },
+        }
     ]
-}
+};
 
 function articleShow() {
     var articleDetail_local=$("#articleDetail");
@@ -204,7 +206,7 @@ function articleShow() {
     var parent=$(this).parent();
     var id =parent.attr("id");
 
-    article_id=id;
+    var article_id=id;
     /*
      $.get("getArticleDetail.php?article_id="+id, function (data) {
      articleDetail = JSON.parse(data);
@@ -221,7 +223,7 @@ function articleShow() {
     articleDetail_local.find(".x-edit").attr("onclick","updateArticle("+id+")");
     articleDetail_local.find(".x-trash").attr("onclick","deleteArticle("+id+")");
     articleDetail_local.find(".x-time").html(time);
-    articleDetail_local.find(".x-body").html(articleDetail["article"]["body"]);
+    articleDetail_local.find(".x-body").html(articleDetail["article_content"]);
 
 
     var post_detail_page=articleDetail_local.find("#post_detail_page");
@@ -240,14 +242,20 @@ function articleShow() {
         tmp.find(".x-name").html(x.user_name);
         tmp.find(".x-time").html(x.time);
         tmp.find(".x-content").html(x.content);
+        tmp.find(".x-comment").attr("onclick","showSecondComment("+article_id+","+x.floor+")");
         tmp.find(".post-comments-area").hide();
+        tmp.attr("id",x.floor);
         posts_list_ul.append(tmp);
     }
-    posts_list_ul.find(".glyphicon-trash").click(deleteComment);
     $("#articleBack").attr("onclick","returnToArticleList()");
 
 
 }
+
+
+
+
+
 
 function deleteComment() {
     var ids = $(this).attr("id");
@@ -265,6 +273,87 @@ function  returnToArticleList() {
 
 }
 
+var secondComment={
+    "second_comment_number":13,
+    "second_comment":[{
+    "time": "2016-11-10 18:03",
+    "id":"3140100000",
+    "user_name":"蒋中正",
+    "re_id":"3149998888",
+    "re_user_name":"阎锡山",
+    "content":"中原大战"
+},
+    {
+        "time": "2016-11-10 18:06",
+        "id":"3140005555",
+        "user_name":"蒋中正",
+        "re_id":"3149998888",
+        "re_user_name":"阎锡山",
+        "content":"中原大战"
+    },
+    {
+        "time": "2016-11-10 18:06",
+        "id":"3140005555",
+        "user_name":"蒋中正",
+        "re_id":"NULL",
+        "re_user_name":"NULL",
+        "content":"中原大战"
+    }
+]
+};
+
+
+
+
+
+function showSecondComment(article_id,floor) {
+    
+    // $.ajax({
+    //     type:"GET",
+    //     url:"show_second_comment.php?article_id="+article_id+"&floor="+floor,
+    //     success:function (result) {
+    //       
+    //     }
+    //    
+    // });
+    var jsonObj=secondComment;
+    
+
+    var posts_list_item=$(".posts-list-ul").find("#"+floor);
+    var post_comment_area_body=posts_list_item.find(".post-comment-area-body")
+    for (var i in secondComment) {
+        var tmp = post_comment_area_body.children(".old").clone().removeClass("old").addClass("new").show();
+        var x=secondComment[i];
+        
+        tmp.find(".x-name").html(x.user_name);
+        tmp.find(".x-time").html(x.time);
+        tmp.find(".x-content").html(x.content);
+        if(x.re_user_name!="NULL") {
+            tmp.find(".x-re-name").html(x.re_user_name);
+        }
+        else {
+            tmp.find(".x-response").html("");
+        }
+        if(x.id!=user_id){
+            tmp.find(".x-delete").hide()
+        }
+        post_comment_area_body.append(tmp);
+        
+        
+    }
+    posts_list_item.find(".post-comments-area").show();
+
+    
+
+    $(".add-post-comment").click(function () {
+        $(this).hide();
+        var comment_area = $("<textarea placeholder='发表评论...'></textarea>").css("margin-bottom", "10px");
+        $(this).after(comment_area);
+        comment_area.focus = true;
+        var submit_btn = $("<button>提交</button>").addClass("p-btn-sm right");
+        comment_area.after(submit_btn);
+    });
+}
 
 
 
@@ -274,13 +363,5 @@ $("a[href='#discuss_area_pane']").click(function () {
     $("#issue_post_page").hide();
 });
 
-$(".add-post-comment").click(function () {
-    $(this).hide();
-    // var comment_area = $("<div></div>").attr("border", "1px solid #d9dde1");
-    var comment_area = $("<textarea placeholder='发表评论...'></textarea>").css("margin-bottom", "10px");
-    $(this).after(comment_area);
-    comment_area.focus = true;
-    var submit_btn = $("<button>提交</button>").addClass("p-btn-sm right");
-    comment_area.after(submit_btn);
-});
+
 

@@ -105,7 +105,7 @@
 
                     <!--帖子详情页面-->
                     <div id="post_detail_page">
-                        <p class="f-post-comment-num">共<span class="x-comment-number"></span>层回复</p>
+                        <p class="f-post-comment-num">评论数:<span class="x-comment-number"></span></p>
                         <div class="posts-list-container">
                             <ul class="posts-list-ul">
                                 <li class="posts-list-item old" id="">
@@ -116,7 +116,7 @@
                                             &nbsp;&nbsp;<span>|
                                         </span>&nbsp;&nbsp;
                                             <span class="posts-list-item-btm x-time">时间：2016-11-09 19:38</span>
-                                            <a class="post-comment-btn right">评论</a>
+                                            <a class="post-comment-btn right x-comment">评论</a>
                                             <span class="posts-list-item-nick right">#<span class="x-floor"></span>楼</span>
 
                                         </div>
@@ -124,12 +124,17 @@
                                     <div class="post-comments-area">
                                         <div class="post-comment-area-body">
                                             <div class="post-comment old">
-                                                <div class="post-comment-content">XXX</div>
+                                                <div class="post-comment-content x-content"></div>
                                                 <div class="posts-list-item-btm">
-                                                    <span class="nick-color">野子</span>
+                                                    <span class="nick-color x-name"></span><span class="x-response">&nbsp;回复&nbsp;</span><span class="nick-color x-re-name"></span>
                                                     &nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;
-                                                    <span class="posts-list-item-date">时间: 2016-11-09 19:40</span>
-                                                    <a class="post-comment-btn right">回复</a>
+                                                    <span class="posts-list-item-date x-time">
+                                                        <!--时间: 2016-11-09 19:40-->
+                                                    </span>
+                                                    <div class="right">
+                                                    <a class="glyphicon glyphicon-trash x-delete"></a>
+                                                    <span class="x-delete">|</span>
+                                                    <a class="post-comment-btn">回复</a></div>
                                                 </div>
                                             </div>
                                         </div>
