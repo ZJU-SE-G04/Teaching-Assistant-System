@@ -179,7 +179,7 @@ var articleDetail = {
     "comment_number":33,
     "comment": [
         {
-            "id": "3140001111",
+            "id": "111111",
             "floor": 1,
             "user_name": "小明",
             "time": "2016-11-10 18:03",
@@ -250,22 +250,40 @@ function articleShow() {
         tmp.find(".x-comment").attr("onclick","showSecondComment("+article_id+","+x.floor+")");
         tmp.find(".post-comments-area").hide();
         tmp.attr("id","floor"+x.floor);
+
+        if(user_id!=x.id){
+            tmp.find(".x-first-delete").hide();
+        }
+        else {
+            tmp.find(".glyphicon").attr("onclick", "deleteComment(" + article_id + "," + x.floor + ")");
+        }
         posts_list_ul.append(tmp);
     }
     $("#articleBack").attr("onclick","returnToArticleList()");
-
 
 }
 
 
 
+class_id
 
 
 
-function deleteComment() {
-    var ids = $(this).attr("id");
-    $.get("deleteArticleComment.php?"+ids);
-    $(this).parents(".panel").slideUp(function () { $(this).remove() });
+//------------ 删除一级评论
+
+function deleteComment(article_id,floor) {
+    $(".posts-list-ul").find("#floor"+floor).hide();
+    
+    $.ajax({
+        type:"GET",
+        url:"delete_comment.php?article_id="+article_id+"&floor="+floor,
+        success:function (result) {
+            if(result["if_success"]==0){
+                window.alert(result["error_message"]);
+            }
+        }
+    });
+
 }
 
 
@@ -307,8 +325,6 @@ var secondComment={
         "re_user_name":"NULL",
         "content":"中原大战",
         "re_floor":3
-
-
     }
 ]
 };
@@ -327,8 +343,7 @@ function showSecondComment(article_id,floor) {
     //     }
     //    
     // });
-    var jsonObj=secondComment;
-    
+
 
     var posts_list_item=$(".posts-list-ul").find("#floor"+floor);
     var post_comment_area_body=posts_list_item.find(".post-comment-area-body");
@@ -366,13 +381,14 @@ function showSecondComment(article_id,floor) {
         $(this).after(comment_area);
         comment_area.focus = true;
         var submit_btn = $("<button>提交</button>").addClass("p-btn-sm right");
+        // submit_btn.attr("onclick","add_second_comment("+article_id+","+floor+")");
         comment_area.after(submit_btn);
     });
 }
 
 //---------删除一个楼中楼回复,实现局部刷新-------------
 function deleteSecondComment(article_id,floor,re_floor) {
-     // $(".posts-list-ul").find("#floor"+floor).find("#floor"+floor+"re_floor"+re_floor).hide();
+    $(".posts-list-ul").find("#floor"+floor).find("#floor"+floor+"re_floor"+re_floor).hide();
 
     $.ajax({
        type:"GET",
@@ -389,4 +405,7 @@ function deleteSecondComment(article_id,floor,re_floor) {
 
 }
 
+//-----------插入二级回复-----------
+function add_second_comment(article_id,floor) {
 
+}
