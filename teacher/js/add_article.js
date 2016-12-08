@@ -39,7 +39,7 @@ function  articleUpdate() {
             articleLoop.children(".new").remove();
             for (var i in articleRecords) {
                 var x = articleRecords[i];
-                var tmp = $("#articleLoop").children(".old").clone().removeClass("old").addClass("new").show();
+                var tmp = articleLoop.children(".old").clone().removeClass("old").addClass("new").show();
                 tmp.attr("id", x.article_id);
                 if(x.id==user_id) {
                     tmp.find(".x-trash").attr("onclick", "deleteArticle(" + x.article_id + ")");
@@ -235,7 +235,7 @@ function articleShow() {
     post_detail_page.find(".x-comment-number").text(articleDetail["comment_number"]);
 
 
-    var posts_list_ul=post_detail_page.find(".posts-list-ul")
+    var posts_list_ul=post_detail_page.find(".posts-list-ul");
         posts_list_ul.children(".new").remove();
     for (var i in articleDetail["comment"]) {
         var x = articleDetail["comment"][i];
@@ -249,7 +249,7 @@ function articleShow() {
         tmp.find(".x-content").html(x.content);
         tmp.find(".x-comment").attr("onclick","showSecondComment("+article_id+","+x.floor+")");
         tmp.find(".post-comments-area").hide();
-        tmp.attr("id",x.floor);
+        tmp.attr("id","floor"+x.floor);
         posts_list_ul.append(tmp);
     }
     $("#articleBack").attr("onclick","returnToArticleList()");
@@ -286,7 +286,8 @@ var secondComment={
     "user_name":"蒋中正",
     "re_id":"3149998888",
     "re_user_name":"阎锡山",
-    "content":"中原大战"
+    "content":"中原大战",
+        "re_floor":1
 },
     {
         "time": "2016-11-10 18:06",
@@ -294,7 +295,9 @@ var secondComment={
         "user_name":"蒋中正",
         "re_id":"3149998888",
         "re_user_name":"阎锡山",
-        "content":"中原大战"
+        "content":"中原大战",
+        "re_floor":2
+
     },
     {
         "time": "2016-11-10 18:06",
@@ -302,7 +305,10 @@ var secondComment={
         "user_name":"蒋中正",
         "re_id":"NULL",
         "re_user_name":"NULL",
-        "content":"中原大战"
+        "content":"中原大战",
+        "re_floor":3
+
+
     }
 ]
 };
@@ -340,10 +346,10 @@ function showSecondComment(article_id,floor) {
             tmp.find(".x-response").html("");
         }
         if(x.id!=user_id){
-            var x_delete=tmp.find(".x-delete");
-            x_delete.hide()
-            x_delete.attr("onclick","")
-            
+           tmp.find(".x-delete").hide();
+        }
+        else {
+            tmp.find(".x-delete").attr("onclick","deleteSecondComment("+article_id+","+floor+","+x.re_floor+")");
         }
         post_comment_area_body.append(tmp);
         
@@ -364,12 +370,23 @@ function showSecondComment(article_id,floor) {
 }
 
 
+function deleteSecondComment(article_id,floor,re_floor) {
 
-//显示讨论区主界面
-$("a[href='#discuss_area_pane']").click(function () {
-    $("#discuss_home_page").show();
-    $("#issue_post_page").hide();
-});
+    $(".posts-list-ul").find("#floor"+floor).hide();
 
+    // $.ajax({
+    //    type:"GET",
+    //     url:"delete_second_comment.php?article_id="+article_id+"&floor="+floor+"&re_floor="+re_floor,
+    //     success:function (result) {
+    //         if(result["if_success"]==1){
+    //             $x
+    //         }
+    //         else{
+    //             window.alert(result["err_message"]);
+    //         }
+    //     }
+    // });
+
+}
 
 
