@@ -50,3 +50,16 @@ label.error {
 #join_team_by_pass_pane input {
     width: 40%;
 }
+
+/********************************处理入队申请页面**************************/
+.dealwith-team-apply-item {
+    border: 1px black solid;
+    border-top: #337ab7 3px solid;
+    /*border-radius: 4px;*/
+    padding: 3px 5px;
+    margin-bottom: 8px;
+    overflow: hidden;
+}
+
+.dealwith-team-apply-item span {
+}
