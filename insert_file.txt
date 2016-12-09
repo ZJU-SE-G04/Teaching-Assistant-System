@@ -98,9 +98,9 @@ insert into courseware_table values(null,'ABCDE1','实验1模板','www.baidu.com
 insert into courseware_table values(null,'ABCDE1','实验1参考','www.baidu.com','参考资料');
 insert into courseware_table values(null,'ABCDE1','实验1优秀报告','www.baidu.com','以往优秀作业');
 insert into courseware_table values(null,'ABCDE1','实验2优秀报告','www.baidu.com','以往优秀作业');
-insert into courseware_table values(null,'ABCDE1','第一堂课视频','www.baidu.com','教学视频');
+insert into courseware_table values(null,'ABCDE1','第一堂课视频','http://localhost/fushanxing.mp4','教学视频');
 insert into courseware_table values(null,'ABCDE1','实验1讲解','www.baidu.com','教学音频');
-insert into courseware_table values(null,'ABCDE1','实验1视频','www.baidu.com','教学视频');
+insert into courseware_table values(null,'ABCDE1','实验1视频','http://localhost/Your Name.mp4','教学视频');
 insert into courseware_table values(null,'ABCDE2','第一次课程PPT','www.baidu.com','课件');
 
 
