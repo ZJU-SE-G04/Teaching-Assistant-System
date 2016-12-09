@@ -11,8 +11,8 @@ var course_name="软件工程管理";
 var course_id="ABCDE1";
 var class_time="周二345";
 
-var user_name="zero";
-var user_id="3140100000";
+var user_name="Lis";
+var user_id="111111";
 
 //--------- 显示当前课程的所有班级---------
 

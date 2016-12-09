@@ -52,22 +52,25 @@
                     <div class="panel panel-default old w3-hover-shadow w3-animate-zoom">  <!--loop start-->
                         <div class="panel-heading w3-hover-grey clickable">
                             <span class="glyphicon glyphicon-file"></span>&nbsp;<strong class="x-title"></strong>
-                        </div>
+                    </div>
                         <div class="panel-body"><p class="x-contentDigest"></p></div>
                         <div class="panel-footer">
                             <div class="row">
-                                <div class="col-md-2 col-md-offset-7 col-xs-6 col-xs-offset-2">
+                                <div class="col-md-1 right" ><a class="glyphicon glyphicon-trash x-trash" ></a></div>
+
+                                <div class="col-md-4 left">
+                                    <!--col-md-offset-8 col-xs-6 col-xs-offset-2-->
                                     <span class="x-time"></span>
                                 </div>
-                                <div class="col-md-2 col-xs-4">
-                                    <span>作者:&nbsp;&nbsp;</span><span class="x-commentNum "></span>
+                                <div class="col-md-2 left ">
+                                    <span>作者:&nbsp;&nbsp;</span><span class="x-author"></span>
                                 </div>
-                                <div class="col-md-1 col-xs-4" ><span class="glyphicon glyphicon-trash x-trash" ></span></div>
 
                             </div>
                         </div>
                     </div>  <!--loop end-->
                 </div>
+
 
 
                 <div id="articleDetail">
@@ -87,20 +90,74 @@
                         </small></h5><br>
                         <p class="x-body"></p>
                         <hr>
-                        <div class="panel-group" id="commentLoop">
-                            <div class="panel panel-default old w3-hover-shadow">  <!--loop start-->
-                                <div class="panel-heading">
-                                    <div class="row">
-                                        <div class="col-md-1">第&nbsp;<strong class="x-floor"></strong>&nbsp;楼</div>
-                                        <div class="col-md-2"><strong class="x-floorMaster"></strong><span class="is-reply"> 回复 第&nbsp;<strong class="x-re_floor"></strong>&nbsp;楼</span></div>
-                                        <div class="col-md-2"><span class="x-time"></span></div>
-                                        <div class="col-md-1 col-md-offset-6"><span class="glyphicon glyphicon-trash w3-large clickable"></span></div>
+                        <!--<div class="panel-group" id="commentLoop">-->
+                            <!--<div class="panel panel-default old w3-hover-shadow">  &lt;!&ndash;loop start&ndash;&gt;-->
+                                <!--<div class="panel-heading">-->
+                                    <!--<div class="row">-->
+                                        <!--<div class="col-md-1">第&nbsp;<strong class="x-floor"></strong>&nbsp;楼</div>-->
+                                        <!--<div class="col-md-2"><strong class="x-floorMaster"></strong><span class="is-reply"> 回复 第&nbsp;<strong class="x-re_floor"></strong>&nbsp;楼</span></div>-->
+                                        <!--<div class="col-md-2"><span class="x-time"></span></div>-->
+                                        <!--<div class="col-md-1 col-md-offset-6"><span class="glyphicon glyphicon-trash w3-large clickable"></span></div>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                                <!--<div class="panel-body"><p class="x-content"></p></div>-->
+                            <!--</div>  &lt;!&ndash;loop end&ndash;&gt;-->
+                        <!--</div>-->
+                    </div>
+
+                    <!--帖子详情页面-->
+                    <div id="post_detail_page">
+                        <p class="f-post-comment-num">评论数:<span class="x-comment-number"></span></p>
+                        <div class="posts-list-container">
+                            <ul class="posts-list-ul">
+                                <li class="posts-list-item old" id="">
+                                    <div class="">
+                                        <div class="posts-list-item-title x-content">同时学两种语言会容易混淆吗？</div>
+                                        <div class="posts-list-item-btm">
+                                            <span class="posts-list-item-nick inline x-name">章世超</span>
+                                            &nbsp;&nbsp;<span>|
+                                        </span>&nbsp;&nbsp;
+                                            <span class="posts-list-item-btm x-time">时间：2016-11-09 19:38</span>
+                                            <a class="post-comment-btn right x-comment">评论</a>
+                                            <span class="posts-list-item-nick right">#<span class="x-floor"></span>楼</span>
+
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="panel-body"><p class="x-content"></p></div>
-                            </div>  <!--loop end-->
+                                    <div class="post-comments-area">
+                                        <div class="post-comment-area-body">
+                                            <div class="post-comment old">
+                                                <div class="post-comment-content x-content"></div>
+                                                <div class="posts-list-item-btm">
+                                                    <span class="nick-color x-name"></span><span class="x-response">&nbsp;回复&nbsp;</span><span class="nick-color x-re-name"></span>
+                                                    &nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;
+                                                    <span class="posts-list-item-date x-time">
+                                                        <!--时间: 2016-11-09 19:40-->
+                                                    </span>
+                                                    <div class="right">
+                                                    <a class="glyphicon glyphicon-trash x-delete"></a>
+                                                    <span class="x-delete">|</span>
+                                                    <a class="post-comment-btn">回复</a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="add-post-comment">
+                                            添加评论...
+                                            <!--<textarea name="post-comment" id="" cols="30" rows="10" placeholder="添加评论..."></textarea>-->
+                                        </div>
+                                    </div>
+                                </li>
+
+                            </ul>
+
+                            <div>
+                                <script id="ueditor_container" name="content" type="text/plain" class="ueditor"></script>
+                            </div>
+                            <button class="p-btn">发表回复</button>
                         </div>
                     </div>
+
+
                     </div>
 
                 <div id="write_article">
@@ -158,16 +215,7 @@
 
 
 
-                <!--<ul class="pagination pagination-sm">-->
-                    <!--<li><a id="page_first" class="active" href="#">&laquo;第一页</a></li>-->
-                    <!--<li><a id="page_one" href="#test">1</a></li>-->
-                    <!--<li><a id="page_two" href="#">2</a></li>-->
-                    <!--<li><a id="page_three" href="#">3</a></li>-->
-                    <!--<li><a id="page_four" href="#">4</a></li>-->
-                    <!--<li><a id="page_five" href="#">5</a></li>-->
-                    <!--<li class="disabled"><a id="page_last" href="#">最后一页&raquo;</a></li>-->
-                <!--</ul>-->
-            <!--</div>-->
+
 
             <div id="courseware_pane" class="tab-pane">
 
