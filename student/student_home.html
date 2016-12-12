@@ -19,17 +19,17 @@
             <div id="tabs" class="">
                 <ul class="nav-pills nav nav-stacked">
 
-                    <li class="active"><a data-toggle="tab" href="#modify_pass_pane">修改密码</a></li>
+                    <li class=""><a data-toggle="tab" href="#modify_pass_pane">修改密码</a></li>
                     <li class=""><a data-toggle="tab" href="#setup_pass_protect_pane">设置密保</a></li>
                     <li class=""><a data-toggle="tab" href="#create_team_pane">创建队伍</a></li>
                     <li class=""><a data-toggle="tab" href="#join_team_pane">加入队伍</a></li>
                     <li class=""><a data-toggle="tab" href="#deal_with_team_apply_pane">处理入队申请</a></li>
-                    <li class=""><a data-toggle="tab" href="#notice_pane">通知</a></li>
+                    <li class="active"><a data-toggle="tab" href="#notice_pane">通知</a></li>
                 </ul>
             </div>
         </div>
         <div class="col-md-10 tab-content" id="tab_content_area">
-            <div id="modify_pass_pane" class="tab-pane in active">
+            <div id="modify_pass_pane" class="tab-pane">
 
                 <form action="modify_password.php" method="post" id="modify_pass_form">
                     <div class="form-field">
@@ -163,8 +163,32 @@
                     </tbody>
                 </table>
             </div>
-            <div id="deal_with_team_apply_pane" class="tab-pane">处理入队申请</div>
-            <div id="notice_pane" class="tab-pane">通知</div>
+            <div id="deal_with_team_apply_pane" class="tab-pane">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <span><a>张翼德</a>&nbsp;&nbsp;申请加入队伍</span>
+                        <div class="right">
+                            <a href="">同意</a>&nbsp;
+                            <a href="#">拒绝</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <span> <a>高圆圆</a>&nbsp;&nbsp;申请加入队伍 </span>
+                        <div class="right">
+                            <a href="">同意</a>&nbsp;
+                            <a href="#">拒绝</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="notice_pane" class="tab-pane in active">
+                <div class="alert alert-info">
+                    <a type="button" class="close" data-dismiss="alert">&times;</a>
+                    <strong>Warning!</strong> Best check yo self, you're not looking too good.
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -173,28 +197,25 @@
 <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+<script src="../js/student_home.js"></script>
 
 
 <script>
-    $(document).ready(function () {
-        $("#modify_pass_form").validate({
-            submitHandler: function () {
-                var origin_pass = $("input[name='origin_pass']").text();
-                var new_pass = $("input[name='new_pass']").text();
-                var re_new_pass = $("input[name='re_new_pass']").text();
-                $.post("modify_password.php", {
-                            origin_pass: origin_pass,
-                            new_pass: new_pass,
-                            re_new_pass: re_new_pass,
-                        }, function (data, status) {
-                            console.log(data);
-                        }
-                );
-            }
-        })
-//        $("#mod_pass_submit_btn").click(function () {
-//        })
-    });
+    $("#modify_pass_form").validate({
+        submitHandler: function () {
+            var origin_pass = $("input[name='origin_pass']").text();
+            var new_pass = $("input[name='new_pass']").text();
+            var re_new_pass = $("input[name='re_new_pass']").text();
+            $.post("modify_password.php", {
+                        origin_pass: origin_pass,
+                        new_pass: new_pass,
+                        re_new_pass: re_new_pass,
+                    }, function (data, status) {
+                        console.log(data);
+                    }
+            );
+        }
+    })
 </script>
 </body>
 </html>
