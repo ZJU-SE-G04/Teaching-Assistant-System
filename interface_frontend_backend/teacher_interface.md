@@ -44,7 +44,8 @@
 |显示二级评论区内容|show_second_comment.php?article_id=xxx&floor=xxx|{"second_comment_number":"xxx","second_comment":[{"re_floor":"xxx","time":"xxx","id":"xxx","user_name":"xxx","re_id":"xxx","re_user_name":"xxx","content":"xxx","re_floor":"xxx"}{"re_floor":"xxx","time":"xxx","id":"xxx","user_name":"xxx","re_id":"xxx","re_user_name":"xxx","content":"xxx","re_floor":"xxx"}...]}|注意:!!!如果没有被回复人,re_id和re_user_name返回'0'.id是回复人id,re_id是被回复人id,user_name是回复人姓名,re_user_name是被回复人姓名|是
 |删除一条二级评论区内容|delete_second_comment.php?article_id=xxx&floor=xxx&re_floor=xxx|成功:{"if_success":1,"error_message":"null"},失败:{"if_success":0,"error_message":"xxx"}|失败要有具体错误信息,成功或失败返回的是整数1或0|是
 |删除一条一级评论区内容|delete_comment.php?article_id=xxx&floor=xxx|成功:{"if_success":1,"error_message":"null"},失败成功:{"if_success":0,"error_message":"xxx"}|失败要有具体错误信息,成功或失败返回的是整数1或0|是
-|添加一条二级回复|add_second_comment.php?article_id=xxx&id=xxx&time=xxx&content=xxx&floor=xxx&re_id=xxx|成功:{"if_success":1,"error_message":"null"},失败成功:{"if_success":0,"error_message":"xxx"}|!!!为了方面局部刷新,这里的时间由前段获取,后端不必重复获取,前端re_floor希望后端根据当前最大楼中楼楼层号+1生成,因为前端不方面获取,如果没有被回复人,re_id为'0'(字符'0')|否
+|添加一条二级回复|add_second_comment.php?article_id=xxx&id=xxx&time=xxx&content=xxx&floor=xxx&re_id=xxx|成功:{"if_success":1,"error_message":"null"},失败成功:{"if_success":0,"error_message":"xxx"}|!!!为了方便局部刷新,这里的时间由前段获取,后端不必重复获取;前端re_floor不方便获取,希望后端根据当前最大楼中楼楼层号+1生成;如果没有被回复人,re_id为'0'(字符'0')|否
+|添加一条一级回复|add_comment.php?article_id=xxx&id=xxx&time=xxx&content=xxx|成功:{"if_success":1,"error_message":"null"},失败成功:{"if_success":0,"error_message":"xxx"}|!!!为了方便局部刷新,这里的时间由前段获取,后端不必重复获取;前端floor不方便获取,希望后端根据当前最大楼层号+1生成;|否
 
 
 ### To be continued……

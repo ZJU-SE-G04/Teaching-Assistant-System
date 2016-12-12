@@ -3,7 +3,9 @@
 
 //-------一些全局变量---------
 
-
+var article_id;//在点击文章后被初始化
+var re_user_name='0';//被回复人姓名
+var re_user_id="0";//被回复人id
 
 //-------
 $(document).ready(function() {
@@ -384,6 +386,7 @@ function add_second_comment() {
    var current_time=getNowFormatDate();
 
 
+
     var post_comment_area_body=post_comments_area.find(".post-comment-area-body");
     var tmp = post_comment_area_body.children(".old").clone().removeClass("old").addClass("new").show();
     tmp.find(".x-name").html(user_name);
@@ -479,5 +482,54 @@ function add_second_comment_second() {
     comment_area.after(submit_btn);
 
     // window.alert(re_user_name);
+
+}
+
+
+//---------插入一级回复------------
+
+function  add_comment() {
+    var content=ue_add_comment.getContent();
+    var current_time=getNowFormatDate();
+
+
+    var posts_list_ul=$(".posts-list-ul");
+    var tmp = posts_list_ul.children(".old").clone().removeClass("old").addClass("new").show();
+
+
+    tmp.find(".x-name").html(user_name);
+    tmp.find(".x-time").html(current_time);
+    tmp.find(".x-content").html(content);
+    tmp.find(".x-comment").click(showSecondComment);
+    tmp.find(".post-comments-area").hide();
+    tmp.find(".glyphicon").click(deleteComment);
+
+    posts_list_ul.append(tmp);
+
+    // $.ajax({
+    //    type:"GET",
+    //     url:"add_article_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content,
+    //     success:function (result) {
+    //         if(result["if_success"]==1){
+    //             var posts_list_ul=$(".posts-list-ul");
+    //             var tmp = posts_list_ul.children(".old").clone().removeClass("old").addClass("new").show();
+    //
+    //             tmp.find(".x-name").html(user_name);
+    //             tmp.find(".x-time").html(current_time);
+    //             tmp.find(".x-content").html(content);
+    //             tmp.find(".x-comment").click(showSecondComment);
+    //             tmp.find(".post-comments-area").hide();
+    //             tmp.find(".glyphicon").click(deleteComment);
+    //
+    //             posts_list_ul.append(tmp);
+    //
+    //         }
+    //         else{
+    //             window.alert(result["err_message"]);
+    //         }
+    //
+    //     }
+
+    // });
 
 }
