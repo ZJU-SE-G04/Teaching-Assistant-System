@@ -17,3 +17,16 @@
 .badge:hover {
     background-color: grey!important;
 }
+
+legend {
+    width: inherit; /* Or auto */
+    padding: 0 10px; /* To give a bit of padding on the left and right */
+    border-bottom: none;
+    margin-left: 10px;
+}
+
+fieldset {
+    border: 1px solid silver;
+    margin-bottom: 10px;
+}
+
