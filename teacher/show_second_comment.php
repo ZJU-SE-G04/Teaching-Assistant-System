@@ -2,8 +2,8 @@
 	include 'connect.php';
 	$article_id=(int)$_GET['article_id'];
 	$floor=(int)$_GET['floor'];
-	//$article_id=2;
-	//$floor=2;
+//	$article_id=2;
+//	$floor=2;
 
 	$arr = [];
 	//获取二级评论数量
@@ -17,6 +17,7 @@
 		$x['time']=$row['time'];
 		$x['id']=$row['id'];
 		$x['user_name']=$row['user_name'];
+		$x['re_floor']=$row['re_floor'];
 		$x['re_id']=$row['re_id'];
 		$resu=$conn->query("select user_name from user_table where id='".$x['re_id']."';");
 		$ro=mysqli_fetch_assoc($resu);
