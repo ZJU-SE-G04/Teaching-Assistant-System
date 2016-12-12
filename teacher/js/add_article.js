@@ -21,7 +21,7 @@ $(document).ready(function() {
     $("#articleBack").click(articleUpdate);
 });
 
-//////////////////////////////////////////////////////-------show an article list--------
+//-------show an article list--------
 
 
 function  articleUpdate() {
@@ -60,7 +60,7 @@ function  articleUpdate() {
 }
 
 
-//------------show input for writing a article
+//------------show input for writing a article----------
 
 function  showWriteArticle() {
     $("#articleLoop").hide();
@@ -294,8 +294,10 @@ function showSecondComment() {
         url:"show_second_comment.php?article_id="+article_id+"&floor="+floor,
         success:function (result) {
             var secondComment=result;
+            var second_comment_number=secondComment["second_comment_number"];
 
             var post_comment_area_body=posts_list_item.find(".post-comment-area-body");
+            post_comment_area_body.find(".x-second-comment-number").html(second_comment_number);
             for (var i in secondComment["second_comment"]) {
                 var tmp = post_comment_area_body.children(".old").clone().removeClass("old").addClass("new").show();
                 var x=secondComment["second_comment"][i];
@@ -304,7 +306,7 @@ function showSecondComment() {
                 tmp.find(".x-time").html(x.time);
                 tmp.find(".x-content").html(x.content);
                 tmp.find(".x-re-floor").html(x.re_floor);
-                if(x.re_user_name!="NULL") {
+                if(x.re_user_name!="0") {
                     tmp.find(".x-re-name").html(x.re_user_name);
                 }
                 else {
@@ -328,7 +330,7 @@ function showSecondComment() {
                 $(this).after(comment_area);
                 comment_area.focus = true;
                 var submit_btn = $("<button>提交</button>").addClass("p-btn-sm right");
-                // submit_btn.attr("onclick","add_second_comment("+article_id+","+floor+")");
+                submit_btn.click(add_second_comment);
                 comment_area.after(submit_btn);
             });
 
@@ -364,6 +366,70 @@ function deleteSecondComment() {
 }
 
 //-----------插入二级回复-----------
-function add_second_comment(article_id,floor) {
+function add_second_comment() {
+    var post_comments_area=$(this).parent();
+    var content=post_comments_area.find("textarea").val();
+    // alert(content);
+    var posts_list_item=post_comments_area.parent();
+    var floor=posts_list_item.find(".x-floor").text();
+    // window.alert(floor);
+    
+    // var re_floor=post_comments_area.find(".x-second-comment-number").text()+1;
+     // window.alert(re_floor);
 
+
+   var current_time=getNowFormatDate();
+
+
+    $.ajax({
+        type:"GET",
+        url:"add_second_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content+"&floor="+floor+"&re_id="+re_user_id,
+        success:function (result) {
+            if(result["if_success"]==1){
+
+                var post_comment_area_body=post_comments_area.find(".post-comment-area-body");
+                var tmp = post_comment_area_body.children(".old").clone().removeClass("old").addClass("new").show();
+                tmp.find(".x-name").html(user_name);
+                // tmp.find(".x-time").html();
+                tmp.find(".x-content").html(content);
+                if(re_user_name!="0") {
+                    tmp.find(".x-re-name").html(re_user_name);
+                }
+                else {
+                    tmp.find(".x-response").html("");
+                }
+
+                tmp.find(".x-time").html(current_time);
+
+
+                tmp.find(".x-delete").click(deleteSecondComment);
+                post_comment_area_body.append(tmp);
+
+            }
+            else{
+                window.alert(result["err_message"]);
+            }
+
+        }
+
+    });
+
+}
+
+function getNowFormatDate() {
+    var date = new Date();
+    var seperator1 = "-";
+    var seperator2 = ":";
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+        + " " + date.getHours() + seperator2 + date.getMinutes()
+        + seperator2 + date.getSeconds();
+    return currentdate;
 }

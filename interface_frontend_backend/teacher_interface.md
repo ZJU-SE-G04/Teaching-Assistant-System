@@ -41,9 +41,11 @@
 |发布文章|add_article.php?lesson_id=xxx&id=xxx&title=xxx&content=xxx|发布成功：{"if_success":1,error_message:"null"};发布失败：{"if_success":0,"error_messgae":"xxx"}|成功或失败返回的是整数1或0,时间由后端获取|是
 |修改文章|update_article.php?article_id=xxx&title=xxx&content=xxx|修改成功：{"if_success":1,error_message:"null"};修改失败：{"if_success":0,"error_messgae":"xxx"}|成功或失败返回的是整数1或0,时间由后端获取|是
 |显示文章详情和评论区一级评论内容|show_article_detail.php?article_id=xxx|{"article_content":"xxx","comment_number":"xxx","comment":[{"id":"xxx","floor":"xxx","user_name":"xxx","time":"xxx","content":"xxx"}{"id":"xxx","floor":"xxx","user_name":"xxx","time":"xxx","content":"xxx"}......]}|article_content是文章的所有内容,comment_number是评论楼层数目,id是评论(一级)人id,user_name是评论(一级)人用户名,content是评论内容|是
-|显示二级评论区内容|show_second_comment.php?article_id=xxx&floor=xxx|{"second_comment_number":"xxx","second_comment":[{"re_floor":"xxx","time":"xxx","id":"xxx","user_name":"xxx","re_id":"xxx","re_user_name":"xxx","content":"xxx","re_floor":"xxx"}{"re_floor":"xxx","time":"xxx","id":"xxx","user_name":"xxx","re_id":"xxx","re_user_name":"xxx","content":"xxx","re_floor":"xxx"}...]}|id是回复人id,re_id是被回复人id,user_name是回复人姓名,re_user_name是被回复人姓名|是
+|显示二级评论区内容|show_second_comment.php?article_id=xxx&floor=xxx|{"second_comment_number":"xxx","second_comment":[{"re_floor":"xxx","time":"xxx","id":"xxx","user_name":"xxx","re_id":"xxx","re_user_name":"xxx","content":"xxx","re_floor":"xxx"}{"re_floor":"xxx","time":"xxx","id":"xxx","user_name":"xxx","re_id":"xxx","re_user_name":"xxx","content":"xxx","re_floor":"xxx"}...]}|注意:!!!如果没有被回复人,re_id和re_user_name返回'0'.id是回复人id,re_id是被回复人id,user_name是回复人姓名,re_user_name是被回复人姓名|是
 |删除一条二级评论区内容|delete_second_comment.php?article_id=xxx&floor=xxx&re_floor=xxx|成功:{"if_success":1,"error_message":"null"},失败:{"if_success":0,"error_message":"xxx"}|失败要有具体错误信息,成功或失败返回的是整数1或0|是
 |删除一条一级评论区内容|delete_comment.php?article_id=xxx&floor=xxx|成功:{"if_success":1,"error_message":"null"},失败成功:{"if_success":0,"error_message":"xxx"}|失败要有具体错误信息,成功或失败返回的是整数1或0|是
+|添加一条二级回复|add_second_comment.php?article_id=xxx&id=xxx&time=xxx&content=xxx&floor=xxx&re_id=xxx|成功:{"if_success":1,"error_message":"null"},失败成功:{"if_success":0,"error_message":"xxx"}|!!!为了方面局部刷新,这里的时间由前段获取,后端不必重复获取,前端re_floor希望后端根据当前最大楼中楼楼层号+1生成,因为前端不方面获取,如果没有被回复人,re_id为'0'(字符'0')|否
+
 
 ### To be continued……
 - 其余尚未完成或者还未定型
