@@ -52,6 +52,7 @@
                     <div class="panel panel-default old w3-hover-shadow w3-animate-zoom">  <!--loop start-->
                         <div class="panel-heading w3-hover-grey clickable">
                             <span class="glyphicon glyphicon-file"></span>&nbsp;<strong class="x-title"></strong>
+                            <span class="x-article-id" style="display: none"></span>
                     </div>
                         <div class="panel-body"><p class="x-contentDigest"></p></div>
                         <div class="panel-footer">
@@ -97,9 +98,9 @@
                         <p class="f-post-comment-num">评论数:<span class="x-comment-number"></span></p>
                         <div class="posts-list-container">
                             <ul class="posts-list-ul">
-                                <li class="posts-list-item old ">
+                                <li class="posts-list-item old ">  <!-- loop start-->
                                     <div class="">
-                                        <div class="posts-list-item-title x-content">同时学两种语言会容易混淆吗？</div>
+                                        <div class="posts-list-item-title x-content"></div>
                                         <div class="posts-list-item-btm">
                                             <span class="posts-list-item-nick inline x-name">章世超</span>
                                             &nbsp;&nbsp;<span>|
@@ -110,15 +111,16 @@
                                             <a class="glyphicon glyphicon-trash x-first-delete"></a>
                                             <span class="x-first-delete">|</span>
                                             <a class="post-comment-btn  x-comment">评论</a>
-                                            <span class="posts-list-item-nick ">#<span class="x-floor"></span>楼</span>
+                                            <span class="posts-list-item-nick ">#<span class="x-floor"></span>楼</span><!-- floor id ~~ -->
                                             </div>
                                         </div>
                                     </div>
                                     <div class="post-comments-area">
                                         <div class="post-comment-area-body">
-                                            <div class="post-comment old">
+                                            <div class="post-comment old"><!-- loop start 二级回复区-->
                                                 <div class="post-comment-content x-content"></div>
                                                 <div class="posts-list-item-btm">
+                                                    <span class="x-re-floor" style="display: none"></span>
                                                     <span class="nick-color x-name"></span><span class="x-response">&nbsp;回复&nbsp;</span><span class="nick-color x-re-name"></span>
                                                     &nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;
                                                     <span class="posts-list-item-date x-time">
@@ -128,7 +130,7 @@
                                                     <span class="x-delete">|</span>
                                                     <a class="post-comment-btn">回复</a></div>
                                                 </div>
-                                            </div>
+                                            </div> <!-- loop end-->
                                         </div>
 
                                         <div class="add-post-comment">
@@ -136,7 +138,7 @@
                                             <!--<textarea name="post-comment" id="" cols="30" rows="10" placeholder="添加评论..."></textarea>-->
                                         </div>
                                     </div>
-                                </li>
+                                </li><!-- loop end-->
 
                             </ul>
 

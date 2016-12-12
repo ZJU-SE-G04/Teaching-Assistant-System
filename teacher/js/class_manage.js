@@ -14,6 +14,9 @@ var class_time="周二345";
 var user_name="Lis";
 var user_id="111111";
 
+var article_id;//在点击文章后被初始化
+
+
 //--------- 显示当前课程的所有班级---------
 
 function show_class() {
