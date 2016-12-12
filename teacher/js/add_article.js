@@ -173,36 +173,37 @@ function  deleteArticle(article_id) {
 
 
 ////////////////////////////
-var articleDetail = {
-    "article_content":"性能方面：没有必要过多的关心性能，因为二者的性能都已经足够高了。由于Redis只使用单核，而Memcached可以使用多核，所以在比较上，平均每一个核上Redis在存储小数据时比Memcached性能更高。而在100k以上的数据中，Memcached性能要高于Redis，虽然Redis最近也在存储大数据的性能上进行优化，但是比起Memcached，还是稍有逊色。说了这么多，结论是，无论你使用哪一个，每秒处理请求的次数都不会成为瓶颈。（比如瓶颈可能会在网卡）内存使用效率：使用简单的key-value存储的话，Memcached的内存利用率更高，而如果Redis采用hash结构来做key-value存储，由于其组合式的压缩，其内存利用率会高于Memcached。当然，这和你的应用场景和数据特性有关。数据持久化：如果你对数据持久化和数据同步有所要求，那么推荐你选择Redis，因为这两个特性Memcached都不具备。即使你只是希望在升级或者重启系统后缓存数据不会丢失，选择Redis也是明智的。数据结构:当然，最后还得说到你的具体应用需求。Redis相比Memcached来说，拥有更多的数据结构和并支持更丰富的数据操作，通常在Memcached里，你需要将数据拿到客户端来进行类似的修改再set回去。这大大增加了网络IO的次数和数据体积。在Redis中，这些复杂的操作通常和一般的GET/SET一样高效。所以，如果你需要缓存能够支持更复杂的结构和操作，那么Redis会是不错的选择。网络IO模型方面：Memcached是多线程，分为监听线程、worker线程，引入锁，带来了性能损耗。Redis使用单线程的IO复用模型，将速度优势发挥到最大，也提供了较简单的计算功能 。内存管理方面：Memcached使用预分配的内存池的方式，带来一定程度的空间浪费 并且在内存仍然有很大空间时，新的数据也可能会被剔除，而Redis使用现场申请内存的方式来存储数据，不会剔除任何非临时数据 Redis更适合作为存储而不是cache 。数据的一致性方面：Memcached提供了cas命令来保证.而Redis提供了事务的功能，可以保证一串 命令的原子性，中间不会被任何操作打断 。如果简单地比较Redis与Memcached的区别，大多数都会得到以下观点： 1 、Redis不仅仅支持简单的k/v类型的数据，同时还提供list，set，zset，hash等数据结构的存储。 2 、Redis支持数据的备份，即master-slave模式的数据备份。 3 、Redis支持数据的持久化，可以将内存中的数据保持在磁盘中，重启的时候可以再次加载进行使用。 4、Redis可以实现主从复制，实现故障恢复。 5、Redis的Sharding技术： 很容易将数据分布到多个Redis实例中。"
-    ,
-    "comment_number":33,
-    "comment": [
-        {
-            "id": "111111",
-            "floor": 1,
-            "user_name": "小明",
-            "time": "2016-11-10 18:03",
-            "content": "LZ我要成为你这样的男人 厉害！今年大三 看到你的博客 感觉自己什么都不会！能给点建议吗 比如现在该怎么选择前进的道路 或者 着重学习那些内容呢 现在学校还在上《算法设计》我现在就在算法设计的实验课上 无意间看到你的博客的 还是感觉楼主真的很牛逼啊 楼主大大 给点建议 指点指点明路。"
-        },
-        {
-            "id": "3140001112",
-            "floor": 2,
-            "user_name": "神",
-            "time": "2016-11-10 18:03",
-            "content": "LZ我要成为你这样的男人 厉害！今年大三 看到你的博客 感觉自己什么都不会！能给点建议吗 比如现在该怎么选择前进的道路 或者 着重学习那些内容呢 现在学校还在上《算法设计》我现在就在算法设计的实验课上 无意间看到你的博客的 还是感觉楼主真的很牛逼啊 楼主大大 给点建议 指点指点明路。"
-        },
-        {
-            "id": "3140001113",
-            "floor": 3,
-            "user_name": "长者",
-            "time": "2016-9-14 18:43",
-            "content": "LZ我要成为你这样的男人 厉害！今年大三 看到你的博客 感觉自己什么都不会！能给点建议吗 比如现在该怎么选择前进的道路 或者 着重学习那些内容呢 现在学校还在上《算法设计》我现在就在算法设计的实验课上 无意间看到你的博客的 还是感觉楼主真的很牛逼啊 楼主大大 给点建议 指点指点明路。"
-        }
-    ]
-};
+// var articleDetail = {
+//     "article_content":"性能方面：没有必要过多的关心性能，因为二者的性能都已经足够高了。由于Redis只使用单核，而Memcached可以使用多核，所以在比较上，平均每一个核上Redis在存储小数据时比Memcached性能更高。而在100k以上的数据中，Memcached性能要高于Redis，虽然Redis最近也在存储大数据的性能上进行优化，但是比起Memcached，还是稍有逊色。说了这么多，结论是，无论你使用哪一个，每秒处理请求的次数都不会成为瓶颈。（比如瓶颈可能会在网卡）内存使用效率：使用简单的key-value存储的话，Memcached的内存利用率更高，而如果Redis采用hash结构来做key-value存储，由于其组合式的压缩，其内存利用率会高于Memcached。当然，这和你的应用场景和数据特性有关。数据持久化：如果你对数据持久化和数据同步有所要求，那么推荐你选择Redis，因为这两个特性Memcached都不具备。即使你只是希望在升级或者重启系统后缓存数据不会丢失，选择Redis也是明智的。数据结构:当然，最后还得说到你的具体应用需求。Redis相比Memcached来说，拥有更多的数据结构和并支持更丰富的数据操作，通常在Memcached里，你需要将数据拿到客户端来进行类似的修改再set回去。这大大增加了网络IO的次数和数据体积。在Redis中，这些复杂的操作通常和一般的GET/SET一样高效。所以，如果你需要缓存能够支持更复杂的结构和操作，那么Redis会是不错的选择。网络IO模型方面：Memcached是多线程，分为监听线程、worker线程，引入锁，带来了性能损耗。Redis使用单线程的IO复用模型，将速度优势发挥到最大，也提供了较简单的计算功能 。内存管理方面：Memcached使用预分配的内存池的方式，带来一定程度的空间浪费 并且在内存仍然有很大空间时，新的数据也可能会被剔除，而Redis使用现场申请内存的方式来存储数据，不会剔除任何非临时数据 Redis更适合作为存储而不是cache 。数据的一致性方面：Memcached提供了cas命令来保证.而Redis提供了事务的功能，可以保证一串 命令的原子性，中间不会被任何操作打断 。如果简单地比较Redis与Memcached的区别，大多数都会得到以下观点： 1 、Redis不仅仅支持简单的k/v类型的数据，同时还提供list，set，zset，hash等数据结构的存储。 2 、Redis支持数据的备份，即master-slave模式的数据备份。 3 、Redis支持数据的持久化，可以将内存中的数据保持在磁盘中，重启的时候可以再次加载进行使用。 4、Redis可以实现主从复制，实现故障恢复。 5、Redis的Sharding技术： 很容易将数据分布到多个Redis实例中。"
+//     ,
+//     "comment_number":33,
+//     "comment": [
+//         {
+//             "id": "111111",
+//             "floor": 1,
+//             "user_name": "小明",
+//             "time": "2016-11-10 18:03",
+//             "content": "LZ我要成为你这样的男人 厉害！今年大三 看到你的博客 感觉自己什么都不会！能给点建议吗 比如现在该怎么选择前进的道路 或者 着重学习那些内容呢 现在学校还在上《算法设计》我现在就在算法设计的实验课上 无意间看到你的博客的 还是感觉楼主真的很牛逼啊 楼主大大 给点建议 指点指点明路。"
+//         },
+//         {
+//             "id": "3140001112",
+//             "floor": 2,
+//             "user_name": "神",
+//             "time": "2016-11-10 18:03",
+//             "content": "LZ我要成为你这样的男人 厉害！今年大三 看到你的博客 感觉自己什么都不会！能给点建议吗 比如现在该怎么选择前进的道路 或者 着重学习那些内容呢 现在学校还在上《算法设计》我现在就在算法设计的实验课上 无意间看到你的博客的 还是感觉楼主真的很牛逼啊 楼主大大 给点建议 指点指点明路。"
+//         },
+//         {
+//             "id": "3140001113",
+//             "floor": 3,
+//             "user_name": "长者",
+//             "time": "2016-9-14 18:43",
+//             "content": "LZ我要成为你这样的男人 厉害！今年大三 看到你的博客 感觉自己什么都不会！能给点建议吗 比如现在该怎么选择前进的道路 或者 着重学习那些内容呢 现在学校还在上《算法设计》我现在就在算法设计的实验课上 无意间看到你的博客的 还是感觉楼主真的很牛逼啊 楼主大大 给点建议 指点指点明路。"
+//         }
+//     ]
+// };
 
 function articleShow() {
+
     var articleDetail_local=$("#articleDetail");
     articleDetail_local.show();
     $("#articleLoop").hide();
@@ -212,60 +213,64 @@ function articleShow() {
     var id =parent.attr("id");
 
     var article_id=id;
-    /*
-     $.get("getArticleDetail.php?article_id="+id, function (data) {
-     articleDetail = JSON.parse(data);
-     })
-     */
+    
+    $.ajax({
+        type:"GET",
+        url:"show_article_detail.php?article_id="+article_id,
+        success:function (result) {
+            var articleDetail=result;
 
-    var title=parent.find(".x-title").text();
-    var author=parent.find(".x-author").text();
-    var time=parent.find(".x-time").text();
-
-
-    articleDetail_local.find(".x-title").html(title);
-    articleDetail_local.find(".x-author").html(author);
-    articleDetail_local.find(".x-edit").attr("onclick","updateArticle("+id+")");
-    articleDetail_local.find(".x-trash").attr("onclick","deleteArticle("+id+")");
-    articleDetail_local.find(".x-time").html(time);
-    articleDetail_local.find(".x-body").html(articleDetail["article_content"]);
+            var title=parent.find(".x-title").text();
+            var author=parent.find(".x-author").text();
+            var time=parent.find(".x-time").text();
 
 
-    var post_detail_page=articleDetail_local.find("#post_detail_page");
-    post_detail_page.find(".x-comment-number").text(articleDetail["comment_number"]);
+            articleDetail_local.find(".x-title").html(title);
+            articleDetail_local.find(".x-author").html(author);
+            articleDetail_local.find(".x-edit").attr("onclick","updateArticle("+id+")");
+            articleDetail_local.find(".x-trash").attr("onclick","deleteArticle("+id+")");
+            articleDetail_local.find(".x-time").html(time);
+            articleDetail_local.find(".x-body").html(articleDetail["article_content"]);
 
 
-    var posts_list_ul=post_detail_page.find(".posts-list-ul");
-        posts_list_ul.children(".new").remove();
-    for (var i in articleDetail["comment"]) {
-        var x = articleDetail["comment"][i];
-        var tmp = posts_list_ul.children(".old").clone().removeClass("old").addClass("new").show();
+            var post_detail_page=articleDetail_local.find("#post_detail_page");
+            post_detail_page.find(".x-comment-number").text(articleDetail["comment_number"]);
 
-        // if (x.re_floor == 0)
-        //     tmp.find(".is-reply").hide();
-        tmp.find(".x-floor").html(x.floor);
-        tmp.find(".x-name").html(x.user_name);
-        tmp.find(".x-time").html(x.time);
-        tmp.find(".x-content").html(x.content);
-        tmp.find(".x-comment").attr("onclick","showSecondComment("+article_id+","+x.floor+")");
-        tmp.find(".post-comments-area").hide();
-        tmp.attr("id","floor"+x.floor);
 
-        if(user_id!=x.id){
-            tmp.find(".x-first-delete").hide();
+            var posts_list_ul=post_detail_page.find(".posts-list-ul");
+            posts_list_ul.children(".new").remove();
+            for (var i in articleDetail["comment"]) {
+                var x = articleDetail["comment"][i];
+                var tmp = posts_list_ul.children(".old").clone().removeClass("old").addClass("new").show();
+
+                // if (x.re_floor == 0)
+                //     tmp.find(".is-reply").hide();
+                tmp.find(".x-floor").html(x.floor);
+                tmp.find(".x-name").html(x.user_name);
+                tmp.find(".x-time").html(x.time);
+                tmp.find(".x-content").html(x.content);
+                tmp.find(".x-comment").attr("onclick","showSecondComment("+article_id+","+x.floor+")");
+                tmp.find(".post-comments-area").hide();
+                tmp.attr("id","floor"+x.floor);
+
+                if(user_id!=x.id){
+                    tmp.find(".x-first-delete").hide();
+                }
+                else {
+                    tmp.find(".glyphicon").attr("onclick", "deleteComment(" + article_id + "," + x.floor + ")");
+                }
+                posts_list_ul.append(tmp);
+            }
+
+
         }
-        else {
-            tmp.find(".glyphicon").attr("onclick", "deleteComment(" + article_id + "," + x.floor + ")");
-        }
-        posts_list_ul.append(tmp);
-    }
+    });
+
     $("#articleBack").attr("onclick","returnToArticleList()");
 
 }
 
 
-
-class_id
 
 
 
@@ -296,84 +301,83 @@ function  returnToArticleList() {
 
 }
 
-var secondComment={
-    "second_comment_number":13,
-    "second_comment":[{
-    "time": "2016-11-10 18:03",
-    "id":"3140100000",
-    "user_name":"蒋中正",
-    "re_id":"3149998888",
-    "re_user_name":"阎锡山",
-    "content":"中原大战",
-        "re_floor":1
-},
-    {
-        "time": "2016-11-10 18:06",
-        "id":"111111",
-        "user_name":"蒋中正",
-        "re_id":"3149998888",
-        "re_user_name":"阎锡山",
-        "content":"中原大战",
-        "re_floor":2
-
-    },
-    {
-        "time": "2016-11-10 18:06",
-        "id":"3140005555",
-        "user_name":"蒋中正",
-        "re_id":"NULL",
-        "re_user_name":"NULL",
-        "content":"中原大战",
-        "re_floor":3
-    }
-]
-};
-
+// var secondComment={
+//     "second_comment_number":13,
+//     "second_comment":[{
+//     "time": "2016-11-10 18:03",
+//     "id":"3140100000",
+//     "user_name":"蒋中正",
+//     "re_id":"3149998888",
+//     "re_user_name":"阎锡山",
+//     "content":"中原大战",
+//         "re_floor":1
+// },
+//     {
+//         "time": "2016-11-10 18:06",
+//         "id":"111111",
+//         "user_name":"蒋中正",
+//         "re_id":"3149998888",
+//         "re_user_name":"阎锡山",
+//         "content":"中原大战",
+//         "re_floor":2
+//
+//     },
+//     {
+//         "time": "2016-11-10 18:06",
+//         "id":"3140005555",
+//         "user_name":"蒋中正",
+//         "re_id":"NULL",
+//         "re_user_name":"NULL",
+//         "content":"中原大战",
+//         "re_floor":3
+//     }
+// ]
+// };
+//
 
 
 
 
 function showSecondComment(article_id,floor) {
     
-    // $.ajax({
-    //     type:"GET",
-    //     url:"show_second_comment.php?article_id="+article_id+"&floor="+floor,
-    //     success:function (result) {
-    //       
-    //     }
-    //    
-    // });
+    $.ajax({
+        type:"GET",
+        url:"show_second_comment.php?article_id="+article_id+"&floor="+floor,
+        success:function (result) {
+            var secondComment=result;
+
+            var posts_list_item=$(".posts-list-ul").find("#floor"+floor);
+            var post_comment_area_body=posts_list_item.find(".post-comment-area-body");
+            for (var i in secondComment["second_comment"]) {
+                var tmp = post_comment_area_body.children(".old").clone().removeClass("old").addClass("new").show();
+                var x=secondComment["second_comment"][i];
+
+                tmp.find(".x-name").html(x.user_name);
+                tmp.find(".x-time").html(x.time);
+                tmp.find(".x-content").html(x.content);
+                tmp.attr("id","floor"+floor+"re_floor"+x.re_floor);
+                if(x.re_user_name!="NULL") {
+                    tmp.find(".x-re-name").html(x.re_user_name);
+                }
+                else {
+                    tmp.find(".x-response").html("");
+                }
+                if(x.id!=user_id){
+                    tmp.find(".x-delete").hide();
+                }
+                else {
+                    tmp.find(".x-delete").attr("onclick","deleteSecondComment("+article_id+","+floor+","+x.re_floor+")");
+                }
+                post_comment_area_body.append(tmp);
 
 
-    var posts_list_item=$(".posts-list-ul").find("#floor"+floor);
-    var post_comment_area_body=posts_list_item.find(".post-comment-area-body");
-    for (var i in secondComment["second_comment"]) {
-        var tmp = post_comment_area_body.children(".old").clone().removeClass("old").addClass("new").show();
-        var x=secondComment["second_comment"][i];
-        
-        tmp.find(".x-name").html(x.user_name);
-        tmp.find(".x-time").html(x.time);
-        tmp.find(".x-content").html(x.content);
-        tmp.attr("id","floor"+floor+"re_floor"+x.re_floor);
-        if(x.re_user_name!="NULL") {
-            tmp.find(".x-re-name").html(x.re_user_name);
-        }
-        else {
-            tmp.find(".x-response").html("");
-        }
-        if(x.id!=user_id){
-           tmp.find(".x-delete").hide();
-        }
-        else {
-            tmp.find(".x-delete").attr("onclick","deleteSecondComment("+article_id+","+floor+","+x.re_floor+")");
-        }
-        post_comment_area_body.append(tmp);
-        
-        
-    }
-    posts_list_item.find(".post-comments-area").show();
+            }
+            posts_list_item.find(".post-comments-area").show();
 
-    
+
+        }
+
+    });
 
     $(".add-post-comment").click(function () {
         $(this).hide();
