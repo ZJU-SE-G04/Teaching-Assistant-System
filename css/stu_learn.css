@@ -460,16 +460,16 @@ input[name="post_title"] {
 }
 
 /*返回按键*/
-.back_text {
+.back_to_discuss_home_page {
     margin: 5px 0px 15px 0px;
     padding: 5px 0 5px 0;
     border-bottom: 1px solid #eee;
 }
 
-.back_text span {
+.back_to_discuss_home_page span {
 }
 
-.back_text a {
+.back_to_discuss_home_page a {
     color: #000;
     /*line-height: 20px;*/
 }

@@ -1,4 +1,3 @@
-</html>
 <?php
     //获取数据
     error_reporting(E_ERROR|E_WARNING);
