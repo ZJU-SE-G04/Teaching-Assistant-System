@@ -14,6 +14,22 @@ $(document).ready(function(){
         $("." + s).show();
     });
 
+/*    $("input").focus(function () {
+        $(".edui-editor:visible").hide()
+        $(".editor:hidden").show()
+        if ($(this).hasClass("editor")) {
+            $(this).hide()
+            $(this).next().find(".edui-editor").show()
+        }
+    })
+    $(".ueEditor").each(function () {
+        var ueEditor = UE.getEditor($(this).attr("id"))
+        var input = $(this).prev()
+        ueEditor.addListener("contentChange", function () {
+            input.attr("value", this.getContent())
+        })
+    })*/
+
 //////////////////////////////////////////////////////
     var messageRecords = [
         {
@@ -214,7 +230,6 @@ $(document).ready(function(){
             "id": 12312431,
             "lesson": "软件工程管理",
             "kind": "答疑",
-            "sight": "团队可见",
             "author": "小明",
             "time": "2014-08-22 20:14",
             "title": "关于计算最长的字符串长度，为什么s传不进去",
@@ -224,7 +239,6 @@ $(document).ready(function(){
             "id": 35112441,
             "lesson": "软件工程管理",
             "kind": "答疑",
-            "sight": "团队可见",
             "author": "小明",
             "time": "2014-04-12 20:15",
             "title": "关于计算最长的字符串长度，为什么s传不进去",
@@ -234,7 +248,6 @@ $(document).ready(function(){
             "id": 55312431,
             "lesson": "软件工程管理",
             "kind": "答疑",
-            "sight": "团队可见",
             "author": "小明",
             "time": "2014-03-22 10:34",
             "title": "关于计算最长的字符串长度，为什么s传不进去",
@@ -263,7 +276,6 @@ $(document).ready(function(){
             tmp.find(".x-author").html(x.author);
             tmp.find(".x-lesson").html(x.lesson);
             tmp.find(".x-kind").html(x.kind);
-            tmp.find(".x-sight").html(x.sight);
             tmp.find(".x-time").html(x.time);
             tmp.find(".x-responseNum").html(x.responseNum);
             $("#topicLoop").append(tmp);
@@ -284,7 +296,6 @@ $(document).ready(function(){
             "content": "On L421-L423 of src/blowfish.c, a sha256_key() function is created for password-based key derivation with a salt for blowfish. Unfortunately, even with 1,000 rounds, SHA-256 is designed to be fast, and can be parallelized with GPUs when brute forcing a file. Instead, the Blowfish key should be derived using bcrypt or scrypt. Both defeat parallelization on GPUs, and scrypt further defeats FPGAs.",
             "lesson": "软件需求工程",
             "kind": "答疑",
-            "sight": "团队可见",
             "time": "2014-03-22 10:34",
             "responseNum": 32
         },
@@ -335,7 +346,6 @@ $(document).ready(function(){
         topicDetailDiv.find(".x-content").html(topicDetail.topic.content);
         topicDetailDiv.find(".x-lesson").html(topicDetail.topic.lesson);
         topicDetailDiv.find(".x-kind").html(topicDetail.topic.kind);
-        topicDetailDiv.find(".x-sight").html(topicDetail.topic.sight);
         topicDetailDiv.find(".x-time").html(topicDetail.topic.time);
         topicDetailDiv.find(".x-responseNum").html(topicDetail.topic.responseNum);
         topicDetailDiv.find(".glyphicon-trash").click(function () {
@@ -385,25 +395,68 @@ $(document).ready(function(){
     });
 
 /////////////////////////////////////////////////////////////////////////////////////////////
+    var teacherIntroductionEditor = UE.getEditor("teacherIntroductionEditor", {
+        initialFrameHeight:500,
+        // isShow: false
+    })
+
     $("#teacherForm").submit(function () {
         var data = {}
         data["teacherId"] = $("#teacherId").val()
         data["teacherName"] = $("#teacherName").val()
-        data["teacherIntroduction"] = $("#teacherIntroduction").val()
+        data["teacherIntroduction"] = teacherIntroductionEditor.getContent()
         $.post("addTeacher.php", data)
     })
 
 /////////////////////////////////////////////////////////////////////////////////////////////
+    $("input").focus(function () {
+        $(".edui-editor:visible").hide()
+        $(".editor:hidden").show()
+        if ($(this).hasClass("editor")) {
+            $(this).slideUp()
+            $(this).next().find(".edui-editor").fadeIn()
+        }
+    })
+    $(".ueEditor").each(function () {
+        var ueEditor = UE.getEditor($(this).attr("id"), {
+            initialFrameHeight:100,
+            isShow: false
+        })
+        ueEditor.addListener("contentChange", function () {
+            $("#" + this.key).prev().attr("value", this.getContent())
+        })
+    })
+/*    var backgroundEditor = UE.getEditor("backgroundEditor", {
+        initialFrameHeight:100,
+        isShow: false
+    })
+    var classHourEditor = UE.getEditor("classHourEditor", {
+        initialFrameHeight:50,
+        isShow: false
+    })
+    var teachPlanEditor = UE.getEditor("teachPlanEditor", {
+        initialFrameHeight:50,
+        isShow: false
+    })
+    var textBookEditor = UE.getEditor("textBookEditor", {
+        initialFrameHeight:50,
+        isShow: false
+    })
+    var evaluationEditor = UE.getEditor("evaluationEditor", {
+        initialFrameHeight:80,
+        isShow: false
+    })*/
+
     $("#lessonForm").submit(function () {
         var data = {}
         data["lessonId"] = $("#lessonId").val()
         data["lessonName"] = $("#lessonName").val()
         var lessonInfo = {}
-        lessonInfo["国际国内背景"] = $("#background").val()
-        lessonInfo["课时安排"] = $("#classHour").val()
-        lessonInfo["教学计划"] = $("#teachplan").val()
-        lessonInfo["使用教材"] = $("#textBook").val()
-        lessonInfo["考核方式"] = $("#evaluation").val()
+        lessonInfo["国际国内背景"] = backgroundEditor.getContent()
+        lessonInfo["课时安排"] = classHourEditor.getContent()
+        lessonInfo["教学计划"] = teachPlanEditor.getContent()
+        lessonInfo["使用教材"] = textBookEditor.getContent()
+        lessonInfo["考核方式"] = evaluationEditor.getContent()
         data["lessonInfo"] = JSON.stringify(lessonInfo)
         $.post("addLesson.php", data)
     })
@@ -474,9 +527,13 @@ $(document).ready(function(){
     }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
+    var updateInfoEditor = UE.getEditor("updateInfoEditor", {
+        initialFrameHeight:200,
+    })
+
     $("#updataForm").submit(function () {
         var data = {}
-        data["updateInfo"] = $("#updataInfo").val()
+        data["updateInfo"] = updataInfoEditor.getContent()
         $.post("addUpdataInfo.php", data)
     })
 

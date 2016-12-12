@@ -4,11 +4,15 @@
     <title>管理员</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 
     <link rel="stylesheet" href="w3.css">
     <link rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css">
     <script src="../jquery/jquery-3.1.1.min.js"></script>
     <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" charset="utf-8" src="../ueditor/ueditor.all.min.js"> </script>
+    <script type="text/javascript" charset="utf-8" src="../ueditor/lang/zh-cn/zh-cn.js"></script>
 
     <!--
     <link rel="stylesheet" href="http://w3schools.bootcss.com/lib/w3.css">
@@ -159,7 +163,6 @@
                                         <div class="col-md-8">
                                             <span class="label label-primary x-lesson"></span>
                                             <span class="label label-success x-kind"></span>
-                                            <span class="label label-info x-sight"></span>
                                         </div>
                                         <div class="col-md-2">
                                             <span class="x-time"></span>
@@ -202,7 +205,6 @@
                                             <div class="col-md-8">
                                                 <span class="label label-primary x-lesson"></span>
                                                 <span class="label label-success x-kind"></span>
-                                                <span class="label label-info x-sight"></span>
                                             </div>
                                             <div class="col-md-2">
                                                 <span class="x-time"></span>
@@ -242,8 +244,14 @@
                                 <form class="form-horizontal" id="classForm">
                                     <div class="form-group">
                                         <label class="control-label col-sm-2">课程号：</label>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-6">
                                             <input type="text" class="form-control" id="lessonIdClass" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="control-label col-sm-2">授课教师ID：</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="teacherIdClass" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -262,7 +270,14 @@
                                     <div class="form-group">
                                         <label class="control-label col-sm-2">上课地点：</label>
                                         <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="lessonAddress" required>
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="lessonAddress1" required placeholder="地点一">
+                                                </div>
+                                                <div class="col-sm-5">
+                                                    <input type="text" class="form-control" id="lessonAddress2" placeholder="地点二（选填）">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -284,20 +299,21 @@
                                 <form class="form-horizontal" id="teacherForm">
                                     <div class="form-group">
                                         <label class="control-label col-sm-2">教师ID:</label>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-6">
                                             <input type="text" class="form-control" id="teacherId" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-sm-2">教师姓名:</label>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-6">
                                             <input type="text" class="form-control" id="teacherName" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-sm-2">介绍:</label>
-                                        <div class="col-sm-10">
-                                            <textarea class="form-control" rows="5" id="teacherIntroduction" required></textarea>
+                                        <div class="col-sm-9">
+                                            <!--<input type="text" class="form-control editor" id="teacherIntroduction" required>-->
+                                            <script type="text/plain" id="teacherIntroductionEditor"></script>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -319,49 +335,58 @@
                                 <form class="form-horizontal" id="lessonForm">
                                     <div class="form-group">
                                         <label  class="control-label col-sm-2">课程号：</label>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-6">
                                             <input type="text" class="form-control" id="lessonId" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label  class="control-label col-sm-2">课程名：</label>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-6">
                                             <input type="text" class="form-control" id="lessonName" required>
                                         </div>
                                     </div>
+                                    <div class="row">
+                                        <div class="col-sm-10 col-sm-offset-1">
                                     <fieldset>
                                         <legend><h4>课程信息</h4></legend>
                                         <div class="form-group">
-                                            <label  class="control-label col-sm-2">国际国内背景：</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="background">
+                                            <label  class="control-label col-sm-3">国际国内背景：</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control editor" id="background">
+                                                <script type="text/plain" class="ueEditor" id="backgroundEditor"></script>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label  class="control-label col-sm-2">课时安排：</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="classHour">
+                                            <label  class="control-label col-sm-3">课时安排：</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control editor" id="classHour">
+                                                <script type="text/plain" class="ueEditor" id="classHourEditor"></script>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label  class="control-label col-sm-2">教学计划：</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="teachPlan">
+                                            <label  class="control-label col-sm-3">教学计划：</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control editor" id="teachPlan">
+                                                <script type="text/plain" class="ueEditor" id="teachPlanEditor"></script>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label  class="control-label col-sm-2">使用教材：</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="textBook">
+                                            <label  class="control-label col-sm-3">使用教材：</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control editor" id="textBook">
+                                                <script type="text/plain" class="ueEditor" id="textBookEditor"></script>
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label  class="control-label col-sm-2">考核方式：</label>
-                                            <div class="col-sm-10">
-                                                <input type="text" class="form-control" id="evaluation">
+                                            <label  class="control-label col-sm-3">考核方式：</label>
+                                            <div class="col-sm-8">
+                                                <input type="text" class="form-control editor" id="evaluation">
+                                                <script type="text/plain" class="ueEditor" id="evaluationEditor"></script>
                                             </div>
                                         </div>
                                     </fieldset>
+                                        </div>
+                                    </div>
                                     <div class="form-group">
                                         <div class="col-sm-10 col-sm-offset-2">
                                             <button type="submit" class="btn btn-primary">提交</button>
@@ -381,13 +406,13 @@
                                 <form class="form-horizontal" id="linkForm">
                                     <div class="form-group">
                                         <label class="control-label col-sm-2">链接名：</label>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-9">
                                             <input type="text" class="form-control" id="linkName" required>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="control-label col-sm-2">链接地址：</label>
-                                        <div class="col-sm-10">
+                                        <div class="col-sm-9">
                                             <input type="text" class="form-control" id="linkAddress" required>
                                         </div>
                                     </div>
@@ -399,7 +424,7 @@
                                 </form>
 
                                 <fieldset>
-                                    <legend>已有链接：</legend>
+                                    <legend>已有链接</legend>
                                     <table class="table table-hover table-responsive table-condensed table-striped" id="linkTable">
                                         <tbody>
                                         <tr class="old">
@@ -424,11 +449,12 @@
                                     <div class="form-group">
                                         <label class="control-label col-sm-2">更新信息：</label>
                                         <div class="col-sm-10">
-                                            <textarea class="form-control" rows="7" id="updataInfo" required></textarea>
+                                            <!--<textarea class="form-control" rows="7" id="updataInfo" required></textarea>-->
+                                            <script type="text/plain" id="updateInfoEditor"></script>
                                         </div>
                                     </div>
                                     <div class="form-group" id="updateForm">
-                                        <div class="col-sm-10 col-sm-offset-2">
+                                        <div class="col-sm-9 col-sm-offset-2">
                                             <button type="submit" class="btn btn-primary">提交</button>
                                         </div>
                                     </div>
