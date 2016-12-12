@@ -99,7 +99,13 @@
 
 		$arr = [];
 		while($row = mysqli_fetch_assoc($result)) {
-			$x['re_username']=$row['user_name'];
+			$x['username']=$row['user_name'];
+			if($row['re_id']!='0'){
+				$resu=$conn->query("select user_name from user_table where id='".$row['re_id']."';");
+				$ro=mysqli_fetch_assoc($resu);
+				$x['re_username']=$ro['user_name'];
+			}else
+				$x['re_username']='0';
 			$x['re_content']=$row['content'];
 			$x['re_time']=$row['time'];
 			$x['re_floor']=(int)$row['re_floor'];
