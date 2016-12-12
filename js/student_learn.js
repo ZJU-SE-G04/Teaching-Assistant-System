@@ -113,23 +113,29 @@ $(document).ready(
                                 break;
                         }
                         var item_ele = $("<div class='each_datum'></div>");
-                        var preview_link = $("<a></a>").text(item['courseware_name']);
+                        var preview_link = $("<a></a>").attr("title", item['courseware_link']).text(item['courseware_name']);
 
                         //如果是视频
                         if(item_kind === "教学视频") {
                             preview_link.click(function () {
-                                var video_area = $("<video id='my-video' class='video-js' controls preload='auto' width='1280' height='528' data-setup='{}'></video>");
-                                video_area.css("width", 800).css("height", "450");
-                                video_area.append($("<source>").attr("src", item['courseware_link']));
-                                video_area.append($('<p class="vjs-no-js"> To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a> </p>'));
-                                $("#courseware_nonpreview_area").hide();
-
-                                $("#courseware_pane video").remove();
-                                $("#courseware_pane").append(video_area);
+                                window.open("watch_video.html?vid=" + $(this).attr("title"));
+                                // var video_area = $("<video id='my-video' class='video-js' controls autoplay preload='none' width='1280' height='528' data-setup='{}'></video>");
+                                // video_area.css("width", 800).css("height", "450");
+                                // video_area.append($("<source>").attr("src", $(this).attr("title")));
+                                // video_area.append($('<p class="vjs-no-js"> To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a> </p>'));
+                                // $("#courseware_nonpreview_area").hide();
+                                //
+                                // $("#courseware_pane video").remove();
+                                // $("#courseware_pane").append(video_area);
+                                // // videojs('my-video').ready(function () {
+                                // //      this.on('timeupdate', function () {
+                                // //          console.log("the time was updated to: " + this.currentTime());
+                                // //      })
+                                // // })
                             })
                         }
                         //如果是ppt
-                        if(item_kind == "课件") {
+                        if(item_kind === "课件") {
                             preview_link
                             //TODO
                         }
@@ -191,6 +197,8 @@ $(document).ready(
                 url: "posts_handler.php?action=fetchDetail&topic_id=" + post_id,
                 success: function (result) {
                     $("#posts_border_page").hide();
+                    $("#discuss_home_page").hide();
+                    $("#issue_post_page").hide();
                     $("#post_detail_page").show();
 
                     $(".post-detail>.f-post-title").text(result['title']);
@@ -200,14 +208,18 @@ $(document).ready(
                 }
             })
         }
-        //发布帖子
+
+        /****************************************发布帖子****************************************/
+
         $("#submit_post_btn").click(function () {
             var flag = true;
-            var title_input = $("input[name='post_title']");
-            if (title_input.text() === "") {
+            var title_input = $("#post_title_input");
+            if (title_input.val() === "") {
                 title_input.after("帖子标题不能为空");
                 flag = false;
             }
+            console.log(title_input.val());
+
             var border_selector = $("#sel_post_catagory_ddMenu");
             console.log(border_selector.text());
             if (border_selector.text() === "") {
@@ -217,31 +229,41 @@ $(document).ready(
             if (flag !== true) return;
 
             var ueContent = UE.getEditor('container').getContent();
-            $.post("getUEditorContent.php", {myEditor: ueContent}, function (result, status) {
-                alert(result);
+            $.post("getUEditorContent.php", {title: title_input.val(),border:border_selector.text(), myEditor: ueContent}, function (result, status) {
+                // alert(result);
+                $("#test_div").html(result);
             });
         });
+
+        $("#select_posts_catagory li").click(function () {
+            $("#sel_post_catagory_ddMenu div").text($(this).text());
+        })
 
         //显示发布帖子的界面
         $("#goto_issue_post_page_btn").click(function () {
             $("#discuss_home_page").hide();
             $("#issue_post_page").show();
-            $(".back_text a").click(function () {
-                $("#discuss_home_page").show();
-                $("#issue_post_page").hide();
-            });
+            $("#post_detail_page").hide();
+            $("#posts_border_page").hide();
+
         });
 
-        $("a[href='#join_team_pane']").click(function () {
-            $("#join_team_by_apply_pane").show();
-            $("#join_team_by_pass_pane").hide();
+        //后退按钮，返回讨论区主界面
+        $(".back_to_discuss_home_page a").click(function () {
+            $("#discuss_home_page").show();
+            $("#issue_post_page").hide();
+            $("#post_detail_page").hide();
+            $("#posts_border_page").hide();
         });
 
         //显示讨论区主界面
         $("a[href='#discuss_area_pane']").click(function () {
             $("#discuss_home_page").show();
             $("#issue_post_page").hide();
+            $("#posts_border_page").hide();
+            $("#post_detail_page").hide();
         });
+
 
         $(".add-post-comment").click(function () {
             $(this).hide();
@@ -254,24 +276,14 @@ $(document).ready(
         });
 
 
-        /****************************************加入队伍*************************************/
-        //点击直接加入队伍的连接，通过团队名字和密码加入
-        $("#direct_join_team_link").click(function () {
-            $("#join_team_by_apply_pane").hide();
-            $("#join_team_by_pass_pane").show();
-        })
-
         //设置初始状态
 
         //讨论区
         $("#discuss_home_page").hide();
-        $("#issue_post_page").hide();
+        $("#issue_post_page").show();
         $("#posts_border_page").hide();
-        $("#post_detail_page").show();
+        $("#post_detail_page").hide();
 
 
-        //加入队伍区
-        $("#join_team_by_apply_pane").show();
-        $("#join_team_by_pass_pane").hide();
     });
 
