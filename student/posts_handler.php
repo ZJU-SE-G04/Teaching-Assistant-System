@@ -71,7 +71,7 @@
 		$i=0;$j=0;
 		while($row = mysqli_fetch_assoc($result)) {
 			if($i>=$offset){
-				$x['user_name']=$row['user_name'];
+				$x['username']=$row['user_name'];
 				$x['content']=$row['content'];
 				$x['time']=$row['time'];
 				$x['floor']=(int)$row['floor'];
