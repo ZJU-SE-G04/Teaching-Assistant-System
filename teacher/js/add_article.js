@@ -347,9 +347,6 @@ function deleteSecondComment() {
     var floor=posts_list_item.find(".x-floor").text();
 
     var re_floor=post_comment.find(".x-re-floor").text();
-    alert(re_floor);
-
-
 
     $.ajax({
        type:"GET",
