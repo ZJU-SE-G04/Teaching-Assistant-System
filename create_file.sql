@@ -29,6 +29,8 @@ create table team_table(
 	team_id int not null auto_increment,#队伍ID
 	team_name varchar(20) unique,#队伍名
 	team_password varchar(16),#队伍密码
+	max int,#容量
+	now int,#现人数
 	primary key(team_id)
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 #组队表：
