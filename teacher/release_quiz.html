@@ -15,8 +15,14 @@
     <script src="release_quiz_detail.js"></script>
 </head>
 <body>
-<h3 class="page-header">发布新作业</h3>
+<h3 class="page-header" id="quizTitle">发布新作业</h3>
 <form action="#" class="form-horizontal" id="releaseQuizForm">
+    <div class="form-group">
+        <label for="optionQuestionCount" class="col-sm-1 control-label">测试名称</label>
+        <div class="col-sm-2">
+            <input type="text" class="form-control" id="quizName" placeholder="">
+        </div>
+    </div>
     <div class="form-group">
         <label for="optionQuestionCount" class="col-sm-1 control-label">选择题数量</label>
         <div class="col-sm-1">
