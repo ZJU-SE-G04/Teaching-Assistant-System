@@ -30,6 +30,11 @@
     <script src="js/class_manage.js"></script>
     <script src="js/courseware.js"></script>
 
+    <!--以下是Li Boao导入的js文件-->
+    <link rel="stylesheet" href="../css/content.css">
+    <script src="get_notice.js"></script>
+
+
     <!--bootstrap file input-->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="../bootstrap-3.3.7-dist/bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
@@ -78,7 +83,34 @@
                     </ul>
             </div>
             <div class="col-md-10 tab-content" id="tab_content_area">
-                <div id="notice" class="tab-pane in active">aa</div>
+                <div id="notice" class="tab-pane in active">
+                    <h3 class="page-header">发布通知</h3>
+                    <form action="#" method="post">
+                        <div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="title" placeholder="输入通知标题">
+                            </div>
+                            <div class="form-group">
+                                <textarea name="content" id="content" rows="3" class="form-control" placeholder="输入通知内容"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 发布
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <br>
+
+                    <div id="noticeDiv">
+                    </div>
+
+
+
+
+
+
+                </div>
                 <div id="article" class="tab-pane">
                     <div><button  class='btn btn-primary' id='write_article_button' onclick="showWriteArticle()" >撰写文章</button></div>
                     <div class="panel-group" style="padding-top:35px" id="articleLoop">
