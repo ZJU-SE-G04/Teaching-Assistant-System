@@ -230,8 +230,9 @@
 
 
             <div id="courseware_pane" class="tab-pane">
+                <form method="get">
 
-                <select class="form-control">
+                <select name="courseware_kind" class="form-control">
                     <option>课件</option>
                     <option>模板</option>
                     <option>参考资料</option>
@@ -239,13 +240,16 @@
                     <option>教学视频</option>
                     <option>教学音频</option>
                 </select>
-                <input id="input-id" type="file" class="file" data-preview-file-type="text" >
 
+                <input id="input-id" name="input-id" type="file" class="file" data-preview-file-type="text" >
+                </form>
 
 
                 <!--<form action="add_courseware?courseware_name=xxx" method="post" enctype="multipart/form-data">-->
                     <!--<input type="file" name='file'><input type='submit' value='submit'>-->
                 <!--</form>被注释掉的原始的上传文件表单-->
+
+
 
 
 

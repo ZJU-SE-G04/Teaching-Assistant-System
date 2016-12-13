@@ -300,6 +300,7 @@ function showSecondComment() {
 
             var post_comment_area_body=posts_list_item.find(".post-comment-area-body");
             post_comment_area_body.find(".x-second-comment-number").html(second_comment_number);
+            post_comment_area_body.children(".new").remove();
             for (var i in secondComment["second_comment"]) {
                 var tmp = post_comment_area_body.children(".old").clone().removeClass("old").addClass("new").show();
                 var x=secondComment["second_comment"][i];

@@ -5,16 +5,6 @@
 $(document).ready(
     function () {
 
-        $("#input-id").fileinput({
-            uploadAsync: false,
-            uploadUrl: "/path/to/upload.php" // your upload server url
-            uploadExtraData: function() {
-                return {
-                    userid: $("#userid").val(),
-                    username: $("#username").val()
-                };
-            }
-        });
         
 
         //课件资料页面改变下拉列表项的箭头
