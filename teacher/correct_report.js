@@ -17,7 +17,16 @@ function displayCorrect() {
     document.getElementById("correct_report1").style.display = "inline";
 }
 
+function test1() {
+    alert("hello1");
+}
 
+function test2() {
+    alert("hello2");
+}
+function test3() {
+    alert("hello3");
+}
 function correctReport() {
     var JSON_STR = [
         {
@@ -125,4 +134,3 @@ function correctReport() {
     }
 }
 
-window.onload = correctReport;
