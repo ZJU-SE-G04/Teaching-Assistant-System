@@ -18,6 +18,10 @@ var user_id="111111";
 window.onload = function() { //在前端存_id的值
     $(".c-course-id").attr("value",course_id);
 }
+window.onload = function() { //在前端存_id的值
+    $(".c-class-id").attr("value",class_id);
+}
+
 
 
 //--------- 显示当前课程的所有班级---------

@@ -74,8 +74,7 @@ function showStuInfo(){
                 var add_multi_stu=document.createElement("div");
                 add_multi_stu.className="row";
                 add_multi_stu.id="add_multi_stu";
-                add_multi_stu.innerHTML= "<div  class='col-sm-3' id='add_multi_stu_hint'> " +
-                    "<form action='add_stu_excel.php' method='post' enctype='multipart/form-data'><input type='file' name='file'><input type='submit' value='submit'></form></div> " +
+                add_multi_stu.innerHTML= "<div  class='col-sm-3' id='add_multi_stu_hint'></div> " +
                     "<div  class='col-sm-1' id='add_stu_select' >  </div> ";
                 parent.appendChild(add_multi_stu);
             }
