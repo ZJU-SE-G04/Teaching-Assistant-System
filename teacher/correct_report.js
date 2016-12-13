@@ -45,6 +45,13 @@ function correctReport() {
 
     var stuReport = JSON_STR;
 
+    var root = document.getElementById("report");
+    root.removeChild();
+    var rootChild = document.getElementById("correct_report2");
+
+    root.appendChild(rootChild);
+    rootChild.id = "correct_report";
+
     var o1 = document.getElementById("firstCorrect");
     for(var i in stuReport) {
         if(stuReport[i].state=="0"){
@@ -119,4 +126,4 @@ function correctReport() {
     }
 }
 
-window.onload = correctReport;
+// window.onload = correctReport;

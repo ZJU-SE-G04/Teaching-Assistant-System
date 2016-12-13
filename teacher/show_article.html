@@ -83,7 +83,7 @@
                 <li class="tab-style"><a href="#article" data-toggle="tab" onclick="articleUpdate()">最新文章</a></li>
                 <li class="tab-style"><a href="#courseware_pane" data-toggle="tab">课程资料</a></li>
                 <li class="tab-style"><a href="#report" data-toggle="tab">报告与文档</a></li>
-                <li class="tab-style"><a href="#correct_report" data-toggle="tab">批改实验报告</a></li>
+                <!--<li class="tab-style"><a href="#correct_report" data-toggle="tab">批改实验报告</a></li>-->
                 <li class="tab-style"><a href="#exercise" data-toggle="tab">发布作业</a></li>
                 <li class="tab-style"><a href="#class" data-toggle="tab" onclick="show_class()">班级信息管理</a></li>
                 <li class="tab-style"><a href="#stuInfo" data-toggle="tab" onclick="showStuInfo()">学生信息</a></li>
@@ -227,6 +227,7 @@
                                 <script id="container" name="content" type="text/plain">
         这里写你的初始化内容
 
+
                                 </script>
                                 <!-- 配置文件 -->
                                 <!-- 实例化编辑器 -->
@@ -272,6 +273,7 @@
                     <div>
                         <script id="container_update" name="content" type="text/plain">
         这里写你的初始化内容
+
 
                         </script>
                         <!-- 配置文件 -->
@@ -417,7 +419,7 @@
                             <td>2016-11-05</td>
                             <td>15/90</td>
                             <td>
-                                <a href="http://www.baidu.com" class="icon-black" onclick="correctReport()">
+                                <a class="icon-black" onclick="correctReport()">
                                     <span class="glyphicon glyphicon-arrow-right"></span>
                                 </a>
                             </td>
@@ -428,7 +430,7 @@
                             <td>2016-11-10</td>
                             <td>90/90</td>
                             <td>
-                                <a href="http://www.baidu.com" class="icon-black">
+                                <a class="icon-black" onclick="correctReport()">
                                     <span class="glyphicon glyphicon-arrow-right"></span>
                                 </a>
                             </td>
@@ -449,7 +451,7 @@
 
             </div>
 
-            <div id="correct_report" class="tab-pane">
+            <div id="correct_report2" class="tab-pane">
                 <div>
                     <h3 class="page-header">批改实验报告</h3>
                     <table class="table text-center">
