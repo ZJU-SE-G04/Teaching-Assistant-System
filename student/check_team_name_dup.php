@@ -3,23 +3,17 @@
 	$teamName=$_GET['teamName'];
 	//$teamName='T1226';
 	
-	$state=false;
-	$msg='';
+	$state='';
 	
 	//先判断这人是不是已经有队伍了
 	$result=$conn->query('select * from team_table where team_name="'.$teamName.'";');
 	$row=mysqli_fetch_assoc($result);
 	if($row!=null){
-		$state=false;
-		$msg='队名重复！';
+		$state='false';
 	}else{
-		$state=true;
-		$msg='队名可用！';
+		$state='true';
 	}
-
-	$arr['state']=$state;
-	$arr['msg']=$msg;
-	echo json_encode($arr, JSON_UNESCAPED_UNICODE);
+	echo $state;
 	$conn->close();
 
 ?>
