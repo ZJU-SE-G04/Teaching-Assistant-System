@@ -9,7 +9,7 @@
 |获取某个板块的所有帖子列表|posts_handler.php?action=fetchAll&courseID=xxx&post_kind=0 | [{"topic_id","title":"xxx", "datetime":"xxx", "publisher":"xxx"}, ... ]|请求参数中post_kind,值为0表示老师答疑区,值为1表示综合讨论区,值为2表示小组答疑区
 |获取某个帖子的详情          |posts_handler.php?action=fetchDetail&topic_id=xxx    | {"title":"xxx", "content", "xxxxxx", "datetime":"xxx", "publisher":"xxx"}|无
 |获取某个帖子的所有一级回复(只获取第一页)|posts_handler.php?action=fetchRe&topic_id=xxx&offset=0&count=10 | [{"username":"xxx", "content":"xxxxxx", "time":"xxx", "floor": 1}, ...] |结果按照楼层号排序,从第offset条记录开始,返回count条记录
-|获取某个帖子的所有二级回复(只获取第一页)|posts_handler.php?action=fetchReRe&topic_id=xxx&floor=xxx        | [{"username":"xxx","re_username":"xxx", "re_content":"xxxxxx", "re_time":"xxx", "re_floor": 0}, ...]|无
+|获取某个一级回复的所有二级回复|posts_handler.php?action=fetchReRe&topic_id=xxx&floor=xxx        | [{"userid":"xxx", "username":"xxx","username_of_be_re":"xxx","id_of_be_re":"xxx", "re_content":"xxxxxx", "re_time":"xxx", "re_floor": 0}, ...]|id_of_be_re为0表示回复对象是一级回复的楼主
 ###选择测试或实验报告
 <table>
     <thead>
