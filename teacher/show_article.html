@@ -23,6 +23,13 @@
     <script type="text/javascript" src="../ueditor/ueditor.config.js"></script>
     <script type="text/javascript" src="../ueditor/ueditor.all.js"></script>
 
+    <!--以下是zhang shichao导入的js文件-->
+    <script src="js/add_TA.js"></script>
+    <script src="js/add_stu.js"></script>
+    <script src="js/add_article.js"></script>
+    <script src="js/class_manage.js"></script>
+    <script src="js/courseware.js"></script>
+
     <!--bootstrap file input-->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link href="../bootstrap-3.3.7-dist/bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
@@ -230,8 +237,8 @@
 
 
             <div id="courseware_pane" class="tab-pane">
-                <form method="get">
-
+                <form method="get" >
+                <input class="c-course-id" name="lesson_id" style="display: none">
                 <select name="courseware_kind" class="form-control">
                     <option>课件</option>
                     <option>模板</option>
@@ -241,13 +248,11 @@
                     <option>教学音频</option>
                 </select>
 
-                <input id="input-id" name="input-id" type="file" class="file" data-preview-file-type="text" >
+                <input id="input-id" name="file" type="file" class="file" multiple >
                 </form>
 
 
-                <!--<form action="add_courseware?courseware_name=xxx" method="post" enctype="multipart/form-data">-->
-                    <!--<input type="file" name='file'><input type='submit' value='submit'>-->
-                <!--</form>被注释掉的原始的上传文件表单-->
+
 
 
 
@@ -334,12 +339,7 @@
 <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script src="../jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 
-<!--以下是zhang shichao导入的js文件-->
-<script src="js/add_TA.js"></script>
-<script src="js/add_stu.js"></script>
-<script src="js/add_article.js"></script>
-<script src="js/class_manage.js"></script>
-<script src="js/courseware.js"></script>
+
 
 
 </body>
