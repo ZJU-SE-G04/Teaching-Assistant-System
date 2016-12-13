@@ -61,6 +61,9 @@ function correctReport() {
     var stuReport = JSON_STR;
 
     var o1 = document.getElementById("firstCorrect");
+    if(o1.firstChild) {
+        o1.innerHTML = null;
+    }
     for(var i in stuReport) {
         if(stuReport[i].state=="0"){
             var name = document.createElement("td");
@@ -93,6 +96,9 @@ function correctReport() {
 
 
     var o = document.getElementById("reportAllStudent");
+    if(o.firstChild) {
+        o.innerHTML = null;
+    }
 
     for (var i in stuReport) {
         var tr = document.createElement("tr");
