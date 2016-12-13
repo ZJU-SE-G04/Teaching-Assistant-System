@@ -104,7 +104,7 @@
                                             <span class="x-time"></span>
                                         </div>
                                         <div class="col-md-2 col-xs-4">
-                                            <span>评论&nbsp;&nbsp;</span><span class="badge w3-green x-commentNum clickable"></span>
+                                            <span>评论&nbsp;&nbsp;</span><span class="badge w3-green x-commentCnt clickable"></span>
                                         </div>
                                     </div>
                                 </div>
@@ -124,20 +124,38 @@
                                     <span class="glyphicon glyphicon-time"></span> 发表时间：<span class="x-time"></span>
                                 </small></h5><br>
                                 <p class="x-body"></p>
-                                <hr>
+                                <hr id="commentBegin">
                                 <div class="panel-group" id="commentLoop">
                                     <div class="panel panel-default old w3-hover-shadow">  <!--loop start-->
                                         <div class="panel-heading">
                                             <div class="row">
                                                 <div class="col-md-1">第&nbsp;<strong class="x-floor"></strong>&nbsp;楼</div>
-                                                <div class="col-md-2"><strong class="x-floorMaster"></strong><span class="is-reply"> 回复 第&nbsp;<strong class="x-re_floor"></strong>&nbsp;楼</span></div>
-                                                <div class="col-md-2"><span class="x-time"></span></div>
-                                                <div class="col-md-1 col-md-offset-6"><span class="glyphicon glyphicon-trash w3-large clickable"></span></div>
+                                                <div class="col-md-1"><strong class="x-floorMaster"></strong></div>
+                                                <div class="col-md-2"><span class="x-time small"></span></div>
+                                                <div class="col-md-8 text-right"><span class="glyphicon glyphicon-trash w3-large clickable"></span></div>
                                             </div>
                                         </div>
                                         <div class="panel-body"><p class="x-content"></p></div>
+                                        <div class="panel-footer">
+                                            <div class="well well-sm old">  <!--loooop start-->
+                                                <p><strong class="x-reFloorMaster"></strong>&nbsp;&nbsp;回复&nbsp;&nbsp;<strong class="x-reFloorGuest"></strong>&nbsp;:&nbsp;&nbsp;<span class="x-reContent"></span></p>
+                                                <div class="row">
+                                                    <div class="col-sm-6"><span class="x-reTime small"></span></div>
+                                                    <div class="col-sm-6 text-right"><span class="glyphicon glyphicon-trash clickable"></span></div>
+                                                </div>
+                                            </div>  <!--loooop end-->
+                                        </div>
                                     </div>  <!--loop end-->
                                 </div>
+                                <ul class="pagination pagination-md">
+                                    <li><a href="#commentBegin">上一页</a></li>
+                                    <li><a href="#commentBegin">1</a></li>
+                                    <li><a href="#commentBegin">2</a></li>
+                                    <li><a href="#commentBegin">3</a></li>
+                                    <li><a href="#commentBegin">4</a></li>
+                                    <li><a href="#commentBegin">5</a></li>
+                                    <li><a href="#commentBegin">下一页</a></li>
+                                </ul>
                             </div>
                         </div>
 
@@ -192,7 +210,7 @@
                                             <div class="col-md-2">
                                                 <span class="glyphicon glyphicon-user"></span>&nbsp;<small class="x-author"></small>
                                             </div>
-                                            <div class="col-md-1">
+                                            <div class="col-md-1 text-right">
                                                 <span class="glyphicon glyphicon-trash w3-large clickable"></span>
                                             </div>
                                         </div>
@@ -217,20 +235,40 @@
                                 </div>
                             </div>
 
+                            <hr id="responseBegin">
+
                             <div class="row">
                                 <div class="panel-group" id="topicResponseLoop">
                                     <div class="panel panel-default old w3-hover-shadow w3-animate-zoom">  <!--loop start-->
                                         <div class="panel-heading">
                                             <div class="row">
                                                 <div class="col-md-1">第&nbsp;<strong class="x-floor"></strong>&nbsp;楼</div>
-                                                <div class="col-md-2"><strong class="x-floorMaster"></strong><span class="is-reply"> 回复 第&nbsp;<strong class="x-reFloor"></strong>&nbsp;楼</span></div>
-                                                <div class="col-md-2"><span class="x-time"></span></div>
-                                                <div class="col-md-1 col-md-offset-6"><span class="glyphicon glyphicon-trash w3-large clickable"></span></div>
+                                                <div class="col-md-1"><strong class="x-floorMaster"></strong></div>
+                                                <div class="col-md-2"><span class="x-time small"></span></div>
+                                                <div class="col-md-8 text-right"><span class="glyphicon glyphicon-trash w3-large clickable"></span></div>
                                             </div>
                                         </div>
                                         <div class="panel-body"><p class="x-content"></p></div>
+                                        <div class="panel-footer">
+                                            <div class="well well-sm old">  <!--loooop start-->
+                                                <p><strong class="x-reFloorMaster"></strong>&nbsp;&nbsp;回复&nbsp;&nbsp;<strong class="x-reFloorGuest"></strong>&nbsp;:&nbsp;&nbsp;<span class="x-reContent"></span></p>
+                                                <div class="row">
+                                                    <div class="col-sm-6"><span class="x-reTime small"></span></div>
+                                                    <div class="col-sm-6 text-right"><span class="glyphicon glyphicon-trash clickable"></span></div>
+                                                </div>
+                                            </div>  <!--loooop end-->
+                                        </div>
                                     </div>  <!--loop end-->
                                 </div>
+                                <ul class="pagination pagination-md">
+                                    <li><a href="#responseBegin">上一页</a></li>
+                                    <li><a href="#responseBegin">1</a></li>
+                                    <li><a href="#responseBegin">2</a></li>
+                                    <li><a href="#responseBegin">3</a></li>
+                                    <li><a href="#responseBegin">4</a></li>
+                                    <li><a href="#responseBegin">5</a></li>
+                                    <li><a href="#responseBegin">下一页</a></li>
+                                </ul>
                             </div>
                         </div>
 

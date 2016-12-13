@@ -30,3 +30,8 @@ fieldset {
     margin-bottom: 10px;
 }
 
+.well {
+    margin-bottom: 0;
+    font-size: smaller;
+}
+

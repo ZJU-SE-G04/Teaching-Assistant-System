@@ -88,25 +88,25 @@ $(document).ready(function(){
 //////////////////////////////////////////////////////
     var articleRecords = [
         {
-            "article_id": 123456789,
+            "articleId": 123456789,
             "title": "Java之JDK环境配置过程（图）",
             "articleDigest": "1、在Windows7操作系统下，右键，点击属性，会出现如下界面 2、选择“高级系统设置”，如下 3、接着点击“环境变量”按钮，会出现如下图： 4、找到系统变量，点击“新建”按钮，这时会弹出一个窗口，分别在变量名和变量值框中填入：JAVA_HOME和JDK的路径C:\Program Files\Java\jdk1.7.0_05，点击“确定”；... ",
             "time": "2013-06-29 00:35",
-            "commentNum": 7
+            "commentCnt": 7
         },
         {
-            "article_id": 223456789,
+            "articleId": 223456789,
             "title": "Java之JDK环境配置过程（图）",
             "articleDigest": "1、在Windows7操作系统下，右键，点击属性，会出现如下界面 2、选择“高级系统设置”，如下 3、接着点击“环境变量”按钮，会出现如下图： 4、找到系统变量，点击“新建”按钮，这时会弹出一个窗口，分别在变量名和变量值框中填入：JAVA_HOME和JDK的路径C:\Program Files\Java\jdk1.7.0_05，点击“确定”；... ",
             "time": "2013-06-22 12:31",
-            "commentNum": 12
+            "commentCnt": 12
         },
         {
-            "article_id": 323456789,
+            "articleId": 323456789,
             "title": "Java之JDK环境配置过程（图）",
             "articleDigest": "1、在Windows7操作系统下，右键，点击属性，会出现如下界面 2、选择“高级系统设置”，如下 3、接着点击“环境变量”按钮，会出现如下图： 4、找到系统变量，点击“新建”按钮，这时会弹出一个窗口，分别在变量名和变量值框中填入：JAVA_HOME和JDK的路径C:\Program Files\Java\jdk1.7.0_05，点击“确定”；... ",
             "time": "2013-06-09 10:12",
-            "commentNum": 9
+            "commentCnt": 9
         },
     ];
     /*
@@ -124,79 +124,51 @@ $(document).ready(function(){
         for (var i in articleRecords) {
             var x = articleRecords[i];
             var tmp = $("#articleLoop").children(".old").clone().removeClass("old").addClass("new").show();
-            tmp.attr("id", x.article_id);
+            // tmp.attr("id", x.article_id);
             tmp.find(".x-title").html(x.title);
             tmp.find(".x-contentDigest").html(x.articleDigest);
             tmp.find(".x-time").html(x.time);
-            tmp.find(".x-commentNum").html(x.commentNum);
+            tmp.find(".x-commentCnt").html(x.commentCnt);
+            tmp.find(".panel-heading").click((function (articleId, commentCnt) {
+                return function () { articleShow(articleId, commentCnt); }
+            })(x.articleId, x.commentCnt));
+
             $("#articleLoop").append(tmp);
         }
-        $("#articleLoop").find(".panel-heading").click(articleShow);  //all heading created
     }
     $("#article").click(articleUpdate);
 
 ////////////////////////////
     var articleDetail = {
-        "article": {
-            "title": "redis和memcache的区别",
-            "author": "AlexandraStan",
-            "time": "2016-11-09 09:45",
-            "body": "性能方面：没有必要过多的关心性能，因为二者的性能都已经足够高了。由于Redis只使用单核，而Memcached可以使用多核，所以在比较上，平均每一个核上Redis在存储小数据时比Memcached性能更高。而在100k以上的数据中，Memcached性能要高于Redis，虽然Redis最近也在存储大数据的性能上进行优化，但是比起Memcached，还是稍有逊色。说了这么多，结论是，无论你使用哪一个，每秒处理请求的次数都不会成为瓶颈。（比如瓶颈可能会在网卡）内存使用效率：使用简单的key-value存储的话，Memcached的内存利用率更高，而如果Redis采用hash结构来做key-value存储，由于其组合式的压缩，其内存利用率会高于Memcached。当然，这和你的应用场景和数据特性有关。数据持久化：如果你对数据持久化和数据同步有所要求，那么推荐你选择Redis，因为这两个特性Memcached都不具备。即使你只是希望在升级或者重启系统后缓存数据不会丢失，选择Redis也是明智的。数据结构:当然，最后还得说到你的具体应用需求。Redis相比Memcached来说，拥有更多的数据结构和并支持更丰富的数据操作，通常在Memcached里，你需要将数据拿到客户端来进行类似的修改再set回去。这大大增加了网络IO的次数和数据体积。在Redis中，这些复杂的操作通常和一般的GET/SET一样高效。所以，如果你需要缓存能够支持更复杂的结构和操作，那么Redis会是不错的选择。网络IO模型方面：Memcached是多线程，分为监听线程、worker线程，引入锁，带来了性能损耗。Redis使用单线程的IO复用模型，将速度优势发挥到最大，也提供了较简单的计算功能 。内存管理方面：Memcached使用预分配的内存池的方式，带来一定程度的空间浪费 并且在内存仍然有很大空间时，新的数据也可能会被剔除，而Redis使用现场申请内存的方式来存储数据，不会剔除任何非临时数据 Redis更适合作为存储而不是cache 。数据的一致性方面：Memcached提供了cas命令来保证.而Redis提供了事务的功能，可以保证一串 命令的原子性，中间不会被任何操作打断 。如果简单地比较Redis与Memcached的区别，大多数都会得到以下观点： 1 、Redis不仅仅支持简单的k/v类型的数据，同时还提供list，set，zset，hash等数据结构的存储。 2 、Redis支持数据的备份，即master-slave模式的数据备份。 3 、Redis支持数据的持久化，可以将内存中的数据保持在磁盘中，重启的时候可以再次加载进行使用。 4、Redis可以实现主从复制，实现故障恢复。 5、Redis的Sharding技术： 很容易将数据分布到多个Redis实例中。"
-        },
-        "comment": [
-            {
-                "article_id": 234234,
-                "floor": 12,
-                "re_floor": 5,
-                "floorMaster": "小明",
-                "time": "2016-11-10 18:03",
-                "content": "LZ我要成为你这样的男人 厉害！今年大三 看到你的博客 感觉自己什么都不会！能给点建议吗 比如现在该怎么选择前进的道路 或者 着重学习那些内容呢 现在学校还在上《算法设计》我现在就在算法设计的实验课上 无意间看到你的博客的 还是感觉楼主真的很牛逼啊 楼主大大 给点建议 指点指点明路。"
-            },
-            {
-                "article_id": 234234,
-                "floor": 11,
-                "re_floor": 0,
-                "floorMaster": "小明",
-                "time": "2016-10-14 18:43",
-                "content": "LZ我要成为你这样的男人 厉害！今年大三 看到你的博客 感觉自己什么都不会！能给点建议吗 比如现在该怎么选择前进的道路 或者 着重学习那些内容呢 现在学校还在上《算法设计》我现在就在算法设计的实验课上 无意间看到你的博客的 还是感觉楼主真的很牛逼啊 楼主大大 给点建议 指点指点明路。"
-            },
-            {
-                "article_id": 234234,
-                "floor": 7,
-                "re_floor": 3,
-                "floorMaster": "小明",
-                "time": "2016-9-14 18:43",
-                "content": "LZ我要成为你这样的男人 厉害！今年大三 看到你的博客 感觉自己什么都不会！能给点建议吗 比如现在该怎么选择前进的道路 或者 着重学习那些内容呢 现在学校还在上《算法设计》我现在就在算法设计的实验课上 无意间看到你的博客的 还是感觉楼主真的很牛逼啊 楼主大大 给点建议 指点指点明路。"
-            },
-            {
-                "article_id": 234234,
-                "floor": 1,
-                "re_floor": 0,
-                "floorMaster": "小明",
-                "time": "2016-5-10 9:33",
-                "content": "LZ我要成为你这样的男人 厉害！今年大三 看到你的博客 感觉自己什么都不会！能给点建议吗 比如现在该怎么选择前进的道路 或者 着重学习那些内容呢 现在学校还在上《算法设计》我现在就在算法设计的实验课上 无意间看到你的博客的 还是感觉楼主真的很牛逼啊 楼主大大 给点建议 指点指点明路。"
-            },
-        ]
+        "articleId": 1594234,
+        "title": "redis和memcache的区别",
+        "author": "AlexandraStan",
+        "time": "2016-11-09 09:45",
+        "body": "性能方面：没有必要过多的关心性能，因为二者的性能都已经足够高了。由于Redis只使用单核，而Memcached可以使用多核，所以在比较上，平均每一个核上Redis在存储小数据时比Memcached性能更高。而在100k以上的数据中，Memcached性能要高于Redis，虽然Redis最近也在存储大数据的性能上进行优化，但是比起Memcached，还是稍有逊色。说了这么多，结论是，无论你使用哪一个，每秒处理请求的次数都不会成为瓶颈。（比如瓶颈可能会在网卡）内存使用效率：使用简单的key-value存储的话，Memcached的内存利用率更高，而如果Redis采用hash结构来做key-value存储，由于其组合式的压缩，其内存利用率会高于Memcached。当然，这和你的应用场景和数据特性有关。数据持久化：如果你对数据持久化和数据同步有所要求，那么推荐你选择Redis，因为这两个特性Memcached都不具备。即使你只是希望在升级或者重启系统后缓存数据不会丢失，选择Redis也是明智的。数据结构:当然，最后还得说到你的具体应用需求。Redis相比Memcached来说，拥有更多的数据结构和并支持更丰富的数据操作，通常在Memcached里，你需要将数据拿到客户端来进行类似的修改再set回去。这大大增加了网络IO的次数和数据体积。在Redis中，这些复杂的操作通常和一般的GET/SET一样高效。所以，如果你需要缓存能够支持更复杂的结构和操作，那么Redis会是不错的选择。网络IO模型方面：Memcached是多线程，分为监听线程、worker线程，引入锁，带来了性能损耗。Redis使用单线程的IO复用模型，将速度优势发挥到最大，也提供了较简单的计算功能 。内存管理方面：Memcached使用预分配的内存池的方式，带来一定程度的空间浪费 并且在内存仍然有很大空间时，新的数据也可能会被剔除，而Redis使用现场申请内存的方式来存储数据，不会剔除任何非临时数据 Redis更适合作为存储而不是cache 。数据的一致性方面：Memcached提供了cas命令来保证.而Redis提供了事务的功能，可以保证一串 命令的原子性，中间不会被任何操作打断 。如果简单地比较Redis与Memcached的区别，大多数都会得到以下观点： 1 、Redis不仅仅支持简单的k/v类型的数据，同时还提供list，set，zset，hash等数据结构的存储。 2 、Redis支持数据的备份，即master-slave模式的数据备份。 3 、Redis支持数据的持久化，可以将内存中的数据保持在磁盘中，重启的时候可以再次加载进行使用。 4、Redis可以实现主从复制，实现故障恢复。 5、Redis的Sharding技术： 很容易将数据分布到多个Redis实例中。"
     }
     /*
     var articleDetail = "";
     */
-    function articleShow() {
+    function articleShow(articleId, commentCnt) {
         $("#articleLoop").hide();
         $("#articleDetail").show();
 
-        var id = $(this).parent().attr("id");
         /*
-        $.get("getArticleDetail.php?article_id="+id, function (data) {
+        $.get("getArticleDetail.php?article_id="+articleId, function (data) {
             articleDetail = JSON.parse(data);
         })
         */
-        $("#articleDetail").find(".x-title").html(articleDetail["article"]["title"]);
-        $("#articleDetail").find(".x-author").html(articleDetail["article"]["author"]);
-        $("#articleDetail").find(".x-time").html(articleDetail["article"]["time"]);
-        $("#articleDetail").find(".x-body").html(articleDetail["article"]["body"]);
+        $("#articleDetail").find(".x-title").html(articleDetail.title);
+        $("#articleDetail").find(".x-author").html(articleDetail.author);
+        $("#articleDetail").find(".x-time").html(articleDetail.time);
+        $("#articleDetail").find(".x-body").html(articleDetail.body);
 
-        $("#commentLoop").children(".new").remove();
+        showComments(articleDetail.articleId, 1);
+
+        var pageNum = Math.floor(commentCnt / 10);
+        initialPagination(pageCnt);
+
+/*        $("#commentLoop").children(".new").remove();
         for (var i in articleDetail["comment"]) {
             var x = articleDetail["comment"][i];
             var tmp = $("#commentLoop").children(".old").clone().removeClass("old").addClass("new").show();
@@ -212,13 +184,165 @@ $(document).ready(function(){
             tmp.find(".x-content").html(x.content);
             $("#commentLoop").append(tmp);
         }
-        $("#commentLoop").find(".glyphicon-trash").click(deleteComment);
+        $("#commentLoop").find(".glyphicon-trash").click(deleteComment);*/
     }
 
-    function deleteComment() {
-        var ids = $(this).attr("id");
-        $.get("deleteArticleComment.php?"+ids);
+    var pageComments = {
+        "articleId": 4568715,
+        "comments": [
+            {
+                "floor": 1,
+                "reCommentCnt": 1,
+                "floorMaster": "小明",
+                "time": "2016-11-10 18:03",
+                "content": "LZ我要成为你这样的男人 厉害！今年大三 看到你的博客 感觉自己什么都不会！能给点建议吗 比如现在该怎么选择前进的道路 或者 着重学习那些内容呢 现在学校还在上《算法设计》我现在就在算法设计的实验课上 无意间看到你的博客的 还是感觉楼主真的很牛逼啊 楼主大大 给点建议 指点指点明路。",
+                "reComments": [
+                    {
+                        "floor": 1,
+                        "Master": "小强",
+                        "reTo": "小明",
+                        "time": "2016-11-10 18:03",
+                        "content": "hahaha",
+                    }
+                ]
+            },
+            {
+                "floor": 2,
+                "reCommentCnt": 0,
+                "floorMaster": "小明",
+                "time": "2016-10-14 18:43",
+                "content": "LZ我要成为你这样的男人 厉害！今年大三 看到你的博客 感觉自己什么都不会！能给点建议吗 比如现在该怎么选择前进的道路 或者 着重学习那些内容呢 现在学校还在上《算法设计》我现在就在算法设计的实验课上 无意间看到你的博客的 还是感觉楼主真的很牛逼啊 楼主大大 给点建议 指点指点明路。",
+                "reComments": []
+            },
+            {
+                "floor": 3,
+                "reCommentCnt": 1,
+                "floorMaster": "小明",
+                "time": "2016-9-14 18:43",
+                "content": "LZ我要成为你这样的男人 厉害！今年大三 看到你的博客 感觉自己什么都不会！能给点建议吗 比如现在该怎么选择前进的道路 或者 着重学习那些内容呢 现在学校还在上《算法设计》我现在就在算法设计的实验课上 无意间看到你的博客的 还是感觉楼主真的很牛逼啊 楼主大大 给点建议 指点指点明路。",
+                "reComments": [
+                    {
+                        "floor": 1,
+                        "Master": "小强",
+                        "reTo": "小明",
+                        "time": "2016-11-10 18:03",
+                        "content": "hahaha",
+                    },
+                    {
+                        "floor": 2,
+                        "Master": "小强",
+                        "reTo": "小明",
+                        "time": "2016-11-10 18:03",
+                        "content": "hahaha",
+                    },
+                    {
+                        "floor": 3,
+                        "Master": "小强",
+                        "reTo": "小明",
+                        "time": "2016-11-10 18:03",
+                        "content": "hahaha",
+                    }
+                ]
+            },
+            {
+                "floor": 4,
+                "reCommentCnt": 3,
+                "floorMaster": "小明",
+                "time": "2016-5-10 9:33",
+                "content": "LZ我要成为你这样的男人 厉害！今年大三 看到你的博客 感觉自己什么都不会！能给点建议吗 比如现在该怎么选择前进的道路 或者 着重学习那些内容呢 现在学校还在上《算法设计》我现在就在算法设计的实验课上 无意间看到你的博客的 还是感觉楼主真的很牛逼啊 楼主大大 给点建议 指点指点明路。",
+                "reComments": [
+                    {
+                        "floor": 1,
+                        "Master": "小强",
+                        "reTo": "小明",
+                        "time": "2016-11-10 18:03",
+                        "content": "hahaha",
+                    },
+                    {
+                        "floor": 2,
+                        "Master": "小强",
+                        "reTo": "小明",
+                        "time": "2016-11-10 18:03",
+                        "content": "hahaha",
+                    },
+                    {
+                        "floor": 3,
+                        "Master": "小强",
+                        "reTo": "小明",
+                        "time": "2016-11-10 18:03",
+                        "content": "hahaha",
+                    },
+                    {
+                        "floor": 4,
+                        "Master": "小强",
+                        "reTo": "小明",
+                        "time": "2016-11-10 18:03",
+                        "content": "hahaha",
+                    }
+                ]
+            },
+        ]
+    };
+    // var pageComments = "";
+    function showComments(articleId, pageNum) {
+        var postData = {
+            "articleId": articleId,
+            "pageNum": pageNum
+        }
+/*        $.post("getPageComments.php", postData, function (data) {
+            pageComments = JSON.parse(data);
+        });*/
+
+        $("#commentLoop").children(".new").remove();
+        for (var i in pageComments.comments) {
+            var x = pageComments.comments[i];
+            var tmp = $("#commentLoop").children(".old").clone().removeClass("old").addClass("new").show();
+
+            tmp.find(".x-floor").html(x.floor);
+            tmp.find(".x-floorMaster").html(x.floorMaster);
+            tmp.find(".x-time").html(x.time);
+            tmp.find(".x-content").html(x.content);
+            tmp.find(".panel-heading").find(".glyphicon-trash").click((function (articleId, floor) {
+                return function () { deleteComment.call(this, articleId, floor); }
+            })(pageComments.articleId, x.floor));
+
+            var reBlock = tmp.find(".panel-footer");
+            reBlock.children(".new").remove();
+            for (var j in x.reComments) {
+                var y = x.reComments[j];
+                var reTmp = reBlock.children(".old").clone().removeClass("old").addClass("new").show();
+
+                reTmp.find(".x-reFloorMaster").html(y.Master);
+                reTmp.find(".x-reFloorGuest").html(y.reTo);
+                reTmp.find(".x-reContent").html(y.content);
+                reTmp.find(".x-reTime").html(y.time);
+                reTmp.find(".glyphicon-trash").click((function (articleId, floor, reFloor) {
+                    return function () { deleteReComment.call(this, articleId, floor, reFloor); }
+                })(pageComments.articleId, x.floor, y.floor));
+
+                reBlock.append(reTmp);
+            }
+
+            $("#commentLoop").append(tmp);
+        }
+    }
+
+    function deleteComment(articleId, floor) {
+        var postData = {
+            "articleId": articleId,
+            "floor": floor
+        }
+        $.post("deleteArticleComment.php", postData);
         $(this).parents(".panel").slideUp(function () { $(this).remove() });
+    }
+    function deleteReComment(articleId, floor, reFloor) {
+        var postData = {
+            "articleId": articleId,
+            "floor": floor,
+            "reFloor": reFloor
+        }
+        $.post("deleteArticleReComment.php", postData);
+        $(this).parents(".well").slideUp(function () { $(this).remove() });
     }
 
     $("#articleBack").click(articleUpdate);
@@ -227,31 +351,31 @@ $(document).ready(function(){
 ///////////////////////////////////////////////////////////////////////////////
     var topicRecords = [
         {
-            "id": 12312431,
+            "topicId": 12312431,
             "lesson": "软件工程管理",
             "kind": "答疑",
             "author": "小明",
             "time": "2014-08-22 20:14",
             "title": "关于计算最长的字符串长度，为什么s传不进去",
-            "responseNum": 13
+            "responseCnt": 13
         },
         {
-            "id": 35112441,
+            "topicId": 35112441,
             "lesson": "软件工程管理",
             "kind": "答疑",
             "author": "小明",
             "time": "2014-04-12 20:15",
             "title": "关于计算最长的字符串长度，为什么s传不进去",
-            "responseNum": 19
+            "responseCnt": 19
         },
         {
-            "id": 55312431,
+            "topicId": 55312431,
             "lesson": "软件工程管理",
             "kind": "答疑",
             "author": "小明",
             "time": "2014-03-22 10:34",
             "title": "关于计算最长的字符串长度，为什么s传不进去",
-            "responseNum": 53
+            "responseCnt": 53
         },
     ]
     /*
@@ -271,35 +395,32 @@ $(document).ready(function(){
         for (var i in topicRecords) {
             var x = topicRecords[i];
             var tmp = $("#topicLoop").children(".old").clone().removeClass("old").addClass("new").show();
-            tmp.attr("id", x.id);
             tmp.find(".x-title").html(x.title);
             tmp.find(".x-author").html(x.author);
             tmp.find(".x-lesson").html(x.lesson);
             tmp.find(".x-kind").html(x.kind);
             tmp.find(".x-time").html(x.time);
             tmp.find(".x-responseNum").html(x.responseNum);
+            tmp.find(".panel-heading").click((function (topicId, responseCnt) {
+                return function () { topicShow(topicId, responseCnt); }
+            })(x.topicId, x.responseCnt));
+
             $("#topicLoop").append(tmp);
         }
-        $("#topicLoop").find(".panel-heading").click(function () {
-            var topicId = $(this).parents(".panel").attr("id");
-            topicShow(topicId);
-        });
     }
     $("#topic").click(topicUpdate);
 
 /////////////////
     var topicDetail = {
-        topic: {
-            "id": 1224234,
-            "title": "Vim cryptmethod uses SHA-256 for password-based key derivation",
-            "author": "atopuncw",
-            "content": "On L421-L423 of src/blowfish.c, a sha256_key() function is created for password-based key derivation with a salt for blowfish. Unfortunately, even with 1,000 rounds, SHA-256 is designed to be fast, and can be parallelized with GPUs when brute forcing a file. Instead, the Blowfish key should be derived using bcrypt or scrypt. Both defeat parallelization on GPUs, and scrypt further defeats FPGAs.",
-            "lesson": "软件需求工程",
-            "kind": "答疑",
-            "time": "2014-03-22 10:34",
-            "responseNum": 32
-        },
-        response: [
+        "topicId": 1224234,
+        "title": "Vim cryptmethod uses SHA-256 for password-based key derivation",
+        "author": "atopuncw",
+        "content": "On L421-L423 of src/blowfish.c, a sha256_key() function is created for password-based key derivation with a salt for blowfish. Unfortunately, even with 1,000 rounds, SHA-256 is designed to be fast, and can be parallelized with GPUs when brute forcing a file. Instead, the Blowfish key should be derived using bcrypt or scrypt. Both defeat parallelization on GPUs, and scrypt further defeats FPGAs.",
+        "lesson": "软件需求工程",
+        "kind": "答疑",
+        "time": "2014-03-22 10:34",
+        "responseNum": 32
+/*        response: [
             {
                 "floor": 8,
                 "floorMaster": "小明",
@@ -321,14 +442,14 @@ $(document).ready(function(){
                 "time": "2016-3-21 5:34",
                 "content": "Indeed. Bad recommendation on my part, although I wouldn't recommend Argon2 quite yet either. Scrypt seems to be the most fitting here."
             },
-        ]
+        ]*/
     }
 
     /*
     var topicDetail = {};
     */
 
-    function topicShow (topicId) {  //only called when clicking heading
+    function topicShow (topicId, responseCnt) {  //only called when clicking heading
         $("#topicLoop").hide();
         $("#topicDetail").show();
 
@@ -341,18 +462,23 @@ $(document).ready(function(){
         $("#topicBack").click(topicUpdate);
 
         var topicDetailDiv = $("#topicDetail").find(".panel:first");
-        topicDetailDiv.find(".x-title").html(topicDetail.topic.title);
-        topicDetailDiv.find(".x-author").html(topicDetail.topic.author);
-        topicDetailDiv.find(".x-content").html(topicDetail.topic.content);
-        topicDetailDiv.find(".x-lesson").html(topicDetail.topic.lesson);
-        topicDetailDiv.find(".x-kind").html(topicDetail.topic.kind);
-        topicDetailDiv.find(".x-time").html(topicDetail.topic.time);
-        topicDetailDiv.find(".x-responseNum").html(topicDetail.topic.responseNum);
+        topicDetailDiv.find(".x-title").html(topicDetail.title);
+        topicDetailDiv.find(".x-author").html(topicDetail.author);
+        topicDetailDiv.find(".x-content").html(topicDetail.content);
+        topicDetailDiv.find(".x-lesson").html(topicDetail.lesson);
+        topicDetailDiv.find(".x-kind").html(topicDetail.kind);
+        topicDetailDiv.find(".x-time").html(topicDetail.time);
+        topicDetailDiv.find(".x-responseNum").html(topicDetail.responseNum);
         topicDetailDiv.find(".glyphicon-trash").click(function () {
-            deleteTopic(this, topicDetail.topic.id)
+            deleteTopic(this, topicDetail.topicId)
         });
 
-        var topicResponseDiv = $("#topicResponseLoop");
+        showResponses(topicDetail.topicId, 1);
+
+        var pageCnt = Math.floor(responseCnt / 10);
+        initialPagination(pageCnt);
+
+/*        var topicResponseDiv = $("#topicResponseLoop");
         topicResponseDiv.find(".new").remove();
         for (var i in topicDetail.response) {
             var x = topicDetail.response[i];
@@ -368,6 +494,146 @@ $(document).ready(function(){
             tmp.find(".x-content").html(x.content);
             deleteResponse(tmp, topicDetail.topic.id, x.floor);
             topicResponseDiv.append(tmp);
+        }*/
+    }
+
+    var pageResponses = {
+        "topicId": 4568715,
+        "responses": [
+            {
+                "floor": 1,
+                "reResponseCnt": 1,
+                "floorMaster": "小明",
+                "time": "2016-11-10 18:03",
+                "content": "LZ我要成为你这样的男人 厉害！今年大三 看到你的博客 感觉自己什么都不会！能给点建议吗 比如现在该怎么选择前进的道路 或者 着重学习那些内容呢 现在学校还在上《算法设计》我现在就在算法设计的实验课上 无意间看到你的博客的 还是感觉楼主真的很牛逼啊 楼主大大 给点建议 指点指点明路。",
+                "reResponses": [
+                    {
+                        "floor": 1,
+                        "Master": "小强",
+                        "reTo": "小明",
+                        "time": "2016-11-10 18:03",
+                        "content": "hahaha",
+                    }
+                ]
+            },
+            {
+                "floor": 2,
+                "reResponseCnt": 0,
+                "floorMaster": "小明",
+                "time": "2016-10-14 18:43",
+                "content": "LZ我要成为你这样的男人 厉害！今年大三 看到你的博客 感觉自己什么都不会！能给点建议吗 比如现在该怎么选择前进的道路 或者 着重学习那些内容呢 现在学校还在上《算法设计》我现在就在算法设计的实验课上 无意间看到你的博客的 还是感觉楼主真的很牛逼啊 楼主大大 给点建议 指点指点明路。",
+                "reResponses": []
+            },
+            {
+                "floor": 3,
+                "reResponseCnt": 1,
+                "floorMaster": "小明",
+                "time": "2016-9-14 18:43",
+                "content": "LZ我要成为你这样的男人 厉害！今年大三 看到你的博客 感觉自己什么都不会！能给点建议吗 比如现在该怎么选择前进的道路 或者 着重学习那些内容呢 现在学校还在上《算法设计》我现在就在算法设计的实验课上 无意间看到你的博客的 还是感觉楼主真的很牛逼啊 楼主大大 给点建议 指点指点明路。",
+                "reResponses": [
+                    {
+                        "floor": 1,
+                        "Master": "小强",
+                        "reTo": "小明",
+                        "time": "2016-11-10 18:03",
+                        "content": "hahaha",
+                    },
+                    {
+                        "floor": 2,
+                        "Master": "小强",
+                        "reTo": "小明",
+                        "time": "2016-11-10 18:03",
+                        "content": "hahaha",
+                    },
+                    {
+                        "floor": 3,
+                        "Master": "小强",
+                        "reTo": "小明",
+                        "time": "2016-11-10 18:03",
+                        "content": "hahaha",
+                    }
+                ]
+            },
+            {
+                "floor": 4,
+                "reResponseCnt": 3,
+                "floorMaster": "小明",
+                "time": "2016-5-10 9:33",
+                "content": "LZ我要成为你这样的男人 厉害！今年大三 看到你的博客 感觉自己什么都不会！能给点建议吗 比如现在该怎么选择前进的道路 或者 着重学习那些内容呢 现在学校还在上《算法设计》我现在就在算法设计的实验课上 无意间看到你的博客的 还是感觉楼主真的很牛逼啊 楼主大大 给点建议 指点指点明路。",
+                "reResponses": [
+                    {
+                        "floor": 1,
+                        "Master": "小强",
+                        "reTo": "小明",
+                        "time": "2016-11-10 18:03",
+                        "content": "hahaha",
+                    },
+                    {
+                        "floor": 2,
+                        "Master": "小强",
+                        "reTo": "小明",
+                        "time": "2016-11-10 18:03",
+                        "content": "hahaha",
+                    },
+                    {
+                        "floor": 3,
+                        "Master": "小强",
+                        "reTo": "小明",
+                        "time": "2016-11-10 18:03",
+                        "content": "hahaha",
+                    },
+                    {
+                        "floor": 4,
+                        "Master": "小强",
+                        "reTo": "小明",
+                        "time": "2016-11-10 18:03",
+                        "content": "hahaha",
+                    }
+                ]
+            },
+        ]
+    };
+    // var pageResponses = "";
+    function showResponses(topicId, pageNum) {
+        var postData = {
+            "topicId": topicId,
+            "pageNum": pageNum
+        }
+        /*        $.post("getPageResponses.php", postData, function (data) {
+         pageResponses = JSON.parse(data);
+         });*/
+
+        $("#topicResponseLoop").children(".new").remove();
+        for (var i in pageResponses.responses) {
+            var x = pageResponses.responses[i];
+            var tmp = $("#topicResponseLoop").children(".old").clone().removeClass("old").addClass("new").show();
+
+            tmp.find(".x-floor").html(x.floor);
+            tmp.find(".x-floorMaster").html(x.floorMaster);
+            tmp.find(".x-time").html(x.time);
+            tmp.find(".x-content").html(x.content);
+            tmp.find(".panel-heading").find(".glyphicon-trash").click((function (topicId, floor) {
+                return function () { deleteResponse.call(this, topicId, floor); }
+            })(pageResponses.topicId, x.floor));
+
+            var reBlock = tmp.find(".panel-footer");
+            reBlock.children(".new").remove();
+            for (var j in x.reResponses) {
+                var y = x.reResponses[j];
+                var reTmp = reBlock.children(".old").clone().removeClass("old").addClass("new").show();
+
+                reTmp.find(".x-reFloorMaster").html(y.Master);
+                reTmp.find(".x-reFloorGuest").html(y.reTo);
+                reTmp.find(".x-reContent").html(y.content);
+                reTmp.find(".x-reTime").html(y.time);
+                reTmp.find(".glyphicon-trash").click((function (topicId, floor, reFloor) {
+                    return function () { deleteReResponse.call(this, topicId, floor, reFloor); }
+                })(pageResponses.topicId, x.floor, y.floor));
+
+                reBlock.append(reTmp);
+            }
+
+            $("#topicResponseLoop").append(tmp);
         }
     }
 
@@ -375,13 +641,22 @@ $(document).ready(function(){
         $.get("deleteTopic.php?topic_id="+topicId);
         $(thisElement).parents(".panel").slideUp(function () { topicUpdate() });
     }
-    function deleteResponse(tmp, topicId, floor) {  //trash icon
-        tmp.find(".glyphicon-trash").click(function () {
-            $.get("deleteResponse.php?topic_id=" + topicId + "&floor=" + floor);
-            tmp.slideUp(function () {
-                $(this).remove()
-            });
-        })
+    function deleteResponse(topicId, floor) {  //trash icon
+        var postData = {
+            "topicId": topicId,
+            "floor": floor
+        }
+        $.post("deleteTopicResponse.php", postData);
+        $(this).parents(".panel").slideUp(function () { $(this).remove() });
+    }
+    function deleteReResponse(topicId, floor, reFloor) {
+        var postData = {
+            "topicId": topicId,
+            "floor": floor,
+            "reFloor": reFloor
+        }
+        $.post("deleteTopicReResponse.php", postData);
+        $(this).parents(".well").slideUp(function () { $(this).remove() });
     }
 
 /////////////////////////////////////////////////////////////////////////////////////////////
@@ -452,11 +727,11 @@ $(document).ready(function(){
         data["lessonId"] = $("#lessonId").val()
         data["lessonName"] = $("#lessonName").val()
         var lessonInfo = {}
-        lessonInfo["国际国内背景"] = backgroundEditor.getContent()
-        lessonInfo["课时安排"] = classHourEditor.getContent()
-        lessonInfo["教学计划"] = teachPlanEditor.getContent()
-        lessonInfo["使用教材"] = textBookEditor.getContent()
-        lessonInfo["考核方式"] = evaluationEditor.getContent()
+        lessonInfo["国际国内背景"] = UE.getEditor("backgroundEditor").getContent()
+        lessonInfo["课时安排"] = UE.getEditor("classHourEditor").getContent()
+        lessonInfo["教学计划"] = UE.getEditor("teachPlanEditor").getContent()
+        lessonInfo["使用教材"] = UE.getEditor("textBookEditor").getContent()
+        lessonInfo["考核方式"] = UE.getEditor("evaluationEditor").getContent()
         data["lessonInfo"] = JSON.stringify(lessonInfo)
         $.post("addLesson.php", data)
     })
