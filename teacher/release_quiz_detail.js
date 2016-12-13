@@ -1,10 +1,10 @@
 /**
  * Created by Rexxar on 2016/11/20.
  */
-var o = document.body;
+
 
 function createDiv() {
-    var o = document.body;
+    var o = document.getElementById("exercise");
 
     var quizName = document.getElementById("quizName").value;
     var optionQuestionCount = document.getElementById("optionQuestionCount").value;

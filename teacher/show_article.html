@@ -33,7 +33,7 @@
     <!--以下是Li Boao导入的js文件-->
     <link rel="stylesheet" href="../css/content.css">
     <script src="get_notice.js"></script>
-
+    <script src="release_quiz_detail.js"></script>
 
     <!--bootstrap file input-->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -60,7 +60,10 @@
         locale file as mentioned below -->
     <!--<script src="../bootstrap-3.3.7-dist/bootstrap-fileinput/js/locales/<lang>.js"></script>-->
 
-
+    <!--由Li Boao导入的CSS样式-->
+    <link rel="stylesheet" href="../css/content.css">
+    <link rel="stylesheet" href="../css/stu_learn.css">
+    <link rel="stylesheet" href="../css/docs.css">
 
 
     </head>
@@ -76,6 +79,7 @@
                         <li class="tab-style"><a href="#article" data-toggle="tab" onclick="articleUpdate()">最新文章</a></li>
                         <li class="tab-style"><a href="#courseware_pane" data-toggle="tab">课程资料</a></li>
                         <li class="tab-style"><a href="#report" data-toggle="tab">报告与文档</a></li>
+                        <li class="tab-style"><a href="#exercise" data-toggle="tab">作业</a></li>
                         <li class="tab-style"><a href="#class" data-toggle="tab" onclick="show_class()">班级信息管理</a></li>
                         <li  class="tab-style"><a href="#stuInfo" data-toggle="tab"  onclick="showStuInfo()">学生信息</a></li>
                         <li class="tab-style"><a href="#TAInfo" data-toggle="tab" id="TA" onclick="showTAInfo()" >助教信息</a></li>
@@ -428,6 +432,38 @@
 
             </div>
             <div id="exercise" class="tab-pane">
+
+                <h3 class="page-header" id="quizTitle">发布新作业</h3>
+                <form action="#" class="form-horizontal" id="releaseQuizForm">
+                    <div class="form-group">
+                        <label for="optionQuestionCount" class="col-sm-1 control-label">测试名称</label>
+                        <div class="col-sm-2">
+                            <input type="text" class="form-control" id="quizName" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="optionQuestionCount" class="col-sm-1 control-label">选择题数量</label>
+                        <div class="col-sm-1">
+                            <input type="text" class="form-control" id="optionQuestionCount" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="essayQuestionCount" class="col-sm-1 control-label">问答题数量</label>
+                        <div class="col-sm-1">
+                            <input type="text" class="form-control" id="essayQuestionCount" placeholder="">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2">
+                            <button type="submit" class="btn btn-primary" id="btnOK" onclick="createDiv()">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 确定
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+
+
             </div>
             <div id="class" class="tab-pane">
                 <!--<h3>你当前所在的班级是:<span id="course_name">xxx</span><span id="class_time">xxx</span></h3><h3>你当前所在的班级是:<span id="course_name">xxx</span><span id="class_time">xxx</span></h3>-->
