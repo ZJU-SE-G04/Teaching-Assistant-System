@@ -331,6 +331,101 @@
                     </div>
                 </div>
             <div id="report" class="tab-pane">
+                <form action="http://www.baidu.com" class="form-horizontal">
+                    <div class="">
+                        <h3 class="page-header">发布新实验报告</h3>
+                    </div>
+                    <div class="form-group" >
+                        <label for="id" class="col-sm-2 control-label margin-left--10">实验报告编号</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="id" placeholder="输入实验报告编号">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="name" class="col-sm-2 control-label margin-left--10">实验报告名称</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" id="name" placeholder="输入实验报告名称">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="deadline" class="col-sm-2 control-label margin-left--10">截止日期</label>
+                        <div class="col-sm-3">
+                            <input type="date" class="form-control" id="deadline">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="detail" class="col-sm-2 control-label margin-left--10">详细信息</label>
+                        <div class="col-sm-9">
+                            <textarea name="detail" id="detail" rows="3" class="form-control" placeholder="输入详细信息"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="fileTemplate" class="col-sm-2 control-label margin-left--10">实验报告模板</label>
+                        <div class="col-sm-9">
+                            <input style="margin-top: 1mm;" type="file" id="fileTemplate">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-2 control-label margin-left--10"></div>
+                        <div class="col-sm-9">
+                            <button type="submit" class="btn btn-primary">
+                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 发布
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <div class="">
+                    <h3 class="page-header">批改实验报告</h3>
+                </div>
+                <div class="">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>实验报告编号</th>
+                            <th>实验报告名称</th>
+                            <th>截止日期</th>
+                            <th>剩余批改份数</th>
+                            <th>点评</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>实验报告1</td>
+                            <td>学习使用网桥</td>
+                            <td>2016-11-05</td>
+                            <td>15/90</td>
+                            <td>
+                                <a href="http://www.baidu.com" class="icon-black">
+                                    <span class="glyphicon glyphicon-arrow-right"></span>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>实验报告2</td>
+                            <td>学习使用路由器</td>
+                            <td>2016-11-10</td>
+                            <td>90/90</td>
+                            <td>
+                                <a href="http://www.baidu.com" class="icon-black">
+                                    <span class="glyphicon glyphicon-arrow-right"></span>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>实验报告3</td>
+                            <td>学习使用服务器</td>
+                            <td>2016-12-15</td>
+                            <td>90/90</td>
+                            <td>
+                                <span class="glyphicon glyphicon-time"></span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
             </div>
             <div id="exercise" class="tab-pane">
             </div>
