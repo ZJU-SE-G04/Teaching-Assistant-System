@@ -228,6 +228,7 @@
         这里写你的初始化内容
 
 
+
                                 </script>
                                 <!-- 配置文件 -->
                                 <!-- 实例化编辑器 -->
@@ -275,6 +276,7 @@
         这里写你的初始化内容
 
 
+
                         </script>
                         <!-- 配置文件 -->
 
@@ -294,8 +296,6 @@
                     </div>
                 </div>
             </div>
-
-
             <div id="courseware_pane" class="tab-pane">
                 <form action="upload_coureseware.php" method="get">
                     <input class="c-course-id" name="lesson_id" style="display: none">
@@ -353,6 +353,7 @@
                 </div>
             </div>
             <div id="report" class="tab-pane">
+                <div id="report_main">
                 <form action="http://www.baidu.com" class="form-horizontal">
                     <div class="">
                         <h3 class="page-header">发布新实验报告</h3>
@@ -419,7 +420,7 @@
                             <td>2016-11-05</td>
                             <td>15/90</td>
                             <td>
-                                <a class="icon-black" onclick="correctReport()">
+                                <a class="icon-black" onclick="displayCorrect()">
                                     <span class="glyphicon glyphicon-arrow-right"></span>
                                 </a>
                             </td>
@@ -430,7 +431,7 @@
                             <td>2016-11-10</td>
                             <td>90/90</td>
                             <td>
-                                <a class="icon-black" onclick="correctReport()">
+                                <a class="icon-black" onclick="displayCorrect()">
                                     <span class="glyphicon glyphicon-arrow-right"></span>
                                 </a>
                             </td>
@@ -447,74 +448,77 @@
                         </tbody>
                     </table>
                 </div>
+                </div>
+                <!--------------------------------->
 
+                <div id="correct_report1" style="display: none;">
+                    <div>
+                        <h3 class="page-header">批改实验报告</h3>
+                        <table class="table text-center">
+                            <thead>
+                            <tr class="">
+                                <th class="text-center">姓名</th>
+                                <th class="text-center">学号</th>
+                                <th class="text-center">实验报告名称</th>
+                                <th class="text-center">最后提交时间</th>
+                                <th class="text-center">下载</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr id="firstCorrect"><!--第一个批改的实验报告-->
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <form action="http://www.baidu.com" class="form-horizontal" >
+                        <div class="form-group">
+                            <label for="score" class="col-sm-1 control-label">打分</label>
+                            <div class="col-sm-1">
+                                <input type="text" id="score" class="form-control">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="comment" class="col-sm-1 control-label">点评</label>
+                            <div class="col-sm-3">
+                                <textarea name="comment" id="comment" rows="3" class="form-control"
+                                          placeholder="输入实验报告评价"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-1 control-label"></div>
+                            <div class="col-sm-3">
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 提交并批改下一份
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <br>
+
+                    <!--姓名 学号 实验报告名称 完成状态 提交时间 成绩 批改-->
+                    <div class="">
+                        <h3 class="page-header">查看所有学生报告</h3>
+                        <table class="table text-center">
+                            <thead>
+                            <tr>
+                                <th class="text-center">姓名</th>
+                                <th class="text-center">学号</th>
+                                <th class="text-center">实验报告名称</th>
+                                <th class="text-center">最后提交时间</th>
+                                <th class="text-center">成绩</th>
+                                <th class="text-center">批改</th>
+                            </tr>
+                            </thead>
+                            <tbody id="reportAllStudent">
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
             </div>
 
-            <div id="correct_report2" class="tab-pane">
-                <div>
-                    <h3 class="page-header">批改实验报告</h3>
-                    <table class="table text-center">
-                        <thead>
-                        <tr class="">
-                            <th class="text-center">姓名</th>
-                            <th class="text-center">学号</th>
-                            <th class="text-center">实验报告名称</th>
-                            <th class="text-center">最后提交时间</th>
-                            <th class="text-center">下载</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr id="firstCorrect"><!--第一个批改的实验报告-->
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <form action="http://www.baidu.com" class="form-horizontal" style="margin-left: -12mm;">
-                    <div class="form-group">
-                        <label for="score" class="col-sm-1 control-label">打分</label>
-                        <div class="col-sm-1">
-                            <input type="text" id="score" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="comment" class="col-sm-1 control-label">点评</label>
-                        <div class="col-sm-3">
-                            <textarea name="comment" id="comment" rows="3" class="form-control"
-                                      placeholder="输入实验报告评价"></textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-1 control-label"></div>
-                        <div class="col-sm-3">
-                            <button type="submit" class="btn btn-primary">
-                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 提交并批改下一份
-                            </button>
-                        </div>
-                    </div>
-                </form>
-                <br>
-
-                <!--姓名 学号 实验报告名称 完成状态 提交时间 成绩 批改-->
-                <div class="">
-                    <h3 class="page-header">查看所有学生报告</h3>
-                    <table class="table text-center">
-                        <thead>
-                        <tr>
-                            <th class="text-center">姓名</th>
-                            <th class="text-center">学号</th>
-                            <th class="text-center">实验报告名称</th>
-                            <th class="text-center">最后提交时间</th>
-                            <th class="text-center">成绩</th>
-                            <th class="text-center">批改</th>
-                        </tr>
-                        </thead>
-                        <tbody id="reportAllStudent">
-                        </tbody>
-                    </table>
-                </div>
-
-            </div>
             <div id="exercise" class="tab-pane">
 
                 <h3 class="page-header" id="quizTitle">发布新作业</h3>

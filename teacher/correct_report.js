@@ -12,6 +12,12 @@
  是否评价
  */
 
+function displayCorrect() {
+    document.getElementById("report_main").style.display = "none";
+    document.getElementById("correct_report1").style.display = "inline";
+}
+
+
 function correctReport() {
     var JSON_STR = [
         {
@@ -44,13 +50,6 @@ function correctReport() {
     ];
 
     var stuReport = JSON_STR;
-
-    var root = document.getElementById("report");
-    root.removeChild();
-    var rootChild = document.getElementById("correct_report2");
-
-    root.appendChild(rootChild);
-    rootChild.id = "correct_report";
 
     var o1 = document.getElementById("firstCorrect");
     for(var i in stuReport) {
@@ -126,4 +125,4 @@ function correctReport() {
     }
 }
 
-// window.onload = correctReport;
+window.onload = correctReport;
