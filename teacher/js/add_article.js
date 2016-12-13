@@ -3,7 +3,9 @@
 
 //-------一些全局变量---------
 
-
+var article_id;//在点击文章后被初始化
+var re_user_name='0';//被回复人姓名
+var re_user_id="0";//被回复人id
 
 //-------
 $(document).ready(function() {
@@ -21,7 +23,7 @@ $(document).ready(function() {
     $("#articleBack").click(articleUpdate);
 });
 
-//////////////////////////////////////////////////////
+//-------show an article list--------
 
 
 function  articleUpdate() {
@@ -40,13 +42,14 @@ function  articleUpdate() {
             for (var i in articleRecords) {
                 var x = articleRecords[i];
                 var tmp = articleLoop.children(".old").clone().removeClass("old").addClass("new").show();
-                tmp.attr("id", x.article_id);
+
                 if(x.id==user_id) {
                     tmp.find(".x-trash").attr("onclick", "deleteArticle(" + x.article_id + ")");
                 }
                 else {
                     tmp.find(".x-trash").hide()
                 }
+                tmp.find(".x-article-id").html(x.article_id);
                 tmp.find(".x-title").html(x.title);
                 tmp.find(".x-contentDigest").html(x.short_content);
                 tmp.find(".x-time").html(x.time);
@@ -59,7 +62,7 @@ function  articleUpdate() {
 }
 
 
-//------------show input for writing a article
+//------------show input for writing a article----------
 
 function  showWriteArticle() {
     $("#articleLoop").hide();
@@ -144,7 +147,7 @@ function  submitUpdateArticle(article_id) {
 
 //----------cancel updating an article-----------------------
 
-function cancelUpdateArticle(article_id) {
+function cancelUpdateArticle() {
     $("#update_article").hide();
     $("#articleLoop").show();
     $("#write_article_button").show()
@@ -182,9 +185,7 @@ function articleShow() {
     $("#write_article_button").hide();
 
     var parent=$(this).parent();
-    var id =parent.attr("id");
-
-    var article_id=id;
+    article_id=parent.find(".x-article-id").text();
 
     $.ajax({
         type:"GET",
@@ -199,8 +200,8 @@ function articleShow() {
 
             articleDetail_local.find(".x-title").html(title);
             articleDetail_local.find(".x-author").html(author);
-            articleDetail_local.find(".x-edit").attr("onclick","updateArticle("+id+")");
-            articleDetail_local.find(".x-trash").attr("onclick","deleteArticle("+id+")");
+            articleDetail_local.find(".x-edit").attr("onclick","updateArticle("+article_id+")");
+            articleDetail_local.find(".x-trash").attr("onclick","deleteArticle("+article_id+")");
             articleDetail_local.find(".x-time").html(time);
             articleDetail_local.find(".x-body").html(articleDetail["article_content"]);
 
@@ -215,21 +216,19 @@ function articleShow() {
                 var x = articleDetail["comment"][i];
                 var tmp = posts_list_ul.children(".old").clone().removeClass("old").addClass("new").show();
 
-                // if (x.re_floor == 0)
-                //     tmp.find(".is-reply").hide();
+
                 tmp.find(".x-floor").html(x.floor);
                 tmp.find(".x-name").html(x.user_name);
                 tmp.find(".x-time").html(x.time);
                 tmp.find(".x-content").html(x.content);
-                tmp.find(".x-comment").attr("onclick","showSecondComment("+article_id+","+x.floor+")");
+                tmp.find(".x-comment").click(showSecondComment);
                 tmp.find(".post-comments-area").hide();
-                tmp.attr("id","floor"+x.floor);
 
                 if(user_id!=x.id){
                     tmp.find(".x-first-delete").hide();
                 }
                 else {
-                    tmp.find(".glyphicon").attr("onclick", "deleteComment(" + article_id + "," + x.floor + ")");
+                    tmp.find(".glyphicon").click(deleteComment);
                 }
                 posts_list_ul.append(tmp);
             }
@@ -246,10 +245,14 @@ function articleShow() {
 
 
 
-//------------ 删除一级评论
+//------------ 删除一级评论-----------
 
-function deleteComment(article_id,floor) {
-    $(".posts-list-ul").find("#floor"+floor).hide();
+function deleteComment() {
+    $(this).parent().parent().parent().parent().hide();
+    var floor=$(this).parent().find(".x-floor").text();
+
+    var x_comment_number=$(".x-comment-number");
+     x_comment_number.text(x_comment_number.text()-1);
     
     $.ajax({
         type:"GET",
@@ -258,6 +261,12 @@ function deleteComment(article_id,floor) {
             if(result["if_success"]==0){
                 window.alert(result["error_message"]);
             }
+            else
+            {
+                alert("删除成功");
+            }
+
+
         }
     });
 
@@ -273,62 +282,37 @@ function  returnToArticleList() {
 
 }
 
-// var secondComment={
-//     "second_comment_number":13,
-//     "second_comment":[{
-//     "time": "2016-11-10 18:03",
-//     "id":"3140100000",
-//     "user_name":"蒋中正",
-//     "re_id":"3149998888",
-//     "re_user_name":"阎锡山",
-//     "content":"中原大战",
-//         "re_floor":1
-// },
-//     {
-//         "time": "2016-11-10 18:06",
-//         "id":"111111",
-//         "user_name":"蒋中正",
-//         "re_id":"3149998888",
-//         "re_user_name":"阎锡山",
-//         "content":"中原大战",
-//         "re_floor":2
-//
-//     },
-//     {
-//         "time": "2016-11-10 18:06",
-//         "id":"3140005555",
-//         "user_name":"蒋中正",
-//         "re_id":"NULL",
-//         "re_user_name":"NULL",
-//         "content":"中原大战",
-//         "re_floor":3
-//     }
-// ]
-// };
-//
 
 
+//-------显示二级评论--------
+
+function showSecondComment() {
+    var floor=$(this).parent().find(".x-floor").text();
+    var posts_list_item=$(this).parent().parent().parent().parent();//....
 
 
-function showSecondComment(article_id,floor) {
-    
     $.ajax({
         type:"GET",
         url:"show_second_comment.php?article_id="+article_id+"&floor="+floor,
         success:function (result) {
             var secondComment=result;
+            var second_comment_number=secondComment["second_comment_number"];
 
-            var posts_list_item=$(".posts-list-ul").find("#floor"+floor);
             var post_comment_area_body=posts_list_item.find(".post-comment-area-body");
+            post_comment_area_body.find(".x-second-comment-number").html(second_comment_number);
+            post_comment_area_body.children(".new").remove();
             for (var i in secondComment["second_comment"]) {
                 var tmp = post_comment_area_body.children(".old").clone().removeClass("old").addClass("new").show();
                 var x=secondComment["second_comment"][i];
 
                 tmp.find(".x-name").html(x.user_name);
                 tmp.find(".x-time").html(x.time);
+                tmp.find(".x-second-comment-id").html(x.id);
+
                 tmp.find(".x-content").html(x.content);
-                tmp.attr("id","floor"+floor+"re_floor"+x.re_floor);
-                if(x.re_user_name!="NULL") {
+                tmp.find(".x-re-floor").html(x.re_floor);
+                tmp.find(".post-comment-btn").click(add_second_comment_second)
+                if(x.re_user_name!="0") {
                     tmp.find(".x-re-name").html(x.re_user_name);
                 }
                 else {
@@ -338,7 +322,7 @@ function showSecondComment(article_id,floor) {
                     tmp.find(".x-delete").hide();
                 }
                 else {
-                    tmp.find(".x-delete").attr("onclick","deleteSecondComment("+article_id+","+floor+","+x.re_floor+")");
+                    tmp.find(".x-delete").click(deleteSecondComment);
                 }
                 post_comment_area_body.append(tmp);
 
@@ -346,32 +330,38 @@ function showSecondComment(article_id,floor) {
             }
             posts_list_item.find(".post-comments-area").show();
 
+            $(".add-rere").click(function () {
+                $(this).hide();
+                var comment_area = $("<textarea placeholder='发表评论...'></textarea>").css("margin-bottom", "10px");
+                $(this).after(comment_area);
+                comment_area.focus = true;
+                var submit_btn = $("<button>提交</button>").addClass("p-btn-sm right");
+                submit_btn.click(add_second_comment);
+                comment_area.after(submit_btn);
+            });
 
         }
 
     });
 
-    $(".add-post-comment").click(function () {
-        $(this).hide();
-        var comment_area = $("<textarea placeholder='发表评论...'></textarea>").css("margin-bottom", "10px");
-        $(this).after(comment_area);
-        comment_area.focus = true;
-        var submit_btn = $("<button>提交</button>").addClass("p-btn-sm right");
-        // submit_btn.attr("onclick","add_second_comment("+article_id+","+floor+")");
-        comment_area.after(submit_btn);
-    });
+
 }
 
 //---------删除一个楼中楼回复,实现局部刷新-------------
-function deleteSecondComment(article_id,floor,re_floor) {
-    $(".posts-list-ul").find("#floor"+floor).find("#floor"+floor+"re_floor"+re_floor).hide();
+function deleteSecondComment() {
+    var post_comment=$(this).parent().parent();
+
+    var posts_list_item=post_comment.parent().parent().parent().parent();
+    var floor=posts_list_item.find(".x-floor").text();
+
+    var re_floor=post_comment.find(".x-re-floor").text();
 
     $.ajax({
        type:"GET",
         url:"delete_second_comment.php?article_id="+article_id+"&floor="+floor+"&re_floor="+re_floor,
         success:function (result) {
             if(result["if_success"]==1){
-                $(".posts-list-ul").find("#floor"+floor).find("#floor"+floor+"re_floor"+re_floor).hide();
+                post_comment.find(".x-re-floor").parent().parent().hide();
             }
             else{
                 window.alert(result["err_message"]);
@@ -382,6 +372,165 @@ function deleteSecondComment(article_id,floor,re_floor) {
 }
 
 //-----------插入二级回复-----------
-function add_second_comment(article_id,floor) {
+function add_second_comment() {
+    var post_comments_area=$(this).parent();
+    var content=post_comments_area.find("textarea").val();
+    // alert(content);
+    var posts_list_item=post_comments_area.parent();
+    var floor=posts_list_item.find(".x-floor").text();
+    // window.alert(floor);
+    
+    // var re_floor=post_comments_area.find(".x-second-comment-number").text()+1;
+     // window.alert(re_floor);
+
+
+   var current_time=getNowFormatDate();
+
+
+
+    var post_comment_area_body=post_comments_area.find(".post-comment-area-body");
+    var tmp = post_comment_area_body.children(".old").clone().removeClass("old").addClass("new").show();
+    tmp.find(".x-name").html(user_name);
+    // tmp.find(".x-time").html();
+    tmp.find(".x-content").html(content);
+    window.alert(re_user_name);
+    if(re_user_name!="0") {
+        tmp.find(".x-re-name").html(re_user_name);
+    }
+    else {
+        tmp.find(".x-response").html("");
+    }
+
+    tmp.find(".x-time").html(current_time);
+
+
+    tmp.find(".x-delete").click(deleteSecondComment);
+    post_comment_area_body.append(tmp);
+
+
+    // $.ajax({
+    //     type:"GET",
+    //     url:"add_second_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content+"&floor="+floor+"&re_id="+re_user_id,
+    //     success:function (result) {
+    //         if(result["if_success"]==1){
+    //
+    //             var post_comment_area_body=post_comments_area.find(".post-comment-area-body");
+    //             var tmp = post_comment_area_body.children(".old").clone().removeClass("old").addClass("new").show();
+    //             tmp.find(".x-name").html(user_name);
+    //             // tmp.find(".x-time").html();
+    //             tmp.find(".x-content").html(content);
+    //             if(re_user_name!="0") {
+    //                 tmp.find(".x-re-name").html(re_user_name);
+    //             }
+    //             else {
+    //                 tmp.find(".x-response").html("");
+    //             }
+    //
+    //             tmp.find(".x-time").html(current_time);
+    //
+    //
+    //             tmp.find(".x-delete").click(deleteSecondComment);
+    //             post_comment_area_body.append(tmp);
+    //
+    //         }
+    //         else{
+    //             window.alert(result["err_message"]);
+    //         }
+    //
+    //     }
+    //
+    // });
+
+}
+
+function getNowFormatDate() {
+    var date = new Date();
+    var seperator1 = "-";
+    var seperator2 = ":";
+    var month = date.getMonth() + 1;
+    var strDate = date.getDate();
+    if (month >= 1 && month <= 9) {
+        month = "0" + month;
+    }
+    if (strDate >= 0 && strDate <= 9) {
+        strDate = "0" + strDate;
+    }
+    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+        + " " + date.getHours() + seperator2 + date.getMinutes()
+        + seperator2 + date.getSeconds();
+    return currentdate;
+}
+
+//------针对楼中楼 add second comment 需要对re_user_id和re_user_name进行调整-----------
+
+function add_second_comment_second() {
+    var post_comment_list_btm=$(this).parent().parent();
+    re_user_id=post_comment_list_btm.find(".x-second-comment-id").text();
+    // window.alert(re_user_id);
+
+    re_user_name=post_comment_list_btm.find(".x-name").text();
+
+
+    var post_comments_area=post_comment_list_btm.parent().parent().parent();
+    var add_post_comment=post_comments_area.find(".add-post-comment");
+    // alert(add_post_comment.length);
+    add_post_comment.hide();
+    var comment_area = $("<textarea placeholder='回复"+re_user_name+"'></textarea>").css("margin-bottom", "10px");
+    add_post_comment.after(comment_area);
+    comment_area.focus = true;
+    var submit_btn = $("<button>提交</button>").addClass("p-btn-sm right");
+    submit_btn.click(add_second_comment);
+    comment_area.after(submit_btn);
+
+    // window.alert(re_user_name);
+
+}
+
+
+//---------插入一级回复------------
+
+function  add_comment() {
+    var content=ue_add_comment.getContent();
+    var current_time=getNowFormatDate();
+
+
+    var posts_list_ul=$(".posts-list-ul");
+    var tmp = posts_list_ul.children(".old").clone().removeClass("old").addClass("new").show();
+
+
+    tmp.find(".x-name").html(user_name);
+    tmp.find(".x-time").html(current_time);
+    tmp.find(".x-content").html(content);
+    tmp.find(".x-comment").click(showSecondComment);
+    tmp.find(".post-comments-area").hide();
+    tmp.find(".glyphicon").click(deleteComment);
+
+    posts_list_ul.append(tmp);
+
+    // $.ajax({
+    //    type:"GET",
+    //     url:"add_article_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content,
+    //     success:function (result) {
+    //         if(result["if_success"]==1){
+    //             var posts_list_ul=$(".posts-list-ul");
+    //             var tmp = posts_list_ul.children(".old").clone().removeClass("old").addClass("new").show();
+    //
+    //             tmp.find(".x-name").html(user_name);
+    //             tmp.find(".x-time").html(current_time);
+    //             tmp.find(".x-content").html(content);
+    //             tmp.find(".x-comment").click(showSecondComment);
+    //             tmp.find(".post-comments-area").hide();
+    //             tmp.find(".glyphicon").click(deleteComment);
+    //
+    //             posts_list_ul.append(tmp);
+    //
+    //         }
+    //         else{
+    //             window.alert(result["err_message"]);
+    //         }
+    //
+    //     }
+
+    // });
 
 }

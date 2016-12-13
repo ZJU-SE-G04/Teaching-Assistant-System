@@ -5,6 +5,8 @@
 $(document).ready(
     function () {
 
+        
+
         //课件资料页面改变下拉列表项的箭头
         $(".titleBox").click(function () {
                 var content = $(this).next();

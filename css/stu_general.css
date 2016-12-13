@@ -51,6 +51,9 @@ a, button {
     color: #d9dde1;
 }
 
+.my-blue {
+    color: #337ab7;
+}
 /*#container {*/
 /*width: 700px;*/
 /*height: auto;*/
@@ -95,6 +98,7 @@ a, button {
 }
 
 .p-btn {
+    cursor: pointer;
     background-color: #337ab9;
     color: #fff;
     height: 34px;

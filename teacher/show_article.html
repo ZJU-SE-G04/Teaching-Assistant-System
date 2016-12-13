@@ -23,35 +23,69 @@
     <script type="text/javascript" src="../ueditor/ueditor.config.js"></script>
     <script type="text/javascript" src="../ueditor/ueditor.all.js"></script>
 
+    <!--以下是zhang shichao导入的js文件-->
+    <script src="js/add_TA.js"></script>
+    <script src="js/add_stu.js"></script>
+    <script src="js/add_article.js"></script>
+    <script src="js/class_manage.js"></script>
+    <script src="js/courseware.js"></script>
+
+    <!--bootstrap file input-->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../bootstrap-3.3.7-dist/bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- canvas-to-blob.min.js is only needed if you wish to resize images before upload.
+         This must be loaded before fileinput.min.js -->
+    <script src="../bootstrap-3.3.7-dist/bootstrap-fileinput/js/plugins/canvas-to-blob.min.js" type="text/javascript"></script>
+    <!-- sortable.min.js is only needed if you wish to sort / rearrange files in initial preview.
+         This must be loaded before fileinput.min.js -->
+    <script src="../bootstrap-3.3.7-dist/bootstrap-fileinput/js/plugins/sortable.min.js" type="text/javascript"></script>
+    <!-- purify.min.js is only needed if you wish to purify HTML content in your preview for HTML files.
+         This must be loaded before fileinput.min.js -->
+    <script src="../bootstrap-3.3.7-dist/bootstrap-fileinput/js/plugins/purify.min.js" type="text/javascript"></script>
+    <!-- the main fileinput plugin file -->
+    <script src="../bootstrap-3.3.7-dist/bootstrap-fileinput/js/fileinput.min.js"></script>
+    <!-- bootstrap.js below is needed if you wish to zoom and view file content
+     in a larger detailed modal dialog -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" type="text/javascript"></script>
+    <!-- optionally if you need a theme like font awesome theme you can include
+        it as mentioned below -->
+    <script src="../bootstrap-3.3.7-dist/bootstrap-fileinput/themes/fa/theme.js"></script>
+    <!-- optionally if you need translation for your language then include
+        locale file as mentioned below -->
+    <!--<script src="../bootstrap-3.3.7-dist/bootstrap-fileinput/js/locales/<lang>.js"></script>-->
 
 
-</head>
 
-<body>
 
-<iframe src="../header.html" frameborder="0" width="100%" id="header"></iframe>
-<div class="container">
-    <div class="row" id="mainBody">
-        <div class="col-md-2" id="left-side">
-                <ul  class="nav nav-pills nav-stacked">
-                    <li class="active"><a href="#notice" data-toggle="tab">公告</a></li>
-                    <li class="tab-style"><a href="#article" data-toggle="tab" onclick="articleUpdate()">最新文章</a></li>
-                    <li class="tab-style"><a href="#courseware_pane" data-toggle="tab">课程资料</a></li>
-                    <li class="tab-style"><a href="#report" data-toggle="tab">报告与文档</a></li>
-                    <li class="tab-style"><a href="#class" data-toggle="tab" onclick="show_class()">班级信息管理</a></li>
-                    <li  class="tab-style"><a href="#stuInfo" data-toggle="tab"  onclick="showStuInfo()">学生信息</a></li>
-                    <li class="tab-style"><a href="#TAInfo" data-toggle="tab" id="TA" onclick="showTAInfo()" >助教信息</a></li>
+    </head>
 
-                </ul>
-        </div>
-        <div class="col-md-10 tab-content" id="tab_content_area">
-            <div id="notice" class="tab-pane in active">aa</div>
-            <div id="article" class="tab-pane">
-                <div><button  class='btn btn-primary' id='write_article_button' onclick="showWriteArticle()" >撰写文章</button></div>
-                <div class="panel-group" style="padding-top:35px" id="articleLoop">
-                    <div class="panel panel-default old w3-hover-shadow w3-animate-zoom">  <!--loop start-->
+    <body>
+
+    <iframe src="../header.html" frameborder="0" width="100%" id="header"></iframe>
+    <div class="container">
+        <div class="row" id="mainBody">
+            <div class="col-md-2" id="left-side">
+                    <ul  class="nav nav-pills nav-stacked">
+                        <li class="active"><a href="#notice" data-toggle="tab">公告</a></li>
+                        <li class="tab-style"><a href="#article" data-toggle="tab" onclick="articleUpdate()">最新文章</a></li>
+                        <li class="tab-style"><a href="#courseware_pane" data-toggle="tab">课程资料</a></li>
+                        <li class="tab-style"><a href="#report" data-toggle="tab">报告与文档</a></li>
+                        <li class="tab-style"><a href="#class" data-toggle="tab" onclick="show_class()">班级信息管理</a></li>
+                        <li  class="tab-style"><a href="#stuInfo" data-toggle="tab"  onclick="showStuInfo()">学生信息</a></li>
+                        <li class="tab-style"><a href="#TAInfo" data-toggle="tab" id="TA" onclick="showTAInfo()" >助教信息</a></li>
+
+                    </ul>
+            </div>
+            <div class="col-md-10 tab-content" id="tab_content_area">
+                <div id="notice" class="tab-pane in active">aa</div>
+                <div id="article" class="tab-pane">
+                    <div><button  class='btn btn-primary' id='write_article_button' onclick="showWriteArticle()" >撰写文章</button></div>
+                    <div class="panel-group" style="padding-top:35px" id="articleLoop">
+                        <div class="panel panel-default old w3-hover-shadow w3-animate-zoom">  <!--loop start-->
                         <div class="panel-heading w3-hover-grey clickable">
                             <span class="glyphicon glyphicon-file"></span>&nbsp;<strong class="x-title"></strong>
+                            <span class="x-article-id" style="display: none"></span>
                     </div>
                         <div class="panel-body"><p class="x-contentDigest"></p></div>
                         <div class="panel-footer">
@@ -97,9 +131,9 @@
                         <p class="f-post-comment-num">评论数:<span class="x-comment-number"></span></p>
                         <div class="posts-list-container">
                             <ul class="posts-list-ul">
-                                <li class="posts-list-item old ">
+                                <li class="posts-list-item old ">  <!-- loop start-->
                                     <div class="">
-                                        <div class="posts-list-item-title x-content">同时学两种语言会容易混淆吗？</div>
+                                        <div class="posts-list-item-title x-content"></div>
                                         <div class="posts-list-item-btm">
                                             <span class="posts-list-item-nick inline x-name">章世超</span>
                                             &nbsp;&nbsp;<span>|
@@ -110,40 +144,51 @@
                                             <a class="glyphicon glyphicon-trash x-first-delete"></a>
                                             <span class="x-first-delete">|</span>
                                             <a class="post-comment-btn  x-comment">评论</a>
-                                            <span class="posts-list-item-nick ">#<span class="x-floor"></span>楼</span>
+                                            <span class="posts-list-item-nick" style="display: none;">#<span class="x-floor"></span>楼</span><!-- floor id ~~ -->
                                             </div>
                                         </div>
                                     </div>
                                     <div class="post-comments-area">
                                         <div class="post-comment-area-body">
-                                            <div class="post-comment old">
+                                            <span class="x-second-comment-number" style="display: none"></span>
+                                            <div class="post-comment old"><!-- loop start 二级回复区-->
                                                 <div class="post-comment-content x-content"></div>
                                                 <div class="posts-list-item-btm">
-                                                    <span class="nick-color x-name"></span><span class="x-response">&nbsp;回复&nbsp;</span><span class="nick-color x-re-name"></span>
+                                                    <span class="x-re-floor" style="display: none"></span>
+                                                    <span class="nick-color x-name"></span>
+                                                    <span class="x-second-comment-id" style="display: none"></span>
+                                                    <span class="x-response">&nbsp;回复&nbsp;</span><span class="nick-color x-re-name"></span>
                                                     &nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;
-                                                    <span class="posts-list-item-date x-time">
-                                                    </span>
+                                                    <span class="posts-list-item-date x-time"></span>
                                                     <div class="right">
                                                     <a class="glyphicon glyphicon-trash x-delete"></a>
                                                     <span class="x-delete">|</span>
-                                                    <a class="post-comment-btn">回复</a></div>
+                                                    <a class="post-comment-btn">回复</a>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </div> <!-- loop end-->
                                         </div>
 
                                         <div class="add-post-comment">
                                             添加评论...
-                                            <!--<textarea name="post-comment" id="" cols="30" rows="10" placeholder="添加评论..."></textarea>-->
                                         </div>
+                                        <!--<textarea name="post-comment" id="" cols="30" rows="10" placeholder="添加评论..."></textarea>-->
+
                                     </div>
-                                </li>
+                                </li><!-- loop end-->
 
                             </ul>
 
                             <div>
-                                <script id="ueditor_container" name="content" type="text/plain" class="ueditor"></script>
-                            </div>
-                            <button class="p-btn" >发表回复</button>
+                                <script id="container" name="content" type="text/plain">
+        这里写你的初始化内容
+    </script>
+                                <!-- 配置文件 -->
+                                <!-- 实例化编辑器 -->
+                                <script type="text/javascript">
+                                    var ue_add_comment= UE.getEditor('container');
+                                </script>                            </div>
+                            <button class="p-btn" onclick="add_comment()">发表回复</button>
                         </div>
                     </div>
 
@@ -156,15 +201,7 @@
                     <p class="subtit">文章内容</p>
 
                     <!-- 加载编辑器的容器 --><div>
-                    <script id="container" name="content" type="text/plain">
-        这里写你的初始化内容
-    </script>
-                    <!-- 配置文件 -->
-
-                    <!-- 实例化编辑器 -->
-                    <script type="text/javascript">
-                        var ue = UE.getEditor('container');
-                    </script></div>
+                   e</div>
                     <div class="row">
                         <div class='col-sm-9'>
                             <button  class='btn btn-primary' id="cancel_write_article" onclick='cancelArticle()'>取消发布</button></div>
@@ -196,20 +233,13 @@
                             <button  class='btn btn-primary cancel-ok-button x-button' >修改文章</button></div>
                     </div>
                 </div>
-
-
-
             </div>
 
 
-
-
-
-
-
             <div id="courseware_pane" class="tab-pane">
-
-                <select class="form-control">
+                <form action="upload_coureseware.php" method="get" >
+                <input class="c-course-id" name="lesson_id" style="display: none">
+                <select name="courseware_kind" class="form-control">
                     <option>课件</option>
                     <option>模板</option>
                     <option>参考资料</option>
@@ -217,9 +247,14 @@
                     <option>教学视频</option>
                     <option>教学音频</option>
                 </select>
-                <form action="add_courseware?courseware_name=xxx" method="post" enctype="multipart/form-data">
-                    <input type="file" name='file'><input type='submit' value='submit'>
+
+                <input id="input-id" name="file" type="file" class="file" multiple >
                 </form>
+
+
+
+
+
 
 
 
@@ -285,6 +320,14 @@
                     <h4>以下是<span id="stu_course_name">软件工程管理</span><span id="stu_class_time">周二345</span>班的学生信息</h4>
                 </div>
 
+
+                <form  action="add_stu_excel.php" method="get" style="margin-bottom: 15px">
+                    <input class="c-class-id" name="class_id" style="display: none">
+
+                        <label >用Excel重置学生信息</label>
+                        <input  name="file" type="file" class="file"  >
+                </form>
+
             </div>
             <div id="TAInfo" class="tab-pane">
 
@@ -303,14 +346,6 @@
 <script src="../jquery/jquery-3.1.1.min.js"></script>
 <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script src="../jquery-ui-1.12.1.custom/jquery-ui.js"></script>
-
-<!--以下是zhang shichao导入的js文件-->
-<script src="js/add_TA.js"></script>
-<script src="js/add_stu.js"></script>
-<script src="js/add_article.js"></script>
-<script src="js/class_manage.js"></script>
-<script src="js/courseware.js"></script>
-
 
 
 
