@@ -324,7 +324,7 @@ function showSecondComment() {
             }
             posts_list_item.find(".post-comments-area").show();
 
-            $(".add-post-comment").click(function () {
+            $(".add-rere").click(function () {
                 $(this).hide();
                 var comment_area = $("<textarea placeholder='发表评论...'></textarea>").css("margin-bottom", "10px");
                 $(this).after(comment_area);

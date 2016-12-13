@@ -16,7 +16,9 @@ textarea {
     min-height:100px;
 }
 
-
+a {
+    color: #000;
+}
 a, button {
     cursor: pointer;
 }
@@ -63,10 +65,6 @@ a, button {
 
 input:focus {
     border: 1px solid #337AB7;
-}
-
-.nick-color {
-    color: #337ab7;
 }
 
 /**按钮**/
@@ -272,6 +270,10 @@ input[name="search_post"] {
     padding-top: 9px;
 }
 
+.post-border-item a {
+    color: #337AB7;
+}
+
 /*发布帖子页面*/
 .f-placeholder {
     font-size: 15px;
@@ -314,7 +316,7 @@ input[name="post_title"] {
 /*显示帖子列表页面*/
 
 #posts_border_page {
-    padding: 0 24px 0 24px;
+    padding: 0 24px 0 5px;
 }
 
 .posts-list-container {
@@ -338,16 +340,7 @@ input[name="post_title"] {
     line-height: 1.2;
     margin-bottom: 8px;
     font-weight: normal;
-}
 
-.posts-list-container .response-list-content {
-    margin-top: 3px;
-    font-size: 14px;
-    color: #14191e;
-    line-height: 24px;
-    word-wrap: break-word;
-    white-space: pre-wrap;
-    overflow: auto;
 }
 
 .posts-list-container .posts-list-item-btm {
@@ -413,12 +406,43 @@ input[name="post_title"] {
     line-height: 1.5;
     font-size: 1.1em;
 }
+/*一级回复样式*/
+.re-list-container {
+    border-top: 1px solid #d9dde1;
+    /*margin: 0 24px 0 24px;*/
+}
 
-.post-comment-btn {
+.re-list-ul {
+    padding-left: 0px;
+    margin: 0;
+}
+
+.re-list-container .re-item {
+    padding: 0.7em 0 0.7em 0;
+    border-bottom: 1px solid #d9dde1;
+    list-style: none;
+    overflow: hidden;
+}
+
+.re-item-date {
+    font-size: 12px;
+}
+.re-item-btm {
+    font-size: 12px;
+}
+.re-item-content {
+    line-height: 1.2;
+    margin-bottom: 8px;
+    font-weight: normal;
+
+}
+
+.comment-btn {
     margin-right: 5px;
 }
 
-.post-comments-area {
+/*二级回复样式*/
+.rere-area {
     /*border-radius: 2%;*/
     margin-top: 5px;
     padding: 10px 10px;
@@ -429,32 +453,44 @@ input[name="post_title"] {
     line-height: 1.2;
 }
 
-.post-comment {
+.rere-item {
     border-bottom: 1px #d9dde1 solid;
     padding-bottom: 6px;
     margin-bottom: 8px;
 }
 
-.post-comment-area-body {
+.rere-area-body {
 
 }
-.post-comment:last-child {
+
+.rere-area .rere-item-btm {
+    font-size: 12px;
+}
+
+.rere-item:last-child {
     border-bottom: none;
     /*margin-bottom: -8px;*/
 }
 
-.post-comments-area .post-comment-content {
+.rere-area .rere-content {
     margin-bottom: 8px;
 }
 
-.add-post-comment {
+.re-list-container .re-posts-comment-item-nick {
+    color: #337ab7;
+}
+
+.re-list-container .re-posts-comment-item-date {
+    color: #93999f;
+}
+.add-rere {
     border: 1px #d9dde1 solid;
     padding: 10px 10px;
     color: #999;
 
 }
 
-.add-post-comment:hover {
+.add-rere:hover {
     cursor: pointer;
 
 }
