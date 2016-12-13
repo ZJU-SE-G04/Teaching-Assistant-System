@@ -237,7 +237,7 @@
 
 
             <div id="courseware_pane" class="tab-pane">
-                <form method="get" >
+                <form action="upload_coureseware.php" method="get" >
                 <input class="c-course-id" name="lesson_id" style="display: none">
                 <select name="courseware_kind" class="form-control">
                     <option>课件</option>
@@ -319,6 +319,14 @@
                 <div class="bs-callout bs-callout-info">
                     <h4>以下是<span id="stu_course_name">软件工程管理</span><span id="stu_class_time">周二345</span>班的学生信息</h4>
                 </div>
+
+
+                <form  action="add_stu_excel.php" method="get" style="margin-bottom: 15px">
+                    <input class="c-class-id" name="class_id" style="display: none">
+
+                        <label >用Excel重置学生信息</label>
+                        <input  name="file" type="file" class="file"  >
+                </form>
 
             </div>
             <div id="TAInfo" class="tab-pane">

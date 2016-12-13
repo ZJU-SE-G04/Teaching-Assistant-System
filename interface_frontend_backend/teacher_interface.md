@@ -17,7 +17,7 @@
 |显示当前课程当前班级的学生信息|show_stu_info.php?class_id=xxx      | [{"name":"xxx", "id":"xxx", "department":"xxx", "major":"xxx","team_name":"xxx"}{"name":"xxx", "id":"xxx", "department":"xxx", "major":"xxx","team_name":"xxx"}...]|如果当前学生尚未组队,请返回:"未组队"|是
 |手动添加学生信息|add_stu.php?class_id=xxx[{"id":"xxx","name":"xxx","department":"xxx","major":"xxx"}{"id":"xxx","name":"xxx","department":"xxx","major":"xxx"}...] | 插入成功：{"if_success":1,error_message:"null"};插入失败：{"if_success":0,"error_messgae":"xxx"}|注明:成功或失败返回的是整数1或0,与添加助教相同|是
 |根据id删除一行的学生信息|delete_stu.php?class_id=xxx&id=xxx | 删除成功：{"if_success":1,error_message:"null"};删除失败：{"if_success":0,"error_messgae":"xxx"}|成功或失败返回的是整数1或0|是
-|用Excel批量导入学生信息|add_stu_excel.php?class_id=xxx&file=xxx| 导入成功：{"if_success":1,error_message:"null"};导入失败：{"if_success":0,"error_messgae":"xxx"}|导入的信息包括学号,姓名,院系,专业,每次导入都是对原有学生信息的重置,注意!不是添加!成功或失败返回的是整数1或0|否
+|用Excel批量导入学生信息|add_stu_excel.php?class_id=xxx&file=xxx| 无|导入的信息包括学号,姓名,院系,专业,每次导入都是对原有学生信息的重置,注意!不是添加!|否
 |修改其中一行的学生信息|update_stu.php?class_id=xxx&old_id=xxx&&name=xxx&&id=xxx&&department=xxx&major=xxx&team_name=xxx |  修改成功：{"if_success":1,error_message:"null"};修改失败：{"if_success":0,"error_messgae":"xxx"}|old_id是学生的原有id,因为老师可能输错了id,需要修改,成功或失败返回的是整数1或0|是
 
 
