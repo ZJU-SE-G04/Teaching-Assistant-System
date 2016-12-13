@@ -3,7 +3,9 @@
 
 //-------一些全局变量---------
 
-
+var article_id;//在点击文章后被初始化
+var re_user_name='0';//被回复人姓名
+var re_user_id="0";//被回复人id
 
 //-------
 $(document).ready(function() {
@@ -243,7 +245,7 @@ function articleShow() {
 
 
 
-//------------ 删除一级评论
+//------------ 删除一级评论-----------
 
 function deleteComment() {
     $(this).parent().parent().parent().parent().hide();
@@ -304,8 +306,11 @@ function showSecondComment() {
 
                 tmp.find(".x-name").html(x.user_name);
                 tmp.find(".x-time").html(x.time);
+                tmp.find(".x-second-comment-id").html(x.id);
+
                 tmp.find(".x-content").html(x.content);
                 tmp.find(".x-re-floor").html(x.re_floor);
+                tmp.find(".post-comment-btn").click(add_second_comment_second)
                 if(x.re_user_name!="0") {
                     tmp.find(".x-re-name").html(x.re_user_name);
                 }
@@ -381,38 +386,59 @@ function add_second_comment() {
    var current_time=getNowFormatDate();
 
 
-    $.ajax({
-        type:"GET",
-        url:"add_second_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content+"&floor="+floor+"&re_id="+re_user_id,
-        success:function (result) {
-            if(result["if_success"]==1){
 
-                var post_comment_area_body=post_comments_area.find(".post-comment-area-body");
-                var tmp = post_comment_area_body.children(".old").clone().removeClass("old").addClass("new").show();
-                tmp.find(".x-name").html(user_name);
-                // tmp.find(".x-time").html();
-                tmp.find(".x-content").html(content);
-                if(re_user_name!="0") {
-                    tmp.find(".x-re-name").html(re_user_name);
-                }
-                else {
-                    tmp.find(".x-response").html("");
-                }
+    var post_comment_area_body=post_comments_area.find(".post-comment-area-body");
+    var tmp = post_comment_area_body.children(".old").clone().removeClass("old").addClass("new").show();
+    tmp.find(".x-name").html(user_name);
+    // tmp.find(".x-time").html();
+    tmp.find(".x-content").html(content);
+    window.alert(re_user_name);
+    if(re_user_name!="0") {
+        tmp.find(".x-re-name").html(re_user_name);
+    }
+    else {
+        tmp.find(".x-response").html("");
+    }
 
-                tmp.find(".x-time").html(current_time);
+    tmp.find(".x-time").html(current_time);
 
 
-                tmp.find(".x-delete").click(deleteSecondComment);
-                post_comment_area_body.append(tmp);
+    tmp.find(".x-delete").click(deleteSecondComment);
+    post_comment_area_body.append(tmp);
 
-            }
-            else{
-                window.alert(result["err_message"]);
-            }
 
-        }
-
-    });
+    // $.ajax({
+    //     type:"GET",
+    //     url:"add_second_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content+"&floor="+floor+"&re_id="+re_user_id,
+    //     success:function (result) {
+    //         if(result["if_success"]==1){
+    //
+    //             var post_comment_area_body=post_comments_area.find(".post-comment-area-body");
+    //             var tmp = post_comment_area_body.children(".old").clone().removeClass("old").addClass("new").show();
+    //             tmp.find(".x-name").html(user_name);
+    //             // tmp.find(".x-time").html();
+    //             tmp.find(".x-content").html(content);
+    //             if(re_user_name!="0") {
+    //                 tmp.find(".x-re-name").html(re_user_name);
+    //             }
+    //             else {
+    //                 tmp.find(".x-response").html("");
+    //             }
+    //
+    //             tmp.find(".x-time").html(current_time);
+    //
+    //
+    //             tmp.find(".x-delete").click(deleteSecondComment);
+    //             post_comment_area_body.append(tmp);
+    //
+    //         }
+    //         else{
+    //             window.alert(result["err_message"]);
+    //         }
+    //
+    //     }
+    //
+    // });
 
 }
 
@@ -432,4 +458,78 @@ function getNowFormatDate() {
         + " " + date.getHours() + seperator2 + date.getMinutes()
         + seperator2 + date.getSeconds();
     return currentdate;
+}
+
+//------针对楼中楼 add second comment 需要对re_user_id和re_user_name进行调整-----------
+
+function add_second_comment_second() {
+    var post_comment_list_btm=$(this).parent().parent();
+    re_user_id=post_comment_list_btm.find(".x-second-comment-id").text();
+    // window.alert(re_user_id);
+
+    re_user_name=post_comment_list_btm.find(".x-name").text();
+
+
+    var post_comments_area=post_comment_list_btm.parent().parent().parent();
+    var add_post_comment=post_comments_area.find(".add-post-comment");
+    // alert(add_post_comment.length);
+    add_post_comment.hide();
+    var comment_area = $("<textarea placeholder='回复"+re_user_name+"'></textarea>").css("margin-bottom", "10px");
+    add_post_comment.after(comment_area);
+    comment_area.focus = true;
+    var submit_btn = $("<button>提交</button>").addClass("p-btn-sm right");
+    submit_btn.click(add_second_comment);
+    comment_area.after(submit_btn);
+
+    // window.alert(re_user_name);
+
+}
+
+
+//---------插入一级回复------------
+
+function  add_comment() {
+    var content=ue_add_comment.getContent();
+    var current_time=getNowFormatDate();
+
+
+    var posts_list_ul=$(".posts-list-ul");
+    var tmp = posts_list_ul.children(".old").clone().removeClass("old").addClass("new").show();
+
+
+    tmp.find(".x-name").html(user_name);
+    tmp.find(".x-time").html(current_time);
+    tmp.find(".x-content").html(content);
+    tmp.find(".x-comment").click(showSecondComment);
+    tmp.find(".post-comments-area").hide();
+    tmp.find(".glyphicon").click(deleteComment);
+
+    posts_list_ul.append(tmp);
+
+    // $.ajax({
+    //    type:"GET",
+    //     url:"add_article_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content,
+    //     success:function (result) {
+    //         if(result["if_success"]==1){
+    //             var posts_list_ul=$(".posts-list-ul");
+    //             var tmp = posts_list_ul.children(".old").clone().removeClass("old").addClass("new").show();
+    //
+    //             tmp.find(".x-name").html(user_name);
+    //             tmp.find(".x-time").html(current_time);
+    //             tmp.find(".x-content").html(content);
+    //             tmp.find(".x-comment").click(showSecondComment);
+    //             tmp.find(".post-comments-area").hide();
+    //             tmp.find(".glyphicon").click(deleteComment);
+    //
+    //             posts_list_ul.append(tmp);
+    //
+    //         }
+    //         else{
+    //             window.alert(result["err_message"]);
+    //         }
+    //
+    //     }
+
+    // });
+
 }

@@ -111,7 +111,7 @@
                                             <a class="glyphicon glyphicon-trash x-first-delete"></a>
                                             <span class="x-first-delete">|</span>
                                             <a class="post-comment-btn  x-comment">评论</a>
-                                            <span class="posts-list-item-nick ">#<span class="x-floor"></span>楼</span><!-- floor id ~~ -->
+                                            <span class="posts-list-item-nick" style="display: none;">#<span class="x-floor"></span>楼</span><!-- floor id ~~ -->
                                             </div>
                                         </div>
                                     </div>
@@ -122,14 +122,16 @@
                                                 <div class="post-comment-content x-content"></div>
                                                 <div class="posts-list-item-btm">
                                                     <span class="x-re-floor" style="display: none"></span>
-                                                    <span class="nick-color x-name"></span><span class="x-response">&nbsp;回复&nbsp;</span><span class="nick-color x-re-name"></span>
+                                                    <span class="nick-color x-name"></span>
+                                                    <span class="x-second-comment-id" style="display: none"></span>
+                                                    <span class="x-response">&nbsp;回复&nbsp;</span><span class="nick-color x-re-name"></span>
                                                     &nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;
-                                                    <span class="posts-list-item-date x-time">
-                                                    </span>
+                                                    <span class="posts-list-item-date x-time"></span>
                                                     <div class="right">
                                                     <a class="glyphicon glyphicon-trash x-delete"></a>
                                                     <span class="x-delete">|</span>
-                                                    <a class="post-comment-btn">回复</a></div>
+                                                    <a class="post-comment-btn">回复</a>
+                                                    </div>
                                                 </div>
                                             </div> <!-- loop end-->
                                         </div>
@@ -145,9 +147,15 @@
                             </ul>
 
                             <div>
-                                <script id="ueditor_container" name="content" type="text/plain" class="ueditor"></script>
-                            </div>
-                            <button class="p-btn" >发表回复</button>
+                                <script id="container" name="content" type="text/plain">
+        这里写你的初始化内容
+    </script>
+                                <!-- 配置文件 -->
+                                <!-- 实例化编辑器 -->
+                                <script type="text/javascript">
+                                    var ue_add_comment= UE.getEditor('container');
+                                </script>                            </div>
+                            <button class="p-btn" onclick="add_comment()">发表回复</button>
                         </div>
                     </div>
 
@@ -160,15 +168,7 @@
                     <p class="subtit">文章内容</p>
 
                     <!-- 加载编辑器的容器 --><div>
-                    <script id="container" name="content" type="text/plain">
-        这里写你的初始化内容
-    </script>
-                    <!-- 配置文件 -->
-
-                    <!-- 实例化编辑器 -->
-                    <script type="text/javascript">
-                        var ue = UE.getEditor('container');
-                    </script></div>
+                   e</div>
                     <div class="row">
                         <div class='col-sm-9'>
                             <button  class='btn btn-primary' id="cancel_write_article" onclick='cancelArticle()'>取消发布</button></div>
@@ -200,15 +200,7 @@
                             <button  class='btn btn-primary cancel-ok-button x-button' >修改文章</button></div>
                     </div>
                 </div>
-
-
-
             </div>
-
-
-
-
-
 
 
             <div id="courseware_pane" class="tab-pane">
@@ -314,9 +306,6 @@
 <script src="js/add_article.js"></script>
 <script src="js/class_manage.js"></script>
 <script src="js/courseware.js"></script>
-
-
-
 
 
 </body>
