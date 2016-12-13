@@ -27,7 +27,7 @@ create table user_table(
 #队伍表：
 create table team_table(
 	team_id int not null auto_increment,#队伍ID
-	team_name varchar(20),#队伍名
+	team_name varchar(20) unique,#队伍名
 	team_password varchar(16),#队伍密码
 	primary key(team_id)
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -35,7 +35,7 @@ create table team_table(
 create table orgnize_table(
 	id varchar(10),#用户ID
 	team_id int,#队伍ID
-	flag boolean,#标识，是否已加入成功
+	flag int,#标识，是否已加入成功
 	primary key(id,team_id),
 	constraint foreign key (id) references user_table(id) on delete cascade on update cascade,
 	constraint foreign key (team_id) references team_table(team_id) on delete cascade on update cascade
@@ -176,6 +176,7 @@ create table courseware_table(
 	lesson_id varchar(10),#课程号
 	courseware_name varchar(100),#课件名
 	courseware_link varchar(200),#课件地址
+	#分为，课件，模板，参考资料，以往优秀作业，教学视频，教学音频
 	courseware_kind varchar(20),#课件类型
 	primary key(courseware_id),
 	constraint foreign key (lesson_id) references lesson_table(lesson_id) on delete cascade on update cascade
