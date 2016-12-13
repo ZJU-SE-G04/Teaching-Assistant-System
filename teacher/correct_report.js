@@ -12,7 +12,7 @@
  是否评价
  */
 
-function ready() {
+function correctReport() {
     var JSON_STR = [
         {
             "name": "谢俊东",
@@ -119,4 +119,4 @@ function ready() {
     }
 }
 
-window.onload = ready;
+window.onload = correctReport;
