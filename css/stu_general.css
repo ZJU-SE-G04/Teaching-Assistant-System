@@ -98,6 +98,7 @@ a, button {
 }
 
 .p-btn {
+    cursor: pointer;
     background-color: #337ab9;
     color: #fff;
     height: 34px;

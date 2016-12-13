@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:equalTo="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>学生个人主页</title>
@@ -31,7 +31,7 @@
         <div class="col-md-10 tab-content" id="tab_content_area">
             <div id="modify_pass_pane" class="tab-pane">
 
-                <form action="modify_password.php" method="post" id="modify_pass_form">
+                <form action="modify_pass.php" method="post" id="modify_pass_form">
                     <div class="form-field">
                         <div class="field-label-margin">
                             <em class="f-sign">*</em>
@@ -45,7 +45,7 @@
                             <div class="inline">请输入新密码</div>
                         </div>
                         <input type="password" name="new_pass" class="" placeholder="6-16位字母、数字" maxlength="16"
-                               minlength="6" required/>
+                               minlength="6" id="new_pass" required/>
                     </div>
                     <div class="form-field">
                         <div class="field-label-margin">
@@ -53,7 +53,7 @@
                             <div class="inline">请再次输入新密码</div>
                         </div>
                         <input type="password" name="re_new_pass" class="" placeholder="6-16位字母、数字" maxlength="16"
-                               minlength="6" required/>
+                               minlength="6" equalTo="#new_pass" required/>
                     </div>
                     <div>
                         <button class="p-btn" id="mod_pass_submit_btn">提交</button>
@@ -63,14 +63,14 @@
 
             <div id="setup_pass_protect_pane" class="tab-pane">
 
-                <form action="setup_pass_protect.php" method="post" id="setup_pass_protect_form">
+                <form action="set_passpro.php" method="post" id="setup_pass_protect_form">
                     <div class="form-field">
                         <div class="field-label-margin">
                             <em class="f-sign">*</em>
                             <div class="inline">请输入密保问题</div>
                         </div>
                         <!--<input type="password" name="origin_pass" class="" required/>-->
-                        <select class="">
+                        <select class="" name="question" required>
                             <option>您母亲的名字是?</option>
                             <option>您第一次做飞机是去哪里?</option>
                             <option>您小学班主任的名字是？</option>
@@ -81,7 +81,7 @@
                             <em class="f-sign">*</em>
                             <div class="inline">请输入密保问题的答案</div>
                         </div>
-                        <input type="password" name="new_pass" class="" placeholder="" required/>
+                        <input type="text" name="answer" class="" placeholder="" required/>
                     </div>
                     <div>
                         <button class="p-btn" id="setup_pass_protect_submit_btn">提交</button>
@@ -89,79 +89,102 @@
                 </form>
             </div>
             <div id="create_team_pane" class="tab-pane">
-                <div id="team_name_field" class="form-field">
-                    <div class="field-label-margin">
-                        <em class="f-sign">*</em>
-                        <span class="inline">请输入团队名</span>
+                <form action="create_team.php" method="post" id="create_team_form">
+                    <div id="team_name_field" class="form-field">
+                        <div class="field-label-margin">
+                            <em class="f-sign">*</em>
+                            <span class="inline">请输入团队名</span>
+                        </div>
+                        <input type="text" name="teamname_for_create" required id="teamname_for_create">
                     </div>
-                    <input type="text">
-                </div>
-                <div id="team_password_field" class="form-field">
-                    <div class="field-label-margin">
-                        <em class="f-sign">*</em>
-                        <span class="inline">请输入加入团队的密码</span>
+                    <div id="team_password_field" class="form-field">
+                        <div class="field-label-margin">
+                            <em class="f-sign">*</em>
+                            <span class="inline">请输入加入团队的密码</span>
+                        </div>
+                        <input type="password" name="teampass_for_create" required minlength="6" maxlength="16"
+                               id="teampass_for_create">
                     </div>
-                    <input type="password">
-                </div>
-                <div id="team_rePassword_field" class="form-field">
-                    <div class="field-label-margin">
-                        <em class="f-sign">*</em>
-                        <span class="inline">请再次输入加入团队的密码</span>
+                    <div id="team_rePassword_field" class="form-field">
+                        <div class="field-label-margin">
+                            <em class="f-sign">*</em>
+                            <span class="inline">请再次输入加入团队的密码</span>
+                        </div>
+                        <input type="password" name="re_teampass_for_create" required minlength="6" maxlength="16"
+                               equalTo="#teampass_for_create">
                     </div>
-                    <input type="password">
-                </div>
 
-                <div class="btn-whiteBlue p-btn" id="create_team_btn">创建队伍</div>
+                    <button class="btn-whiteBlue p-btn" id="create_team_btn">创建队伍</button>
+                </form>
             </div>
             <div id="join_team_pane" class="tab-pane">
 
-                <div class="f-prompt">
-                    <span>已知团队名和密码？</span><a href="#" id="direct_join_team_link">直接加入</a>
+                <div id="join_team_by_apply_pane">
+                    <div class="f-prompt">
+                        <span>已知团队名和密码？</span><a href="#" id="direct_join_team_link">直接加入</a>
+                    </div>
+                    <div class="page-header">
+                        <h4>队伍列表</h4>
+                    </div>
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th width="44%">队伍名称</th>
+                            <th width="44%">队伍容量</th>
+                            <th width="12%">操作</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>亦可赛艇</td>
+                            <td>4/6</td>
+                            <td><a href="">申请加入</a></td>
+                        </tr>
+                        <tr>
+                            <td>苟利国家</td>
+                            <td>2/6</td>
+                            <td><a href="">申请加入</a></td>
+                        </tr>
+                        <tr>
+                            <td>去玩儿</td>
+                            <td>2/6</td>
+                            <td><a href="">申请加入</a></td>
+                        </tr>
+                        <tr>
+                            <td>生死以</td>
+                            <td>2/6</td>
+                            <td><a href="">申请加入</a></td>
+                        </tr>
+                        <tr>
+                            <td>岂因祸福</td>
+                            <td>2/6</td>
+                            <td><a href="">申请加入</a></td>
+                        </tr>
+                        <tr>
+                            <td>避趋之</td>
+                            <td>2/6</td>
+                            <td><a href="">申请加入</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div class="page-header">
-                    <h4>队伍列表</h4>
+                <div id="join_team_by_pass_pane">
+                    <div class="form-field">
+                        <div class="field-label-margin">
+                            <em class="f-sign">*</em>
+                            <span class="inline">请输入团队名</span>
+                        </div>
+                        <input type="text">
+                    </div>
+                    <div class="form-field">
+                        <div class="field-label-margin">
+                            <em class="f-sign">*</em>
+                            <span class="inline">请输入团队密码</span>
+                        </div>
+                        <input type="password">
+                    </div>
+                    <div class="btn-whiteBlue p-btn">加入队伍</div>
                 </div>
-                <table class="table table-hover">
-                    <thead>
-                    <tr>
-                        <th width="44%">队伍名称</th>
-                        <th width="44%">队伍容量</th>
-                        <th width="12%">操作</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>亦可赛艇</td>
-                        <td>4/6</td>
-                        <td><a href="">申请加入</a></td>
-                    </tr>
-                    <tr>
-                        <td>苟利国家</td>
-                        <td>2/6</td>
-                        <td><a href="">申请加入</a></td>
-                    </tr>
-                    <tr>
-                        <td>去玩儿</td>
-                        <td>2/6</td>
-                        <td><a href="">申请加入</a></td>
-                    </tr>
-                    <tr>
-                        <td>生死以</td>
-                        <td>2/6</td>
-                        <td><a href="">申请加入</a></td>
-                    </tr>
-                    <tr>
-                        <td>岂因祸福</td>
-                        <td>2/6</td>
-                        <td><a href="">申请加入</a></td>
-                    </tr>
-                    <tr>
-                        <td>避趋之</td>
-                        <td>2/6</td>
-                        <td><a href="">申请加入</a></td>
-                    </tr>
-                    </tbody>
-                </table>
             </div>
             <div id="deal_with_team_apply_pane" class="tab-pane">
                 <div class="panel panel-default">
@@ -206,14 +229,73 @@
             var origin_pass = $("input[name='origin_pass']").text();
             var new_pass = $("input[name='new_pass']").text();
             var re_new_pass = $("input[name='re_new_pass']").text();
-            $.post("modify_password.php", {
+            $.get("modify_pass.php", {
                         origin_pass: origin_pass,
                         new_pass: new_pass,
                         re_new_pass: re_new_pass,
                     }, function (data, status) {
                         console.log(data);
+                        if (data['state'] == 0) {
+                            alert(data['msg']);
+                        } else if (data['state'] == 1) {
+                            alert(data['msg']);
+                        } else if (date['state'] == 2) {
+                            alert(date['msg'])
+                        }
                     }
             );
+        }
+    });
+
+    $("#setup_pass_protect_form").validate({
+        submitHandler: function () {
+            var question = $("select[name='question']").val();
+            var answer = $("input[name='answer']").val();
+            $.post("set_passpro.php", {
+                question: question,
+                answer: answer,
+            }, function (data, status) {
+                alert(data['msg']);
+            })
+        }
+    });
+
+    $("#create_team_form").validate({
+        rules: {
+            teamname_for_create: {
+
+                remote: {
+                    url: "check_team_name_dup.php",
+                    type: "get",
+                    dataType: "json",
+                    data: {
+                        teamName: function () {
+                            return $("#teamname_for_create").val();
+                        }
+                    },
+                    dataFilter: function (data) {　　　　//判断控制器返回的内容
+//                        console.log("validate team_name_dup:" + data);
+//                        return data == "true";
+                    }
+                },
+            },
+            messages: {
+                teamname_for_create: {
+                    remote: "队伍名称已经被占用"
+                }
+            }
+
+        },
+        submitHandler: function () {
+            var teamName = $("input[name='teamname_for_create']").val();
+            var teamPass = $("input[name='teampass_for_create']").val();
+
+            $.get("create_team.php", {
+                teamName: teamName,
+                pass: teamPass
+            }, function (data, status) {
+                alert(data['msg']);
+            })
         }
     })
 </script>
