@@ -1,6 +1,6 @@
 <?php
 	$action=$_GET["action"];//获取行为
-	//$action="submitReRe";
+	//$action="fetchAll";
 	if($action=='fetchAll'){
 		fetchAll();
 	}else if($action=='fetchDetail'){
@@ -80,19 +80,31 @@
 		include 'connect.php';
 		$lesson_id=$_GET["courseID"];//获取教师账号
 		$post_kind=(int)$_GET['post_kind'];
+		$offset=(int)$_GET['offset'];
+		$count=(int)$_GET['count'];
 		//$lesson_id='ABCDE1';
 		//$post_kind=1;
+		//$offset=0;
+		//$count=10;
 
 
 		$result = $conn->query("select * from topic_table natural join user_table where lesson_id='".$lesson_id."' and topic_kind=".$post_kind." order by topic_id DESC;");
 
 		$arr = [];
+		$i=0;
+		$j=0;
 		while($row = mysqli_fetch_assoc($result)) {
-			$x['topic_id']=(int)$row['topic_id'];
-			$x['title']=$row['title'];
-			$x['datetime']=$row['time'];
-			$x['publisher']=$row['user_name'];
-			$arr[] = $x;
+			if($i>=$offset){
+				$x['topic_id']=(int)$row['topic_id'];
+				$x['title']=$row['title'];
+				$x['datetime']=$row['time'];
+				$x['publisher']=$row['user_name'];
+				$arr[] = $x;
+				$j++;
+			}
+			$i++;
+			if($j>=$count)
+				break;
 		}
 		echo json_encode($arr, JSON_UNESCAPED_UNICODE);
 		$conn->close();
