@@ -330,7 +330,7 @@ function showSecondComment() {
             }
             posts_list_item.find(".post-comments-area").show();
 
-            $(".add-rere").click(function () {
+            $(".add-post-comment").click(function () {
                 $(this).hide();
                 var comment_area = $("<textarea placeholder='发表评论...'></textarea>").css("margin-bottom", "10px");
                 $(this).after(comment_area);
@@ -475,6 +475,9 @@ function add_second_comment_second() {
     var add_post_comment=post_comments_area.find(".add-post-comment");
     // alert(add_post_comment.length);
     add_post_comment.hide();
+    post_comments_area.children("textarea").remove();
+    post_comments_area.children("button").remove();
+
     var comment_area = $("<textarea placeholder='回复"+re_user_name+"'></textarea>").css("margin-bottom", "10px");
     add_post_comment.after(comment_area);
     comment_area.focus = true;
