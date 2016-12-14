@@ -34,7 +34,9 @@ function getQuizDetail() {
     var quizName = quiz.quizName;
     var question = quiz.question;
 
-    var o = document.body;
+    // var o = document.body;
+    var o = document.getElementById("examin_pane");
+    o.innerHTML = null;
 
     var h3 = document.createElement("h3");
     h3.className = "page-header";
@@ -108,4 +110,4 @@ function getQuizDetail() {
     button.className = "btn btn-primary center-block";
     button.innerHTML = '<span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 提交';
 }
-window.onload = getQuizDetail;
+// window.onload = getQuizDetail;

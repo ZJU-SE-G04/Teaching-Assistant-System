@@ -2,13 +2,33 @@
  * Created by Rexxar on 2016/11/20.
  */
 
+var option_num, essay_num;//选择题和问答题数量
+
+function result() {
+    var jsObj = {};
+    jsObj.option_num=option_num;
+    jsObj.essay_num=essay_num;
+
+    for (var i=0;i<option_num;i++) {
+
+    }
+
+    for (var i=0;i<essay_num;i++) {
+
+    }
+}
+
 
 function createDiv() {
-    var o = document.getElementById("exercise");
+    // var o = document.getElementById("exercise");
+    var o=document.body;
 
     var quizName = document.getElementById("quizName").value;
     var optionQuestionCount = document.getElementById("optionQuestionCount").value;
     var essayQuestionCount = document.getElementById("essayQuestionCount").value;
+
+    option_num = optionQuestionCount;
+    essay_num = essayQuestionCount;
 
     document.getElementById("releaseQuizForm").remove();
     document.getElementById("quizTitle").innerText = quizName;
@@ -19,6 +39,7 @@ function createDiv() {
 
     o.appendChild(form);
 
+    alert("hello");
     for (var i = 1; i <= optionQuestionCount; i++) {
         var divOp = document.createElement("div");
         divOp.className = "list-group-item-text bs-callout bs-callout-info";
@@ -82,7 +103,7 @@ function createDiv() {
 
             textarea.className = "form-control form-group";
             textarea.rows = "3";
-            textarea.name = i+"_question";
+            textarea.name = i + "_question";
             textarea.placeholder = "输入主观题题目";
 
             divOp.appendChild(label);

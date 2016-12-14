@@ -16,7 +16,9 @@ textarea {
     min-height:100px;
 }
 
-
+select {
+    height: 30px;
+}
 a, button {
     cursor: pointer;
 }
