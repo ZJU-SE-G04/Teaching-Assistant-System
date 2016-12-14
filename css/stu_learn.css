@@ -442,10 +442,19 @@ input[name="post_title"] {
 }
 
 /*二级回复样式*/
+.submit-rere-frame {
+    margin-top: 5px;
+    float: right;
+    width: 75%;
+    /*font-size: 0.9em;*/
+    /*line-height: 1.2;*/
+}
+
 .rere-area {
     /*border-radius: 2%;*/
     margin-top: 5px;
-    padding: 10px 10px;
+    padding: 10px;
+    padding-bottom: 0px;
     border: 1px solid #d9dde1;
     float: right;
     width: 75%;
