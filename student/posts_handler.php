@@ -1,6 +1,6 @@
 <?php
 	$action=$_GET["action"];//获取行为
-	//$action="fetchReRe";
+	//$action="submitReRe";
 	if($action=='fetchAll'){
 		fetchAll();
 	}else if($action=='fetchDetail'){
@@ -9,7 +9,72 @@
 		fetchRe();
 	}else if($action=='fetchReRe'){
 		fetchReRe();
+	}else if($action=='submitRe'){
+		submitRe();
+	}else if($action=='submitReRe'){
+		submitReRe();
 	}
+
+
+//提交二级回复
+	function submitReRe(){
+		include 'connect.php';
+		$topic_id=(int)$_GET['topic_id'];
+		$content=$_GET['content'];
+		$ofloor=(int)$_GET['floor'];
+		$reid=$_GET['id_be_re'];
+		//$uid=$_SESSION['user'];
+		$uid='3140103333';
+		//$topic_id=1;
+		//$content='层主说得对';
+		//$reid='3140102222';
+		//$ofloor=4;
+
+		$datetime=date('Y-m-d H:i:s');
+		$state=0;
+		$msg='发表成功！';
+		$result=$conn->query('select * from re_response_table where topic_id='.$topic_id.' and floor='.$ofloor.' order by floor DESC;');
+		$row=mysqli_fetch_assoc($result);
+		$floor=(int)$row['re_floor'];
+		$floor++;
+		$result=$conn->query('insert into re_response_table values('.$topic_id.',"'.$uid.'","'.$datetime.'","'.$content.'",'.$ofloor.','.$floor.',"'.$reid.'");');
+		$row=mysqli_fetch_assoc($result);
+		if($result==null){
+			$state=1;
+			$msg='发表失败！';
+		}
+		$arr['state']=$state;
+		$arr['msg']=$msg;
+		echo json_encode($arr, JSON_UNESCAPED_UNICODE);
+	}
+
+//提交一级回复
+	function submitRe(){
+		include 'connect.php';
+		$topic_id=(int)$_GET['topic_id'];
+		$content=$_GET['content'];
+		//$uid=$_SESSION['user'];
+		$uid='3140102222';
+		//$topic_id=1;
+		//$content='顶楼主';
+		$datetime=date('Y-m-d H:i:s');
+		$state=0;
+		$msg='发表成功！';
+		$result=$conn->query('select * from response_table where topic_id='.$topic_id.' order by floor DESC;');
+		$row=mysqli_fetch_assoc($result);
+		$floor=(int)$row['floor'];
+		$floor++;
+		$result=$conn->query('insert into response_table values('.$topic_id.',"'.$uid.'","'.$datetime.'","'.$content.'",'.$floor.');');
+		$row=mysqli_fetch_assoc($result);
+		if($result==null){
+			$state=1;
+			$msg='发表失败！';
+		}
+		$arr['state']=$state;
+		$arr['msg']=$msg;
+		echo json_encode($arr, JSON_UNESCAPED_UNICODE);
+	}
+
 //显示帖子列表
 	function fetchAll(){
 		include 'connect.php';
@@ -37,8 +102,8 @@
 //显示一个帖子的内容
 	function fetchDetail(){
 		include 'connect.php';
-		//$topic_id=(int)$_GET['topic_id'];
-		$topic_id=1;
+		$topic_id=(int)$_GET['topic_id'];
+		//$topic_id=1;
 
 
 		$result = $conn->query("select * from topic_table natural join user_table where topic_id=".$topic_id.";");
@@ -72,6 +137,7 @@
 		while($row = mysqli_fetch_assoc($result)) {
 			if($i>=$offset){
 				$x['username']=$row['user_name'];
+				$x['userid']=$row['id'];
 				$x['content']=$row['content'];
 				$x['time']=$row['time'];
 				$x['floor']=(int)$row['floor'];
