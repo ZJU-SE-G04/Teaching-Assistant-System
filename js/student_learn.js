@@ -164,6 +164,8 @@ $(document).ready(
         $(".post-border-item>a").click(function () {
             var border_type = $(this).attr("title");
             var border_name = $(this).text();
+            //获取该帖子板块中的所有帖子
+            //TODO 分页
             $.ajax({
                 url: "posts_handler.php?action=fetchAll&courseID=" + courseID + "&post_kind=" + border_type,
                 success: function (result) {
@@ -185,13 +187,14 @@ $(document).ready(
                             var post_id = $(this).parent().attr("id");
                             $.ajax({
                                 url: "posts_handler.php?action=fetchDetail&topic_id=" + post_id,
+                                async: false,
                                 success: function (result) {
                                     $("#posts_border_page").hide();
                                     $("#discuss_home_page").hide();
                                     $("#issue_post_page").hide();
                                     $("#post_detail_page").show();
 
-                                    $(".post-detail").attr("title", post_id);
+                                    $(".post-detail").attr("topic_id", post_id);
                                     $(".post-detail>.f-post-title").text(result['title']);
                                     $(".post-detail>.f-post-content").append($("<p></p>").text(result['content']));
                                     $(".post-detail-btm>.f-post-author").text(result['publisher']);
@@ -208,45 +211,111 @@ $(document).ready(
                                         result = results[i];
                                         $(".f-re-num").text("共" + results.length + "回复");    //获取评论数量
                                         var re_item_content_ele = $("<div class='re-item-content'></div>").text(result['content']);
-                                        var re_item_nick = $("<span class='re-item-nick inline' style='margin-right: 1em'></span>").text(result['username']);
-                                        var re_item_date = $("<span class='re-item-date' style='margin-left: 1em'></span>").text(result['time']);
-                                        var re_comment_btn = $("<a class='comment-btn right'>评论</a>").click(function () {
+                                        var re_item_nick = $("<span class='my-blue inline' style='margin-right: 1em'></span>").text(result['username']);
+                                        var re_item_date = $("<span class='f-post-date' style='margin-left: 1em'></span>").text(result['time']);
+                                        var re_comment_btn = $("<a class='comment-btn right my-blue'>回复</a>").click(function () {
+
+                                            //点击回复的时候出现回复框
+                                            var comment_form = $("<form method='post' action='submit_rere.php' title='submit_rere_form'></form>");
+                                            var comment_area = $("<textarea placeholder='发表评论...'></textarea>").css("margin-bottom", "10px");
+                                            comment_area.focus = true;
+                                            var submit_btn = $("<button>提交</button>").addClass("p-btn-sm right").css("margin-bottom", "5px");
+                                            comment_form.append(comment_area).append(submit_btn);
+
+                                            comment_form.validate({
+                                                submitHandler: function () {
+                                                    // var content =
+                                                    var topic_id = $(".post-detail").attr("topic_id");
+                                                    var floor = $(this).parent().parent().attr("floor");
+                                                    var re_floor = 0;  //回复的对象是一级回复
+                                                    var content = $(this).children("textarea").val();
+                                                    console.log("content:" + content);
+                                                    var id_be_re = $(this).parent().parent().attr("userid");
+                                                    var name_be_re = $(this).parent().before().children(":first").text();
+                                                    // alert("aaa");
+                                                    $.post("posts_handler.php", {
+                                                        action: "submitReRe",
+                                                        topic_id: topic_id,
+                                                        floor: floor,
+                                                        id_be_re: id_be_re,
+                                                        name_be_re: name_be_re,
+                                                        content: content,
+                                                        floor_be_re: 0
+                                                    }, function (data, status) {
+
+                                                    })
+                                                }
+                                            })
+                                            $(this).parent().next().append(comment_form);
                                         });
                                         var re_item_btm = $("<div class='re-item-btm'></div>").append(re_item_nick).append("|").append(re_item_date).append(re_comment_btn);
-                                        var re_li = $("<li class='re-item'></li>").append(re_item_content_ele).append(re_item_btm).attr("title", result['floor']);
+                                        var re_li = $("<li class='re-item'></li>").append(re_item_content_ele).append(re_item_btm).attr("floor", result['floor']).attr("userid", "3140101111");
+                                        re_li.append($("<div class='submit-rere-frame'></div>"));
                                         $(".re-list-ul").append(re_li);
+                                    }
 
-                                        //获取每个回复下面的所有二级回复
+                                    //获取每个回复下面的所有二级回复
+                                    var re_items = $(".re-item");
+                                    console.log(re_items);
+                                    for(var i = 0; i < re_items.length; i++) {
+                                        var re_li = $(re_items.get(i));
+                                        var floor =  re_li.attr("floor");
                                         $.ajax({
-                                            url: "posts_handler.php?action=fetchReRe&topic_id=" + post_id + "&floor=" + result['floor'],
+                                            url: "posts_handler.php?action=fetchReRe&topic_id=" + post_id + "&floor=" + floor,
+                                            async: false,   //很重要！如果是异步的ajax的话，后面引用re_li就不一定是同一个re_li了
                                             success: function (results) {
                                                 var rereAreaBody = $("<div class='rere-area-body'></div>");
-                                                for(var eachReRe in results) {
+                                                if(results.length == 0) return;
+                                                for(var i = 0; i < results.length; i++) {
+                                                    var eachReRe = results[i];
                                                     var rere_item = $("<div class='rere-item'></div>").append($("<div class='rere-content'></div>").text(eachReRe['re_content']));
                                                     var rere_username = $("<span class='my-blue'></span>").text(eachReRe['username']).attr("title", eachReRe['userid']);
                                                     var rere_item_btm = $("<div class='rere-item-btm'></div>").append(rere_username);
                                                     if(eachReRe['id_of_be_re'] != 0) {
                                                         //回复对象不是一级回复
-                                                        rere_item_btm.append($("<span style='margin: 0 0.8em'>回复</span>"));
+                                                        rere_item_btm.append($("<span style='margin: 0 0.5em'>回复</span>"));
                                                         var username_of_be_re = $("<span class='my-blue'></span>").text(eachReRe['username_of_be_re']);
                                                         rere_item_btm.append(username_of_be_re);
                                                     }
-                                                    rere_item_btm.append($("<span style='margin: 0 0.8em'>|</span>"))
-                                                    var rere_date = $("<span class='my-blue'></span>").text(eachReRe['re_time']);
+                                                    rere_item_btm.append($("<span style='margin: 0 0.5em'>|</span>"))
+                                                    var rere_date = $("<span class='f-post-date'></span>").text(eachReRe['re_time']);
                                                     rere_item_btm.append(rere_date);
-                                                    rere_item_btm.append($("<a class='comment-btn right'></a>").text("回复"));
+                                                    rere_item_btm.append($("<a class='comment-btn right my-blue'></a>").text("回复").click(function () {
+
+                                                        //点击回复的时候出现回复框
+                                                        var comment_form = $("<form method='post' action='submit_rere.php'></form>");
+                                                        var comment_area = $("<textarea placeholder='发表评论...'></textarea>").css("margin-bottom", "10px");
+                                                        comment_area.focus = true;
+                                                        var submit_btn = $("<button>提交</button>").addClass("p-btn-sm right").css("margin-bottom", "5px");
+                                                        // comment_area.after(submit_btn);
+                                                        var rere_item = $(this).parent().parent();
+                                                        comment_form.append(comment_area).append(submit_btn);
+
+                                                        comment_form.validate({
+                                                            submitHandler: function () {
+                                                                // var content =
+                                                                alert("aaa");
+                                                            }
+                                                        });
+                                                        rere_item.after(comment_form);
+
+                                                    }));
                                                     rere_item.append(rere_item_btm);
                                                     rereAreaBody.append(rere_item);
 
                                                 }
                                                 var rereArea = $("<div class='rere-area'></div>").append(rereAreaBody);
-                                                rereArea.append($("<div class='add-rere'>添加评论...</div>"));
+                                                // rereArea.append($("<div class='add-rere'>添加评论...</div>"));
+                                                console.log(rereArea);
+                                                console.log(re_li);
                                                 re_li.append(rereArea);
                                             }
                                         })
                                     }
                                 }
                             })
+
+
 
                         });
                         var post_li = $("<li class='posts-list-item'></li>").append(post_title_ele);
@@ -259,8 +328,6 @@ $(document).ready(
                 }
             });
         });
-
-
 
 
         /****************************************发布帖子****************************************/

@@ -113,6 +113,21 @@
                         <input type="password" name="re_teampass_for_create" required minlength="6" maxlength="16"
                                equalTo="#teampass_for_create">
                     </div>
+                    <div id="team_capacity" class="form-field">
+                        <div class="field-label-margin">
+                            <em class="f-sign">*</em>
+                            <span class="inline">请选择队伍容量</span>
+                        </div>
+                        <select name="select_team_capacity" id="select_team_capacity" style="width: 100px;">
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6" selected="selected">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                        </select>
+                    </div>
 
                     <button class="btn-whiteBlue p-btn" id="create_team_btn">创建队伍</button>
                 </form>
@@ -169,21 +184,23 @@
                     </table>
                 </div>
                 <div id="join_team_by_pass_pane">
-                    <div class="form-field">
-                        <div class="field-label-margin">
-                            <em class="f-sign">*</em>
-                            <span class="inline">请输入团队名</span>
+                    <form action="apply_for_team.php" method="get" id="join_team_by_pass_form">
+                        <div class="form-field">
+                            <div class="field-label-margin">
+                                <em class="f-sign">*</em>
+                                <span class="inline">请输入团队名</span>
+                            </div>
+                            <input type="text" name="teamName" required >
                         </div>
-                        <input type="text">
-                    </div>
-                    <div class="form-field">
-                        <div class="field-label-margin">
-                            <em class="f-sign">*</em>
-                            <span class="inline">请输入团队密码</span>
+                        <div class="form-field">
+                            <div class="field-label-margin">
+                                <em class="f-sign">*</em>
+                                <span class="inline">请输入团队密码</span>
+                            </div>
+                            <input type="password" name="pass" required>
                         </div>
-                        <input type="password">
-                    </div>
-                    <div class="btn-whiteBlue p-btn">加入队伍</div>
+                        <button class="btn-whiteBlue p-btn">加入队伍</button>
+                    </form>
                 </div>
             </div>
             <div id="deal_with_team_apply_pane" class="tab-pane">
@@ -274,8 +291,7 @@
                         }
                     },
                     dataFilter: function (data) {　　　　//判断控制器返回的内容
-//                        console.log("validate team_name_dup:" + data);
-//                        return data == "true";
+                        return data == "true";
                     }
                 },
             },
@@ -293,6 +309,19 @@
             $.get("create_team.php", {
                 teamName: teamName,
                 pass: teamPass
+            }, function (data, status) {
+                alert(data['msg']);
+            })
+        }
+    });
+
+    $("#join_team_by_pass_form").validate({
+        submitHandler: function () {
+            var teamName = $("#join_team_by_pass_form input[name='teamName']").val();
+            var pass = $("#join_team_by_pass_form input[name='pass']").val();
+            $.get("direct_join_team.php", {
+                teamName: teamName,
+                pass: pass
             }, function (data, status) {
                 alert(data['msg']);
             })
