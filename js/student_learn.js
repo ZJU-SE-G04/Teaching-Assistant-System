@@ -226,12 +226,24 @@ $(document).ready(
                                                 submitHandler: function () {
                                                     // var content =
                                                     var topic_id = $(".post-detail").attr("topic_id");
-                                                    var floor = 0;  //回复的对象是一级回复
+                                                    var floor = $(this).parent().parent().attr("floor");
+                                                    var re_floor = 0;  //回复的对象是一级回复
                                                     var content = $(this).children("textarea").val();
                                                     console.log("content:" + content);
                                                     var id_be_re = $(this).parent().parent().attr("userid");
-                                                    var username_be_re = $(this).parent().before().children(":first").text();
-                                                    alert("aaa");
+                                                    var name_be_re = $(this).parent().before().children(":first").text();
+                                                    // alert("aaa");
+                                                    $.post("posts_handler.php", {
+                                                        action: "submitReRe",
+                                                        topic_id: topic_id,
+                                                        floor: floor,
+                                                        id_be_re: id_be_re,
+                                                        name_be_re: name_be_re,
+                                                        content: content,
+                                                        floor_be_re: 0
+                                                    }, function (data, status) {
+
+                                                    })
                                                 }
                                             })
                                             $(this).parent().next().append(comment_form);
