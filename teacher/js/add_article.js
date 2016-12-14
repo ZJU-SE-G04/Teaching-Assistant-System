@@ -175,7 +175,7 @@ function  deleteArticle(article_id) {
 }
 
 
-////////////////////////////-------show article details and comments(first)
+/////------show article details and comments(first)---------
 
 function articleShow() {
 
@@ -291,6 +291,7 @@ function showSecondComment() {
     var posts_list_item=$(this).parent().parent().parent().parent();//....
 
 
+
     $.ajax({
         type:"GET",
         url:"show_second_comment.php?article_id="+article_id+"&floor="+floor,
@@ -343,9 +344,19 @@ function showSecondComment() {
         }
 
     });
-
+    $(this).text("收起评论");
+    $(this).click(withdraw_second_comment);
 
 }
+
+//--------收起二级回复--------
+function withdraw_second_comment() {
+    
+    $(this).parents(".posts-list-item").find(".post-comments-area").hide()
+    $(this).text("评论");
+    $(this).click(showSecondComment);
+}
+
 
 //---------删除一个楼中楼回复,实现局部刷新-------------
 function deleteSecondComment() {
@@ -492,7 +503,9 @@ function add_second_comment_second() {
 
 function  add_comment() {
     var content=ue_add_comment.getContent();
+    alert(content);
     var current_time=getNowFormatDate();
+    alert(current_time);
 
 
     var posts_list_ul=$(".posts-list-ul");
@@ -510,7 +523,7 @@ function  add_comment() {
 
     // $.ajax({
     //    type:"GET",
-    //     url:"add_article_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content,
+    //     url:"add_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content,
     //     success:function (result) {
     //         if(result["if_success"]==1){
     //             var posts_list_ul=$(".posts-list-ul");
@@ -531,7 +544,7 @@ function  add_comment() {
     //         }
     //
     //     }
-
+    //
     // });
 
 }
