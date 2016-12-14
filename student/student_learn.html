@@ -5,14 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>浙江大学软件教学管理系统</title>
+
+
+
     <link href="../bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/video-js.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/header.css">
     <link rel="stylesheet" href="../css/stu_general.css">
     <link rel="stylesheet" href="../css/stu_learn.css">
 
+    <!--add by Li Boao-->
+    <link rel="stylesheet" href="../css/content.css">
+    <link rel="stylesheet" href="../css/docs.css">
+
     <script type="text/javascript" src="../ueditor/ueditor.config.js"></script>
     <script type="text/javascript" src="../ueditor/ueditor.all.js"></script>
+
+    <!--⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠
+    window.onload的值在get_notice.js设置
+     -->
+    <script src="get_notice.js"></script>
+    <script src="quiz_detail.js"></script>
 
 </head>
 <body>
@@ -40,7 +53,9 @@
         </div>
         <div class="col-md-10 tab-content" id="tab_content_area">
             <div id="notice_pane" class="tab-pane">
-                公告
+                <h3 class="page-header">公告</h3>
+
+                <div id="noticeDiv"></div>
             </div>
             <div id="course_intro_pane" class="tab-pane">
 
@@ -144,7 +159,72 @@
                 文章
             </div>
             <div id="examin_pane" class="tab-pane">
-                作业与测验
+                <h3 class="page-header">请选择一项测试或实验报告</h3>
+
+                <div class="list-group">
+                    <a href="#" class="list-group-item bs-callout bs-callout-warning" onclick="getQuizDetail()">
+                        <h4 class="list-group-item-heading">测试001（已完成）</h4>
+                        <p class="list-group-item-text">
+                            到期时间：2016-11-30 23:59:59 <br>
+                            第一章测试，请及时完成
+                        </p>
+                    </a>
+                    <a href="#" class="list-group-item bs-callout bs-callout-warning" onclick="getQuizDetail()">
+                        <h4 class="list-group-item-heading">测试002（未完成）</h4>
+                        <p class="list-group-item-text">
+                            到期时间：2016-12-05 23:59:59 <br>
+                            第二章测试，请及时完成
+                        </p>
+                    </a>
+                </div>
+
+                <div class="list-group ">
+                    <div class="list-group-item bs-callout bs-callout-info">
+                        <h4 class="list-group-item-heading">
+                            实验报告1（已完成）
+                            <a href="http://www.baidu.com">成绩：98 &nbsp;查看评价</a>
+                        </h4>
+
+                        <p class="list-group-item-text">
+                            学习使用网桥
+                            <a href="http://www.baidu.com" class="">
+                                <span class="glyphicon glyphicon-arrow-down"></span> 下载实验报告模板
+                            </a>
+                            <br>
+                            到期时间：2016-11-30 23:59:59 <br>
+                            <input style="margin-top: 1mm;" type="file" id="report1">
+                            <button type="submit" class="btn btn-primary" style="margin-top: 2mm;">
+                                <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> 上传
+                            </button>
+                        </p>
+                    </div>
+                    <div class="list-group-item bs-callout bs-callout-info">
+                        <h4 class="list-group-item-heading">
+                            <a href="http://www.baidu.com">实验报告2（已完成）</a>
+                        </h4>
+                        <p class="list-group-item-text">
+                            学习使用路由器 <br>
+                            到期时间：2016-12-05 23:59:59 <br>
+                            <input style="margin-top: 1mm;" type="file" id="report2">
+                            <button type="submit" class="btn btn-primary" style="margin-top: 2mm;">
+                                <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> 上传
+                            </button>
+                        </p>
+                    </div>
+                    <div class="list-group-item bs-callout bs-callout-info">
+                        <h4 class="list-group-item-heading">
+                            <a href="http://www.baidu.com">实验报告3（未完成）</a>
+                        </h4>
+                        <p class="list-group-item-text">
+                            学习使用服务器 <br>
+                            到期时间：2016-12-05 23:59:59 <br>
+                            <input style="margin-top: 1mm;" type="file" id="report3">
+                            <button type="submit" class="btn btn-primary" style="margin-top: 2mm;">
+                                <span class="glyphicon glyphicon-upload" aria-hidden="true"></span> 上传
+                            </button>
+                        </p>
+                    </div>
+                </div>
             </div>
             <div id="discuss_area_pane" class="tab-pane in active">
                 <div id="discuss_home_page">
