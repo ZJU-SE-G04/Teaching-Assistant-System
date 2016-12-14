@@ -311,7 +311,7 @@ function showSecondComment() {
 
                 tmp.find(".x-content").html(x.content);
                 tmp.find(".x-re-floor").html(x.re_floor);
-                tmp.find(".post-comment-btn").click(add_second_comment_second)
+                tmp.find(".post-comment-btn").click(add_second_comment_second);
                 if(x.re_user_name!="0") {
                     tmp.find(".x-re-name").html(x.re_user_name);
                 }
@@ -330,7 +330,7 @@ function showSecondComment() {
             }
             posts_list_item.find(".post-comments-area").show();
 
-            $(".add-post-comment").click(function () {
+            post_comment_area_body.parent().find(".add-post-comment").click(function () {
                 $(this).hide();
                 var comment_area = $("<textarea placeholder='发表评论...'></textarea>").css("margin-bottom", "10px");
                 $(this).after(comment_area);
@@ -484,8 +484,6 @@ function add_second_comment_second() {
     var submit_btn = $("<button>提交</button>").addClass("p-btn-sm right");
     submit_btn.click(add_second_comment);
     comment_area.after(submit_btn);
-
-    // window.alert(re_user_name);
 
 }
 
