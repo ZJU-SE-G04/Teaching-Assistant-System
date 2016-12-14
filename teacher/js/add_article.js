@@ -393,7 +393,7 @@ function add_second_comment() {
     tmp.find(".x-name").html(user_name);
     // tmp.find(".x-time").html();
     tmp.find(".x-content").html(content);
-    window.alert(re_user_name);
+    // window.alert(re_user_name);
     if(re_user_name!="0") {
         tmp.find(".x-re-name").html(re_user_name);
     }
