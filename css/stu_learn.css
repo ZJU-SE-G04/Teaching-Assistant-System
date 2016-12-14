@@ -61,6 +61,7 @@ a, button {
 .ueditor {
     margin-top: 30px;
     height: auto;
+    min-height: 100px;
 }
 
 input:focus {
