@@ -6,7 +6,7 @@
 |获取该课程所有老师姓名| get_course_teacher.php?courseID=xxx     |无          | [{"id":"xxx", "name":"xxx"},{"id":"xxx", "name":"xxx"},...]                               |无 
 |获取某个老师的详细介绍| get_teacher_intro.php?teacherID=xxx      |无         | {"introduction":"xxxxxxxx"}                                                               |无
 |获取所有课件资料     | get_courseware.php?courseID=xxx         |无            |[{"courseware_name":"xxx", "courseware_info":"xxx", "courseware_kind":"xxx"}, {"courseware_name":"xxx", "courseware_info":"xxx", "course_kind":"xxx"}]|无
-|获取某个板块的所有帖子列表|posts_handler.php?action=fetchAll&courseID=xxx&post_kind=0|无 | [{"topic_id","title":"xxx", "datetime":"xxx", "publisher":"xxx"}, ... ]|请求参数中post_kind,值为0表示老师答疑区,值为1表示综合讨论区,值为2表示小组答疑区
+|获取某个板块的帖子列表(某一页)|posts_handler.php?action=fetchAll&courseID=xxx&post_kind=0&offset=0&count=10|无 | [{"topic_id","title":"xxx", "datetime":"xxx", "publisher":"xxx"}, ... ]|请求参数中post_kind,值为0表示老师答疑区,值为1表示综合讨论区,值为2表示小组答疑区
 |获取某个帖子的详情          |posts_handler.php?action=fetchDetail&topic_id=xxx   |无 | {"title":"xxx", "content", "xxxxxx", "datetime":"xxx", "publisher":"xxx"}|无
 |获取某个帖子的所有一级回复(只获取第一页)|posts_handler.php?action=fetchRe&topic_id=xxx&offset=0&count=10 |无| [{"username":"xxx", "userid":"xxx", "content":"xxxxxx", "time":"xxx", "floor": 1}, ...] |结果按照楼层号排序,从第offset条记录开始,返回count条记录
 |获取某个一级回复的所有二级回复|posts_handler.php?action=fetchReRe&topic_id=xxx&floor=xxx        |无| [{"userid":"xxx", "username":"xxx","username_of_be_re":"xxx","id_of_be_re":"xxx", "re_content":"xxxxxx", "re_time":"xxx", "re_floor": 1}, ...]|id_of_be_re为0表示回复对象是一级回复的楼主

@@ -344,7 +344,7 @@ $(document).ready(
             //     url: "posts_handler.php?action=fetchNum&courseID=" + courseID + "&post_kind=" + border_type,
             //     success: function (result) {
             //         var num = result['num'];
-                    var num = 24;
+                    var num = 25;
                     var pagination = $("#posts_border_page .pagination").append($("<li><a href='#'>&laquo;</a></li>"));
                     for(var i = 0; i < Math.ceil(num / POSTNUM_PER_PAGE); i++) {
                         pagination.append($("<li class=''></li>").append($("<a href='#'></a>").text(i + 1)));
@@ -368,9 +368,10 @@ $(document).ready(
                     fetch_border_posts($("#posts_border_name").text(), $("#posts_border_name").attr("border_type"), POSTNUM_PER_PAGE * (page_no -1), POSTNUM_PER_PAGE);
                     $(this).parent().parent().find("li.active").removeClass("active").prev().addClass("active");
                 } else if($(this).text() == "»") {
-                    var page_no = $(this).parent().parent().find("li.active a").text() + 1;
+                    var page_no = parseInt($(this).parent().parent().find("li.active a").text()) + 1;
                     var max_page_no = parseInt($(this).parent().parent().find("li:nth-last-child(2) a").text());
                     console.log("max page no" + max_page_no);
+                    console.log("page no:" + page_no);
                     if(page_no > max_page_no) {//最大为max_page_no
                         return;
                     }
