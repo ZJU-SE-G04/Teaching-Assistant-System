@@ -1,6 +1,6 @@
 <?php
-	$action=$_GET["action"];//获取行为
-	//$action="fetchAll";
+	//$action=$_GET["action"];//获取行为
+	$action="fetchNum";
 	if($action=='fetchAll'){
 		fetchAll();
 	}else if($action=='fetchDetail'){
@@ -13,6 +13,24 @@
 		submitRe();
 	}else if($action=='submitReRe'){
 		submitReRe();
+	}else if($action=='fetchNum'){
+		fetchNum();
+	}
+
+//获取帖子总数
+	function fetchNum(){
+		include 'connect.php';
+		$lesson_id=$_GET["courseID"];//获取教师账号
+		$post_kind=(int)$_GET['post_kind'];
+		//$lesson_id='ABCDE1';
+		//$post_kind=1;
+
+		$result = $conn->query("select count(*) from topic_table where lesson_id='".$lesson_id."' and topic_kind=".$post_kind.";");
+		$row=mysqli_fetch_assoc($result);
+		$arr['num']=$row['count(*)'];
+		
+		echo json_encode($arr, JSON_UNESCAPED_UNICODE);
+		$conn->close();
 	}
 
 
