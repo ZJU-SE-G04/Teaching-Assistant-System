@@ -1,7 +1,7 @@
 <?php
 
-	//$action=$_GET["action"];//获取行为
-	$action="request_quiz_detail";
+	$action=$_POST["action"];//获取行为
+	//$action="request_quiz_detail";
 	if($action=='request_quiz_list'){
 		work_list();
 	}else if($action=='request_report_list'){
@@ -20,10 +20,10 @@
 	function submit_work(){
 		include 'connect.php';
 		//按2分一题算
-		$lesson_id=$_GET["lesson_id"];
-		$class_id=$_GET["class_id"];
-		$stu_id=$_GET["stu_id"];
-		$work_id=$_GET["work_id"];
+		$lesson_id=$_POST["lesson_id"];
+		$class_id=$_POST["class_id"];
+		$stu_id=$_POST["stu_id"];
+		$work_id=$_POST["work_id"];
 		//$lesson_id='ABCDE1';
 		//$class_id=1;
 		//$stu_id='3140102222';
@@ -40,7 +40,7 @@
 
 		$score=0;
 		foreach($arr as $a){
-			if($a["answer"]==$_GET[$a["number"]]){
+			if($a["answer"]==$_POST[$a["number"]]){
 				$score+=2;
 			}
 		}
@@ -59,10 +59,10 @@
 	
 	function work_detail(){
 		include 'connect.php';
-		$lesson_id=$_GET["lesson_id"];
-		$class_id=$_GET["class_id"];
-		$stu_id=$_GET["stu_id"];
-		$work_id=$_GET["work_id"];
+		$lesson_id=$_POST["lesson_id"];
+		$class_id=$_POST["class_id"];
+		$stu_id=$_POST["stu_id"];
+		$work_id=$_POST["work_id"];
 		//$lesson_id='ABCDE1';
 		//$class_id=1;
 		//$stu_id='3140102222';
@@ -105,9 +105,9 @@
 
 	function work_list(){
 		include 'connect.php';
-		$lesson_id=$_GET["lesson_id"];
-		$class_id=$_GET["class_id"];
-		$stu_id=$_GET["stu_id"];
+		$lesson_id=$_POST["lesson_id"];
+		$class_id=$_POST["class_id"];
+		$stu_id=$_POST["stu_id"];
 		//$lesson_id='ABCDE1';
 		//$class_id=1;
 		//$stu_id='3140102222';
@@ -128,9 +128,9 @@
 
 	function report_list(){
 		include 'connect.php';
-		$lesson_id=$_GET["lesson_id"];
-		$class_id=$_GET["class_id"];
-		$stu_id=$_GET["stu_id"];
+		$lesson_id=$_POST["lesson_id"];
+		$class_id=$_POST["class_id"];
+		$stu_id=$_POST["stu_id"];
 		//$lesson_id='ABCDE1';
 		//$class_id=1;
 		//$stu_id='3140102222';
