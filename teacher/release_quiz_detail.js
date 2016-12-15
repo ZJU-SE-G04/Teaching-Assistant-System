@@ -3,29 +3,73 @@
  */
 
 var option_num, essay_num;//选择题和问答题数量
+var quiz_name;
 
 function result() {
     var jsObj = {};
-    jsObj.option_num=option_num;
-    jsObj.essay_num=essay_num;
+    jsObj.option_num = option_num;//⚠option_num是整数，不是字符串
+    jsObj.essay_num = essay_num;
+    jsObj.quiz_name = quiz_name;
+    jsObj.option_question = [];
+    jsObj.essay_question = [];
+    alert("this is result");
 
-    for (var i=0;i<option_num;i++) {
+    for (var i = 1; i <= option_num; i++) {
+        var option_question = {};
+        var title = document.getElementById("" + i).value;
+        alert(title);
+        option_question.title = title;
+        option_question.a = document.getElementById(i + "_a").value;//未完成
+        option_question.b = document.getElementById(i + "_b").value;
+        option_question.c = document.getElementById(i + "_c").value;
+        option_question.d = document.getElementById(i + "_d").value;
 
+        var check_radio = document.getElementsByName("" + i);
+        var answer;
+        if (check_radio[0].checked) {
+            answer = "a";
+        } else if (check_radio[1].checked) {
+            answer = "b";
+        } else if (check_radio[2].checked) {
+            answer = "c";
+        } else if (check_radio[3].checked) {
+            answer = "d";
+        }
+        option_question.answer = answer;
+
+        jsObj.option_question.push(option_question);
+    }
+    for (var i = option_num * 1 + 1; i <= essay_num * 1 + option_num * 1; i++) {
+        var essay_question = {};
+        var title = document.getElementById("" + i).value;
+        essay_question.title = title;
+        jsObj.essay_question.push(essay_question);
     }
 
-    for (var i=0;i<essay_num;i++) {
+    var jsonStr = JSON.stringify(jsObj);
+    alert(jsonStr);
 
-    }
+
+    // alert("this is ready");
+    // $.post("test.php",
+    //     {name:"John",city:"Duckburg"},
+    //     function (data) {
+    //         alert("from js: " + data);
+    //     }
+    // );
+
 }
 
 
 function createDiv() {
     // var o = document.getElementById("exercise");
-    var o=document.body;
+    var o = document.body;
 
     var quizName = document.getElementById("quizName").value;
+    quiz_name = quizName;
     var optionQuestionCount = document.getElementById("optionQuestionCount").value;
     var essayQuestionCount = document.getElementById("essayQuestionCount").value;
+
 
     option_num = optionQuestionCount;
     essay_num = essayQuestionCount;
@@ -53,7 +97,8 @@ function createDiv() {
 
             textarea.className = "form-control form-group";
             textarea.rows = "3";
-            textarea.name = i + "_question";
+            textarea.id=i;
+            // textarea.name = i + "_question";
             textarea.placeholder = "输入题目";
 
             divOp.appendChild(label);
@@ -71,7 +116,7 @@ function createDiv() {
                 span.className = "input-group-addon";
                 var inputSpan = document.createElement("input");
                 inputSpan.type = "radio";
-                inputSpan.name = i + "_answer";
+                inputSpan.name = i;
                 inputSpan.value = ch;
 
                 span.appendChild(inputSpan);
@@ -79,7 +124,7 @@ function createDiv() {
                 input.type = "text";
                 input.className = "form-control";
                 input.placeholder = "输入" + ch + "选项";
-                input.name = i + "_" + ch;
+                input.id = i + "_" + ch;
 
                 divOption.appendChild(span);
                 divOption.appendChild(input);
@@ -103,7 +148,8 @@ function createDiv() {
 
             textarea.className = "form-control form-group";
             textarea.rows = "3";
-            textarea.name = i + "_question";
+            // textarea.name = i + "_question";
+            textarea.id = i;
             textarea.placeholder = "输入主观题题目";
 
             divOp.appendChild(label);
@@ -113,11 +159,11 @@ function createDiv() {
     }
 
     var button = document.createElement("button");
-    button.type = "submit";
+    button.type = "button";
     button.className = "btn btn-primary center-block";
+    button.onclick = result;
     var buttonSpan = document.createElement("span");
     button.innerHTML = "<span class=\"glyphicon glyphicon-ok\" ></span> 发布";
-
 
     form.appendChild(button);
 }

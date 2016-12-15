@@ -11,11 +11,21 @@
     <link rel="stylesheet" href="../css/docs.css">
     <script src="../jquery/jquery-3.1.1.js"></script>
     <script src="../bootstrap-3.3.7-dist/js/bootstrap.js"></script>
+
+    <script src="release_quiz_detail.js"></script>
 </head>
 <body>
 <h3 class="page-header">发布新作业</h3>
 <form action="#" method="get">
     <div class="list-group-item-text bs-callout bs-callout-info">
+        <!--
+        题目：id=1
+        a选项：id=1_a
+        b选项：id=1_b
+        c选项：id=1_c
+        d选项：id=1_d
+        答案：radio name=1 value
+        -->
         <label for="1" class="control-label">1.</label>
         <textarea class="form-control form-group" rows="3" id="1" placeholder="输入题目" name="title"></textarea>
 
@@ -23,28 +33,28 @@
             <span class="input-group-addon">
                 <input type="radio" name="1" value="a">
             </span>
-            <input type="text" class="form-control" placeholder="输入A选项" name="a">
+            <input type="text" class="form-control" placeholder="输入A选项" id="1_a" name="1_a">
         </div><!-- /input-group -->
 
         <div class="input-group form-group">
             <span class="input-group-addon">
                 <input type="radio" name="1" value="b">
             </span>
-            <input type="text" class="form-control" placeholder="输入B选项" name="b">
+            <input type="text" class="form-control" placeholder="输入B选项" id="1_b" name="1_b">
         </div><!-- /input-group -->
 
         <div class="input-group form-group">
             <span class="input-group-addon">
                 <input type="radio" name="1" value="c">
             </span>
-            <input type="text" class="form-control" placeholder="输入C选项" name="c">
+            <input type="text" class="form-control" placeholder="输入C选项" id="1_c" name="1_c">
         </div><!-- /input-group -->
 
         <div class="input-group form-group">
             <span class="input-group-addon">
                 <input type="radio" name="1" value="d">
             </span>
-            <input type="text" class="form-control" placeholder="输入D选项" name="d">
+            <input type="text" class="form-control" placeholder="输入D选项" id="1_d" name="1_d">
         </div><!-- /input-group -->
     </div>
 
@@ -56,14 +66,14 @@
             <span class="input-group-addon">
                 <input type="radio" name="2" value="a">
             </span>
-            <input type="text" class="form-control" placeholder="输入A选项" name="a">
+            <input type="text" class="form-control" placeholder="输入A选项" id="2_a" name="2_a">
         </div><!-- /input-group -->
 
         <div class="input-group form-group">
             <span class="input-group-addon">
                 <input type="radio" name="2" value="b">
             </span>
-            <input type="text" class="form-control" placeholder="输入B选项" name="b">
+            <input type="text" class="form-control" placeholder="输入B选项" id="2_b" name="2_b">
         </div><!-- /input-group -->
 
 
@@ -71,7 +81,7 @@
             <span class="input-group-addon">
                 <input type="radio" name="2" value="c">
             </span>
-            <input type="text" class="form-control" placeholder="输入C选项" name="c">
+            <input type="text" class="form-control" placeholder="输入C选项" id="2_c" name="2_c">
         </div><!-- /input-group -->
 
 
@@ -79,7 +89,7 @@
             <span class="input-group-addon">
                 <input type="radio" name="2" value="d">
             </span>
-            <input type="text" class="form-control" placeholder="输入D选项" name="d">
+            <input type="text" class="form-control" placeholder="输入D选项" id="2_d" name="2_d">
         </div><!-- /input-group -->
 
     </div>
@@ -95,7 +105,7 @@
     </div>
 
 
-    <button type="submit" class="btn btn-primary center-block">
+    <button type="button" class="btn btn-primary center-block" onclick="result()">
         <span class="glyphicon glyphicon-ok" ></span> 发布
     </button>
 
