@@ -102,8 +102,10 @@
 //提交一级回复
 	function submitRe(){
 		include 'connect.php';
+		error_reporting(E_ERROR|E_WARNING);
 		$topic_id=(int)$_POST['topic_id'];
 		$content=$_POST['content'];
+		$content=htmlspecialchars(stripcslashes($_POST['content']));
 		//$uid=$_SESSION['user'];
 		$uid='3140102222';
 		//$topic_id=1;
@@ -190,6 +192,7 @@
 //一级回复
 	function fetchRe(){
 		include 'connect.php';
+		error_reporting(E_ERROR|E_WARNING);
 		$topic_id=(int)$_GET['topic_id'];
 		$offset=(int)$_GET['offset'];
 		$count=(int)$_GET['count'];
@@ -205,7 +208,7 @@
 			if($i>=$offset){
 				$x['username']=$row['user_name'];
 				$x['userid']=$row['id'];
-				$x['content']=$row['content'];
+				$x['content']=htmlspecialchars_decode($row['content']);
 				$x['time']=$row['time'];
 				$x['floor']=(int)$row['floor'];
 				$arr[] = $x;
