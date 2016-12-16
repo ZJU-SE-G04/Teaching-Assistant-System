@@ -32,6 +32,9 @@ function  articleUpdate(needed_title) {
     $("#articleLoop").show();
     $("#update_article").hide();
     $("#write_article_button").show();
+    if(needed_title==null){
+        needed_title='';
+    }
     $.ajax({
         url:"show_article_list.php?lesson_id="+course_id+"&needed_title="+needed_title,
         success:function (result) {
