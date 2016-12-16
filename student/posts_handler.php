@@ -23,8 +23,8 @@
 	function submitPost(){
 		include 'connect.php';
 		error_reporting(E_ERROR|E_WARNING);
-		$border_type=$_POST['border_type'];
-		$title=(int)$_POST['title'];
+		$border_type=(int)$_POST['border_type'];
+		$title=$_POST['title'];
 		$content=htmlspecialchars(stripcslashes($_POST['content']));
 		//$uid=$_SESSION['user'];
 		//$lesson_id=$_SESSION['lesson_id'];
@@ -38,7 +38,7 @@
 		$state=0;
 		$msg='发表成功！';
 
-		echo 'insert into topic_table values(null,"'.$lesson_id.'",'.$border_type.',"'.$uid.'","'.$datetime.'","'.$title.'","'.$content.'");';
+		//echo 'insert into topic_table values(null,"'.$lesson_id.'",'.$border_type.',"'.$uid.'","'.$datetime.'","'.$title.'","'.$content.'");';
 
 		$result=$conn->query('insert into topic_table values(null,"'.$lesson_id.'",'.$border_type.',"'.$uid.'","'.$datetime.'","'.$title.'","'.$content.'");');
 		if($result==null){
