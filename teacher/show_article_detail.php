@@ -14,7 +14,7 @@
 	$arr['comment_number']=$row['count(*)'];
 
 	$ar=[];
-	$result=$conn->query("select * from comment_table natural join user_table where article_id=".$article_id.";");
+	$result=$conn->query("select * from comment_table natural join user_table where article_id=".$article_id." order by floor;");
 	while($row = mysqli_fetch_assoc($result)) {
 		$x['id']=$row['id'];
 		$x['floor']=$row['floor'];

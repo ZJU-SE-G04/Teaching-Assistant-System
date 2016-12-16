@@ -5,7 +5,7 @@
 	$time=$_GET['time'];
 	$content=$_GET['content'];
 	$ofloor=$_GET['floor'];
-	$rid=$_GET['rid'];
+	$rid=$_GET['re_id'];
 
 	//$article_id=2;
 	//$id='3140104444';
