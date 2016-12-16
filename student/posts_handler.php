@@ -38,6 +38,8 @@
 		$state=0;
 		$msg='发表成功！';
 
+		echo 'insert into topic_table values(null,"'.$lesson_id.'",'.$border_type.',"'.$uid.'","'.$datetime.'","'.$title.'","'.$content.'");';
+
 		$result=$conn->query('insert into topic_table values(null,"'.$lesson_id.'",'.$border_type.',"'.$uid.'","'.$datetime.'","'.$title.'","'.$content.'");');
 		if($result==null){
 			$state=1;
