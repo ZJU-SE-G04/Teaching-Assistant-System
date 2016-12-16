@@ -315,6 +315,7 @@ function showSecondComment() {
                 tmp.find(".post-comment-btn").click(add_second_comment_second);
                 if(x.re_user_name!="0") {
                     tmp.find(".x-re-name").html(x.re_user_name);
+                    console.log(x.re_user_name);
                 }
                 else {
                     tmp.find(".x-response").html("");
@@ -419,38 +420,38 @@ function add_second_comment() {
     post_comment_area_body.append(tmp);
 
 
-    // $.ajax({
-    //     type:"GET",
-    //     url:"add_second_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content+"&floor="+floor+"&re_id="+re_user_id,
-    //     success:function (result) {
-    //         if(result["if_success"]==1){
-    //
-    //             var post_comment_area_body=post_comments_area.find(".post-comment-area-body");
-    //             var tmp = post_comment_area_body.children(".old").clone().removeClass("old").addClass("new").show();
-    //             tmp.find(".x-name").html(user_name);
-    //             // tmp.find(".x-time").html();
-    //             tmp.find(".x-content").html(content);
-    //             if(re_user_name!="0") {
-    //                 tmp.find(".x-re-name").html(re_user_name);
-    //             }
-    //             else {
-    //                 tmp.find(".x-response").html("");
-    //             }
-    //
-    //             tmp.find(".x-time").html(current_time);
-    //
-    //
-    //             tmp.find(".x-delete").click(deleteSecondComment);
-    //             post_comment_area_body.append(tmp);
-    //
-    //         }
-    //         else{
-    //             window.alert(result["err_message"]);
-    //         }
-    //
-    //     }
-    //
-    // });
+    $.ajax({
+        type:"GET",
+        url:"add_second_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content+"&floor="+floor+"&re_id="+re_user_id,
+        success:function (result) {
+            if(result["if_success"]==1){
+
+                // var post_comment_area_body=post_comments_area.find(".post-comment-area-body");
+                // var tmp = post_comment_area_body.children(".old").clone().removeClass("old").addClass("new").show();
+                // tmp.find(".x-name").html(user_name);
+                // // tmp.find(".x-time").html();
+                // tmp.find(".x-content").html(content);
+                // if(re_user_name!="0") {
+                //     tmp.find(".x-re-name").html(re_user_name);
+                // }
+                // else {
+                //     tmp.find(".x-response").html("");
+                // }
+                //
+                // tmp.find(".x-time").html(current_time);
+                //
+                //
+                // tmp.find(".x-delete").click(deleteSecondComment);
+                // post_comment_area_body.append(tmp);
+
+            }
+            else{
+                window.alert(result["err_message"]);
+            }
+
+        }
+
+    });
 
 }
 
@@ -521,30 +522,30 @@ function  add_comment() {
 
     posts_list_ul.append(tmp);
 
-    // $.ajax({
-    //    type:"GET",
-    //     url:"add_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content,
-    //     success:function (result) {
-    //         if(result["if_success"]==1){
-    //             var posts_list_ul=$(".posts-list-ul");
-    //             var tmp = posts_list_ul.children(".old").clone().removeClass("old").addClass("new").show();
-    //
-    //             tmp.find(".x-name").html(user_name);
-    //             tmp.find(".x-time").html(current_time);
-    //             tmp.find(".x-content").html(content);
-    //             tmp.find(".x-comment").click(showSecondComment);
-    //             tmp.find(".post-comments-area").hide();
-    //             tmp.find(".glyphicon").click(deleteComment);
-    //
-    //             posts_list_ul.append(tmp);
-    //
-    //         }
-    //         else{
-    //             window.alert(result["err_message"]);
-    //         }
-    //
-    //     }
-    //
-    // });
+    $.ajax({
+       type:"GET",
+        url:"add_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content,
+        success:function (result) {
+            if(result["if_success"]==1){
+                // var posts_list_ul=$(".posts-list-ul");
+                // var tmp = posts_list_ul.children(".old").clone().removeClass("old").addClass("new").show();
+                //
+                // tmp.find(".x-name").html(user_name);
+                // tmp.find(".x-time").html(current_time);
+                // tmp.find(".x-content").html(content);
+                // tmp.find(".x-comment").click(showSecondComment);
+                // tmp.find(".post-comments-area").hide();
+                // tmp.find(".glyphicon").click(deleteComment);
+                //
+                // posts_list_ul.append(tmp);
+
+            }
+            else{
+                window.alert(result["err_message"]);
+            }
+
+        }
+
+    });
 
 }
