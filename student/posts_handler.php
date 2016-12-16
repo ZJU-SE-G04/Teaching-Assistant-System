@@ -1,6 +1,6 @@
 <?php
 	$action=$_GET["action"];//获取行为
-	//$action="fetchAll";
+	//$action="submitPost";
 	if($action=='fetchAll'){
 		fetchAll();
 	}else if($action=='fetchDetail'){
@@ -15,6 +15,37 @@
 		submitReRe();
 	}else if($action=='fetchNum'){
 		fetchNum();
+	}else if($action=='submitPost'){
+		submitPost();
+	}
+
+//发布帖子
+	function submitPost(){
+		include 'connect.php';
+		error_reporting(E_ERROR|E_WARNING);
+		$border_type=$_POST['border_type'];
+		$title=(int)$_POST['title'];
+		$content=htmlspecialchars(stripcslashes($_POST['content']));
+		//$uid=$_SESSION['user'];
+		//$lesson_id=$_SESSION['lesson_id'];
+		$lesson_id='ABCDE1';
+		$uid='3140102222';
+		//$border_type=1;
+		//$title='发表测试';
+		//$content='万一能行呢';
+
+		$datetime=date('Y-m-d H:i:s');
+		$state=0;
+		$msg='发表成功！';
+
+		$result=$conn->query('insert into topic_table values(null,"'.$lesson_id.'",'.$border_type.',"'.$uid.'","'.$datetime.'","'.$title.'","'.$content.'");');
+		if($result==null){
+			$state=1;
+			$msg='发表失败！';
+		}
+		$arr['state']=$state;
+		$arr['msg']=$msg;
+		echo json_encode($arr, JSON_UNESCAPED_UNICODE);
 	}
 
 //获取帖子总数
@@ -78,9 +109,11 @@
 		$datetime=date('Y-m-d H:i:s');
 		$state=0;
 		$msg='发表成功！';
+		$floor=1;
 		$result=$conn->query('select * from response_table where topic_id='.$topic_id.' order by floor DESC;');
 		$row=mysqli_fetch_assoc($result);
-		$floor=(int)$row['floor'];
+		if($row!=null)
+			$floor=(int)$row['floor'];
 		$floor++;
 		$result=$conn->query('insert into response_table values('.$topic_id.',"'.$uid.'","'.$datetime.'","'.$content.'",'.$floor.');');
 		$row=mysqli_fetch_assoc($result);
@@ -133,6 +166,7 @@
 //显示一个帖子的内容
 	function fetchDetail(){
 		include 'connect.php';
+		error_reporting(E_ERROR|E_WARNING);
 		$topic_id=(int)$_GET['topic_id'];
 		//$topic_id=1;
 
@@ -142,7 +176,7 @@
 		$arr = [];
 		while($row = mysqli_fetch_assoc($result)) {
 			$arr['title']=$row['title'];
-			$arr['content']=$row['content'];
+			$arr['content']=htmlspecialchars_decode($row['content']);
 			$arr['datetime']=$row['time'];
 			$arr['publisher']=$row['user_name'];
 		}
