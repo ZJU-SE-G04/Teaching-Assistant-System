@@ -19,19 +19,23 @@
     <link rel="stylesheet" href="../administrator/w3.css">
     <link rel="stylesheet" href="../administrator/administrator.css">
 
-    <!--发布文章的编辑器要用到的样式-->
-    <script type="text/javascript" src="../ueditor/ueditor.config.js"></script>
-    <script type="text/javascript" src="../ueditor/ueditor.all.js"></script>
-
     <!--bootstrap file input-->
     <link href="../bootstrap-3.3.7-dist/bootstrap-fileinput/bootstrap.min.css" rel="stylesheet">
     <link href="../bootstrap-3.3.7-dist/bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet"
           type="text/css"/>
 
+    <!--以下是Li Boao导入的css文件-->
+    <link rel="stylesheet" href="../css/content.css">
+
     <!--由Li Boao导入的CSS样式-->
     <link rel="stylesheet" href="../css/content.css">
     <link rel="stylesheet" href="../css/stu_learn.css">
     <link rel="stylesheet" href="../css/docs.css">
+
+
+    <!--发布文章的编辑器要用到的样式..这个js放到后面就就失效了,摔-->
+    <script type="text/javascript" src="../ueditor/ueditor.config.js"></script>
+    <script type="text/javascript" src="../ueditor/ueditor.all.js"></script>
 
 
 </head>
@@ -82,9 +86,15 @@
 
             </div>
             <div id="article" class="tab-pane">
-                <div>
+                <div class="row">
+                    <div class="col-md-9">
+                <div class="input-group">
+                    <input type="text" class="form-control input-lg"><span class="input-group-addon btn btn-primary" onclick="search_article(this)">搜索</span>
+                </div></div>
+                <div class="col-md-3 right">
                     <button class='btn btn-primary' id='write_article_button' onclick="showWriteArticle()">撰写文章</button>
                 </div>
+                    </div>
                 <div class="panel-group" style="padding-top:35px" id="articleLoop">
                     <div class="panel panel-default old w3-hover-shadow ">  <!--loop start-->
                         <div class="panel-heading w3-hover-grey clickable">
@@ -187,7 +197,6 @@
 
                             <div>
                                 <script id="container" name="content" type="text/plain">
-                                这里写你的初始化内容
                                 </script>
                                 <!-- 配置文件 -->
                                 <!-- 实例化编辑器 -->
@@ -210,7 +219,6 @@
                     <!-- 加载编辑器的容器 -->
                     <div>
                         <script id="container_write" name="content" type="text/plain" style="height:700px">
-                                这里写你的初始化内容
                                 </script>
                         <!-- 配置文件 -->
                         <!-- 实例化编辑器 -->
@@ -239,10 +247,6 @@
                     <!-- 加载编辑器的容器 -->
                     <div>
                         <script id="container_update" name="content" type="text/plain">
-        这里写你的初始化内容
-
-
-
                         </script>
                         <!-- 配置文件 -->
 
@@ -558,13 +562,16 @@
 </div>
 
 
-<script src="../jquery/jquery-3.1.1.min.js"></script>
-<script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-<script src="../jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+
 
 <!--以下是bootstrap file input的js文件-->
 <script src="../bootstrap-3.3.7-dist/bootstrap-fileinput/jquery.min.js"></script>
 <script src="../bootstrap-3.3.7-dist/bootstrap-fileinput/js/fileinput.min.js"></script>
+
+<!--以下是jQuery 和 bootstrap的js文件-->
+<script src="../jquery/jquery-3.1.1.min.js"></script>
+<script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="../jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 
 <!--以下是zhang shichao导入的js文件-->
 <script src="js/add_TA.js"></script>
@@ -574,13 +581,9 @@
 <script src="js/courseware.js"></script>
 
 <!--以下是Li Boao导入的js文件-->
-<link rel="stylesheet" href="../css/content.css">
 <script src="get_notice.js"></script>
 <script src="release_quiz_detail.js"></script>
 <script src="correct_report.js"></script>
-
-
-
 
 </body>
 </html>

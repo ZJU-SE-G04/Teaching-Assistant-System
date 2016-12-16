@@ -7,7 +7,7 @@ var article_id;//在点击文章后被初始化
 var re_user_name='0';//被回复人姓名
 var re_user_id="0";//被回复人id
 
-//-------
+//------- wo get it
 $(document).ready(function() {
     $("#message").addClass("active");
     $(".content-blk.message").show();
@@ -26,15 +26,14 @@ $(document).ready(function() {
 //-------show an article list--------
 
 
-function  articleUpdate() {
+function  articleUpdate(needed_title) {
     $("#articleDetail").hide();
     $("#write_article").hide();
     $("#articleLoop").show();
     $("#update_article").hide();
     $("#write_article_button").show();
     $.ajax({
-        type:"GET",
-        url:"show_article_list.php?lesson_id="+course_id,
+        url:"show_article_list.php?lesson_id="+course_id+"&needed_title="+needed_title,
         success:function (result) {
             var articleRecords=result;
             var articleLoop=$("#articleLoop");
@@ -175,7 +174,7 @@ function  deleteArticle(article_id) {
 }
 
 
-/////------show article details and comments(first)---------
+//------show article details and comments(first)---------
 
 function articleShow() {
 
@@ -189,7 +188,7 @@ function articleShow() {
 
     $.ajax({
         type:"GET",
-        url:"show_article_detail.php?article_id="+article_id,
+        url:"show_article_detail.php?article_id="+article_id+"",
         success:function (result) {
             var articleDetail=result;
 
@@ -425,25 +424,6 @@ function add_second_comment() {
         url:"add_second_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content+"&floor="+floor+"&re_id="+re_user_id,
         success:function (result) {
             if(result["if_success"]==1){
-
-                // var post_comment_area_body=post_comments_area.find(".post-comment-area-body");
-                // var tmp = post_comment_area_body.children(".old").clone().removeClass("old").addClass("new").show();
-                // tmp.find(".x-name").html(user_name);
-                // // tmp.find(".x-time").html();
-                // tmp.find(".x-content").html(content);
-                // if(re_user_name!="0") {
-                //     tmp.find(".x-re-name").html(re_user_name);
-                // }
-                // else {
-                //     tmp.find(".x-response").html("");
-                // }
-                //
-                // tmp.find(".x-time").html(current_time);
-                //
-                //
-                // tmp.find(".x-delete").click(deleteSecondComment);
-                // post_comment_area_body.append(tmp);
-
             }
             else{
                 window.alert(result["err_message"]);
@@ -527,18 +507,6 @@ function  add_comment() {
         url:"add_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content,
         success:function (result) {
             if(result["if_success"]==1){
-                // var posts_list_ul=$(".posts-list-ul");
-                // var tmp = posts_list_ul.children(".old").clone().removeClass("old").addClass("new").show();
-                //
-                // tmp.find(".x-name").html(user_name);
-                // tmp.find(".x-time").html(current_time);
-                // tmp.find(".x-content").html(content);
-                // tmp.find(".x-comment").click(showSecondComment);
-                // tmp.find(".post-comments-area").hide();
-                // tmp.find(".glyphicon").click(deleteComment);
-                //
-                // posts_list_ul.append(tmp);
-
             }
             else{
                 window.alert(result["err_message"]);
@@ -548,4 +516,8 @@ function  add_comment() {
 
     });
 
+}
+function search_article(obj) {
+    var needed_title=obj.previousSibling.value;
+    articleUpdate(needed_title);
 }
