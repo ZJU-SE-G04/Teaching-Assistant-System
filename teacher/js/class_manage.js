@@ -11,7 +11,7 @@ var course_name="软件工程管理";
 var course_id="ABCDE1";
 var class_time="周二345";
 
-var user_name="Lis";
+var user_name="Li";
 var user_id="111111";
 
 

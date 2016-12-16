@@ -175,7 +175,7 @@ function  deleteArticle(article_id) {
 }
 
 
-////////////////////////////-------show article details and comments(first)
+/////------show article details and comments(first)---------
 
 function articleShow() {
 
@@ -288,7 +288,8 @@ function  returnToArticleList() {
 
 function showSecondComment() {
     var floor=$(this).parent().find(".x-floor").text();
-    var posts_list_item=$(this).parent().parent().parent().parent();//....
+    var posts_list_item=$(this).parents(".posts-list-item");
+
 
 
     $.ajax({
@@ -311,9 +312,10 @@ function showSecondComment() {
 
                 tmp.find(".x-content").html(x.content);
                 tmp.find(".x-re-floor").html(x.re_floor);
-                tmp.find(".post-comment-btn").click(add_second_comment_second)
+                tmp.find(".post-comment-btn").click(add_second_comment_second);
                 if(x.re_user_name!="0") {
                     tmp.find(".x-re-name").html(x.re_user_name);
+                    console.log(x.re_user_name);
                 }
                 else {
                     tmp.find(".x-response").html("");
@@ -330,7 +332,7 @@ function showSecondComment() {
             }
             posts_list_item.find(".post-comments-area").show();
 
-            $(".add-rere").click(function () {
+            post_comment_area_body.parent().find(".add-post-comment").click(function () {
                 $(this).hide();
                 var comment_area = $("<textarea placeholder='发表评论...'></textarea>").css("margin-bottom", "10px");
                 $(this).after(comment_area);
@@ -343,9 +345,19 @@ function showSecondComment() {
         }
 
     });
-
+    $(this).text("收起评论");
+    $(this).click(withdraw_second_comment);
 
 }
+
+//--------收起二级回复--------
+function withdraw_second_comment() {
+    
+    $(this).parents(".posts-list-item").find(".post-comments-area").hide()
+    $(this).text("评论");
+    $(this).click(showSecondComment);
+}
+
 
 //---------删除一个楼中楼回复,实现局部刷新-------------
 function deleteSecondComment() {
@@ -393,7 +405,7 @@ function add_second_comment() {
     tmp.find(".x-name").html(user_name);
     // tmp.find(".x-time").html();
     tmp.find(".x-content").html(content);
-    window.alert(re_user_name);
+    // window.alert(re_user_name);
     if(re_user_name!="0") {
         tmp.find(".x-re-name").html(re_user_name);
     }
@@ -408,38 +420,38 @@ function add_second_comment() {
     post_comment_area_body.append(tmp);
 
 
-    // $.ajax({
-    //     type:"GET",
-    //     url:"add_second_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content+"&floor="+floor+"&re_id="+re_user_id,
-    //     success:function (result) {
-    //         if(result["if_success"]==1){
-    //
-    //             var post_comment_area_body=post_comments_area.find(".post-comment-area-body");
-    //             var tmp = post_comment_area_body.children(".old").clone().removeClass("old").addClass("new").show();
-    //             tmp.find(".x-name").html(user_name);
-    //             // tmp.find(".x-time").html();
-    //             tmp.find(".x-content").html(content);
-    //             if(re_user_name!="0") {
-    //                 tmp.find(".x-re-name").html(re_user_name);
-    //             }
-    //             else {
-    //                 tmp.find(".x-response").html("");
-    //             }
-    //
-    //             tmp.find(".x-time").html(current_time);
-    //
-    //
-    //             tmp.find(".x-delete").click(deleteSecondComment);
-    //             post_comment_area_body.append(tmp);
-    //
-    //         }
-    //         else{
-    //             window.alert(result["err_message"]);
-    //         }
-    //
-    //     }
-    //
-    // });
+    $.ajax({
+        type:"GET",
+        url:"add_second_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content+"&floor="+floor+"&re_id="+re_user_id,
+        success:function (result) {
+            if(result["if_success"]==1){
+
+                // var post_comment_area_body=post_comments_area.find(".post-comment-area-body");
+                // var tmp = post_comment_area_body.children(".old").clone().removeClass("old").addClass("new").show();
+                // tmp.find(".x-name").html(user_name);
+                // // tmp.find(".x-time").html();
+                // tmp.find(".x-content").html(content);
+                // if(re_user_name!="0") {
+                //     tmp.find(".x-re-name").html(re_user_name);
+                // }
+                // else {
+                //     tmp.find(".x-response").html("");
+                // }
+                //
+                // tmp.find(".x-time").html(current_time);
+                //
+                //
+                // tmp.find(".x-delete").click(deleteSecondComment);
+                // post_comment_area_body.append(tmp);
+
+            }
+            else{
+                window.alert(result["err_message"]);
+            }
+
+        }
+
+    });
 
 }
 
@@ -475,14 +487,15 @@ function add_second_comment_second() {
     var add_post_comment=post_comments_area.find(".add-post-comment");
     // alert(add_post_comment.length);
     add_post_comment.hide();
+    post_comments_area.children("textarea").remove();
+    post_comments_area.children("button").remove();
+
     var comment_area = $("<textarea placeholder='回复"+re_user_name+"'></textarea>").css("margin-bottom", "10px");
     add_post_comment.after(comment_area);
     comment_area.focus = true;
     var submit_btn = $("<button>提交</button>").addClass("p-btn-sm right");
     submit_btn.click(add_second_comment);
     comment_area.after(submit_btn);
-
-    // window.alert(re_user_name);
 
 }
 
@@ -491,7 +504,9 @@ function add_second_comment_second() {
 
 function  add_comment() {
     var content=ue_add_comment.getContent();
+    alert(content);
     var current_time=getNowFormatDate();
+    alert(current_time);
 
 
     var posts_list_ul=$(".posts-list-ul");
@@ -507,30 +522,30 @@ function  add_comment() {
 
     posts_list_ul.append(tmp);
 
-    // $.ajax({
-    //    type:"GET",
-    //     url:"add_article_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content,
-    //     success:function (result) {
-    //         if(result["if_success"]==1){
-    //             var posts_list_ul=$(".posts-list-ul");
-    //             var tmp = posts_list_ul.children(".old").clone().removeClass("old").addClass("new").show();
-    //
-    //             tmp.find(".x-name").html(user_name);
-    //             tmp.find(".x-time").html(current_time);
-    //             tmp.find(".x-content").html(content);
-    //             tmp.find(".x-comment").click(showSecondComment);
-    //             tmp.find(".post-comments-area").hide();
-    //             tmp.find(".glyphicon").click(deleteComment);
-    //
-    //             posts_list_ul.append(tmp);
-    //
-    //         }
-    //         else{
-    //             window.alert(result["err_message"]);
-    //         }
-    //
-    //     }
+    $.ajax({
+       type:"GET",
+        url:"add_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content,
+        success:function (result) {
+            if(result["if_success"]==1){
+                // var posts_list_ul=$(".posts-list-ul");
+                // var tmp = posts_list_ul.children(".old").clone().removeClass("old").addClass("new").show();
+                //
+                // tmp.find(".x-name").html(user_name);
+                // tmp.find(".x-time").html(current_time);
+                // tmp.find(".x-content").html(content);
+                // tmp.find(".x-comment").click(showSecondComment);
+                // tmp.find(".post-comments-area").hide();
+                // tmp.find(".glyphicon").click(deleteComment);
+                //
+                // posts_list_ul.append(tmp);
 
-    // });
+            }
+            else{
+                window.alert(result["err_message"]);
+            }
+
+        }
+
+    });
 
 }

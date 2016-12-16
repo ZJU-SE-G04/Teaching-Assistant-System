@@ -77,6 +77,7 @@ $(document).ready(
         $("a[href='#courseware_pane']").click(function () {
             $.ajax({
                 url: "get_courseware.php?courseID=" + courseID,
+                async: false,
                 success: function (result, status) {
                     $("#courseware_nonpreview_area").show();
                     $("#courseware_pane .courseware_list").html("");
@@ -140,6 +141,26 @@ $(document).ready(
                         var download_link = $("<a></a>").attr("href", item['courseware_link']);
                         download_link.append($("<span class='glyphicon-download glyphicon'></span>"));
                         download_area.append(download_link);
+
+                        //-----add by achao----
+                        var c_delete_area = $("<div class='download-btn right'></div>");
+                        c_delete_area.append($("<span class='glyphicon-trash glyphicon c-trash'></span>"));
+                        c_delete_area.find(".c-trash").click(function () {
+                            $(this).parent().parent().remove()
+                            $.ajax({
+                                url:"delete_courseware.php?courseware_id="+xxx,
+                                success:function (result) {
+                                    if(result["if_success"]==0){
+                                        alert(result["err_message"]);
+                                    }
+
+                                }
+                            });
+                        });
+                        item_ele.append(c_delete_area);
+                        //----------------
+
+
                         item_ele.append(download_area);
                         list_ele.append(item_ele);
 
@@ -152,6 +173,7 @@ $(document).ready(
         $("#choose_posts_catagory ul li a").click(function () {
             $("#posts_catagory_ddMenu div").html($(this).html());
         });
+
 
 
         /************************************* 讨论区 ******************************************/
