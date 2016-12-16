@@ -234,18 +234,18 @@
                             <div class="dropdown left" id="choose_posts_catagory">
                                 <button class="btn btn-default dropdown-toggle" type="button" id="posts_catagory_ddMenu"
                                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                                    <div class="inline">全部答疑区</div>
+                                    <div class="inline">所有板块</div>
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="posts_catagory_ddMenu">
                                     <li><a href="#" title="0">老师答疑区</a></li>
                                     <li><a href="#" title="1">综合讨论区</a></li>
                                     <li><a href="#" title="2">小组讨论区</a></li>
-                                    <li><a href="#" title="a">全部答疑区</a></li>
+                                    <li><a href="#" title="a">所有板块</a></li>
                                 </ul>
                             </div>
-                            <input type="search" name="search_post" class="search_post_btn" placeholder="按照帖子标题搜索"/>
-                            <div class="u-btn btn-whiteBlue"><span>搜索</span></div>
+                            <input type="search" name="search_post" class="search_post_input" placeholder="按照帖子标题搜索"/>
+                            <div class="u-btn btn-whiteBlue search_post_btn"><span>搜索</span></div>
                         </div>
                     </div>
                     <div class="btn-whiteBlue p-btn" id="goto_issue_post_page_btn">发起主题</div>
@@ -270,7 +270,7 @@
                         <span class="glyphicon glyphicon-menu-left"></span>
                         <a href="#" class="f-title">返回</a>
                     </div>
-                    <form action="getUEditorContent.php" method="post">
+                    <form action="" method="post" id="submit_post_form">
                         <div class="dropdown" id="select_posts_catagory">
                             <div class="field-label-margin">
                                 <em class="f-sign">*</em>
@@ -295,7 +295,7 @@
                                 <em class="f-sign">*</em>
                                 <div class="inline">请输入标题</div>
                             </div>
-                            <input type="text" name="post_title" class="" id="post_title_input"  title="title_of_post"/>
+                            <input type="text" name="post_title" class="" id="post_title_input" title="title_of_post" />
 
                             <!-- 加载编辑器的容器 -->
                         </div>
@@ -304,10 +304,10 @@
                                 <em class="f-sign">*</em>
                                 <div class="inline"> 内容</div>
                             </div>
-                            <script id="container" name="content" type="text/plain"></script>
+                            <script id="submitPost_editor" name="content" type="text/plain"></script>
 
-                            <div class="btn-whiteBlue p-btn" id="submit_post_btn">发表</div>
                         </div>
+                        <button class="btn-whiteBlue p-btn" id="submit_post_btn">发表</button>
                     </form>
                 </div>
 
@@ -441,7 +441,7 @@
                         <div style="">
                             <script id="ueditor_container" name="content" type="text/plain" class="ueditor"></script>
                         </div>
-                        <button class="p-btn" style="margin-top: 50px">发表回复</button>
+                        <button class="p-btn" style="margin-top: 50px" id="submit_re_btn">发表回复</button>
                     </div>
                 </div>
             </div>
@@ -449,7 +449,7 @@
         </div>
     </div>
 </div>
-<!--<div id="test_div">test div</div>-->
+<div id="test_div">test div</div>
 <!--<video id="my-video" class="video-js" controls preload="auto" width="640" height="264"-->
 <!--poster="MY_VIDEO_POSTER.jpg" data-setup="{}">-->
 <!--<source src="../fushanxing.mp4">-->
@@ -467,7 +467,7 @@
 <script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
 
 <script type="text/javascript">
-    var ue = UE.getEditor('container');
+    var ue = UE.getEditor('submitPost_editor');
     var uec = UE.getEditor('ueditor_container')
 </script>
 <script src="../js/http_vjs.zencdn.net_5.8.8_video.js"></script>

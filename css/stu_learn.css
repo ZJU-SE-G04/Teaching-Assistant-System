@@ -16,6 +16,7 @@ textarea {
     min-height:100px;
 }
 
+
 a {
     color: #000;
 }
@@ -235,11 +236,14 @@ input[name="search_post"] {
     width: 250px;
 }
 
+.search_post_btn {
+
+}
 #discuss_header {
     min-height: 45px;
 }
 
-.search_post_btn {
+.search_post_input {
     margin: 0px 5px 0px 5px;
 }
 
@@ -297,7 +301,7 @@ input[name="search_post"] {
 }
 
 input[name="post_title"] {
-    display: block;
+    /*display: block;*/
     width: 500px;
 }
 

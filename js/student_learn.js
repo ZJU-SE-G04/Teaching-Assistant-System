@@ -155,9 +155,33 @@ $(document).ready(
 
 
         /************************************* 讨论区 ******************************************/
-        function fetch_border_posts(border_name, border_type, offset, count) {
+
+        $(".search_post_btn").click(function () {
+            var search_content = $(".search_post_input").val();
+            if (search_content == "") return;
+            var border_name = $("#posts_catagory_ddMenu>div").text();
+            console.log(border_name);
+            var border_type;
+            switch (border_name) {
+                case "老师答疑区":
+                    border_type = 0;
+                    break;
+                case "综合讨论区":
+                    border_type = 1;
+                    break;
+                case "小组讨论区":
+                    border_type = 2;
+                    break;
+                case "所有板块":
+                    border_type = "a";
+                    break;
+            }
+            fetch_border_posts(border_name, border_type, 0, POSTNUM_PER_PAGE, search_content);
+        });
+
+        function fetch_border_posts(border_name, border_type, offset, count, search) {
             $.ajax({
-                url: "posts_handler.php?action=fetchAll&courseID=" + courseID + "&post_kind=" + border_type + "&offset=" + offset + "&count=" + count,
+                url: "posts_handler.php?action=fetchAll&courseID=" + courseID + "&post_kind=" + border_type + "&offset=" + offset + "&count=" + count + "&search=" + search,
                 success: function (result) {
                     //界面切换
                     $("#discuss_home_page").hide();
@@ -206,7 +230,7 @@ $(document).ready(
                                         var re_comment_btn = $("<a class='comment-btn right my-blue'>回复</a>").click(function () {
 
                                             //点击回复的时候出现回复框
-                                            if($(this).parent().next().children("form").length != 0) return;
+                                            if ($(this).parent().next().children("form").length != 0) return;
                                             var comment_form = $("<form method='post' action='submit_rere.php' title='submit_rere_form'></form>").css("overflow", "hidden");
                                             var comment_area = $("<textarea placeholder='发表评论...'></textarea>").css("margin-bottom", "10px");
                                             comment_area.focus = true;
@@ -221,7 +245,7 @@ $(document).ready(
                                                     var content = comment_form.children("textarea").val();
                                                     var id_be_re = comment_form.parent().parent().attr("userid");
                                                     var name_be_re = comment_form.parent().parent().find(".re-username").text();
-                                                    $.post("posts_handler.php", {
+                                                    $.post("posts_handler.php?action=submitReRe", {
                                                         action: "submitReRe",
                                                         topic_id: topic_id,
                                                         floor: floor,
@@ -256,7 +280,7 @@ $(document).ready(
                                                 if (results.length == 0) return;
                                                 for (var i = 0; i < results.length; i++) {
                                                     var eachReRe = results[i];
-                                                    var rere_item = $("<div class='rere-item'></div>").attr("userid",eachReRe['userid']).attr("rere_floor", eachReRe['re_floor']).append($("<div class='rere-content'></div>").text(eachReRe['re_content']));
+                                                    var rere_item = $("<div class='rere-item'></div>").attr("userid", eachReRe['userid']).attr("rere_floor", eachReRe['re_floor']).append($("<div class='rere-content'></div>").text(eachReRe['re_content']));
                                                     var rere_username = $("<span class='my-blue rere-username'></span>").text(eachReRe['username']);
                                                     var rere_item_btm = $("<div class='rere-item-btm'></div>").append(rere_username);
                                                     if (eachReRe['id_of_be_re'] != 0) {
@@ -270,7 +294,7 @@ $(document).ready(
                                                     rere_item_btm.append(rere_date);
                                                     rere_item_btm.append($("<a class='comment-btn right my-blue'></a>").text("回复").click(function () {
 
-                                                        if($(this).parent().parent().next("form").length != 0) return;
+                                                        if ($(this).parent().parent().next("form").length != 0) return;
                                                         //点击回复的时候出现回复框
                                                         var comment_form = $("<form method='post' action=''></form>").css("overflow", "hidden");
                                                         var comment_area = $("<textarea placeholder='发表评论...'></textarea>").css("margin-bottom", "10px");
@@ -334,56 +358,57 @@ $(document).ready(
                 }
             });
         }
+
         //点击某个具体的帖子板块
         $(".post-border-item>a").click(function () {
             var border_type = $(this).attr("title");
             var border_name = $(this).text();
             //获取该帖子板块的帖子数量
 
-            // $.ajax({
-            //     url: "posts_handler.php?action=fetchNum&courseID=" + courseID + "&post_kind=" + border_type,
-            //     success: function (result) {
-            //         var num = result['num'];
+            $.ajax({        //后端还没有写好
+                url: "posts_handler.php?action=fetchNum&courseID=" + courseID + "&post_kind=" + border_type,
+                success: function (result) {
+                    var num = result['num'];
                     var num = 5;
                     $("#posts_border_page .pagination").children().remove();
                     var pagination = $("#posts_border_page .pagination").append($("<li><a href='#'>&laquo;</a></li>"));
-                    for(var i = 0; i < Math.ceil(num / POSTNUM_PER_PAGE); i++) {
+                    for (var i = 0; i < Math.ceil(num / POSTNUM_PER_PAGE); i++) {
                         pagination.append($("<li class=''></li>").append($("<a href='#'></a>").text(i + 1)));
                     }
                     pagination.append($("<li><a href='#'>&raquo</a></li>"));
-            //     }
-            // });
+                }
+            });
             //获取该帖子板块中的第一页的所有帖子
-            fetch_border_posts(border_name, border_type, 0, POSTNUM_PER_PAGE);
+            fetch_border_posts(border_name, border_type, 0, POSTNUM_PER_PAGE, "");
 
             // $("#posts_border_page .pagination").find("li.active").removeClass("active");
 
             $("#posts_border_page .pagination>li:nth-child(2)").addClass("active");
 
             $("#posts_border_page .pagination>li>a").click(function () {
-                if($(this).text() == "«") {
+                if ($(this).text() == "«") {
                     var page_no = $(this).parent().parent().find("li.active a").text() - 1;
-                    if(page_no < 1) {//最小为1
+                    if (page_no < 1) {//最小为1
                         return;
                     }
-                    fetch_border_posts($("#posts_border_name").text(), $("#posts_border_name").attr("border_type"), POSTNUM_PER_PAGE * (page_no -1), POSTNUM_PER_PAGE);
+                    fetch_border_posts($("#posts_border_name").text(), $("#posts_border_name").attr("border_type"), POSTNUM_PER_PAGE * (page_no - 1), POSTNUM_PER_PAGE, "");
                     $(this).parent().parent().find("li.active").removeClass("active").prev().addClass("active");
-                } else if($(this).text() == "»") {
+                } else if ($(this).text() == "»") {
                     var page_no = parseInt($(this).parent().parent().find("li.active a").text()) + 1;
                     var max_page_no = parseInt($(this).parent().parent().find("li:nth-last-child(2) a").text());
                     console.log("max page no" + max_page_no);
                     console.log("page no:" + page_no);
-                    if(page_no > max_page_no) {//最大为max_page_no
+                    if (page_no > max_page_no) {//最大为max_page_no
                         return;
                     }
-                    fetch_border_posts($("#posts_border_name").text(), $("#posts_border_name").attr("border_type"), POSTNUM_PER_PAGE * (page_no -1), POSTNUM_PER_PAGE);
+                    fetch_border_posts($("#posts_border_name").text(), $("#posts_border_name").attr("border_type"), POSTNUM_PER_PAGE * (page_no - 1), POSTNUM_PER_PAGE, "");
                     $(this).parent().parent().find("li.active").removeClass("active").next().addClass("active");
                 } else {
-                    if($(this).parent().hasClass("active")) return;
+                    if ($(this).parent().hasClass("active")) return;
                     $(this).parent().parent().find("li.active").removeClass("active");
                     $(this).parent().addClass("active");
                     var page_no = parseInt($(this).text());
-                    fetch_border_posts($("#posts_border_name").text(), $("#posts_border_name").attr("border_type"), POSTNUM_PER_PAGE * (page_no -1), POSTNUM_PER_PAGE);
+                    fetch_border_posts($("#posts_border_name").text(), $("#posts_border_name").attr("border_type"), POSTNUM_PER_PAGE * (page_no - 1), POSTNUM_PER_PAGE, "");
                 }
             })
         });
@@ -391,39 +416,41 @@ $(document).ready(
 
         /****************************************发布帖子****************************************/
 
-        $("#submit_post_btn").click(function () {
-            var flag = true;
-            var title_input = $("#post_title_input");
-            if (title_input.val() === "") {
-                title_input.after("帖子标题不能为空");
-                flag = false;
-            }
-            console.log(title_input.val());
+        $("#submit_post_form").validate({
+            submitHandler: function () {
+                var flag = true;
+                var title = $("#post_title_input").val();
+                if (title === "") {
+                    $("#post_title_input").after($("<span class='error' style='margin-left: 10px'>帖子标题不能为空</span>"));
+                    flag = false;
+                }
 
-            var border_selector = $("#sel_post_catagory_ddMenu");
-            console.log(border_selector.text());
-            if (border_selector.text() === "") {
-                border_selector.after($("<span></span>").text("请选择帖子所属的板块"));
-                flag = false;
-            }
-            if (flag !== true) return;
+                var border_name = $("#sel_post_catagory_ddMenu>div").text();
+                if (border_name === "请选择主题所属板块") {
 
-            var ueContent = UE.getEditor('container').getContent();
-            $.post("getUEditorContent.php", {
-                title: title_input.val(),
-                border: border_selector.text(),
-                myEditor: ueContent
-            }, function (result, status) {
-                // alert(result);
-                $("#test_div").html(result);
-            });
+                    $("#sel_post_catagory_ddMenu").after($("<span class='error' style='margin-left: 10px; font-size: 1em'></span>").text("请选择帖子所属的板块"));
+                    flag = false;
+                }
+                if (flag !== true) return;
+
+                var ueContent = UE.getEditor('submitPost_editor').getContent();
+                if(ueContent === "") return;
+                $.post("getUEditorContent.php", {
+                    title: title,
+                    border: border_name,
+                    postContent: ueContent
+                }, function (result, status) {
+                    // alert(result);
+                    $("#test_div").html(result);
+                });
+            }
         });
 
         $("#select_posts_catagory li").click(function () {
             $("#sel_post_catagory_ddMenu div").text($(this).text());
         })
 
-        //显示发布帖子的界面
+//显示发布帖子的界面
         $("#goto_issue_post_page_btn").click(function () {
             $("#discuss_home_page").hide();
             $("#issue_post_page").show();
@@ -432,7 +459,7 @@ $(document).ready(
 
         });
 
-        //后退按钮，返回讨论区主界面
+//后退按钮，返回讨论区主界面
         $(".back_to_discuss_home_page a").click(function () {
             $("#discuss_home_page").show();
             $("#issue_post_page").hide();
@@ -440,7 +467,7 @@ $(document).ready(
             $("#posts_border_page").hide();
         });
 
-        //显示讨论区主界面
+//显示讨论区主界面
         $("a[href='#discuss_area_pane']").click(function () {
             $("#discuss_home_page").show();
             $("#issue_post_page").hide();
@@ -460,14 +487,15 @@ $(document).ready(
         });
 
 
-        //设置初始状态
+//设置初始状态
 
-        //讨论区
+//讨论区
         $("#discuss_home_page").show();
         $("#issue_post_page").hide();
         $("#posts_border_page").hide();
         $("#post_detail_page").hide();
 
 
-    });
+    })
+;
 

@@ -1,18 +1,19 @@
 ## 学生页面接口
 
-|功能名            |前端调用后端的URL                             |post| 后端返回前端的数据(json)                   |备注          |
-|-----------------|-------------------------------------------|------|--------------------------------------------|---------------|
-|获取课程介绍信息     |get_course_intro.php?courseID=xxx        |无      | {"国际国内背景":"xxx", "课时安排":"xxx", "教学计划":"xxx", "使用教材":"xxx", "考核方式":"xxx"}|无
-|获取该课程所有老师姓名| get_course_teacher.php?courseID=xxx     |无          | [{"id":"xxx", "name":"xxx"},{"id":"xxx", "name":"xxx"},...]                               |无 
-|获取某个老师的详细介绍| get_teacher_intro.php?teacherID=xxx      |无         | {"introduction":"xxxxxxxx"}                                                               |无
-|获取所有课件资料     | get_courseware.php?courseID=xxx         |无            |[{"courseware_name":"xxx", "courseware_info":"xxx", "courseware_kind":"xxx"}, {"courseware_name":"xxx", "courseware_info":"xxx", "course_kind":"xxx"}]|无
-|获取某个板块的帖子列表(某一页)|posts_handler.php?action=fetchAll&courseID=xxx&post_kind=0&offset=0&count=10|无 | [{"topic_id","title":"xxx", "datetime":"xxx", "publisher":"xxx"}, ... ]|请求参数中post_kind,值为0表示老师答疑区,值为1表示综合讨论区,值为2表示小组答疑区
-|获取某个帖子的详情          |posts_handler.php?action=fetchDetail&topic_id=xxx   |无 | {"title":"xxx", "content", "xxxxxx", "datetime":"xxx", "publisher":"xxx"}|无
-|获取某个帖子的所有一级回复(只获取第一页)|posts_handler.php?action=fetchRe&topic_id=xxx&offset=0&count=10 |无| [{"username":"xxx", "userid":"xxx", "content":"xxxxxx", "time":"xxx", "floor": 1}, ...] |结果按照楼层号排序,从第offset条记录开始,返回count条记录
-|获取某个一级回复的所有二级回复|posts_handler.php?action=fetchReRe&topic_id=xxx&floor=xxx        |无| [{"userid":"xxx", "username":"xxx","username_of_be_re":"xxx","id_of_be_re":"xxx", "re_content":"xxxxxx", "re_time":"xxx", "re_floor": 1}, ...]|id_of_be_re为0表示回复对象是一级回复的楼主
-|发表一级回复                |posts_handler.php                  |action=submitRe&topic_id=xxx&content=xxx| { "state": 0, "msg":"xxx" } |state为0表示发表成功，为1表示发表失败|
-|发表二级回复                |posts_handler.php                   |action=submitReRe&topic_id=xxx&floor=2&id_be_re=xxx&name_be_re=xxx&content=xxx&floor_be_re=0 | { "state": 0, "msg":"xxx" } |state为0表示发表成功，为1表示发表失败. post的参数中id_be_re是被回复人的id，floor是一级回复的楼层号. floor_be_re是被回复的楼层（二级回复)，如果是0表示被回复的对象是一级回复，否则是二级回复| 
-|获取某个板块的帖子总数    |posts_handler.php?action=fetchNum&courseID=xxx&post_kind=0|无| { "num": 10 } |无
+|功能号|功能名            |前端调用后端的URL                             |post| 后端返回前端的数据(json)                   |备注          |
+|s1|-----------------|-------------------------------------------|------|--------------------------------------------|---------------|
+|s2|获取课程介绍信息     |get_course_intro.php?courseID=xxx        |无      | {"国际国内背景":"xxx", "课时安排":"xxx", "教学计划":"xxx", "使用教材":"xxx", "考核方式":"xxx"}|无
+|s3|获取该课程所有老师姓名| get_course_teacher.php?courseID=xxx     |无          | [{"id":"xxx", "name":"xxx"},{"id":"xxx", "name":"xxx"},...]                               |无 
+|s4|获取某个老师的详细介绍| get_teacher_intro.php?teacherID=xxx      |无         | {"introduction":"xxxxxxxx"}                                                               |无
+|s5|获取所有课件资料     | get_courseware.php?courseID=xxx         |无            |[{"courseware_name":"xxx", "courseware_info":"xxx", "courseware_kind":"xxx"}, {"courseware_name":"xxx", "courseware_info":"xxx", "course_kind":"xxx"}]|无
+|s6|获取某个板块的帖子列表(某一页)|posts_handler.php?action=fetchAll&courseID=xxx&post_kind=0&offset=0&count=10&search=xxx|无 | [{"topic_id","title":"xxx", "datetime":"xxx", "publisher":"xxx"}, ... ]|请求参数中post_kind,值为0表示老师答疑区,值为1表示综合讨论区,值为2表示小组答疑区, 值为a表示所有板块, search参数为空表示不执行搜索，不为空表示按标题搜索指定内容
+|s7|获取某个帖子的详情          |posts_handler.php?action=fetchDetail&topic_id=xxx   |无 | {"title":"xxx", "content", "xxxxxx", "datetime":"xxx", "publisher":"xxx"}|无
+|s8|获取某个帖子的所有一级回复(只获取第一页)|posts_handler.php?action=fetchRe&topic_id=xxx&offset=0&count=10 |无| [{"username":"xxx", "userid":"xxx", "content":"xxxxxx", "time":"xxx", "floor": 1}, ...] |结果按照楼层号排序,从第offset条记录开始,返回count条记录
+|s9|获取某个一级回复的所有二级回复|posts_handler.php?action=fetchReRe&topic_id=xxx&floor=xxx        |无| [{"userid":"xxx", "username":"xxx","username_of_be_re":"xxx","id_of_be_re":"xxx", "re_content":"xxxxxx", "re_time":"xxx", "re_floor": 1}, ...]|id_of_be_re为0表示回复对象是一级回复的楼主
+|s10|发表主题帖                  |posts_handler.php?action=submitPost                |border_type=0&title=xxx&content=xxx    | { "state": 0, "msg": "xxx" }  | state为0表示发表成功，为1表示发表失败
+|s11|发表一级回复                |posts_handler.php?action=submitRe                  |topic_id=xxx&content=xxx| { "state": 0, "msg":"xxx" } |state为0表示发表成功，为1表示发表失败|
+|s12|发表二级回复                |posts_handler.php?action=submitReRe                |topic_id=xxx&floor=2&id_be_re=xxx&name_be_re=xxx&content=xxx&floor_be_re=0 | { "state": 0, "msg":"xxx" } |state为0表示发表成功，为1表示发表失败. post的参数中id_be_re是被回复人的id，floor是一级回复的楼层号. floor_be_re是被回复的楼层（二级回复)，如果是0表示被回复的对象是一级回复，否则是二级回复| 
+|s13|获取某个板块的帖子总数    |posts_handler.php?action=fetchNum&courseID=xxx&post_kind=0|无| { "num": 10 } |无
 ###选择测试或实验报告
 <table>
     <thead>

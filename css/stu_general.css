@@ -29,6 +29,9 @@ a, button {
     font-family: "Arial", "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, "Helvetica", "sans-serif";
 }
 
+.error {
+    color: red;
+}
 .bottom-line {
     border-bottom: #eee 1px solid;
 }
