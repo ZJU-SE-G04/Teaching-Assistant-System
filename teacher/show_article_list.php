@@ -1,13 +1,12 @@
 <?php
 	include 'connect.php';
 	$lesson_id=$_GET["lesson_id"];//获取教师账号
+	$search=$_GET['needed_title'];
+	//$lesson_id='ABCDE1';
+	//$search='xx';
 
-	if (empty($_POST["needed_title"])) {
-		$result = $conn->query("select * from article_table natural join teacher_table where lesson_id='" . $lesson_id . "' order by article_id DESC;");
-	}
-	else{
-		//这里产生搜索结果
-	}
+	$result = $conn->query("select * from article_table natural join teacher_table where lesson_id='".$lesson_id."' and title like '%".$search."%' order by article_id DESC;");
+
 	$arr = [];
 	while($row = mysqli_fetch_assoc($result)) {
 		$x['article_id']=(int)$row['article_id'];
