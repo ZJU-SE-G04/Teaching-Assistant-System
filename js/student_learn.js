@@ -366,7 +366,8 @@ $(document).ready(
             //     url: "posts_handler.php?action=fetchNum&courseID=" + courseID + "&post_kind=" + border_type,
             //     success: function (result) {
             //         var num = result['num'];
-                    var num = 25;
+                    var num = 5;
+                    $("#posts_border_page .pagination").children().remove();
                     var pagination = $("#posts_border_page .pagination").append($("<li><a href='#'>&laquo;</a></li>"));
                     for(var i = 0; i < Math.ceil(num / POSTNUM_PER_PAGE); i++) {
                         pagination.append($("<li class=''></li>").append($("<a href='#'></a>").text(i + 1)));
@@ -446,8 +447,8 @@ $(document).ready(
 
         //显示发布帖子的界面
         $("#goto_issue_post_page_btn").click(function () {
-            $("#discuss_home_page").show();
-            $("#issue_post_page").hide();
+            $("#discuss_home_page").hide();
+            $("#issue_post_page").show();
             $("#post_detail_page").hide();
             $("#posts_border_page").hide();
 
