@@ -288,7 +288,7 @@ function  returnToArticleList() {
 
 function showSecondComment() {
     var floor=$(this).parent().find(".x-floor").text();
-    var posts_list_item=$(this).parent().parent().parent().parent();//....
+    var posts_list_item=$(this).parents(".posts-list-item");
 
 
 
