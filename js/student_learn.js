@@ -4,6 +4,7 @@
  */
 
 let POSTNUM_PER_PAGE = 10;
+let POSTRE_NUM_PER_PAGE = 10;
 $(document).ready(
     function () {
         //课程号，从首页传过来的参数获得
@@ -148,9 +149,9 @@ $(document).ready(
                         c_delete_area.find(".c-trash").click(function () {
                             $(this).parent().parent().remove()
                             $.ajax({
-                                url:"delete_courseware.php?courseware_id="+xxx,
-                                success:function (result) {
-                                    if(result["if_success"]==0){
+                                url: "delete_courseware.php?courseware_id=" + xxx,
+                                success: function (result) {
+                                    if (result["if_success"] == 0) {
                                         alert(result["err_message"]);
                                     }
 
@@ -173,7 +174,6 @@ $(document).ready(
         $("#choose_posts_catagory ul li a").click(function () {
             $("#posts_catagory_ddMenu div").html($(this).html());
         });
-
 
 
         /************************************* 讨论区 ******************************************/
@@ -200,6 +200,204 @@ $(document).ready(
             }
             fetch_border_posts(border_name, border_type, 0, POSTNUM_PER_PAGE, search_content);
         });
+
+        function get_current_re_page() {
+            var cur_page = parseInt($(".re-list-container .pagination .active>a").text());
+            return cur_page;
+        }
+
+        //获取每个主题帖的回复的数量
+        function get_post_re_num() {
+            var topic_id = $("#post_detail_page .post-detail").attr("topic_id");
+            var num;
+            $.ajax({
+                url: "posts_handler.php?action=fetchReNum&topic_id=" + topic_id,
+                async: false,
+                success: function (data) {
+                    num = data['num'];
+                }
+            });
+            return num;
+        }
+
+        function fetch_post_rere(post_id, floor, re_li) {
+            $.ajax({
+                url: "posts_handler.php?action=fetchReRe&topic_id=" + post_id + "&floor=" + floor,
+                async: false,   //很重要！如果是异步的ajax的话，后面引用re_li就不一定是同一个re_li了
+                success: function (results) {
+                    var rereAreaBody = $("<div class='rere-area-body'></div>");
+                    if (results.length == 0) return;
+                    for (var i = 0; i < results.length; i++) {
+                        var eachReRe = results[i];
+                        var rere_item = $("<div class='rere-item'></div>").attr("userid", eachReRe['userid']).attr("rere_floor", eachReRe['re_floor']).append($("<div class='rere-content'></div>").text(eachReRe['re_content']));
+                        var rere_username = $("<span class='my-blue rere-username'></span>").text(eachReRe['username']);
+                        var rere_item_btm = $("<div class='rere-item-btm'></div>").append(rere_username);
+                        if (eachReRe['id_of_be_re'] != 0) {
+                            //回复对象不是一级回复
+                            rere_item_btm.append($("<span style='margin: 0 0.5em'>回复</span>"));
+                            var username_of_be_re = $("<span class='my-blue'></span>").text(eachReRe['username_of_be_re']);
+                            rere_item_btm.append(username_of_be_re);
+                        }
+                        rere_item_btm.append($("<span style='margin: 0 0.5em'>|</span>"))
+                        var rere_date = $("<span class='f-post-date'></span>").text(eachReRe['re_time']);
+                        rere_item_btm.append(rere_date);
+                        rere_item_btm.append($("<a class='comment-btn right my-blue'></a>").text("回复").click(function () {
+
+                            if ($(this).parent().parent().next("form").length != 0) return;
+                            //点击回复的时候出现回复框
+                            var comment_form = $("<form method='post' action=''></form>").css("overflow", "hidden");
+                            var comment_area = $("<textarea placeholder='发表评论...'></textarea>").css("margin-bottom", "10px");
+                            comment_area.focus = true;
+                            var submit_btn = $("<button>提交</button>").addClass("p-btn-sm right").css("margin-bottom", "5px");
+                            // comment_area.after(submit_btn);
+                            var rere_item = $(this).parent().parent();
+                            comment_form.append(comment_area).append(submit_btn);
+
+                            comment_form.validate({
+                                submitHandler: function () {
+                                    var topic_id = $(".post-detail").attr("topic_id");
+                                    var floor = comment_form.parent().parent().parent().attr("floor");
+                                    var floor_be_re = comment_form.prev().attr("rere_floor");
+                                    var content = comment_form.children("textarea").val();
+                                    var id_be_re = comment_form.prev().attr("userid");
+                                    var name_be_re = comment_form.prev().find(".rere-username").text();
+
+                                    $.post("posts_handler.php", {
+                                        action: "submitReRe",
+                                        topic_id: topic_id,
+                                        floor: floor,
+                                        id_be_re: id_be_re,
+                                        name_be_re: name_be_re,
+                                        content: content,
+                                        floor_be_re: floor_be_re
+                                    }, function (data, status) {
+                                        // alert(data['msg']);
+
+                                    })
+                                }
+                            });
+
+                            rere_item.after(comment_form);
+
+                        }));
+                        rere_item.append(rere_item_btm);
+                        rereAreaBody.append(rere_item);
+
+                    }
+                    var rereArea = $("<div class='rere-area'></div>").append(rereAreaBody);
+                    // rereArea.append($("<div class='add-rere'>添加评论...</div>"));
+                    // console.log(rereArea);
+                    // console.log(re_li);
+                    re_li.append(rereArea);
+                }
+            })
+        }
+        function fetch_post_re(post_id, offset, count) {
+            $.ajax({
+                url: "posts_handler.php?action=fetchRe&topic_id=" + post_id + "&offset=" + offset + "&count=" + count,
+                success: function (results) {
+                    $(".re-list-ul").children().remove();   //清空原有的内容
+                    // var topic_id = $(".post-detail").attr("title");
+                    $(".f-re-num").text("共" + results.length + "回复");    //获取评论数量
+                    for (var i = 0; i < results.length; i++) {
+                        result = results[i];
+                        var re_item_content_ele = $("<div class='re-item-content'></div>").html(result['content']);
+                        var re_item_nick = $("<span class='my-blue inline re-username' style='margin-right: 0.5em' ></span>").text(result['username']);
+                        var re_item_date = $("<span class='f-post-date' style='margin-left: 0.5em'></span>").text(result['time']);
+                        var re_comment_btn = $("<a class='comment-btn right my-blue'>回复</a>").click(function () {
+
+                            //点击回复的时候出现回复框
+                            if ($(this).parent().next().children("form").length != 0) return;
+                            var comment_form = $("<form method='post' action='submit_rere.php' title='submit_rere_form'></form>").css("overflow", "hidden");
+                            var comment_area = $("<textarea placeholder='发表评论...'></textarea>").css("margin-bottom", "10px");
+                            comment_area.focus = true;
+                            var submit_btn = $("<button>提交</button>").addClass("p-btn-sm right").css("margin-bottom", "5px");
+                            comment_form.append(comment_area).append(submit_btn);
+
+                            comment_form.validate({
+                                submitHandler: function () {
+                                    var topic_id = $(".post-detail").attr("topic_id");
+                                    var floor = comment_form.parent().parent().attr("floor");
+                                    var floor_be_re = 0;  //回复的对象是一级回复
+                                    var content = comment_form.children("textarea").val();
+                                    var id_be_re = comment_form.parent().parent().attr("userid");
+                                    var name_be_re = comment_form.parent().parent().find(".re-username").text();
+                                    $.post("posts_handler.php?action=submitReRe", {
+                                        action: "submitReRe",
+                                        topic_id: topic_id,
+                                        floor: floor,
+                                        id_be_re: id_be_re,
+                                        name_be_re: name_be_re,
+                                        content: content,
+                                        floor_be_re: floor_be_re
+                                    }, function (data, status) {
+                                        alert(data['msg']);
+                                        fetch_post_re(topic_id, 0, POSTNUM_PER_PAGE);
+                                    })
+                                }
+                            });
+                            $(this).parent().next().append(comment_form);
+                        });
+                        var re_item_btm = $("<div class='re-item-btm'></div>").append(re_item_nick).append("|").append(re_item_date).append(re_comment_btn);
+                        var re_li = $("<li class='re-item'></li>").append(re_item_content_ele).append(re_item_btm).attr("floor", result['floor']).attr("userid", result['userid']);
+                        re_li.append($("<div class='submit-rere-frame'></div>"));
+                        $(".re-list-ul").append(re_li);
+                    }
+
+                    //分页
+                    var re_num = get_post_re_num();
+                    //TODO 后端还没写好
+                    var re_num = 30;
+                    var cur_page_num = offset / POSTRE_NUM_PER_PAGE + 1;
+                    $("#post_detail_page .pagination").children().remove();
+                    var pagination = $("#post_detail_page .pagination").append($("<li><a>&laquo;</a></li>"));
+                    for (var i = 0; i < Math.ceil(re_num / POSTNUM_PER_PAGE); i++) {
+                        pagination.append($("<li class=''></li>").append($("<a></a>").text(i + 1)));
+                    }
+                    pagination.append($("<li><a>&raquo</a></li>"));
+
+                    $("#post_detail_page .pagination>li:nth-child(" + (cur_page_num+1) +")").addClass("active");
+
+                    $("#post_detail_page .pagination>li>a").click(function () {
+                        var topic_id = $("#post_detail_page .post-detail").attr("topic_id");
+                        if ($(this).text() == "«") {
+                            var page_no = $(this).parent().parent().find("li.active a").text() - 1;
+                            if (page_no < 1) {//最小为1
+                                return;
+                            }
+                            fetch_post_re(topic_id,POSTRE_NUM_PER_PAGE * (page_no - 1), POSTRE_NUM_PER_PAGE);
+                            $(this).parent().parent().find("li.active").removeClass("active").prev().addClass("active");
+                        } else if ($(this).text() == "»") {
+                            var page_no = parseInt($(this).parent().parent().find("li.active a").text()) + 1;
+                            var max_page_no = parseInt($(this).parent().parent().find("li:nth-last-child(2) a").text());
+                            if (page_no > max_page_no) {//最大为max_page_no
+                                return;
+                            }
+                            fetch_post_re(topic_id,POSTRE_NUM_PER_PAGE * (page_no - 1), POSTRE_NUM_PER_PAGE);
+                            $(this).parent().parent().find("li.active").removeClass("active").next().addClass("active");
+                        } else {
+                            if ($(this).parent().hasClass("active")) return;
+                            $(this).parent().parent().find("li.active").removeClass("active");
+                            $(this).parent().addClass("active");
+                            var page_no = parseInt($(this).text());
+                            fetch_post_re(topic_id,POSTRE_NUM_PER_PAGE * (page_no - 1), POSTRE_NUM_PER_PAGE);
+                        }
+                    });
+
+
+
+                    //获取每个回复下面的所有二级回复
+                    var re_items = $(".re-item");
+                    var topic_id = $("#post_detail_page .post-detail").attr("topic_id")
+                    for (var i = 0; i < re_items.length; i++) {
+                        var re_li = re_items.eq(i);
+                        var floor = re_li.attr("floor");
+                        fetch_post_rere(topic_id, floor, re_li);
+                    }
+                }
+            })
+
+        }
 
         function fetch_border_posts(border_name, border_type, offset, count, search) {
             $.ajax({
@@ -237,136 +435,8 @@ $(document).ready(
                                     $(".post-detail-btm>.f-post-date").text(result['datetime']);
                                 }
                             });
-                            //获取某个主题帖子下面的所有回复
-                            $.ajax({
-                                url: "posts_handler.php?action=fetchRe&topic_id=" + post_id + "&offset=0&count=10",
-                                success: function (results) {
-                                    $(".re-list-ul").children().remove();   //清空原有的内容
-                                    // var topic_id = $(".post-detail").attr("title");
-                                    $(".f-re-num").text("共" + results.length + "回复");    //获取评论数量
-                                    for (var i = 0; i < results.length; i++) {
-                                        result = results[i];
-                                        var re_item_content_ele = $("<div class='re-item-content'></div>").text(result['content']);
-                                        var re_item_nick = $("<span class='my-blue inline re-username' style='margin-right: 0.5em' ></span>").text(result['username']);
-                                        var re_item_date = $("<span class='f-post-date' style='margin-left: 0.5em'></span>").text(result['time']);
-                                        var re_comment_btn = $("<a class='comment-btn right my-blue'>回复</a>").click(function () {
-
-                                            //点击回复的时候出现回复框
-                                            if ($(this).parent().next().children("form").length != 0) return;
-                                            var comment_form = $("<form method='post' action='submit_rere.php' title='submit_rere_form'></form>").css("overflow", "hidden");
-                                            var comment_area = $("<textarea placeholder='发表评论...'></textarea>").css("margin-bottom", "10px");
-                                            comment_area.focus = true;
-                                            var submit_btn = $("<button>提交</button>").addClass("p-btn-sm right").css("margin-bottom", "5px");
-                                            comment_form.append(comment_area).append(submit_btn);
-
-                                            comment_form.validate({
-                                                submitHandler: function () {
-                                                    var topic_id = $(".post-detail").attr("topic_id");
-                                                    var floor = comment_form.parent().parent().attr("floor");
-                                                    var floor_be_re = 0;  //回复的对象是一级回复
-                                                    var content = comment_form.children("textarea").val();
-                                                    var id_be_re = comment_form.parent().parent().attr("userid");
-                                                    var name_be_re = comment_form.parent().parent().find(".re-username").text();
-                                                    $.post("posts_handler.php?action=submitReRe", {
-                                                        action: "submitReRe",
-                                                        topic_id: topic_id,
-                                                        floor: floor,
-                                                        id_be_re: id_be_re,
-                                                        name_be_re: name_be_re,
-                                                        content: content,
-                                                        floor_be_re: floor_be_re
-                                                    }, function (data, status) {
-                                                        alert(data['msg']);
-
-                                                    })
-                                                }
-                                            });
-                                            $(this).parent().next().append(comment_form);
-                                        });
-                                        var re_item_btm = $("<div class='re-item-btm'></div>").append(re_item_nick).append("|").append(re_item_date).append(re_comment_btn);
-                                        var re_li = $("<li class='re-item'></li>").append(re_item_content_ele).append(re_item_btm).attr("floor", result['floor']).attr("userid", result['userid']);
-                                        re_li.append($("<div class='submit-rere-frame'></div>"));
-                                        $(".re-list-ul").append(re_li);
-                                    }
-
-                                    //获取每个回复下面的所有二级回复
-                                    var re_items = $(".re-item");
-                                    for (var i = 0; i < re_items.length; i++) {
-                                        var re_li = $(re_items.get(i));
-                                        var floor = re_li.attr("floor");
-                                        $.ajax({
-                                            url: "posts_handler.php?action=fetchReRe&topic_id=" + post_id + "&floor=" + floor,
-                                            async: false,   //很重要！如果是异步的ajax的话，后面引用re_li就不一定是同一个re_li了
-                                            success: function (results) {
-                                                var rereAreaBody = $("<div class='rere-area-body'></div>");
-                                                if (results.length == 0) return;
-                                                for (var i = 0; i < results.length; i++) {
-                                                    var eachReRe = results[i];
-                                                    var rere_item = $("<div class='rere-item'></div>").attr("userid", eachReRe['userid']).attr("rere_floor", eachReRe['re_floor']).append($("<div class='rere-content'></div>").text(eachReRe['re_content']));
-                                                    var rere_username = $("<span class='my-blue rere-username'></span>").text(eachReRe['username']);
-                                                    var rere_item_btm = $("<div class='rere-item-btm'></div>").append(rere_username);
-                                                    if (eachReRe['id_of_be_re'] != 0) {
-                                                        //回复对象不是一级回复
-                                                        rere_item_btm.append($("<span style='margin: 0 0.5em'>回复</span>"));
-                                                        var username_of_be_re = $("<span class='my-blue'></span>").text(eachReRe['username_of_be_re']);
-                                                        rere_item_btm.append(username_of_be_re);
-                                                    }
-                                                    rere_item_btm.append($("<span style='margin: 0 0.5em'>|</span>"))
-                                                    var rere_date = $("<span class='f-post-date'></span>").text(eachReRe['re_time']);
-                                                    rere_item_btm.append(rere_date);
-                                                    rere_item_btm.append($("<a class='comment-btn right my-blue'></a>").text("回复").click(function () {
-
-                                                        if ($(this).parent().parent().next("form").length != 0) return;
-                                                        //点击回复的时候出现回复框
-                                                        var comment_form = $("<form method='post' action=''></form>").css("overflow", "hidden");
-                                                        var comment_area = $("<textarea placeholder='发表评论...'></textarea>").css("margin-bottom", "10px");
-                                                        comment_area.focus = true;
-                                                        var submit_btn = $("<button>提交</button>").addClass("p-btn-sm right").css("margin-bottom", "5px");
-                                                        // comment_area.after(submit_btn);
-                                                        var rere_item = $(this).parent().parent();
-                                                        comment_form.append(comment_area).append(submit_btn);
-
-                                                        comment_form.validate({
-                                                            submitHandler: function () {
-                                                                var topic_id = $(".post-detail").attr("topic_id");
-                                                                var floor = comment_form.parent().parent().parent().attr("floor");
-                                                                var floor_be_re = comment_form.prev().attr("rere_floor");
-                                                                var content = comment_form.children("textarea").val();
-                                                                var id_be_re = comment_form.prev().attr("userid");
-                                                                var name_be_re = comment_form.prev().find(".rere-username").text();
-
-                                                                $.post("posts_handler.php", {
-                                                                    action: "submitReRe",
-                                                                    topic_id: topic_id,
-                                                                    floor: floor,
-                                                                    id_be_re: id_be_re,
-                                                                    name_be_re: name_be_re,
-                                                                    content: content,
-                                                                    floor_be_re: floor_be_re
-                                                                }, function (data, status) {
-                                                                    // alert(data['msg']);
-
-                                                                })
-                                                            }
-                                                        });
-
-                                                        rere_item.after(comment_form);
-
-                                                    }));
-                                                    rere_item.append(rere_item_btm);
-                                                    rereAreaBody.append(rere_item);
-
-                                                }
-                                                var rereArea = $("<div class='rere-area'></div>").append(rereAreaBody);
-                                                // rereArea.append($("<div class='add-rere'>添加评论...</div>"));
-                                                // console.log(rereArea);
-                                                // console.log(re_li);
-                                                re_li.append(rereArea);
-                                            }
-                                        })
-                                    }
-                                }
-                            })
+                            //获取某个主题帖子下面的第一页的回复
+                            fetch_post_re(post_id, 0, POSTRE_NUM_PER_PAGE);
 
 
                         });
@@ -387,11 +457,10 @@ $(document).ready(
             var border_name = $(this).text();
             //获取该帖子板块的帖子数量
 
-            $.ajax({        //后端还没有写好
+            $.ajax({
                 url: "posts_handler.php?action=fetchNum&courseID=" + courseID + "&post_kind=" + border_type,
                 success: function (result) {
                     var num = result['num'];
-                    var num = 5;
                     $("#posts_border_page .pagination").children().remove();
                     var pagination = $("#posts_border_page .pagination").append($("<li><a href='#'>&laquo;</a></li>"));
                     for (var i = 0; i < Math.ceil(num / POSTNUM_PER_PAGE); i++) {
@@ -456,7 +525,7 @@ $(document).ready(
                 if (flag !== true) return;
 
                 var ueContent = UE.getEditor('submitPost_editor').getContent();
-                if(ueContent === "") return;
+                if (ueContent === "") return;
                 $.post("posts_handler.php?action=submitPost", {
                     border_type: border_name,
                     title: title,
@@ -472,7 +541,7 @@ $(document).ready(
         $("#submit_re_btn").click(function () {
             var editor = UE.getEditor("submitRe_editor");
             var content = editor.getContent();
-            if(content == "") {
+            if (content == "") {
                 alert("回复内容不能为空");
                 return;
             }
@@ -483,6 +552,8 @@ $(document).ready(
                 content: content
             }, function (data, status) {
                 alert(data['msg']);
+                UE.getEditor("submitRe_editor").setContent("");
+                fetch_post_re(topic_id, 0, POSTRE_NUM_PER_PAGE);
             })
         })
         $("#select_posts_catagory li").click(function () {
