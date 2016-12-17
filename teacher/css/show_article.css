@@ -123,6 +123,7 @@
 .post-comment {
     border-bottom: 1px #d9dde1 solid;
     padding-bottom: 6px;
+    float: none;
     margin-bottom: 8px;
 }
 

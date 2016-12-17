@@ -396,7 +396,7 @@ function deleteSecondComment() {
 
 //-----------插入二级回复-----------
 function add_second_comment() {
-    var post_comments_area=$(this).parent();
+    var post_comments_area=$(this).parents(".post-comments-area");
     var content=post_comments_area.find("textarea").val();
     // alert(content);
     var posts_list_item=post_comments_area.parent();
@@ -436,6 +436,7 @@ function add_second_comment() {
         url:"add_second_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content+"&floor="+floor+"&re_id="+re_user_id,
         success:function (result) {
             if(result["if_success"]==1){
+                post_comment_area_body.find(".text-btn-div").hide();
             }
             else{
                 window.alert(result["err_message"]);
@@ -468,26 +469,25 @@ function getNowFormatDate() {
 //------针对楼中楼 add second comment 需要对re_user_id和re_user_name进行调整-----------
 
 function add_second_comment_second() {
-    var post_comment_list_btm=$(this).parent().parent();
+    var post_comment_list_btm=$(this).parents(".posts-list-item-btm");
     re_user_id=post_comment_list_btm.find(".x-second-comment-id").text();
     // window.alert(re_user_id);
 
     re_user_name=post_comment_list_btm.find(".x-name").text();
 
-
-    var post_comments_area=post_comment_list_btm.parent().parent().parent();
-    var add_post_comment=post_comments_area.find(".add-post-comment");
-    // alert(add_post_comment.length);
-    add_post_comment.hide();
-    post_comments_area.children("textarea").remove();
-    post_comments_area.children("button").remove();
-
     var comment_area = $("<textarea placeholder='回复"+re_user_name+"'></textarea>").css("margin-bottom", "10px");
-    add_post_comment.after(comment_area);
-    comment_area.focus = true;
-    var submit_btn = $("<button>提交</button>").addClass("p-btn-sm right");
+    // comment_area.focus = true;
+
+    var textBtnDiv=$("<div style='margin-bottom: 10px'></div>").addClass("text-btn-div");
+    textBtnDiv.append(comment_area);
+    textBtnDiv.append();
+    
+
+    var submit_btn = $("<button  style='margin-bottom: 5px;float: right'>提交</button>").addClass("p-btn-sm");
     submit_btn.click(add_second_comment);
     comment_area.after(submit_btn);
+    
+    post_comment_list_btm.parent().after(textBtnDiv);
 
 }
 
