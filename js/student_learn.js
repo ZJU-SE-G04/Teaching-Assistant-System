@@ -262,8 +262,7 @@ $(document).ready(
                                     var id_be_re = comment_form.prev().attr("userid");
                                     var name_be_re = comment_form.prev().find(".rere-username").text();
 
-                                    $.post("posts_handler.php", {
-                                        action: "submitReRe",
+                                    $.post("posts_handler.php?action=submitReRe", {
                                         topic_id: topic_id,
                                         floor: floor,
                                         id_be_re: id_be_re,
@@ -271,8 +270,12 @@ $(document).ready(
                                         content: content,
                                         floor_be_re: floor_be_re
                                     }, function (data, status) {
-                                        // alert(data['msg']);
-
+                                        var topic_id = $(".post-detail").attr("topic_id");
+                                        var floor = comment_form.parent().parent().parent().attr("floor");
+                                        alert(data['msg']);
+                                        var re_li = comment_form.parent().parent().parent();
+                                        console.log(re_li);
+                                        fetch_post_rere(topic_id, floor, re_li);
                                     })
                                 }
                             });
@@ -288,7 +291,7 @@ $(document).ready(
                     // rereArea.append($("<div class='add-rere'>添加评论...</div>"));
                     // console.log(rereArea);
                     // console.log(re_li);
-                    re_li.append(rereArea);
+                    re_li.html(rereArea);
                 }
             })
         }

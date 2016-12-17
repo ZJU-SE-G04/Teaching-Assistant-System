@@ -14,7 +14,7 @@
 |s11|发表一级回复                |posts_handler.php?action=submitRe                  |topic_id=xxx&content=xxx| { "state": 0, "msg":"xxx" } |state为0表示发表成功，为1表示发表失败|
 |s12|发表二级回复                |posts_handler.php?action=submitReRe                |topic_id=xxx&floor=2&id_be_re=xxx&name_be_re=xxx&content=xxx&floor_be_re=0 | { "state": 0, "msg":"xxx" } |state为0表示发表成功，为1表示发表失败. post的参数中id_be_re是被回复人的id，floor是一级回复的楼层号. floor_be_re是被回复的楼层（二级回复)，如果是0表示被回复的对象是一级回复，否则是二级回复| 
 |s13|获取某个板块的帖子总数    |posts_handler.php?action=fetchNum&courseID=xxx&post_kind=0|无| { "num": 10 } |无
-|s14|获取某个主题帖的回复总数    |posts_handler.php?action=fetchReNum&topic_id=xxx|无| { "num": 20 } |无
+|s14|获取某个主题帖的回复总数    |fetch_post_re_num.php?topic_id=xxx|无| { "num": 20 } |无
 ###选择测试或实验报告
 <table>
     <thead>
