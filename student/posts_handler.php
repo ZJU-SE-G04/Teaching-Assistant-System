@@ -1,6 +1,6 @@
 <?php
-	$action=$_GET["action"];//获取行为
-	//$action="submitRe";
+	//$action=$_GET["action"];//获取行为
+	$action="submitReRe";
 	if($action=='fetchAll'){
 		fetchAll();
 	}else if($action=='fetchDetail'){
@@ -70,28 +70,28 @@
 //提交二级回复
 	function submitReRe(){
 		include 'connect.php';
-		$topic_id=(int)$_POST['topic_id'];
-		$content=$_POST['content'];
-		$ofloor=(int)$_POST['floor'];
-		$reid=$_POST['id_be_re'];
+		//$topic_id=(int)$_POST['topic_id'];
+		//$content=$_POST['content'];
+		//$ofloor=(int)$_POST['floor'];
+		//$reid=$_POST['id_be_re'];
 		//$uid=$_SESSION['user'];
 		$uid='3140103333';
-		//$topic_id=1;
-		//$content='层主说得对';
-		//$reid='3140102222';
-		//$ofloor=4;
+		$topic_id=1;
+		$content='层主说得对';
+		$reid='0';
+		$ofloor=4;
 
 		$datetime=date('Y-m-d H:i:s');
 		$state=0;
 		$msg='发表成功！';
 
-		if($re_id=='0'){
+		/*if($reid=='0'){
 			$result=$conn->query('select * from response_table where topic_id='.$topic_id.' and floor='.$ofloor.' order by floor DESC;');
 			$row=mysqli_fetch_assoc($result);
-			$re_id=$row['id'];
-		}
+			$reid=$row['id'];
+		}*/
 
-		$result=$conn->query('select * from re_response_table where topic_id='.$topic_id.' and floor='.$ofloor.' order by floor DESC;');
+		$result=$conn->query('select * from re_response_table where topic_id='.$topic_id.' and floor='.$ofloor.' order by re_floor DESC;');
 		$row=mysqli_fetch_assoc($result);
 
 		$floor=0;
