@@ -226,6 +226,7 @@ $(document).ready(
                 async: false,   //很重要！如果是异步的ajax的话，后面引用re_li就不一定是同一个re_li了
                 success: function (results) {
                     var rereAreaBody = $("<div class='rere-area-body'></div>");
+                    rereAreaBody.children().remove();
                     if (results.length == 0) return;
                     for (var i = 0; i < results.length; i++) {
                         var eachReRe = results[i];
@@ -287,10 +288,7 @@ $(document).ready(
                         rereAreaBody.append(rere_item);
 
                     }
-                    var rereArea = $("<div class='rere-area'></div>").append(rereAreaBody);
-                    // rereArea.append($("<div class='add-rere'>添加评论...</div>"));
-                    // console.log(rereArea);
-                    // console.log(re_li);
+                    var rereArea = $("<div class='rere-area'></div>").html(rereAreaBody);
                     re_li.html(rereArea);
                 }
             })
