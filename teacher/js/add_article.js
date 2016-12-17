@@ -9,15 +9,21 @@ var re_user_id="0";//被回复人id
 
 //------- wo get it
 $(document).ready(function() {
-    $("#message").addClass("active");
-    $(".content-blk.message").show();
+    // $("#notice").addClass("in active");
+    // $("#notice").addClass("x-old-nav");
+    // // $(".content-blk.message").show();
 
-    $(".order-nav").click(function () {
-        $(".order-nav.active").removeClass("active");
-        $(this).addClass("active");
-        $(".content-blk").hide();
-        var s = $(this).attr("id");
-        $("." + s).show();
+    $("#article").click(function () {
+        // var x_old_nav=$(".x-old-nav");
+        // x_old_nav.removeClass("active");
+        // x_old_nav.removeClass("x-old-nav");
+       $("#notice").removeClass("in active");
+
+
+
+        // $(".content-blk").hide();
+        // var s = $(this).attr("id");
+        // $("." + s).show();
     });
 
     $("#articleBack").click(articleUpdate);
@@ -317,7 +323,6 @@ function showSecondComment() {
                 tmp.find(".post-comment-btn").click(add_second_comment_second);
                 if(x.re_user_name!="0") {
                     tmp.find(".x-re-name").html(x.re_user_name);
-                    console.log(x.re_user_name);
                 }
                 else {
                     tmp.find(".x-response").html("");
@@ -348,7 +353,7 @@ function showSecondComment() {
 
     });
     $(this).text("收起评论");
-    $(this).click(withdraw_second_comment);
+    $(this).one("click",withdraw_second_comment);
 
 }
 
@@ -357,7 +362,7 @@ function withdraw_second_comment() {
     
     $(this).parents(".posts-list-item").find(".post-comments-area").hide()
     $(this).text("评论");
-    $(this).click(showSecondComment);
+    $(this).one("click",showSecondComment);
 }
 
 

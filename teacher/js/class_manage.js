@@ -17,10 +17,10 @@ var user_id="3140102222";
 
 window.onload = function() { //在前端存_id的值
     $(".c-course-id").attr("value",course_id);
-}
+};
 window.onload = function() { //在前端存_id的值
     $(".c-class-id").attr("value",class_id);
-}
+};
 
 
 
