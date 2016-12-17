@@ -74,6 +74,7 @@
 		$content=$_POST['content'];
 		$ofloor=(int)$_POST['floor'];
 		$reid=$_POST['id_be_re'];
+		$rf=(int)$_POST['floor_be_re'];
 		//$uid=$_SESSION['user'];
 		$uid='3140103333';
 		//$topic_id=1;
@@ -84,6 +85,10 @@
 		$datetime=date('Y-m-d H:i:s');
 		$state=0;
 		$msg='发表成功！';
+
+		if($rd==0){
+			$reid='0';
+		}
 
 		/*if($reid=='0'){
 			$result=$conn->query('select * from response_table where topic_id='.$topic_id.' and floor='.$ofloor.' order by floor DESC;');
