@@ -86,10 +86,12 @@
 		$msg='发表成功！';
 		$result=$conn->query('select * from re_response_table where topic_id='.$topic_id.' and floor='.$ofloor.' order by floor DESC;');
 		$row=mysqli_fetch_assoc($result);
-		$floor=(int)$row['re_floor'];
+		$floor=0;
+		if($row!=null)
+			$floor=(int)$row['re_floor'];
 		$floor++;
 		$result=$conn->query('insert into re_response_table values('.$topic_id.',"'.$uid.'","'.$datetime.'","'.$content.'",'.$ofloor.','.$floor.',"'.$reid.'");');
-		$row=mysqli_fetch_assoc($result);
+		//$row=mysqli_fetch_assoc($result);
 		if($result==null){
 			$state=1;
 			$msg='发表失败！';
