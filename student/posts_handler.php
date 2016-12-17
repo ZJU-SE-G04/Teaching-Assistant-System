@@ -84,12 +84,21 @@
 		$datetime=date('Y-m-d H:i:s');
 		$state=0;
 		$msg='发表成功！';
+
+		if($re_id=='0'){
+			$result=$conn->query('select * from response_table where topic_id='.$topic_id.' and floor='.$ofloor.' order by floor DESC;');
+			$row=mysqli_fetch_assoc($result);
+			$re_id=$row['id'];
+		}
+
 		$result=$conn->query('select * from re_response_table where topic_id='.$topic_id.' and floor='.$ofloor.' order by floor DESC;');
 		$row=mysqli_fetch_assoc($result);
+
 		$floor=0;
 		if($row!=null)
 			$floor=(int)$row['re_floor'];
 		$floor++;
+
 		$result=$conn->query('insert into re_response_table values('.$topic_id.',"'.$uid.'","'.$datetime.'","'.$content.'",'.$ofloor.','.$floor.',"'.$reid.'");');
 		//$row=mysqli_fetch_assoc($result);
 		if($result==null){
