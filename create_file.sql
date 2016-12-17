@@ -322,3 +322,12 @@ create table words_table(
 	content varchar(300),
 	primary key(id)
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+	
+#个人通知
+create table private_msg_table(
+	id varchar(10),#账号
+	content varchar(300),#内容
+	state int,#0未读，1已读
+	time datetime,#收到评论的时间
+	constraint foreign key (id) references user_table(id) on delete cascade on update cascade
+	)ENGINE=InnoDB DEFAULT CHARSET=utf8;

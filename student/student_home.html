@@ -89,6 +89,9 @@
                 </form>
             </div>
             <div id="create_team_pane" class="tab-pane">
+                <div id="you_have_joined_team">
+                    <p class="alert alert-info">你已经加入队伍<a class="alert-link" style="margin-left: 3px">妖精的尾巴</a></p>
+                </div>
                 <form action="create_team.php" method="post" id="create_team_form">
                     <div id="team_name_field" class="form-field">
                         <div class="field-label-margin">
@@ -134,6 +137,8 @@
             </div>
             <div id="join_team_pane" class="tab-pane">
 
+                <div id="have_joined_team_pane">
+                </div>
                 <div id="join_team_by_apply_pane">
                     <div class="f-prompt">
                         <span>已知团队名和密码？</span><a href="#" id="direct_join_team_link">直接加入</a>
@@ -190,7 +195,7 @@
                                 <em class="f-sign">*</em>
                                 <span class="inline">请输入团队名</span>
                             </div>
-                            <input type="text" name="teamName" required >
+                            <input type="text" name="teamName" required>
                         </div>
                         <div class="form-field">
                             <div class="field-label-margin">
@@ -204,24 +209,24 @@
                 </div>
             </div>
             <div id="deal_with_team_apply_pane" class="tab-pane">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <span><a>张翼德</a>&nbsp;&nbsp;申请加入队伍</span>
-                        <div class="right">
-                            <a href="">同意</a>&nbsp;
-                            <a href="#">拒绝</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        <span> <a>高圆圆</a>&nbsp;&nbsp;申请加入队伍 </span>
-                        <div class="right">
-                            <a href="">同意</a>&nbsp;
-                            <a href="#">拒绝</a>
-                        </div>
-                    </div>
-                </div>
+                <!--<div class="panel panel-default">-->
+                    <!--<div class="panel-body">-->
+                        <!--<span><a>张翼德</a>&nbsp;&nbsp;申请加入队伍</span>-->
+                        <!--<div class="right">-->
+                            <!--<a href="">同意</a>&nbsp;-->
+                            <!--<a href="#">拒绝</a>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
+                <!--<div class="panel panel-default">-->
+                    <!--<div class="panel-body">-->
+                        <!--<span> <a>高圆圆</a>&nbsp;&nbsp;申请加入队伍 </span>-->
+                        <!--<div class="right">-->
+                            <!--<a href="">同意</a>&nbsp;-->
+                            <!--<a href="#">拒绝</a>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
             </div>
             <div id="notice_pane" class="tab-pane in active">
                 <div class="alert alert-info">
@@ -235,8 +240,9 @@
 
 <script src="../jquery/jquery-3.1.1.js"></script>
 <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
-<script src="http://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+
+<script src="../js/jquery-validation-1.14.0_dist_jquery.validate.js"></script>
+<script src="../js/jquery-validation-1.14.0_dist_localization_messages_zh.js"></script>
 <script src="../js/student_home.js"></script>
 
 
