@@ -195,7 +195,7 @@ $(document).ready(
                     border_type = 2;
                     break;
                 case "所有板块":
-                    border_type = "a";
+                    border_type = 3;
                     break;
             }
             fetch_border_posts(border_name, border_type, 0, POSTNUM_PER_PAGE, search_content);
@@ -232,7 +232,7 @@ $(document).ready(
 
                                     $(".post-detail").attr("topic_id", post_id);
                                     $(".post-detail>.f-post-title").text(result['title']);
-                                    $(".post-detail>.f-post-content").append($("<p></p>").text(result['content']));
+                                    $(".post-detail>.f-post-content").html(result['content']);
                                     $(".post-detail-btm>.f-post-author").text(result['publisher']);
                                     $(".post-detail-btm>.f-post-date").text(result['datetime']);
                                 }
@@ -243,9 +243,9 @@ $(document).ready(
                                 success: function (results) {
                                     $(".re-list-ul").children().remove();   //清空原有的内容
                                     // var topic_id = $(".post-detail").attr("title");
+                                    $(".f-re-num").text("共" + results.length + "回复");    //获取评论数量
                                     for (var i = 0; i < results.length; i++) {
                                         result = results[i];
-                                        $(".f-re-num").text("共" + results.length + "回复");    //获取评论数量
                                         var re_item_content_ele = $("<div class='re-item-content'></div>").text(result['content']);
                                         var re_item_nick = $("<span class='my-blue inline re-username' style='margin-right: 0.5em' ></span>").text(result['username']);
                                         var re_item_date = $("<span class='f-post-date' style='margin-left: 0.5em'></span>").text(result['time']);
@@ -280,7 +280,7 @@ $(document).ready(
 
                                                     })
                                                 }
-                                            })
+                                            });
                                             $(this).parent().next().append(comment_form);
                                         });
                                         var re_item_btm = $("<div class='re-item-btm'></div>").append(re_item_nick).append("|").append(re_item_date).append(re_comment_btn);
@@ -457,10 +457,10 @@ $(document).ready(
 
                 var ueContent = UE.getEditor('submitPost_editor').getContent();
                 if(ueContent === "") return;
-                $.post("getUEditorContent.php", {
+                $.post("posts_handler.php?action=submitPost", {
+                    border_type: border_name,
                     title: title,
-                    border: border_name,
-                    postContent: ueContent
+                    content: ueContent
                 }, function (result, status) {
                     // alert(result);
                     $("#test_div").html(result);
@@ -468,6 +468,23 @@ $(document).ready(
             }
         });
 
+        /****************************************发布一级回复*************************************/
+        $("#submit_re_btn").click(function () {
+            var editor = UE.getEditor("submitRe_editor");
+            var content = editor.getContent();
+            if(content == "") {
+                alert("回复内容不能为空");
+                return;
+            }
+            var topic_id = $(this).parent().parent().children(".post-detail").attr("topic_id");
+
+            $.post("posts_handler.php?action=submitRe", {
+                topic_id: topic_id,
+                content: content
+            }, function (data, status) {
+                alert(data['msg']);
+            })
+        })
         $("#select_posts_catagory li").click(function () {
             $("#sel_post_catagory_ddMenu div").text($(this).text());
         })

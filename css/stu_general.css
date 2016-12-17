@@ -29,6 +29,9 @@ a, button {
     font-family: "Arial", "Hiragino Sans GB", "Microsoft YaHei", 微软雅黑, "Helvetica", "sans-serif";
 }
 
+.f-info {
+    font-size: 20px;
+}
 .error {
     color: red;
 }
