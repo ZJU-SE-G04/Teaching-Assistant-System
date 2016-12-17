@@ -229,7 +229,7 @@ function articleShow() {
                 tmp.find(".x-name").html(x.user_name);
                 tmp.find(".x-time").html(x.time);
                 tmp.find(".x-content").html(x.content);
-                tmp.find(".x-comment").click(showSecondComment);
+                tmp.find(".x-comment").one("click",showSecondComment);
                 tmp.find(".post-comments-area").hide();
 
                 if(user_id!=x.id){
@@ -359,12 +359,16 @@ function showSecondComment() {
 
 //--------收起二级回复--------
 function withdraw_second_comment() {
-    
-    $(this).parents(".posts-list-item").find(".post-comments-area").hide()
+    $(this).parents(".posts-list-item").find(".post-comments-area").hide();
+    $(this).one("click",re_show_second_comment);
     $(this).text("评论");
-    $(this).one("click",showSecondComment);
 }
-
+//---------收起后重新显示二级回复------
+function re_show_second_comment() {
+    $(this).parents(".posts-list-item").find(".post-comments-area").show()
+    $(this).one("click",withdraw_second_comment);
+    $(this).text("收起评论");
+}
 
 //---------删除一个楼中楼回复,实现局部刷新-------------
 function deleteSecondComment() {
@@ -504,7 +508,7 @@ function  add_comment() {
     tmp.find(".x-name").html(user_name);
     tmp.find(".x-time").html(current_time);
     tmp.find(".x-content").html(content);
-    tmp.find(".x-comment").click(showSecondComment);
+    tmp.find(".x-comment").one("click",showSecondComment);
     tmp.find(".post-comments-area").hide();
     tmp.find(".glyphicon").click(deleteComment);
 
