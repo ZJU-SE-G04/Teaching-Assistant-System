@@ -1,6 +1,6 @@
 <?php
 	$action=$_GET["action"];//获取行为
-	//$action="submitPost";
+	//$action="submitRe";
 	if($action=='fetchAll'){
 		fetchAll();
 	}else if($action=='fetchDetail'){
@@ -106,9 +106,9 @@
 		$topic_id=(int)$_POST['topic_id'];
 		$content=htmlspecialchars(stripcslashes($_POST['content']));
 		//$uid=$_SESSION['user'];
-		$uid='3140102222';
-		//$topic_id=1;
-		//$content='顶楼主';
+		$uid='3140103333';
+		//$topic_id=8;
+		//$content=htmlspecialchars(stripcslashes('<p><span style="text-decoration: underline;"><strong>要画出用例之间的include关系</strong></span><br/></p>'));
 		$datetime=date('Y-m-d H:i:s');
 		$state=0;
 		$msg='发表成功！';
@@ -118,8 +118,8 @@
 		if($row!=null)
 			$floor=(int)$row['floor'];
 		$floor++;
+		//echo 'insert into response_table values('.$topic_id.',"'.$uid.'","'.$datetime.'","'.$content.'",'.$floor.');';
 		$result=$conn->query('insert into response_table values('.$topic_id.',"'.$uid.'","'.$datetime.'","'.$content.'",'.$floor.');');
-		$row=mysqli_fetch_assoc($result);
 		if($result==null){
 			$state=1;
 			$msg='发表失败！';
