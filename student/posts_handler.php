@@ -1,6 +1,6 @@
 <?php
-	//$action=$_GET["action"];//获取行为
-	$action="submitReRe";
+	$action=$_GET["action"];//获取行为
+	//$action="submitReRe";
 	if($action=='fetchAll'){
 		fetchAll();
 	}else if($action=='fetchDetail'){
@@ -70,16 +70,16 @@
 //提交二级回复
 	function submitReRe(){
 		include 'connect.php';
-		//$topic_id=(int)$_POST['topic_id'];
-		//$content=$_POST['content'];
-		//$ofloor=(int)$_POST['floor'];
-		//$reid=$_POST['id_be_re'];
+		$topic_id=(int)$_POST['topic_id'];
+		$content=$_POST['content'];
+		$ofloor=(int)$_POST['floor'];
+		$reid=$_POST['id_be_re'];
 		//$uid=$_SESSION['user'];
 		$uid='3140103333';
-		$topic_id=1;
-		$content='层主说得对';
-		$reid='0';
-		$ofloor=4;
+		//$topic_id=1;
+		//$content='层主说得对';
+		//$reid='0';
+		//$ofloor=4;
 
 		$datetime=date('Y-m-d H:i:s');
 		$state=0;
