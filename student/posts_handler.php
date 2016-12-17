@@ -104,7 +104,6 @@
 		include 'connect.php';
 		error_reporting(E_ERROR|E_WARNING);
 		$topic_id=(int)$_POST['topic_id'];
-		$content=$_POST['content'];
 		$content=htmlspecialchars(stripcslashes($_POST['content']));
 		//$uid=$_SESSION['user'];
 		$uid='3140102222';
