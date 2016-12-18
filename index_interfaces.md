@@ -33,5 +33,14 @@
         </td>
         <td>true/false</td>
     </tr>
+    <tr>
+        <td>退出登录</td>
+        <td>index.php</td>
+        <td>
+            action=logout, <br>
+            user_id=xxx, <br>
+        </td>
+        <td>true/false</td>
+    </tr>
     </tbody>
 </table>

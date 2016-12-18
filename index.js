@@ -41,7 +41,7 @@ function login() {
             }
             else {
                 isLogin = false;
-                document.cookie = null;
+                document.cookie = "";
                 // $.cookie('user_id', null);
                 alert("账户或密码不正确");
                 logged();
@@ -51,14 +51,26 @@ function login() {
 
 }
 
+function logout() {
+    document.cookie = "";
+    isLogin = false;
+    $.post("index.php",
+        {action: "logout", user_id: user_id},
+        function (status) {
+            location.reload();
+        }
+    );
+}
+
 
 function init() {
     // document.cookie = null;
     // alert("init begins");
     user_id = document.cookie;
-    if (user_id == "null") {
+    if (user_id == "") {
         // alert("cookie is null");
         isLogin = false;
+        logged();
     }
     else {
         // alert(user_id);
@@ -74,7 +86,7 @@ function init() {
                 }
                 else {
                     isLogin = false;
-                    document.cookie = null;
+                    document.cookie = "";
                     // $.cookie('user_id', null);
                     logged();
                 }
