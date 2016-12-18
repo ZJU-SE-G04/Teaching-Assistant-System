@@ -46,11 +46,11 @@
 |删除一条一级评论区内容|delete_comment.php?article_id=xxx&floor=xxx|成功:{"if_success":1,"error_message":"null"},失败成功:{"if_success":0,"error_message":"xxx"}|失败要有具体错误信息,成功或失败返回的是整数1或0|是
 |添加一条二级回复|add_second_comment.php?article_id=xxx&id=xxx&time=xxx&content=xxx&floor=xxx&re_id=xxx|成功:{"if_success":1,"error_message":"null"},失败成功:{"if_success":0,"error_message":"xxx"}|!!!为了方便局部刷新,这里的时间由前段获取,后端不必重复获取;前端re_floor不方便获取,希望后端根据当前最大楼中楼楼层号+1生成;如果没有被回复人,re_id为'0'(字符'0')|是
 |添加一条一级回复|add_comment.php?article_id=xxx&id=xxx&time=xxx&content=xxx|成功:{"if_success":1,"error_message":"null"},失败成功:{"if_success":0,"error_message":"xxx"}|!!!为了方便局部刷新,这里的时间由前段获取,后端不必重复获取;前端floor不方便获取,希望后端根据当前最大楼层号+1生成;|是
-|搜索文章标题显示符合要求的文章列表|show_article_list.php?lesson_id=xxx&&needed_title=xxx|[{"article_id":"xxx","title":"xxx","id":"xxx","user_name":"xxx","short_content":"xxx","time":"xxx"}{"article_id":"xxx","title":"xxx","id":"xxx","user_name":"xxx","short_content":"xxx","time":"xxx"}...]|前端要做到代码重用,id是发布人账号，short_content是文章内容前140个字符,user_name是作者姓名|否
+|搜索文章标题显示符合要求的文章列表|show_article_list.php?lesson_id=xxx&&needed_title=xxx|[{"article_id":"xxx","title":"xxx","id":"xxx","user_name":"xxx","short_content":"xxx","time":"xxx"}{"article_id":"xxx","title":"xxx","id":"xxx","user_name":"xxx","short_content":"xxx","time":"xxx"}...]|前端要做到代码重用,id是发布人账号，short_content是文章内容前140个字符,user_name是作者姓名|是
 
 
 ### To be continued……
 - 其余尚未完成或者还未定型
-
+&#10004;
 ···
 
