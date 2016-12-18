@@ -1,6 +1,6 @@
 <?php
 	include 'connect.php';
-
+	error_reporting(E_ERROR|E_WARNING);
 
 	$su=1;
 	$erm='null';
@@ -16,6 +16,8 @@
 			break;
 		}
 		$content=$_GET['content'];
+		$content=htmlspecialchars(stripcslashes($content));
+		
 		//$content='时间应该是对的';
 		if($content==null){
 			$su=0;

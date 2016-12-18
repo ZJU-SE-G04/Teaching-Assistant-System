@@ -1,5 +1,6 @@
 <?php
 	include 'connect.php';
+	error_reporting(E_ERROR|E_WARNING);
 	$article_id=(int)$_GET['article_id'];
 	//$article_id=2;
 
@@ -7,7 +8,7 @@
 	$row=mysqli_fetch_assoc($result);
 	$arr = [];
 	//获取文章内容
-	$arr['article_content']=$row['content'];
+	$arr['article_content']=htmlspecialchars_decode($row['content']);
 	//获取评论数量
 	$result=$conn->query("select count(*) from comment_table where article_id=".$article_id.";");
 	$row=mysqli_fetch_assoc($result);
