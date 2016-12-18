@@ -14,23 +14,8 @@ $(document).ready(function(){
         $("." + s).show();
     });
 
-/*    $("input").focus(function () {
-        $(".edui-editor:visible").hide()
-        $(".editor:hidden").show()
-        if ($(this).hasClass("editor")) {
-            $(this).hide()
-            $(this).next().find(".edui-editor").show()
-        }
-    })
-    $(".ueEditor").each(function () {
-        var ueEditor = UE.getEditor($(this).attr("id"))
-        var input = $(this).prev()
-        ueEditor.addListener("contentChange", function () {
-            input.attr("value", this.getContent())
-        })
-    })*/
 
-//////////////////////////////////////////////////////
+//message//////////////////////////////////////////////////////////////////////////////////////////////////
     var messageRecords = [
         {
             "message_id": 32415312,
@@ -85,7 +70,7 @@ $(document).ready(function(){
     }
 
 
-//////////////////////////////////////////////////////
+//article//////////////////////////////////////////////////////////////////////////////////////////////////
     var articleRecords = [
         {
             "articleId": 123456789,
@@ -106,7 +91,7 @@ $(document).ready(function(){
             "title": "Java之JDK环境配置过程（图）",
             "articleDigest": "1、在Windows7操作系统下，右键，点击属性，会出现如下界面 2、选择“高级系统设置”，如下 3、接着点击“环境变量”按钮，会出现如下图： 4、找到系统变量，点击“新建”按钮，这时会弹出一个窗口，分别在变量名和变量值框中填入：JAVA_HOME和JDK的路径C:\Program Files\Java\jdk1.7.0_05，点击“确定”；... ",
             "time": "2013-06-09 10:12",
-            "commentCnt": 9
+            "commentCnt": 97
         },
     ];
     /*
@@ -138,7 +123,7 @@ $(document).ready(function(){
     }
     $("#article").click(articleUpdate);
 
-////////////////////////////
+//////////////////////////////
     var articleDetail = {
         "articleId": 1594234,
         "title": "redis和memcache的区别",
@@ -158,6 +143,9 @@ $(document).ready(function(){
             articleDetail = JSON.parse(data);
         })
         */
+
+        $("#articleBack").click(articleUpdate);
+
         $("#articleDetail").find(".x-title").html(articleDetail.title);
         $("#articleDetail").find(".x-author").html(articleDetail.author);
         $("#articleDetail").find(".x-time").html(articleDetail.time);
@@ -165,26 +153,8 @@ $(document).ready(function(){
 
         showComments(articleDetail.articleId, 1);
 
-        var pageNum = Math.floor(commentCnt / 10);
-        initialPagination(pageCnt);
-
-/*        $("#commentLoop").children(".new").remove();
-        for (var i in articleDetail["comment"]) {
-            var x = articleDetail["comment"][i];
-            var tmp = $("#commentLoop").children(".old").clone().removeClass("old").addClass("new").show();
-
-            if (x.re_floor == 0)
-                tmp.find(".is-reply").hide();
-            tmp.find(".x-floor").html(x.floor);
-            tmp.find(".x-floorMaster").html(x.floorMaster);
-            tmp.find(".x-re_floor").html(x.re_floor);
-            tmp.find(".x-time").html(x.time);
-            var queryStr = "article_id="+x.article_id+"&floor="+x.floor;
-            tmp.find(".glyphicon-trash").attr("id", queryStr);
-            tmp.find(".x-content").html(x.content);
-            $("#commentLoop").append(tmp);
-        }
-        $("#commentLoop").find(".glyphicon-trash").click(deleteComment);*/
+        var pageCnt = Math.ceil(commentCnt / 10);
+        initialCommentPagination(articleId, pageCnt);
     }
 
     var pageComments = {
@@ -345,10 +315,84 @@ $(document).ready(function(){
         $(this).parents(".well").slideUp(function () { $(this).remove() });
     }
 
-    $("#articleBack").click(articleUpdate);
+/*    function initialCommentPagination(articleId, pageCnt) {
+        var pagination = $("#articleDetail").find(".pagination");
 
+        pagination.find(".new").remove();
+        for (var i=1; i<=pageCnt; i++) {
+            var tmp = pagination.find(".old").clone()
+                .removeClass("old").addClass("new");
+            tmp.children().html(i).click((function (i) {
+                    return function () {
+                        pagination.find(".active").removeClass("active");
+                        $(this).parent().addClass("active");
+                        pagination.find(".prevPage").removeClass("disabled");
+                        pagination.find(".nextPage").removeClass("disabled");
+                        showComments(articleId, i);
+                    }
+                })(i));
+            pagination.find(".nextPage").before(tmp);
+        }
 
-///////////////////////////////////////////////////////////////////////////////
+        if (pageCnt <= 5) {
+            pagination.find(".new").show();
+        }
+        else {
+            pagination.find(".new").each(function (index) {
+                if (index <= 3) {
+                    $(this).click(function () {
+                        pagination.find(".new:visible").hide();
+                        for (var i=1; i<=5; i++)
+                            pagination.find(".new:nth-of-type(i)").show();
+                    })
+                }
+                else if (index >= pageCnt-2) {
+                    $(this).click(function () {
+                        pagination.find(".new:vidible").hide();
+                        for (var i=pageCnt-4; i<=pageCnt; i++)
+                            pagination.find(".new:nth-of-type(i)").show();
+                    })
+                }
+                else {
+                    $(this).click(function () {
+                        pagination.find(".new:visible").hide();
+                        for (var i=index-2; i<=index+2; i++)
+                            pagination.find(".new:nth-of-type(i)").show();
+                    })
+                }
+            })
+        }
+
+        pagination.find(".new:first-of-type").click(function () {
+            pagination.find(".prevPage").addClass("disabled");
+        });
+        pagination.find(".new:last-of-type").click(function () {
+            pagination.find(".nextPage").addClass("disabled");
+        });
+    }*/
+    function initialCommentPagination(articleId, pageCnt) {
+        var pagination = $("#articleDetail").find(".pagination");
+        pagination.find(".x-pageNum").html(1);
+        pagination.find(".x-pageCnt").html(pageCnt);
+        pagination.find(".prevPage").click(function () {
+            var cur = pagination.find(".x-pageNum").html();
+            var cur = parseInt(cur);
+            if (cur >= 2) {
+                pagination.find(".x-pageNum").html(cur-1);
+                showComments(articleId, cur-1);
+            }
+        });
+        pagination.find(".nextPage").click(function () {
+            var cur = pagination.find(".x-pageNum").html();
+            var cur = parseInt(cur);
+            if(cur <= pageCnt-1) {
+                pagination.find(".x-pageNum").html(cur+1);
+                showComments(articleId, cur+1);
+            }
+        });
+    }
+
+//topic//////////////////////////////////////////////////////////////////////////////////////////////////
     var topicRecords = [
         {
             "topicId": 12312431,
@@ -400,7 +444,7 @@ $(document).ready(function(){
             tmp.find(".x-lesson").html(x.lesson);
             tmp.find(".x-kind").html(x.kind);
             tmp.find(".x-time").html(x.time);
-            tmp.find(".x-responseNum").html(x.responseNum);
+            tmp.find(".x-responseCnt").html(x.responseCnt);
             tmp.find(".panel-heading").click((function (topicId, responseCnt) {
                 return function () { topicShow(topicId, responseCnt); }
             })(x.topicId, x.responseCnt));
@@ -410,39 +454,14 @@ $(document).ready(function(){
     }
     $("#topic").click(topicUpdate);
 
-/////////////////
+//////////////////////////////
     var topicDetail = {
-        "topicId": 1224234,
         "title": "Vim cryptmethod uses SHA-256 for password-based key derivation",
         "author": "atopuncw",
         "content": "On L421-L423 of src/blowfish.c, a sha256_key() function is created for password-based key derivation with a salt for blowfish. Unfortunately, even with 1,000 rounds, SHA-256 is designed to be fast, and can be parallelized with GPUs when brute forcing a file. Instead, the Blowfish key should be derived using bcrypt or scrypt. Both defeat parallelization on GPUs, and scrypt further defeats FPGAs.",
         "lesson": "软件需求工程",
         "kind": "答疑",
         "time": "2014-03-22 10:34",
-        "responseNum": 32
-/*        response: [
-            {
-                "floor": 8,
-                "floorMaster": "小明",
-                "reFloor": 4,
-                "time": "2016-3-21 5:34",
-                "content": "Indeed. Bad recommendation on my part, although I wouldn't recommend Argon2 quite yet either. Scrypt seems to be the most fitting here."
-            },
-            {
-                "floor": 6,
-                "floorMaster": "小明",
-                "reFloor": 0,
-                "time": "2016-3-21 5:34",
-                "content": "Indeed. Bad recommendation on my part, although I wouldn't recommend Argon2 quite yet either. Scrypt seems to be the most fitting here."
-            },
-            {
-                "floor": 1,
-                "floorMaster": "小明",
-                "reFloor": 4,
-                "time": "2016-3-21 5:34",
-                "content": "Indeed. Bad recommendation on my part, although I wouldn't recommend Argon2 quite yet either. Scrypt seems to be the most fitting here."
-            },
-        ]*/
     }
 
     /*
@@ -454,7 +473,7 @@ $(document).ready(function(){
         $("#topicDetail").show();
 
         /*
-        $.get("getTopicDetail.php?topic_id=" + topicId, function (data) {
+        $.get("getTopicDetail.php?topicId=" + topicId, function (data) {
             topicDetail = JSON.parse(data);
         });
         */
@@ -468,33 +487,15 @@ $(document).ready(function(){
         topicDetailDiv.find(".x-lesson").html(topicDetail.lesson);
         topicDetailDiv.find(".x-kind").html(topicDetail.kind);
         topicDetailDiv.find(".x-time").html(topicDetail.time);
-        topicDetailDiv.find(".x-responseNum").html(topicDetail.responseNum);
+        topicDetailDiv.find(".x-responseCnt").html(responseCnt);
         topicDetailDiv.find(".glyphicon-trash").click(function () {
-            deleteTopic(this, topicDetail.topicId)
+            deleteTopic(this, topicId)
         });
 
         showResponses(topicDetail.topicId, 1);
 
-        var pageCnt = Math.floor(responseCnt / 10);
-        initialPagination(pageCnt);
-
-/*        var topicResponseDiv = $("#topicResponseLoop");
-        topicResponseDiv.find(".new").remove();
-        for (var i in topicDetail.response) {
-            var x = topicDetail.response[i];
-
-            var tmp = topicResponseDiv.find(".old").clone().removeClass("old").addClass("new").show();
-            tmp.find(".x-floor").html(x.floor);
-            tmp.find(".x-floorMaster").html(x.floorMaster);
-            if (x.reFloor == 0)
-                tmp.find(".is-reply").hide();
-            else
-                tmp.find(".x-reFloor").html(x.reFloor);
-            tmp.find(".x-time").html(x.time);
-            tmp.find(".x-content").html(x.content);
-            deleteResponse(tmp, topicDetail.topic.id, x.floor);
-            topicResponseDiv.append(tmp);
-        }*/
+        var pageCnt = Math.ceil(responseCnt / 10);
+        initialResponsePagination(topicId, pageCnt);
     }
 
     var pageResponses = {
@@ -659,17 +660,41 @@ $(document).ready(function(){
         $(this).parents(".well").slideUp(function () { $(this).remove() });
     }
 
-/////////////////////////////////////////////////////////////////////////////////////////////
+    function initialResponsePagination(topicId, pageCnt) {
+        var pagination = $("#topicDetail").find(".pagination");
+        pagination.find(".x-pageNum").html(1);
+        pagination.find(".x-pageCnt").html(pageCnt);
+        pagination.find(".prevPage").click(function () {
+            var cur = pagination.find(".x-pageNum").html();
+            var cur = parseInt(cur);
+            if (cur >= 2) {
+                pagination.find(".x-pageNum").html(cur-1);
+                showResponses(topicId, cur-1);
+            }
+        });
+        pagination.find(".nextPage").click(function () {
+            var cur = pagination.find(".x-pageNum").html();
+            var cur = parseInt(cur);
+            if(cur <= pageCnt-1) {
+                pagination.find(".x-pageNum").html(cur+1);
+                showResponses(topicId, cur+1);
+            }
+        });
+    }
+
+//class//////////////////////////////////////////////////////////////////////////////////////////////////
     $("#classForm").submit(function () {
         var data = {};
         data["lessonId"] = $("#lessonIdClass").val();
+        data["teacherId"] = $("#teacherIdClass").val();
         data["beginTime1"] = $("#beginTime1").val();
         data["beginTime2"] = $("#beginTime2").val();
-        data["lessonAddress"] = $("#lessonAddress").val();
+        data["lessonAddress1"] = $("#lessonAddress1").val();
+        data["lessonAddress2"] = $("#lessonAddress2").val();
         $.post("addClass.php", data);
     });
 
-/////////////////////////////////////////////////////////////////////////////////////////////
+//teacher//////////////////////////////////////////////////////////////////////////////////////////////////
     var teacherIntroductionEditor = UE.getEditor("teacherIntroductionEditor", {
         initialFrameHeight:500,
         // isShow: false
@@ -683,7 +708,7 @@ $(document).ready(function(){
         $.post("addTeacher.php", data)
     })
 
-/////////////////////////////////////////////////////////////////////////////////////////////
+//lesson//////////////////////////////////////////////////////////////////////////////////////////////////
     $("input").focus(function () {
         $(".edui-editor:visible").hide()
         $(".editor:hidden").show()
@@ -736,7 +761,7 @@ $(document).ready(function(){
         $.post("addLesson.php", data)
     })
 
-/////////////////////////////////////////////////////////////////////////////////////////////
+//link//////////////////////////////////////////////////////////////////////////////////////////////////
     $("#link").click(linkUpdate)
 
     $("#linkForm").submit(function () {
@@ -801,7 +826,7 @@ $(document).ready(function(){
         })
     }
 
-/////////////////////////////////////////////////////////////////////////////////////////////
+//update//////////////////////////////////////////////////////////////////////////////////////////////////
     var updateInfoEditor = UE.getEditor("updateInfoEditor", {
         initialFrameHeight:200,
     })
