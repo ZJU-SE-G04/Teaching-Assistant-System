@@ -11,11 +11,13 @@
 	}
 
 	function isLogin(){
-		$uid=$_SESSION['user'];
-		if($uid==null)
-			echo false;
+		if(isset($_SESSION['user']))
+			if($_SESSION['user']==null)
+				echo false;
+			else
+				echo true;
 		else
-			echo true;
+			echo false;
 	}
 	function login(){
 		$uid=$_POST['user_id'];
