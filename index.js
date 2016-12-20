@@ -29,10 +29,12 @@ function login() {
         {action: "login", user_id: id, password: password},
         function (status) {
             if (status) {
+                // alert(status);
                 $.cookie('user_name', status);
                 isLogin = true;
                 $.cookie('user_id', id);
                 user_id = id;
+                user_name = status;
                 logged();
                 location.reload();
             }
