@@ -1,13 +1,41 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Rexxar
- * Date: 2016/12/18
- * Time: 16:28
- * 
- * ⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠⚠
- * 这部分代码是我测试用的
- * 你用的时候请注释掉
- */
+	include 'connect.php';
+	session_start();
+	$action=$_POST['action'];
+	//$action='login';
+	if($action=='isLogin'){
+		isLogin();
+	}else if($action=='login'){
+		login();
+	}else if($action=='logout'){
+		logout();
+	}
 
-echo true;
+	function isLogin(){
+		$uid=$_SESSION['user'];
+		if($uid==null)
+			echo false;
+		else
+			echo true;
+	}
+	function login(){
+		$uid=$_POST['user_id'];
+		$pwd=$_POST['password'];
+		//$uid='111111';
+		//$pwd='11111';
+		//echo 'select * from user_table where id="'.$uid.'" and pasword="'.$pwd.'";';
+		$result=$conn->query('select * from user_table where id="'.$uid.'" and password="'.$pwd.'";');
+		$row=mysqli_fetch_assoc($result);
+		if($row==null){
+			echo false;
+		}
+		else{
+			$_SESSION['user']=$uid;
+			echo true;
+		}
+	}
+	function logout(){
+		$_SESSION['user']=null;
+		echo true;
+	}
+?>
