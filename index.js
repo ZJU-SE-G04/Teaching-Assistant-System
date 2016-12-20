@@ -2,16 +2,17 @@
  * Created by Rexxar on 2016/12/14.
  */
 var isLogin;
-var user_id;
+var user_id, user_name;
 
 function logged() {
     if (isLogin) {
+        user_name = $.cookie('user_name');
         document.getElementById("register").style.display = "none";
         document.getElementById("login").style.display = "none";
         document.getElementById("info").style.display = "inline";
 
         var a = document.getElementById("hello");
-        a.innerHTML = '你好，' + user_id + ' <span class="caret"></span>';
+        a.innerHTML = '你好，' + user_name + ' <span class="caret"></span>';
     }
     else {
         document.getElementById("register").style.display = "inline";
@@ -27,22 +28,17 @@ function login() {
     $.post("index.php",
         {action: "login", user_id: id, password: password},
         function (status) {
-            // alert("this is login, status = " + status);
             if (status) {
-                // alert("status is true");
+                $.cookie('user_name', status);
                 isLogin = true;
-                // alert(id);
-                // document.cookie = "user_id = " + id + ";";
-                document.cookie = id;
+                $.cookie('user_id', id);
                 user_id = id;
-                // alert("cookie: " + document.cookie);
                 logged();
                 location.reload();
             }
             else {
                 isLogin = false;
-                document.cookie = "";
-                // $.cookie('user_id', null);
+                $.cookie('user_id', null);
                 alert("账户或密码不正确");
                 logged();
             }
@@ -52,7 +48,7 @@ function login() {
 }
 
 function logout() {
-    document.cookie = "";
+    $.cookie('user_id', null);
     isLogin = false;
     $.post("index.php",
         {action: "logout", user_id: user_id},
@@ -64,30 +60,22 @@ function logout() {
 
 
 function init() {
-    // document.cookie = null;
-    // alert("init begins");
-    user_id = document.cookie;
-    if (user_id == "") {
-        // alert("cookie is null");
+    user_id = $.cookie('user_id');
+    if (user_id == "null") {
         isLogin = false;
         logged();
     }
     else {
-        // alert(user_id);
         $.post("index.php",
             {action: "isLogin", user_id: user_id},
             function (status) {
-                // alert("log status is " + status);
                 if (status) {
                     isLogin = true;
-                    document.cookie = user_id;
-                    // $.cookie('user_id', user_id);
                     logged();
                 }
                 else {
                     isLogin = false;
-                    document.cookie = "";
-                    // $.cookie('user_id', null);
+                    $.cookie('user_id', null);
                     logged();
                 }
             }
