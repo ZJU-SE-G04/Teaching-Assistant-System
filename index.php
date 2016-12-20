@@ -1,5 +1,4 @@
 <?php
-	include 'connect.php';
 	session_start();
 	$action=$_POST['action'];
 	//$action='login';
@@ -22,8 +21,9 @@
 		$uid=$_POST['user_id'];
 		$pwd=$_POST['password'];
 		//$uid='111111';
-		//$pwd='11111';
+		//$pwd='1111';
 		//echo 'select * from user_table where id="'.$uid.'" and pasword="'.$pwd.'";';
+		include 'connect.php';
 		$result=$conn->query('select * from user_table where id="'.$uid.'" and password="'.$pwd.'";');
 		$row=mysqli_fetch_assoc($result);
 		if($row==null){
