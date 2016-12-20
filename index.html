@@ -17,8 +17,9 @@
     <script src="jquery/jquery-3.1.1.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <script src="bootstrap-3.3.7-dist/js/npm.js"></script>
+    <script src="jquery/jquery.cookie.js"></script>
 
-    <script src="login_and_logout.js"></script>
+    <script src="index.js"></script>
 </head>
 <body>
 
@@ -102,13 +103,13 @@
 
 
                 <li id="info" class="dropdown" style="display: none;">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
+                    <a id="hello" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
                        aria-expanded="false">你好，谢俊西 <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li style="margin-top: 2mm;"><a href="#">我的课程</a></li>
                         <li><a href="#">设置</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#">退出</a></li>
+                        <li><a onclick="logout()">退出</a></li>
                     </ul>
                 </li>
             </ul>
