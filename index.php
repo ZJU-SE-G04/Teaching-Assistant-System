@@ -33,7 +33,7 @@
 		}
 		else{
 			$_SESSION['user']=$uid;
-			echo true;
+			echo $row['user_name'];
 		}
 	}
 	function logout(){
