@@ -25,7 +25,7 @@ function login() {
     var password = document.getElementById("password").value;
 
     $.post("index.php",
-        {action: "login", user_id: "John", password: "xxx"},
+        {action: "login", user_id: id, password: password},
         function (status) {
             // alert("this is login, status = " + status);
             if (status) {
