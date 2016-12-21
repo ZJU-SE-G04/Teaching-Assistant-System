@@ -5,7 +5,7 @@
 $(document).ready(
     function () {
 
-        
+
 
         //课件资料页面改变下拉列表项的箭头
         $(".titleBox").click(function () {
@@ -27,7 +27,7 @@ $(document).ready(
                     $("#courseware_nonpreview_area").show();
                     $("#courseware_pane .courseware_list").html("");
                     $("video").remove();
-                    for(var i = 0; i < result.length; i++) {
+                    for (var i = 0; i < result.length; i++) {
                         var item = result[i];
                         var item_kind = item["courseware_kind"];
                         var list_ele;
@@ -58,7 +58,7 @@ $(document).ready(
                         var preview_link = $("<a></a>").text(item['courseware_name']);
 
                         //如果是视频
-                        if(item_kind === "教学视频") {
+                        if (item_kind === "教学视频") {
                             preview_link.click(function () {
                                 var video_area = $("<video id='my-video' class='video-js' controls preload='auto' width='1280' height='528' data-setup='{}'></video>");
                                 video_area.css("width", 800).css("height", "450");
@@ -71,7 +71,7 @@ $(document).ready(
                             })
                         }
                         //如果是ppt
-                        if(item_kind == "课件") {
+                        if (item_kind == "课件") {
                             preview_link
                             //TODO
                         }
@@ -89,10 +89,5 @@ $(document).ready(
             });
             $(".courseware_list").hide();
         });
-        $("#choose_posts_catagory ul li a").click(function () {
-            $("#posts_catagory_ddMenu div").html($(this).html());
-        });
-
-
     }
 );

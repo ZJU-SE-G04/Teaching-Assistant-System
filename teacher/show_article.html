@@ -53,6 +53,7 @@
                 <li class="tab-style"><a href="#report" data-toggle="tab" onclick="correctReport()">报告与文档</a></li>
                 <!--<li class="tab-style"><a href="#correct_report" data-toggle="tab">批改实验报告</a></li>-->
                 <li class="tab-style"><a href="#exercise" data-toggle="tab">发布作业</a></li>
+                <li class="tab-style active"><a href="#discuss_area_pane" data-toggle="tab">讨论区</a></li>
                 <li class="tab-style"><a href="#class" data-toggle="tab" onclick="show_class()">班级信息管理</a></li>
                 <li class="tab-style"><a href="#stuInfo" data-toggle="tab" onclick="showStuInfo()">学生信息</a></li>
                 <li class="tab-style"><a href="#TAInfo" data-toggle="tab" id="TA" onclick="showTAInfo()">助教信息</a></li>
@@ -88,13 +89,16 @@
             <div id="article" class="tab-pane">
                 <div class="row">
                     <div class="col-md-9">
-                <div class="input-group">
-                    <input type="text" class="form-control input-lg"><span class="input-group-addon btn btn-primary" onclick="search_article(this)">搜索</span>
-                </div></div>
-                <div class="col-md-3 right">
-                    <button class='btn btn-primary' id='write_article_button' onclick="showWriteArticle()">撰写文章</button>
-                </div>
+                        <div class="input-group">
+                            <input type="text" class="form-control input-lg"><span
+                                class="input-group-addon btn btn-primary" onclick="search_article(this)">搜索</span>
+                        </div>
                     </div>
+                    <div class="col-md-3 right">
+                        <button class='btn btn-primary' id='write_article_button' onclick="showWriteArticle()">撰写文章
+                        </button>
+                    </div>
+                </div>
                 <div class="panel-group" style="padding-top:35px" id="articleLoop">
                     <div class="panel panel-default old w3-hover-shadow ">  <!--loop start-->
                         <div class="panel-heading w3-hover-grey clickable">
@@ -219,11 +223,11 @@
                     <!-- 加载编辑器的容器 -->
                     <div>
                         <script id="container_write" name="content" type="text/plain" style="height:700px">
-                                </script>
+                        </script>
                         <!-- 配置文件 -->
                         <!-- 实例化编辑器 -->
                         <script type="text/javascript">
-                            var ue= UE.getEditor('container_write');
+                            var ue = UE.getEditor('container_write');
                         </script>
                     </div>
                     <div class="row">
@@ -324,100 +328,100 @@
             </div>
             <div id="report" class="tab-pane">
                 <div id="report_main">
-                <form action="http://www.baidu.com" class="form-horizontal">
-                    <div class="">
-                        <h3 class="page-header">发布新实验报告</h3>
-                    </div>
-                    <div class="form-group">
-                        <label for="id" class="col-sm-2 control-label margin-left--10">实验报告编号</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="id" placeholder="输入实验报告编号">
+                    <form action="http://www.baidu.com" class="form-horizontal">
+                        <div class="">
+                            <h3 class="page-header">发布新实验报告</h3>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="name" class="col-sm-2 control-label margin-left--10">实验报告名称</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="name" placeholder="输入实验报告名称">
+                        <div class="form-group">
+                            <label for="id" class="col-sm-2 control-label margin-left--10">实验报告编号</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="id" placeholder="输入实验报告编号">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="deadline" class="col-sm-2 control-label margin-left--10">截止日期</label>
-                        <div class="col-sm-3">
-                            <input type="date" class="form-control" id="deadline">
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label margin-left--10">实验报告名称</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="name" placeholder="输入实验报告名称">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="detail" class="col-sm-2 control-label margin-left--10">详细信息</label>
-                        <div class="col-sm-9">
+                        <div class="form-group">
+                            <label for="deadline" class="col-sm-2 control-label margin-left--10">截止日期</label>
+                            <div class="col-sm-3">
+                                <input type="date" class="form-control" id="deadline">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="detail" class="col-sm-2 control-label margin-left--10">详细信息</label>
+                            <div class="col-sm-9">
                             <textarea name="detail" id="detail" rows="3" class="form-control"
                                       placeholder="输入详细信息"></textarea>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="fileTemplate" class="col-sm-2 control-label margin-left--10">实验报告模板</label>
-                        <div class="col-sm-9">
-                            <input style="margin-top: 1mm;" type="file" id="fileTemplate">
+                        <div class="form-group">
+                            <label for="fileTemplate" class="col-sm-2 control-label margin-left--10">实验报告模板</label>
+                            <div class="col-sm-9">
+                                <input style="margin-top: 1mm;" type="file" id="fileTemplate">
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-2 control-label margin-left--10"></div>
-                        <div class="col-sm-9">
-                            <button type="submit" class="btn btn-primary">
-                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 发布
-                            </button>
+                        <div class="form-group">
+                            <div class="col-sm-2 control-label margin-left--10"></div>
+                            <div class="col-sm-9">
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 发布
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
 
-                <div class="">
-                    <h3 class="page-header">批改实验报告</h3>
-                </div>
-                <div class="">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>实验报告编号</th>
-                            <th>实验报告名称</th>
-                            <th>截止日期</th>
-                            <th>剩余批改份数</th>
-                            <th>点评</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>实验报告1</td>
-                            <td>学习使用网桥</td>
-                            <td>2016-11-05</td>
-                            <td>15/90</td>
-                            <td>
-                                <a class="icon-black" onclick="displayCorrect()">
-                                    <span class="glyphicon glyphicon-arrow-right"></span>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>实验报告2</td>
-                            <td>学习使用路由器</td>
-                            <td>2016-11-10</td>
-                            <td>90/90</td>
-                            <td>
-                                <a class="icon-black" onclick="displayCorrect()">
-                                    <span class="glyphicon glyphicon-arrow-right"></span>
-                                </a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>实验报告3</td>
-                            <td>学习使用服务器</td>
-                            <td>2016-12-15</td>
-                            <td>90/90</td>
-                            <td>
-                                <span class="glyphicon glyphicon-time"></span>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+                    <div class="">
+                        <h3 class="page-header">批改实验报告</h3>
+                    </div>
+                    <div class="">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
+                                <th>实验报告编号</th>
+                                <th>实验报告名称</th>
+                                <th>截止日期</th>
+                                <th>剩余批改份数</th>
+                                <th>点评</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>实验报告1</td>
+                                <td>学习使用网桥</td>
+                                <td>2016-11-05</td>
+                                <td>15/90</td>
+                                <td>
+                                    <a class="icon-black" onclick="displayCorrect()">
+                                        <span class="glyphicon glyphicon-arrow-right"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>实验报告2</td>
+                                <td>学习使用路由器</td>
+                                <td>2016-11-10</td>
+                                <td>90/90</td>
+                                <td>
+                                    <a class="icon-black" onclick="displayCorrect()">
+                                        <span class="glyphicon glyphicon-arrow-right"></span>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>实验报告3</td>
+                                <td>学习使用服务器</td>
+                                <td>2016-12-15</td>
+                                <td>90/90</td>
+                                <td>
+                                    <span class="glyphicon glyphicon-time"></span>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <!--------------------------------->
 
@@ -439,7 +443,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <form action="http://www.baidu.com" class="form-horizontal" >
+                    <form action="http://www.baidu.com" class="form-horizontal">
                         <div class="form-group">
                             <label for="score" class="col-sm-1 control-label">打分</label>
                             <div class="col-sm-1">
@@ -521,6 +525,236 @@
 
             </div>
 
+            <div id="discuss_area_pane" class="tab-pane in active">
+                <div id="discuss_home_page">
+                    <div class="bottom-line" id="discuss_header">
+                        <span class="left f-discuss-header">讨论区</span>
+                        <div class="search_post_area">
+                            <div class="dropdown left" id="choose_posts_catagory">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="posts_catagory_ddMenu"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    <div class="inline">所有板块</div>
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="posts_catagory_ddMenu">
+                                    <li><a href="#" title="0">老师答疑区</a></li>
+                                    <li><a href="#" title="1">综合讨论区</a></li>
+                                    <!--<li><a href="#" title="2">小组讨论区</a></li>-->
+                                    <li><a href="#" title="3">所有板块</a></li>
+                                </ul>
+                            </div>
+                            <input type="search" name="search_post" class="search_post_input" placeholder="按照帖子标题搜索"/>
+                            <div class="u-btn btn-whiteBlue search_post_btn"><span>搜索</span></div>
+                        </div>
+                    </div>
+                    <div class="btn-whiteBlue p-btn" id="goto_issue_post_page_btn">发起主题</div>
+                    <div class="page-header f-sub-border">子版块</div>
+                    <div class="post-border-item">
+                        <a href="#" title="0">老师答疑区</a>
+                        <div>发表关于作业、测试、课件内容希望能够得到老师回答的疑问。</div>
+                    </div>
+                    <div class="post-border-item">
+                        <a href="#" title="1">综合讨论区</a>
+                        <div>发表任何想与大家分享的经验及想法！关于本课程、学习、工作、生活等一般性话题</div>
+                    </div>
+                    <!--<div class="post-border-item">-->
+                    <!--<a href="#" title="2">小组讨论区</a>-->
+                    <!--<div>与小组内成员私密交流的小版块</div>-->
+                    <!--</div>-->
+                </div>
+
+                <!--发布帖子的页面-->
+                <div id="issue_post_page">
+                    <div class="back_to_discuss_home_page">
+                        <span class="glyphicon glyphicon-menu-left"></span>
+                        <a href="#" class="f-title">返回</a>
+                    </div>
+                    <form action="" method="post" id="submit_post_form">
+                        <div class="dropdown" id="select_posts_catagory">
+                            <div class="field-label-margin">
+                                <em class="f-sign">*</em>
+                                <div class="inline">所属讨论区板块</div>
+                            </div>
+                            <div>
+                                <button class="btn btn-default dropdown-toggle" type="button"
+                                        id="sel_post_catagory_ddMenu"
+                                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    <div class="inline f-placeholder">请选择主题所属板块</div>
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="posts_catagory_ddMenu">
+                                    <li><a href="#">老师答疑区</a></li>
+                                    <li><a href="#">综合讨论区</a></li>
+                                    <!--<li><a href="#">小组讨论区</a></li>-->
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="post-title-field">
+                            <div class="field-label-margin">
+                                <em class="f-sign">*</em>
+                                <div class="inline">请输入标题</div>
+                            </div>
+                            <input type="text" name="post_title" class="" id="post_title_input" title="title_of_post"/>
+
+                            <!-- 加载编辑器的容器 -->
+                        </div>
+                        <div>
+                            <div class="field-label-margin">
+                                <em class="f-sign">*</em>
+                                <div class="inline"> 内容</div>
+                            </div>
+                            <script id="submitPost_editor" name="content" type="text/plain"></script>
+
+                        </div>
+                        <button class="btn-whiteBlue p-btn" id="submit_post_btn">发表</button>
+                    </form>
+                </div>
+
+                <!--某一个帖子板块-->
+                <div id="posts_border_page">
+                    <h4 id="posts_border_name">老师答疑区</h4>
+
+                    <div class="posts-list-container">
+                        <ul class="posts-list-ul">
+                            <!--<li class="posts-list-item">-->
+                            <!--<div class="posts-list-item-title">CMMI成熟度模型的几个问题</div>-->
+                            <!--<div class="posts-list-item-btm">-->
+                            <!--<span class="posts-list-item-nick">章世超</span>-->
+                            <!--&nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;-->
+                            <!--<span class="posts-list-item-date">时间：2016-11-09 19:38</span>-->
+                            <!--</div>-->
+                            <!--</li>-->
+                            <!--<li class="posts-list-item">-->
+                            <!--<div class="posts-list-item-title">软件需求访谈的具体时间是什么</div>-->
+                            <!--<div class="posts-list-item-btm">-->
+
+                            <!--<span class="posts-list-item-nick">游客10000</span>-->
+
+                            <!--&nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;-->
+                            <!--<span class="posts-list-item-date">时间: 2016-11-09 19:40</span>-->
+                            <!--</div>-->
+                            <!--</li>-->
+                        </ul>
+                        <ul class="pagination">
+                            <!--<li><a href="#">&laquo;</a></li>-->
+                            <!--<li class="active"><a href="#">1</a></li>-->
+                            <!--<li class="disabled"><a href="#">2</a></li>-->
+                            <!--<li><a href="#">3</a></li>-->
+                            <!--<li><a href="#">4</a></li>-->
+                            <!--<li><a href="#">5</a></li>-->
+                            <!--<li><a href="#">&raquo;</a></li>-->
+                        </ul>
+                    </div>
+                </div>
+
+                <!--帖子详情页面-->
+                <div id="discuss_post_detail_page">
+
+                    <div class="back_to_discuss_home_page">
+                        <span class="glyphicon glyphicon-menu-left"></span>
+                        <a href="#" class="f-title">返回</a>
+                    </div>
+                    <div class="post-detail">
+                        <span class="f-post-title"></span>
+                        <div class="f-post-content">
+                            <p>老师，gcc是在什么地方输入的？不然出现不了命令行工具的安装对话框</p>
+                            <p>在讲计算机的语言的时候，展示的图片上应该是16进制代码，</p>
+                            <p>计算机可以直接运行16进制代码吗？</p>
+                            <p>还是只可以直接运行二进制代码</p>
+
+                        </div>
+                        <div class="post-detail-btm">
+                            <span class="f-post-author">张士超</span>&nbsp;&nbsp;|&nbsp;&nbsp; <span
+                                class="f-post-date">2016-11-09 19:38</span>
+                        </div>
+                    </div>
+
+                    <p class="f-re-num">共100回复</p>
+                    <div class="re-list-container">
+                        <ul class="re-list-ul">
+                            <!--<li class="re-item">-->
+                            <!--<div class="">-->
+                            <!--<div class="re-item-content">同时学两种语言会容易混淆吗？</div>-->
+                            <!--<div class="re-item-btm">-->
+                            <!--<span class="re-item-nick inline">章世超</span>-->
+                            <!--&nbsp;&nbsp;|&nbsp;&nbsp;-->
+                            <!--<span class="re-item-date">时间：2016-11-09 19:38</span>-->
+                            <!--<a class="comment-btn right">评论</a>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <!--</li>-->
+                            <!--<li class="re-item">-->
+                            <!--<div class="">-->
+                            <!--<div class="re-item-content">坑，什么叫用linux自己可以搞定，，，我用vmware装的ubantu..很搞不定</div>-->
+                            <!--<div class="re-item-btm">-->
+
+                            <!--<span class="re-item-nick">游客10001</span>-->
+
+                            <!--&nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;-->
+                            <!--<span class="re-item-date">时间: 2016-11-09 19:40</span>-->
+                            <!--<a class="comment-btn right">评论</a>-->
+                            <!--</div>-->
+                            <!--<div class="rere-area">-->
+                            <!--<div class="rere-area-body">-->
+                            <!--<div class="rere-item">-->
+                            <!--<div class="rere-content">谢谢老师</div>-->
+                            <!--<div class="rere-item-btm">-->
+                            <!--<span class="my-blue">野子</span>-->
+                            <!--&nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;-->
+                            <!--<span class="my-blue">时间: 2016-11-09 19:40</span>-->
+                            <!--<a class="comment-btn right">回复</a>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <!--<div class="rere-item">-->
+                            <!--<div class="rere-content">原来如此,我懂了</div>-->
+                            <!--<div class="rere-item-btm">-->
+                            <!--<span class="my-blue">天马行空</span>-->
+                            <!--&nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;-->
+                            <!--<span class="my-blue">时间: 2016-11-09 19:40</span>-->
+                            <!--<a class="comment-btn right">回复</a>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <!--</div>-->
+
+                            <!--<div class="add-rere">-->
+                            <!--添加评论...-->
+                            <!--&lt;!&ndash;<textarea name="post-comment" id="" cols="30" rows="10" placeholder="添加评论..."></textarea>&ndash;&gt;-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <!--</li>-->
+                            <!--<li class="re-item">-->
+                            <!--<div class="">-->
+                            <!--<div class="posts-list-item-title">是有区别，但是也有联系。各有各的好处!</div>-->
+                            <!--<div class="posts-list-item-btm">-->
+
+                            <!--<span class="posts-list-item-nick">游客10000</span>-->
+
+                            <!--&nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;-->
+                            <!--<span class="posts-list-item-date">时间: 2016-11-09 19:40</span>-->
+                            <!--<a class="post-comment-btn right">评论</a>-->
+                            <!--</div>-->
+                            <!--</div>-->
+                            <!--</li>-->
+                        </ul>
+
+
+                        <ul class="pagination">
+                            <!--<li><a href="#">&laquo;</a></li>-->
+                            <!--<li class="active"><a href="#">1</a></li>-->
+                            <!--<li class="disabled"><a href="#">2</a></li>-->
+                            <!--<li><a href="#">3</a></li>-->
+                            <!--<li><a href="#">4</a></li>-->
+                            <!--<li><a href="#">5</a></li>-->
+                            <!--<li><a href="#">&raquo;</a></li>-->
+                        </ul>
+                        <div style="">
+                            <script id="submitRe_editor" name="content" type="text/plain" class="ueditor"></script>
+                        </div>
+                        <button class="p-btn" style="margin-top: 50px" id="submit_re_btn">发表回复</button>
+                    </div>
+                </div>
+            </div>
 
             <div id="class" class="tab-pane">
                 <!--<h3>你当前所在的班级是:<span id="course_name">xxx</span><span id="class_time">xxx</span></h3><h3>你当前所在的班级是:<span id="course_name">xxx</span><span id="class_time">xxx</span></h3>-->
@@ -562,8 +796,6 @@
 </div>
 
 
-
-
 <!--以下是bootstrap file input的js文件-->
 <script src="../bootstrap-3.3.7-dist/bootstrap-fileinput/jquery.min.js"></script>
 <script src="../bootstrap-3.3.7-dist/bootstrap-fileinput/js/fileinput.min.js"></script>
@@ -579,6 +811,11 @@
 <script src="js/add_article.js"></script>
 <script src="js/class_manage.js"></script>
 <script src="js/courseware.js"></script>
+
+<!--以下是谢俊东导入的js文件-->
+<script src="js/discuss_area.js"></script>
+<script src="../js/jquery-validation-1.14.0_dist_jquery.validate.js"></script>
+<script src="../js/jquery-validation-1.14.0_dist_localization_messages_zh.js"></script>
 
 <!--以下是Li Boao导入的js文件-->
 <script src="get_notice.js"></script>
