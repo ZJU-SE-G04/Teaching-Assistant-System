@@ -4,7 +4,7 @@
 	//$uid=$_SESSION['user'];
 	//$question=$_POST['question'];
 	//$answer=$_POST['answer'];
-	$uid='111111';
+	$uid='3140101111';
 	$question='鹅鹅鹅';
 	$answer='曲项向天歌';
 

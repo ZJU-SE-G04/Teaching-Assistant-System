@@ -2,11 +2,11 @@
 	include 'connect.php';
 	//session_start();
 	//$uid=$_SESSION['user'];
-	//$oldpass=$_GET['oldpass'];
-	//$newpass=$_GET['newpass'];
+	$oldpass=$_GET['oldpass'];
+	$newpass=$_GET['newpass'];
 	$uid='3140101111';
-	$oldpass='1111';
-	$newpass='1234';
+//	$oldpass='1111';
+//	$newpass='1234';
 
 	$state=0;
 	$msg='';

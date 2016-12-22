@@ -249,13 +249,13 @@
 <script>
     $("#modify_pass_form").validate({
         submitHandler: function () {
-            var origin_pass = $("input[name='origin_pass']").text();
-            var new_pass = $("input[name='new_pass']").text();
-            var re_new_pass = $("input[name='re_new_pass']").text();
+            var origin_pass = $("input[name='origin_pass']").val();
+            var new_pass = $("input[name='new_pass']").val();
+            var re_new_pass = $("input[name='re_new_pass']").val();
             $.get("modify_pass.php", {
-                        origin_pass: origin_pass,
-                        new_pass: new_pass,
-                        re_new_pass: re_new_pass,
+                        oldpass: origin_pass,
+                        newpass: new_pass,
+//                        re_new_pass: re_new_pass,
                     }, function (data, status) {
                         console.log(data);
                         if (data['state'] == 0) {

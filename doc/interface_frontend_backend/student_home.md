@@ -13,5 +13,5 @@
 |h7|显示所有的入队申请    |list_team_applications.php            |无                   | { "state": 0, "msg": "xxx", "result": [{"uid": "xxx", "username": "xxx"}, ...] } |state为0表示获取成功，result里面填具体信息， 1表示你不是队长，result为空
 |h8|处理入队申请         |deal_with_team_application.php?uid=xxx&agree=1 |                    | { "state": 0, "msg": "xxx" }           | URL中agree表示为1表示同意某人的入队申请，为0表示不同意. state为0表示处理成功，为1表示处理失败。
 |h9|获取所有队伍列表      |fetch_all_team.php                             |无                   | [{ "teamName", 
-|h10|检查该学生是否为队长  |check_if_stu_in_team.php                   |无                   | { "state": 0, "teamName": "xxx" }        | state是0表示已经加入队伍, 是1表示尚未加入队伍， teamName是已经加入的队伍名
+|h10|检查该学生是否已经加入队伍  |check_if_stu_in_team.php                   |无                   | { "state": 0, "teamName": "xxx" }        | state是0表示已经加入队伍, 是1表示尚未加入队伍， teamName是已经加入的队伍名
 
