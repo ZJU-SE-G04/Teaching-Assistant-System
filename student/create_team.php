@@ -19,8 +19,7 @@
 		$msg='你已经加入队伍了！';
 	}else{//再判断队名是否重复
 		$result=$conn->query('insert into team_table values(null,"'.$teamName.'","'.$pass.'");');
-		$row=mysqli_fetch_assoc($result);
-		if($row!=null){
+		if($result!=null){
 			$state=1;
 			$msg='队名重复！';
 		}else{
