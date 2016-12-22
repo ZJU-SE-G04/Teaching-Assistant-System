@@ -1,11 +1,11 @@
 <?php
 	include 'connect.php';
-	//session_start();
-	//$uid=$_SESSION['user'];
+	session_start();
+	$uid=$_SESSION['user'];
 	//$teamName=$_GET['teamName'];
 	//$pass=$_GET['pass'];
 	//$capa=$_POST['capacity'];
-	$uid='3140102222';
+	//$uid='3140102222';
 	$teamName='T2226';
 	$pass='gogogo';
 	$capa=5;
