@@ -18,7 +18,7 @@ $(document).ready(
         function check_if_in_team() {
             $.get("check_if_stu_in_team.php", function (data, status) {
                 if(data['state'] == 0) {
-                    //是队长
+                    //已经加入队伍
                     $("#create_team_form").hide();
                     $("#you_have_joined_team").show()
                     $("#you_have_joined_team").html($("<p>你已经加入队伍" + data['teamName'] + "</p>"));
@@ -28,7 +28,9 @@ $(document).ready(
                 }
             })
         }
-        $("a[href='#create_team_pane']").click(check_if_in_team);
+        // $("a[href='#create_team_pane']").click(check_if_in_team);
+
+
         $("a[href='#join_team_pane']").click(function () {
 
             $.get("check_if_stu_in_team.php", function (data, status) {
@@ -82,8 +84,8 @@ $(document).ready(
         //设置初始状态
 
         //创建队伍区
-        $("#create_team_form").hide();
-        $("#you_have_joined_team").show();
+        $("#create_team_form").show();
+        $("#you_have_joined_team").hide();
         //加入队伍区
         $("#join_team_by_apply_pane").show();
         $("#join_team_by_pass_pane").hide();
