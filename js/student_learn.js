@@ -320,7 +320,7 @@ $(document).ready(
 
                             //点击回复的时候出现回复框,此回复的对象是一级回复
                             if ($(this).parent().next().children("form").length != 0) return;
-                            var comment_form = $("<form method='post' action='submit_rere.php' title='submit_rere_form'></form>").css("overflow", "hidden");
+                            var comment_form = $("<form method='post' action='' title='submit_rere_form'></form>").css("overflow", "hidden");
                             var comment_area = $("<textarea placeholder='发表评论...'></textarea>").css("margin-bottom", "10px");
                             comment_area.focus = true;
                             var submit_btn = $("<button>提交</button>").addClass("p-btn-sm right").css("margin-bottom", "5px");
@@ -554,6 +554,7 @@ $(document).ready(
         });
 
         /****************************************发布一级回复*************************************/
+
         $("#submit_re_btn").click(function () {
             var editor = UE.getEditor("submitRe_editor");
             var content = editor.getContent();

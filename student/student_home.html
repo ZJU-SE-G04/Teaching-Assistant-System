@@ -311,10 +311,11 @@
         submitHandler: function () {
             var teamName = $("input[name='teamname_for_create']").val();
             var teamPass = $("input[name='teampass_for_create']").val();
-
+            var teamCapacity = $("#select_team_capacity").val();
             $.get("create_team.php", {
                 teamName: teamName,
-                pass: teamPass
+                pass: teamPass,
+                capacity: teamCapacity
             }, function (data, status) {
                 alert(data['msg']);
             })

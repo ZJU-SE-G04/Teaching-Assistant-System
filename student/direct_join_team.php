@@ -2,11 +2,11 @@
 	include 'connect.php';
 	//session_start();
 	//$uid=$_SESSION['user'];
-	//$teamName=$_GET['teamName'];
-	//$pass=$_GET['pass'];
+	$teamName=$_GET['teamName'];
+	$pass=$_GET['pass'];
 	$uid='3140105555';
-	$teamName='T2226';
-	$pass='gogogo';
+//	$teamName='T2226';
+//	$pass='gogogo';
 	
 	$state=0;
 	$msg='';

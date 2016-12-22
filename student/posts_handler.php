@@ -52,6 +52,7 @@
 
 //获取帖子总数
 	function fetchNum(){
+
 		include 'connect.php';
 		$lesson_id=$_GET["courseID"];//获取教师账号
 		$post_kind=(int)$_GET['post_kind'];

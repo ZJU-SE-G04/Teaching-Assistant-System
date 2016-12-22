@@ -1,12 +1,14 @@
 <?php
 	include 'connect.php';
-	//session_start();
-	//$uid=$_SESSION['user'];
+	session_start();
+	$uid=$_SESSION['user'];
 	//$teamName=$_GET['teamName'];
 	//$pass=$_GET['pass'];
-	$uid='3140102222';
+	//$capa=$_POST['capacity'];
+	//$uid='3140102222';
 	$teamName='T2226';
 	$pass='gogogo';
+	$capa=5;
 	
 	$state=0;
 	$msg='';
@@ -18,9 +20,9 @@
 		$state=1;
 		$msg='你已经加入队伍了！';
 	}else{//再判断队名是否重复
-		$result=$conn->query('insert into team_table values(null,"'.$teamName.'","'.$pass.'");');
-		$row=mysqli_fetch_assoc($result);
-		if($row!=null){
+		$result=$conn->query('insert into team_table values(null,"'.$teamName.'","'.$pass.'",'.$capa.',1);');
+		//$row=mysqli_fetch_assoc($result);
+		if($result==null){
 			$state=1;
 			$msg='队名重复！';
 		}else{
