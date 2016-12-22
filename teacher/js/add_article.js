@@ -401,22 +401,18 @@ function add_second_comment() {
     // alert(content);
     var posts_list_item=post_comments_area.parent();
     var floor=posts_list_item.find(".x-floor").text();
-    // window.alert(floor);
-    
-    // var re_floor=post_comments_area.find(".x-second-comment-number").text()+1;
-     // window.alert(re_floor);
 
+   var current_time=getNowFormatDate();//get the time
 
-   var current_time=getNowFormatDate();
+    var textarea=$(this).prev();
+    textarea.val("");
 
 
 
     var post_comment_area_body=post_comments_area.find(".post-comment-area-body");
     var tmp = post_comment_area_body.children(".old").clone().removeClass("old").addClass("new").show();
     tmp.find(".x-name").html(user_name);
-    // tmp.find(".x-time").html();
     tmp.find(".x-content").html(content);
-    // window.alert(re_user_name);
     if(re_user_name!="0") {
         tmp.find(".x-re-name").html(re_user_name);
     }

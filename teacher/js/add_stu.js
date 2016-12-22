@@ -218,6 +218,8 @@ function  addStu(){
             var jsonObj=result;
             if(jsonObj["if_success"]==0){
                 window.alert(jsonObj["error_message"]);
+                // $(".modal-content").text(json["error_message"]);
+                $('#myModal').modal(options)
             }
             else {
                 location.reload(true);
@@ -320,8 +322,7 @@ function updateStu() {
         success:function(result){
             jsonObj = result;
             if(jsonObj["if_success"]==0) {
-                window.alert(json["error_message"]);
-                location.reload(true);
+
             }
             else{
                 window.alert("修改成功");
