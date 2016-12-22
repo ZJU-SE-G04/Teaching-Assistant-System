@@ -26,7 +26,7 @@ $(document).ready(function() {
         // $("." + s).show();
     });
 
-    $("#articleBack").click(articleUpdate);
+    // $("#articleBack").click(articleUpdate);
 });
 
 //-------show an article list--------
@@ -37,7 +37,15 @@ function  articleUpdate(needed_title) {
     $("#write_article").hide();
     $("#articleLoop").show();
     $("#update_article").hide();
-    $("#write_article_button").show();
+    var write_article_button=$("#write_article_button");
+    write_article_button.click(showWriteArticle);
+    write_article_button.show();
+    var articleBack=write_article_button.prev();
+    articleBack.hide();
+    articleBack.click(returnToArticleList);
+
+
+
     if(needed_title==null){
         needed_title='';
     }
@@ -74,8 +82,10 @@ function  articleUpdate(needed_title) {
 
 function  showWriteArticle() {
     $("#articleLoop").hide();
-    $("#write_article_button").hide();
+    $(this).hide();
     $("#write_article").show();
+    $(this).prev().show()
+
     
 }
 
@@ -190,7 +200,10 @@ function articleShow() {
     var articleDetail_local=$("#articleDetail");
     articleDetail_local.show();
     $("#articleLoop").hide();
-    $("#write_article_button").hide();
+    var write_article_button=$("#write_article_button");
+    write_article_button.hide();
+    write_article_button.prev().show();
+
 
     var parent=$(this).parent();
     article_id=parent.find(".x-article-id").text();
@@ -245,8 +258,6 @@ function articleShow() {
         }
     });
 
-    $("#articleBack").attr("onclick","returnToArticleList()");
-
 }
 
 
@@ -286,6 +297,7 @@ function deleteComment() {
 function  returnToArticleList() {
     $("#articleLoop").show();
     $("#articleDetail").hide();
+    $(this).hide()
     $("#write_article_button").show();
 
 }
@@ -404,10 +416,7 @@ function add_second_comment() {
 
    var current_time=getNowFormatDate();//get the time
 
-    var textarea=$(this).prev();
-    textarea.val("");
-
-
+    $(this).prev().val("");//还原输入框中内容
 
     var post_comment_area_body=post_comments_area.find(".post-comment-area-body");
     var tmp = post_comment_area_body.children(".old").clone().removeClass("old").addClass("new").show();

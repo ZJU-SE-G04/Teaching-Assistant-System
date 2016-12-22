@@ -95,7 +95,10 @@
                         </div>
                     </div>
                     <div class="col-md-3 right">
-                        <button class='btn btn-primary' id='write_article_button' onclick="showWriteArticle()">撰写文章
+                        <button type="button" class="btn btn-primary w3-right" id="articleBack">
+                            返回列表&nbsp;<span class="glyphicon glyphicon-share-alt"></span>
+                        </button>
+                        <button class='btn btn-primary' id='write_article_button'>撰写文章
                         </button>
                     </div>
                 </div>
@@ -125,11 +128,6 @@
 
 
                 <div id="articleDetail">
-                    <div class="row">
-                        <button type="button" class="btn btn-primary w3-right" id="articleBack">
-                            返回列表&nbsp;<span class="glyphicon glyphicon-share-alt"></span>
-                        </button>
-                    </div>
                     <div class="row">
                         <h2 class="x-title"></h2>
                         <h5>
@@ -202,13 +200,11 @@
                             <div>
                                 <script id="container" name="content" type="text/plain">
                                 </script>
-                                <!-- 配置文件 -->
-                                <!-- 实例化编辑器 -->
                                 <script type="text/javascript">
                                     var ue_add_comment = UE.getEditor('container');
                                 </script>
                             </div>
-                            <button class="p-btn" onclick="add_comment()">发表回复</button>
+                            <button class="p-btn" onclick="add_comment()" style="margin-top: 15px">发表回复</button>
                         </div>
                     </div>
 
@@ -224,8 +220,6 @@
                     <div>
                         <script id="container_write" name="content" type="text/plain" style="height:700px">
                         </script>
-                        <!-- 配置文件 -->
-                        <!-- 实例化编辑器 -->
                         <script type="text/javascript">
                             var ue = UE.getEditor('container_write');
                         </script>
