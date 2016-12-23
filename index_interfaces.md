@@ -1,6 +1,5 @@
 ##主页接口
 
-###登录
 <table>
     <thead>
     <tr>
@@ -44,6 +43,19 @@
             user_id=xxx, <br>
         </td>
         <td>true/false</td>
+    </tr>
+    <tr>
+        <td>跳转至课程页面</td>
+        <td>index.php</td>
+        <td>
+            action=jump_to_lesson, <br>
+            user_id=xxx, <br>
+            lesson_id=xxx <br>
+        </td>
+        <td>
+            具体页面的URL <br>
+            (区分不同课程，不同身份) <br>
+        </td>
     </tr>
     </tbody>
 </table>
