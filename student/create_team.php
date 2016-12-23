@@ -4,7 +4,7 @@
 	$uid=$_SESSION['user'];
 	$teamName=$_GET['teamName'];
 	$pass=$_GET['pass'];
-	$capa=$_POST['capacity'];
+	$capa=$_GET['capacity'];
 	//$uid='3140102222';
 	//$teamName='T2226';
 	//$pass='gogogo';
