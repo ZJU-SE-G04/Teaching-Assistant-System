@@ -2,13 +2,13 @@
 	include 'connect.php';
 	session_start();
 	$uid=$_SESSION['user'];
-	//$teamName=$_GET['teamName'];
-	//$pass=$_GET['pass'];
-	//$capa=$_POST['capacity'];
+	$teamName=$_GET['teamName'];
+	$pass=$_GET['pass'];
+	$capa=$_POST['capacity'];
 	//$uid='3140102222';
-	$teamName='T2226';
-	$pass='gogogo';
-	$capa=5;
+	//$teamName='T2226';
+	//$pass='gogogo';
+	//$capa=5;
 	
 	$state=0;
 	$msg='';

@@ -1,10 +1,10 @@
 <?php
 	include 'connect.php';
-	//session_start();
-	//$uid=$_SESSION['user'];
+	session_start();
+	$uid=$_SESSION['user'];
 	$teamName=$_GET['teamName'];
 	$pass=$_GET['pass'];
-	$uid='3140105555';
+	//$uid='3140105555';
 //	$teamName='T2226';
 //	$pass='gogogo';
 	

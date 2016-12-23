@@ -26,10 +26,11 @@
 		$border_type=(int)$_POST['border_type'];
 		$title=$_POST['title'];
 		$content=htmlspecialchars(stripcslashes($_POST['content']));
-		//$uid=$_SESSION['user'];
+		session_start();
+		$uid=$_SESSION['user'];
 		//$lesson_id=$_SESSION['lesson_id'];
 		$lesson_id='ABCDE1';
-		$uid='3140102222';
+		//$uid='3140102222';
 		//$border_type=1;
 		//$title='发表测试';
 		//$content='万一能行呢';
@@ -77,7 +78,9 @@
 		$reid=$_POST['id_be_re'];
 		$rf=(int)$_POST['floor_be_re'];
 		//$uid=$_SESSION['user'];
-		$uid='3140103333';
+		session_start();
+		$uid=$_SESSION['user'];
+	
 		//$topic_id=1;
 		//$content='层主说得对';
 		//$reid='0';
@@ -123,7 +126,9 @@
 		$topic_id=(int)$_POST['topic_id'];
 		$content=htmlspecialchars(stripcslashes($_POST['content']));
 		//$uid=$_SESSION['user'];
-		$uid='3140103333';
+		session_start();
+		$uid=$_SESSION['user'];
+	
 		//$topic_id=8;
 		//$content=htmlspecialchars(stripcslashes('<p><span style="text-decoration: underline;"><strong>要画出用例之间的include关系</strong></span><br/></p>'));
 		$datetime=date('Y-m-d H:i:s');

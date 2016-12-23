@@ -1,8 +1,8 @@
 <?php
 	include 'connect.php';
-	//session_start();
-	//$uid=$_SESSION['user'];
-	$uid='3140104444';
+	session_start();
+	$uid=$_SESSION['user'];
+	//$uid='3140104444';
 	
 	$state=0;
 	$tname='';
