@@ -62,7 +62,9 @@
                             <em class="f-sign">*</em>
                             <div class="inline">请输入原密码</div>
                         </div>
-                        <input type="password" name="origin_pass" class="" maxlength="16" minlength="6" required/>
+                        <label>
+                            <input type="password" name="origin_pass" class="" maxlength="16" minlength="6" required/>
+                        </label>
                     </div>
                     <div class="form-field">
                         <div class="field-label-margin">
@@ -264,13 +266,13 @@
     </div>
 </div>
 
-<script src="../jquery/jquery-3.1.1.js"></script>
-<script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="/jquery/jquery-3.1.1.js"></script>
+<script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
-<script src="../js/jquery-validation-1.14.0_dist_jquery.validate.js"></script>
-<script src="../js/jquery-validation-1.14.0_dist_localization_messages_zh.js"></script>
+<script src="/js/jquery-validation-1.14.0_dist_jquery.validate.js"></script>
+<script src="/js/jquery-validation-1.14.0_dist_localization_messages_zh.js"></script>
 <script src="/jquery/jquery.cookie.js"></script>
-<script src="../js/student_home.js"></script>
+<script src="/js/student_home.js"></script>
 
 
 <script>
@@ -360,7 +362,7 @@
                 alert(data['msg']);
             })
         }
-    })
+    });
     $("#username").text($.cookie("user_name"));
 
     function gotoFirstPage() {

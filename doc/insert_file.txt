@@ -7,6 +7,12 @@ insert into user_table values('3140103333','3333','Zhao',1,'3333@zju.edu.cn',nul
 insert into user_table values('3140104444','4444','Peter',1,'4444@zju.edu.cn',null,null);
 insert into user_table values('3140105555','5555','Tony',1,'5555@zju.edu.cn',null,null);
 insert into user_table values('3140106666','6666','Steve',2,'6666@zju.edu.cn',null,null);
+insert into user_table values('3130101111', '666666', '昆仑决1',1,'31301111@zju.edu.cn',null,null);
+insert into user_table values('3130102222', '666666', '昆仑决2',1,'31301112@zju.edu.cn',null,null);
+insert into user_table values('3130103333', '666666', '昆仑决3',1,'31301113@zju.edu.cn',null,null);
+insert into user_table values('3130104444', '666666', '昆仑决4',1,'31301114@zju.edu.cn',null,null);
+insert into user_table values('3130105555', '666666', '昆仑决5',1,'31301115@zju.edu.cn',null,null);
+insert into user_table values('3130106666', '666666', '昆仑决6',1,'31301116@zju.edu.cn',null,null);
 insert into user_table values('111111','1111','Li',3,'1111te@zju.edu.cn',null,null);
 insert into user_table values('222222','2222','Chen',3,'2222te@zju.edu.cn',null,null);
 
@@ -38,6 +44,12 @@ insert into student_table values('3140102222','周州','计算机科学与技术
 insert into student_table values('3140103333','赵志敬','体操艺术学院','全真系');
 insert into student_table values('3140104444','PeterPack','超能力者学院','蜘蛛系');
 insert into student_table values('3140105555','TonyStack','超能力者学院','装甲系');
+insert into student_table values('3130101111', '昆仑决1', '发多少学院', '爱的色放系');
+insert into student_table values('3130102222', '昆仑决2', '发多少学院', '爱的色放系');
+insert into student_table values('3130103333', '昆仑决3', '发多少学院', '爱的色放系');
+insert into student_table values('3130104444', '昆仑决4', '发多少学院', '爱的色放系');
+insert into student_table values('3130105555', '昆仑决5', '发多少学院', '爱的色放系');
+insert into student_table values('3130106666', '昆仑决6', '发多少学院', '爱的色放系');
 #insert into student_table values('3140106666','PeterPack','超能力者学院','蜘蛛系');
 #insert into student_table values('3140104444','StevePack','超能力者学院','蜘蛛系');
 #外键主键正确
