@@ -14,7 +14,7 @@
 
 	function jumpto(){
 		include 'connect.php';
-		$uid=$_SESSION['user'];
+		$uid=$_POST['user'];
 		$lesson_id=$_POST['lesson_id'];
 		
 		//$uid='3140102222';
