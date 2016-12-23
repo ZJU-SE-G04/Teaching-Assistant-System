@@ -3,16 +3,17 @@
  */
 
 //--------- 一些全局变量 ------
-    //这些全局变量在进入用户进入课程后初始化
+//这些全局变量在get_notice.js中初始化初始化
 
-var class_id=1;
-var course_name="软件工程管理";
+var class_id;
+var class_time;
 
-var course_id="ABCDE1";
-var class_time="周二345";
+var course_name;
+var course_id;
+var user_name;
+var user_id;
 
-var user_name="Zhou";
-var user_id="3140102222";
+
 
 
 window.onload = function() { //在前端存_id的值
@@ -27,11 +28,9 @@ window.onload = function() { //在前端存_id的值
 //--------- 显示当前课程的所有班级---------
 
 function show_class() {
-
-
+    
     document.getElementById("class_manage_course_name").innerHTML=course_name;
     
-
     $.ajax({
         type:"GET",
         url:"show_class.php?lesson_id="+course_id,
@@ -73,5 +72,20 @@ function change_class() {
 
     document.getElementById("class_manage_class_time").innerHTML=class_time;
 
+
+}
+//-----根据course_id初始class_id
+
+function show_class() {
+    $.ajax({
+            url:"show_class.php?lesson_id="+course_id,
+            success:function(result){
+                for (var i=0;i<1;i++){
+                    class_id=result[i].class_id;
+                    class_time=result[i].begin_time;
+                }
+            }
+        }
+    );
 
 }
