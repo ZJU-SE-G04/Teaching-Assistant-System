@@ -93,14 +93,14 @@ insert into re_comment_table values(1,'3140102222','2016-7-7 12:10:00','good2',2
 insert into re_comment_table values(1,'3140103333','2016-7-7 12:12:00','good3',2,2,'3140102222');
 
 #课件
-insert into courseware_table values(null,'ABCDE1','课件1','www.baidu.com','课件');
+insert into courseware_table values(null,'ABCDE1','第一堂课的PPT','www.baidu.com','课件');
 insert into courseware_table values(null,'ABCDE1','实验1模板','www.baidu.com','模板');
 insert into courseware_table values(null,'ABCDE1','实验1参考','www.baidu.com','参考资料');
 insert into courseware_table values(null,'ABCDE1','实验1优秀报告','www.baidu.com','以往优秀作业');
 insert into courseware_table values(null,'ABCDE1','实验2优秀报告','www.baidu.com','以往优秀作业');
-insert into courseware_table values(null,'ABCDE1','第一堂课视频','http://localhost/fushanxing.mp4','教学视频');
+insert into courseware_table values(null,'ABCDE1','第一堂课视频','/fushanxing.mp4','教学视频');
 insert into courseware_table values(null,'ABCDE1','实验1讲解','www.baidu.com','教学音频');
-insert into courseware_table values(null,'ABCDE1','实验1视频','http://localhost/Your Name.mp4','教学视频');
+insert into courseware_table values(null,'ABCDE1','实验1视频','/Your Name.mp4','教学视频');
 insert into courseware_table values(null,'ABCDE2','第一次课程PPT','www.baidu.com','课件');
 
 

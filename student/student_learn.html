@@ -29,7 +29,34 @@
 </head>
 <body>
 
-<iframe src="../header.html" frameborder="0" width="100%" id="header"></iframe>
+
+<div class="container-fluid">
+    <div class="row" id="header_topBar">
+        <div class="col-md-6"><a href="" onclick="gotoFirstPage()"><img src="/img/logo_gray_large.png" alt="258x71" class="img-responsive"></a></div>
+        <div class="col-md-2 col-md-offset-4" id="nameLink">
+            <div style="margin-left: 50px">
+                <div class="nickname f-f0 f-fc-gray f-thide">
+                    你好,
+                    <a id="username" class="f-fc-gray" href="/student/student_home.html" target="_blank">谢俊东</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row" id="header_courseNameBar">
+        <div style="margin: 5px 0 5px 0;">
+            <div class="col-md-2 right-border">
+                <img src="/img/logo_zju.png" alt="134x50" class="img-responsive"/>
+            </div>
+            <div class="col-md-9" id="header_courseName">
+                <div class="coursename f-f0 f-fc-black"><strong>软件工程管理</strong><br>
+                </div>
+                <div class="f-fc-black f-f0 teacherName">金波</div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="container-fluid">
     <div class="row" id="mainBody">
         <div class="col-md-2" id="left-side">
@@ -469,18 +496,27 @@
 <!--</p>-->
 <!--</video>-->
 
-<script src="../jquery/jquery-3.1.1.js"></script>
-<script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="/jquery/jquery-3.1.1.js"></script>
+<script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
-<script src="../js/jquery-validation-1.14.0_dist_jquery.validate.js"></script>
-<script src="../js/jquery-validation-1.14.0_dist_localization_messages_zh.js"></script>
+<script src="/js/jquery-validation-1.14.0_dist_jquery.validate.js"></script>
+<script src="/js/jquery-validation-1.14.0_dist_localization_messages_zh.js"></script>
 
 <script type="text/javascript">
     var ue = UE.getEditor('submitPost_editor');
     var uec = UE.getEditor('submitRe_editor')
 </script>
-<script src="../js/http_vjs.zencdn.net_5.8.8_video.js"></script>
-<script src="../js/student_learn.js" type="text/javascript"></script>
+<script src="/js/http_vjs.zencdn.net_5.8.8_video.js"></script>
+
+<script src="/jquery/jquery.cookie.js"></script>
+<script src="/js/student_learn.js" type="text/javascript"></script>
 <!--<script src="http://vjs.zencdn.net/5.8.8/video.js"></script>-->
+<script>
+    $("#username").text($.cookie("user_name"));
+
+    function gotoFirstPage() {
+        window.location.href = "/index.html";
+    }
+</script>
 </body>
 </html>

@@ -5,10 +5,23 @@
 
 let POSTNUM_PER_PAGE = 10;
 let POSTRE_NUM_PER_PAGE = 10;
+
+function gotoFirstPage() {
+    window.location("/index.html");
+}
+function getQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+    var r = window.location.search.substr(1).match(reg);
+    if ( r != null ){
+        return decodeURI(r[2]);
+    }else{
+        return null;
+    }
+}
 $(document).ready(
     function () {
         //课程号，从首页传过来的参数获得
-        var courseID = "ABCDE1";
+        var courseID = getQueryString("lesson_id");
 
         //获取课程信息，包括课程所有老师
         function get_course_intro() {
@@ -117,29 +130,16 @@ $(document).ready(
                         if (item_kind === "教学视频") {
                             preview_link.click(function () {
                                 window.open("watch_video.html?vid=" + $(this).attr("title"));
-                                // var video_area = $("<video id='my-video' class='video-js' controls autoplay preload='none' width='1280' height='528' data-setup='{}'></video>");
-                                // video_area.css("width", 800).css("height", "450");
-                                // video_area.append($("<source>").attr("src", $(this).attr("title")));
-                                // video_area.append($('<p class="vjs-no-js"> To view this video please enable JavaScript, and consider upgrading to a web browser that <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a> </p>'));
-                                // $("#courseware_nonpreview_area").hide();
-                                //
-                                // $("#courseware_pane video").remove();
-                                // $("#courseware_pane").append(video_area);
-                                // // videojs('my-video').ready(function () {
-                                // //      this.on('timeupdate', function () {
-                                // //          console.log("the time was updated to: " + this.currentTime());
-                                // //      })
-                                // // })
                             })
                         }
-                        //如果是ppt
-                        if (item_kind === "课件") {
-                            preview_link
-                            //TODO
-                        }
+                        // //如果是ppt
+                        // if (item_kind === "课件") {
+                        //     // preview_link
+                        //     //TODO
+                        // }
                         item_ele.append(preview_link);
                         var download_area = $("<div class='download-btn right'></div>");
-                        var download_link = $("<a></a>").attr("href", item['courseware_link']);
+                        var download_link = $("<a></a>").attr("href", item['courseware_link']).attr("download", item['courseware_name']);
                         download_link.append($("<span class='glyphicon-download glyphicon'></span>"));
                         download_area.append(download_link);
 
@@ -624,6 +624,7 @@ $(document).ready(
         $("#post_detail_page").hide();
 
 
+        //设置右上角的用户名
     })
 ;
 

@@ -21,16 +21,17 @@ $(document).ready(
                     //已经加入队伍
                     $("#create_team_form").hide();
                     $("#you_have_joined_team").show()
-                    $("#you_have_joined_team").html($("<p>你已经加入队伍" + data['teamName'] + "</p>"));
+                    $("#you_have_joined_team").html($("<p class='alert alert-info'>你已经加入队伍" + "<a class='alert-link' style='margin-left: 3px'>" + data['teamName'] + "</a></p>"));
                 } else {
                     $("#create_team_form").show();
                     $("#you_have_joined_team").hide();
                 }
             })
         }
-        // $("a[href='#create_team_pane']").click(check_if_in_team);
+        $("a[href='#create_team_pane']").click(check_if_in_team);
 
 
+        /****************************************加入队伍*************************************/
         $("a[href='#join_team_pane']").click(function () {
 
             $.get("check_if_stu_in_team.php", function (data, status) {
@@ -39,27 +40,37 @@ $(document).ready(
                     $("#join_team_by_apply_pane").hide();
                     $("#join_team_by_pass_pane").hide();
                     $("#have_joined_team_pane").show()
-                    $("#have_joined_team_pane").html($("<p>你已经加入队伍" + data['teamName'] + "</p>"));
+                    $("#have_joined_team_pane").html($("<p class='alert alert-info'>你已经加入队伍" + "<a class='alert-link' style='margin-left: 3px'>" + data['teamName'] + "</a></p>"));
                 } else {
                     $("#join_team_by_apply_pane").show();
-                    $("#join_team_by_pass_pane").show();
+                    $("#join_team_by_pass_pane").hide();
                     $("#have_joined_team_pane").hide()
                 }
             })
+            $.get("fetch_all_team.php"), function (data, status) {
+                $("#join_team_table>tbody").children().remove();
+                for(var i = 0; i < data.length; i++) {
+                    var tr = $("<tr></tr>").append($("<td></td>").text(data[i].teamName));
+                    tr.append($("<td></td>").text(data[i].joined + "/" + data[i].max));
+                    tr.append($("<td></td>").html($("<a onclick='applyTeam()'></a>").text("申请加入")));
+                    $("#join_team_table>tbody").append(tr);
+                }
+
+            }
         });
 
-        /****************************************加入队伍*************************************/
         //点击直接加入队伍的连接，通过团队名字和密码加入
         $("#direct_join_team_link").click(function () {
             $("#join_team_by_apply_pane").hide();
             $("#join_team_by_pass_pane").show();
         })
 
-        //显示加入队伍主界面
-        $("a[href='#join_team_pane']").click(function () {
-            $("#join_team_by_apply_pane").show();
-            $("#join_team_by_pass_pane").hide();
-        });
+
+        // //显示加入队伍主界面
+        // $("a[href='#join_team_pane']").click(function () {
+        //     $("#join_team_by_apply_pane").show();
+        //     $("#join_team_by_pass_pane").hide();
+        // });
 
 
 

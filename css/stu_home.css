@@ -40,6 +40,7 @@ label.error {
 
 /*加入队伍页面*/
 #join_team_pane {
+    padding-top: 30px;
     width: 80%;
 }
 
