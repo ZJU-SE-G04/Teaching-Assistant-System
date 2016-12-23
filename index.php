@@ -15,8 +15,12 @@
 	function jumpto(){
 		include 'connect.php';
 		$uid=$_SESSION['user'];
-		//$uid='111111';
 		$lesson_id=$_POST['lesson_id'];
+		if($uid=='null'){
+			header('Location:/student/student_learn.html?lesson_id='.$lesson_id);
+			return;
+		}
+		//$uid='111111';
 		//$lesson_id='ABCDE1';
 		$result=$conn->query('select * from user_table where id="'.$uid.'"');
 		$row=mysqli_fetch_assoc($result);
