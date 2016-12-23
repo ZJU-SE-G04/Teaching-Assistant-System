@@ -27,7 +27,7 @@ function jumpToLesson(data) {
         "index.php",
         {action: "jump_to_lesson", user_id:user_id, lesson_id:lessonId },
         function (url) {
-            window.location.href = url;
+            window.location.href = url; 
         }
     );
 }
