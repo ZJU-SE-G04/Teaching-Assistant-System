@@ -21,6 +21,17 @@ function logged() {
     }
 }
 
+function jumpToLesson(data) {
+    var lessonId = data.getAttribute("data-id");
+    $.post(
+        "index.php",
+        {action: "jump_to_lesson", user_id:user_id, lesson_id:lessonId },
+        function (url) {
+            window.location.href = url;
+        }
+    );
+}
+
 function login() {
     var id = document.getElementById("id").value;
     var password = document.getElementById("password").value;
