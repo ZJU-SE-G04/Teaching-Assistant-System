@@ -1,9 +1,9 @@
 <?php
 	include 'connect.php';
-	//session_start();
-	//$uid=$_SESSION['user'];
-	//$teamID=(int)$_GET['teamID'];
-	$uid='3140101111';
+	session_start();
+	$uid=$_SESSION['user'];
+	$teamID=(int)$_GET['teamID'];
+	//$uid='3140101111';
 	$tid=-1;
 
 	$state=0;

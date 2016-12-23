@@ -1,12 +1,12 @@
 <?php
 	include 'connect.php';
-	//session_start();
-	//$uid=$_SESSION['user'];
-	//$did=$_GET['uid'];
-	//$agree=(int)$_GET['agree'];
-	$uid='3140102222';
-	$did='3140106666';
-	$agree=1;
+	session_start();
+	$uid=$_SESSION['user'];
+	$did=$_GET['uid'];
+	$agree=(int)$_GET['agree'];
+	//$uid='3140102222';
+	//$did='3140106666';
+	//$agree=1;
 	
 	$state=0;
 	$msg='';

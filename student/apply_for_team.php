@@ -1,10 +1,10 @@
 <?php
 	include 'connect.php';
-	//session_start();
-	//$uid=$_SESSION['user'];
-	//$teamID=(int)$_GET['teamID'];
-	$uid='3140106666';
-	$teamID=5;
+	session_start();
+	$uid=$_SESSION['user'];
+	$teamID=(int)$_GET['teamID'];
+	//$uid='3140106666';
+	//$teamID=5;
 	
 	$state=0;
 	$msg='';
