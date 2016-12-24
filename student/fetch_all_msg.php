@@ -8,6 +8,7 @@
 	$arr = [];
 
 	while($row = mysqli_fetch_assoc($result)) {
+		$x['msg_id']=$row['msg_id'];
 		$x['msg']=$row['content'];
 		$x['time']=$row['time'];
 		$arr[]=$x;
