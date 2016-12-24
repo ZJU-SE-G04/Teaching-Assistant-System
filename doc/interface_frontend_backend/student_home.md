@@ -14,6 +14,6 @@
 |h8|处理入队申请         |deal_with_team_application.php?uid=xxx&agree=1 |                    | { "state": 0, "msg": "xxx" }           | URL中agree表示为1表示同意某人的入队申请，为0表示不同意. state为0表示处理成功，为1表示处理失败。
 |h9|获取所有队伍列表      |fetch_all_team.php                             |无                   | [{"teamID":"xxx", "teamName":"xxx", "max":6, "joined":4 }, ... ]   | max是队伍的总容量，joined是当前加入的人数 
 |h10|检查该学生是否已经加入队伍  |check_if_stu_in_team.php                   |无                   | { "state": 0, "teamName": "xxx" }        | state是0表示已经加入队伍, 是1表示尚未加入队伍， teamName是已经加入的队伍名
-|h11|获取所有未读消息       | fetch_all_msg.php                             |无                  | [{"id":"xxx", "msg":"xxxxxx"}, ... ]                  |无
+|h11|获取所有未读消息       | fetch_all_msg.php                             |无                  | [{"id":"xxx", "msg":"xxxxxx", "time": "2016-7-12"}, ... ]                  |无
 |h12|把某一条消息标为已读     | mark_as_read.php?msg_id=xxx                   |无                  | { "state": 0, "msg": "xxx" }              |state为0表示成功，其他表示失败
 
