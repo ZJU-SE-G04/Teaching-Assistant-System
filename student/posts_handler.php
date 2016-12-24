@@ -1,6 +1,6 @@
 <?php
 	$action=$_GET["action"];//获取行为
-	//$action="fetchAll";
+	//$action="submitReRe";
 	if($action=='fetchAll'){
 		fetchAll();
 	}else if($action=='fetchDetail'){
@@ -76,15 +76,17 @@
 		$content=$_POST['content'];
 		$ofloor=(int)$_POST['floor'];
 		$reid=$_POST['id_be_re'];
+		
 		$rf=(int)$_POST['floor_be_re'];
-		//$uid=$_SESSION['user'];
+		
 		session_start();
 		$uid=$_SESSION['user'];
 	
-		//$topic_id=1;
-		//$content='层主说得对';
-		//$reid='0';
-		//$ofloor=4;
+		/*$topic_id=1;
+		$content='层主说得对';
+		$reid='0';
+		$ofloor=4;
+		$uid='3140101111';*/
 
 		$datetime=date('Y-m-d H:i:s');
 		$state=0;
