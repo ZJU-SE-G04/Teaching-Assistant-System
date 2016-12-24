@@ -118,6 +118,27 @@ $(document).ready(
             })
         })
 
+        /********************************获取通知***********************************/
+        $("a[href='#notice_pane']").click(function () {
+            $.get("fetch_all_msg.php", function (data) {
+                $("#notice_pane").html("");
+                var alert_div = $("<div class='alert-info alert'></div>");
+                for(var i = 0; i < data.length; i++) {
+                    alert_div.attr("msg_id", data[i].msg_id);
+                    alert_div.html("");
+                    alert_div.append($("<a class='close' type='button' data-dismiss='alert'>&times;</a>").click(function () {
+                        var msg_id = $(this).parent().attr("msg_id");
+                        $.get("mark_as_read.php?msg_id=" + msg_id, function (data) {
+                            if(data['state'] != 0) {
+                                alert(data['msg']);
+                            }
+                        });
+                    }));
+                    alert_div.append(data[i].msg);
+                    $("#notice_pane").append(alert_div);
+                }
+            })
+        })
         //设置初始状态
 
         //创建队伍区

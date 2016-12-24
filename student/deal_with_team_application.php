@@ -5,7 +5,7 @@
 	$did=$_GET['uid'];
 	$agree=(int)$_GET['agree'];
 	//$uid='3140102222';
-	//$did='3140106666';
+	//$did='3140108888';
 	//$agree=1;
 	
 	$state=0;
@@ -23,6 +23,8 @@
 			$result=$conn->query('update orgnize_table set flag=-1 where team_id='.$tid.' and id="'.$did.'";');
 			$state=0;
 			$msg='成功拒绝！';
+			include 'submit_msg.php';
+			send($did,'队伍'.$tid.'拒绝了你的申请！');
 		}else{
 			$tid=$row['team_id'];
 			//允许入队
@@ -31,6 +33,8 @@
 			$result=$conn->query('delete from orgnize_table where id="'.$did.'" and flag!=1;');
 			$state=0;
 			$msg='成功允许！';
+			include 'submit_msg.php';
+			send($did,'成功加入队伍'.$tid);
 		}
 	}
 
