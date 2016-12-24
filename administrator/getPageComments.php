@@ -1,9 +1,9 @@
-//getPageComments.php
 <?php
 	include 'connect.php';
-	$article_id=$_POST["article_id"];
+	$article_id=$_POST["articleId"];
 	$pageNum=$_POST["pageNum"];
-	//$article_id=2;
+//	$article_id=1;
+//    $pageNum=1;
     $result = $conn->query("select * from article_table where article_id = '".$article_id."';");
 	$arr = [];
 	$comments=[];

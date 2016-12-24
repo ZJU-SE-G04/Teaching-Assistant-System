@@ -3,6 +3,7 @@
 	$lessonId=$_POST["lessonId"];
 	$lessonName=$_POST["lessonName"];
 	$lessonInfo=$_POST["lessonInfo"];
-    $result = $conn->query('insert into lesson_table values("'.$lessonId.'","'.$lessonName.'","'.$lessonInfo.'");');
+    $result = $conn->query("insert into lesson_table values('".$lessonId."','".$lessonName."','".$lessonInfo."');");
+    echo "insert into lesson_table values('".$lessonId."','".$lessonName."','".$lessonInfo."');";
 	$conn->close();
 ?>

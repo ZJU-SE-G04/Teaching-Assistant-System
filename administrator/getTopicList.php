@@ -8,8 +8,11 @@
 		$a=$conn->query("select lesson_name from lesson_table where lesson_id = '".$row['lesson_id']."';");
 	    $row2 = mysqli_fetch_assoc($a);
 		$x['lesson']=$row2['lesson_name'];
-		$x['kind']="非答疑";
 		if($row['topic_kind']==1)
+            $x['kind']="公开话题";
+		else if($row['topic_kind']==2)
+            $x['kind']="内部话题";
+		else
             $x['kind']="答疑";
 		//$x['sight']=
         $a=$conn->query("select user_name from  user_table where id = '".$row['id']."';");
@@ -17,7 +20,7 @@
 		$x['author']=$row2['user_name'];	
 		$x['time']=$row['time'];
 		$x['title']=$row['title'];
-        $b=$conn->query("select count(*) from response_table where topic_id = '".$x['id']."';");
+        $b=$conn->query("select count(*) from response_table where topic_id = '".$x['topicId']."';");
 	    $row3 = mysqli_fetch_assoc($b);
 		$x['responseCnt']=$row3['count(*)'];
 		

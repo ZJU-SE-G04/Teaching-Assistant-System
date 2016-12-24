@@ -6,6 +6,7 @@
 	while($row = mysqli_fetch_assoc($result)) {
 		$x['message_id']=(int)$row['id'];
 		$x['name']=$row['name'];
+        $x['time']=$row['time'];
 		$x['content']=$row['content'];
 		$x['read']=False;
 		if($row['flag']==1);
