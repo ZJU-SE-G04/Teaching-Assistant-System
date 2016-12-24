@@ -524,24 +524,33 @@ $(document).ready(
         /****************************************发布帖子****************************************/
 
         $("#submit_post_form").validate({
+            rules: {
+                messages: {
+                    post_title_input: {
+                        required: "请输入标题",
+                    }
+                }
+            },
             submitHandler: function () {
                 var flag = true;
                 var title = $("#post_title_input").val();
                 if (title === "") {
-                    $("#post_title_input").after($("<span class='error' style='margin-left: 10px'>帖子标题不能为空</span>"));
+                    $("#post_title_input").next().html("");
+                    $("#post_title_input").next().append(($("<span class='error' style='margin-left: 10px'>帖子标题不能为空</span>")));
                     flag = false;
                 }
 
                 var border_name = $("#sel_post_catagory_ddMenu>div").text();
                 if (border_name === "请选择主题所属板块") {
 
-                    $("#sel_post_catagory_ddMenu").after($("<span class='error' style='margin-left: 10px; font-size: 1em'></span>").text("请选择帖子所属的板块"));
+                    $("#sel_post_catagory_ddMenu").next().html("");
+                    $("#sel_post_catagory_ddMenu").next().append($("<span class='error' style='margin-left: 10px; font-size: 1em'></span>").text("请选择帖子所属的板块"));
                     flag = false;
                 }
-                if (flag !== true) return;
+                if (flag !== true) return false;
 
                 var ueContent = UE.getEditor('submitPost_editor').getContent();
-                if (ueContent === "") return;
+                if (ueContent === "") return false;
                 $.post("/student/posts_handler.php?action=submitPost", {
                     border_type: border_name,
                     title: title,
