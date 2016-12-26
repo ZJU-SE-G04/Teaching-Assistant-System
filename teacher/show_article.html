@@ -787,11 +787,12 @@
                 <!--<h3>你当前所在的班级是:<span id="course_name">xxx</span><span id="class_time">xxx</span></h3><h3>你当前所在的班级是:<span id="course_name">xxx</span><span id="class_time">xxx</span></h3>-->
                 <div class="bs-callout bs-callout-info">
                     <h4>你当前所在的班级是:</h4>
-                    <span id="class_manage_course_name">课程名</span><span id="class_manage_class_time">班级时间</span>
+                    <span id="class_manage_course_name"></span><span id="class_manage_class_time"></span>
                 </div>
-
-                <select class="form-control" id="class_manage_select" onchange="change_class()">
-                </select>
+                <div class="row">
+                    <div class="col-md-9"><select class="form-control " id="class_manage_select"></select></div>
+                    <div class="col-md-3"><button class="btn btn-primary  x-class-manage-btn">切换班级</button></div>
+                </div>
 
 
             </div>
@@ -807,6 +808,26 @@
                     <label>用Excel重置学生信息</label>
                     <input name="file" type="file" class="file">
                 </form>
+
+
+                <table class="table table-striped" id="StuInfoTable">
+                    <tr><th>学号</th><th>姓名</th><th>院系</th><th>专业</th><th>团队</th><th>删除</th><th>修改</th></tr>
+                    <tbody class="stu_info_loop">
+                    <!-- loop start--><tr class="old"><th class="s-stu-id"></th><th class="s-stu-name"></th><th class="s-depart"></th><th class="s-major"></th><th class="s-team-name"></th>
+                        <th><a class='glyphicon glyphicon-trash s-delete'></a></th>
+                        <th><a class='glyphicon glyphicon-edit s-update'></a></th>
+                    </tr> <!-- loop end-->
+
+                    </tbody>
+                </table>
+                <div class="row" id="stu_info_row">
+                    <div  class='col-sm-3' id='add_stu_hint'>
+                        <p  style='float: right'>手动添加学生数量:</p></div>
+                    <div  class='col-sm-1' id='add_stu_select' >  <div class='form-group'>
+                    <select id='addStuNumberSelect' class='form-control' onchange='addStuInput()'>
+                        <option>0</option><option>1</option><option>2</option><option>3</option>
+                    </select></div> </div>
+                </div>
 
                 <div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-sm">

@@ -30,7 +30,10 @@ window.onload = function() { //在前端存_id的值
 function show_class() {
     
     document.getElementById("class_manage_course_name").innerHTML=course_name;
-    
+
+    $(".x-class-manage-btn").click(change_class);
+
+
     $.ajax({
         type:"GET",
         url:"show_class.php?lesson_id="+course_id,
@@ -65,10 +68,13 @@ function show_class() {
 // -------- 选择不同班级,可以触发此函数 ----------
 
 function change_class() {
+    
+    
     var class_manage_select=document.getElementById("class_manage_select");
     var index=class_manage_select.selectedIndex;
 
     class_time=class_manage_select[index].innerHTML;
+    class_id=class_manage_select[index].id;
 
     $("#class_manage_class_time").text(class_time);
 

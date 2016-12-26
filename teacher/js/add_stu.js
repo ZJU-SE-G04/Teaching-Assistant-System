@@ -12,74 +12,34 @@ var old_id_update_stu;
 
 function showStuInfo(){
 
-
-//显示当前班级信息
-    
-    var jsonObj;
     $.ajax({
         type:"GET",
         url:"show_stu_info.php?class_id="+class_id,
         success:function (result) {
-            jsonObj=result;
 
 
-            var exist=document.getElementById("stu_info_row");
+            var stu_info_loop=$(".stu_info_loop");
+            stu_info_loop.children(".new").remove();
+            for (var i = 0; i < result.length; i++) {
+                var x=result[i];
+                var tmp=stu_info_loop.children(".old").clone().removeClass("old").addClass("new").show();
+                tmp.find(".s-stu-id").html(x.id);
+                tmp.find(".s-stu-name").html(x.name);
+                tmp.find(".s-depart").html(x.department);
+                tmp.find(".s-major").html(x.major);
+                tmp.find(".s-team-name").html(x.team_name);
+                tmp.find(".s-delete").attr("onclick","deleteStu("+x.id+")");
+                tmp.find(".s-update").attr("onclick","addStuUpdate("+x.id+")");
 
-            if(exist==null) {
-
-                var parent = document.getElementById("stuInfo");
-
-                var table = document.createElement("table");
-                table.id = "StuInfoTable";
-                table.className="table table-striped";
-                table.innerHTML = "<tr><th>学号</th><th>姓名</th><th>院系</th><th>专业</th><th>团队</th><th>删除</th><th>修改</th></tr>";
-
-                var tbody=document.createElement("tbody");
-                table.appendChild(tbody);
-
-
-                for (var i = 0; i < jsonObj.length; i++) {
-                    var stu_id= jsonObj[i].id;
-                    var stu_name = jsonObj[i].name;
-                    var department = jsonObj[i].department;
-                    var major = jsonObj[i].major;
-                    var team_name=jsonObj[i].team_name;
-                    tbody.innerHTML += "<tr><th>" + stu_id + "</th><th>" + stu_name + "</th><th>" + department + "</th><th>" + major +"</th><th>"+ team_name+ "</th>" +
-                        "<th onclick='deleteStu("+stu_id+")'><span class='glyphicon glyphicon-trash'></span></th>" +
-                        "<th onclick='addStuUpdate("+stu_id+")'><span class='glyphicon glyphicon-edit'></span></th></tr>";
-
-                }
-                parent.appendChild(table);
-
-                var stu_info_row=document.createElement("div");
-                stu_info_row.className="row";
-                stu_info_row.id="stu_info_row";
-                stu_info_row.innerHTML= "<div  class='col-sm-3' id='add_stu_hint'> " +
-                    "<p  style='float: right'>手动添加学生数量:</p></div> " +
-                    "<div  class='col-sm-1' id='add_stu_select' >  <div class='form-group'> " +
-                    "<select id='addStuNumberSelect' class='form-control' onchange='addStuInput()'> " +
-                    "<option>0</option> "+
-                    "<option>1</option> " +
-                    "<option>2</option> " +
-                    "<option>3</option> " +
-                    "</select></div> </div> ";
-                parent.appendChild(stu_info_row);
-
-
-                var add_multi_stu=document.createElement("div");
-                add_multi_stu.className="row";
-                add_multi_stu.id="add_multi_stu";
-                add_multi_stu.innerHTML= "<div  class='col-sm-3' id='add_multi_stu_hint'></div> " +
-                    "<div  class='col-sm-1' id='add_stu_select' >  </div> ";
-                parent.appendChild(add_multi_stu);
+                stu_info_loop.append(tmp);
             }
+
+                
+
         }
     });
 
-
-
 }
-
 
 //--------------- 增加 添加学生信息的 输入框-----------
 
