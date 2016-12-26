@@ -30,8 +30,10 @@
 			switch($row['level']){
 				case 1:{
 				//echo 'Location:/student/student_learn.html?lesson_id='.$lesson_id;
-				echo '/student/student_learn.html?lesson_id='.$lesson_id;
-				break;
+					$result=$conn->query('select * from lesson_table where lesson_id="'.$lesson_id.'"');
+					$row=mysqli_fetch_assoc($result);
+					echo '/student/student_learn.html?lesson_id='.$lesson_id.'lesson_name='.$row['lesson_name'];
+					break;
 				}
 				case 2:{
 					$result=$conn->query('select * from lesson_table where lesson_id="'.$lesson_id.'"');
