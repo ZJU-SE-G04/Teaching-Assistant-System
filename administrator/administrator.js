@@ -432,7 +432,7 @@ $(document).ready(function(){
         linkUpdate()
     })
 
-    var linkRecords = [
+    /*var linkRecords = [
         {
             "linkId": 22342134,
             "linkName": "浙江大学现代教务管理系统",
@@ -458,26 +458,23 @@ $(document).ready(function(){
             "linkName": "哔哩哔哩弹幕视频网",
             "linkAddress": "http://www.bilibili.com"
         },
-    ]
-    /*
+    ]*/
     var linkRecords = ""
-    */
     function linkUpdate() {
-        /*
-        $.get("getLinkList.php", data)
-        linkRecords = JSON.parse(data)
-        */
+        $.get("getLinkList.php", function (data) {
+            linkRecords = data
 
-        $("#linkTable").find(".new").remove()
-        for (var i in linkRecords) {
-            var x = linkRecords[i]
-            var tmp = $("#linkTable").find(".old").clone().removeClass("old").addClass("new").show()
+            $("#linkTable").find(".new").remove()
+            for (var i in linkRecords) {
+                var x = linkRecords[i]
+                var tmp = $("#linkTable").find(".old").clone().removeClass("old").addClass("new").show()
 
-            tmp.find(".x-linkName").html(x.linkName)
-            tmp.find(".x-linkAddress").attr("href", x.linkAddress).html(x.linkAddress)
-            deleteLink(tmp, x.linkId)
-            $("#linkTable").find("tbody").append(tmp)
-        }
+                tmp.find(".x-linkName").html(x.linkName)
+                tmp.find(".x-linkAddress").attr("href", x.linkAddress).html(x.linkAddress)
+                deleteLink(tmp, x.linkId)
+                $("#linkTable").find("tbody").append(tmp)
+            }
+        })
     }
     function deleteLink(tmp, id) {
         tmp.find(".glyphicon-trash").click(function () {
@@ -491,10 +488,10 @@ $(document).ready(function(){
         initialFrameHeight:200,
     })
 
-    $("#updataForm").submit(function () {
+    $("#updateForm").submit(function () {
         var data = {}
-        data["updateInfo"] = updataInfoEditor.getContent()
-        $.post("addUpdataInfo.php", data)
+        data["updateInfo"] = updateInfoEditor.getContent()
+        $.post("addUpdateInfo.php", data)
     })
 
 });
