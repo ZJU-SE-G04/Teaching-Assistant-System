@@ -40,6 +40,10 @@
 					echo 'teacher/show_article.html?lesson_id='.$lesson_id.'&course_name='.$row['lesson_name'].'&user_name='.$uname.'&user_id='.$uid;
 					break;
 				}
+				case 4:{
+					echo 'administrator/administrator.html';
+					break;
+				}
 			}
 		}
 	}
