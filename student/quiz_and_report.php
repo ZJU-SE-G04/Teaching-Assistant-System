@@ -18,7 +18,7 @@
 	//行为函数
 	
 	function submit_work(){
-		include 'connect.php';
+		include '../connect.php';
 		//按2分一题算
 		$lesson_id=$_POST["lesson_id"];
 		$class_id=$_POST["class_id"];
@@ -58,7 +58,7 @@
 	}
 	
 	function work_detail(){
-		include 'connect.php';
+		include '../connect.php';
 		$lesson_id=$_POST["lesson_id"];
 		$class_id=$_POST["class_id"];
 		$stu_id=$_POST["stu_id"];
@@ -104,7 +104,7 @@
 	}
 
 	function work_list(){
-		include 'connect.php';
+		include '../connect.php';
 		$lesson_id=$_POST["lesson_id"];
 		$class_id=$_POST["class_id"];
 		$stu_id=$_POST["stu_id"];
@@ -127,7 +127,7 @@
 	}
 
 	function report_list(){
-		include 'connect.php';
+		include '../connect.php';
 		$lesson_id=$_POST["lesson_id"];
 		$class_id=$_POST["class_id"];
 		$stu_id=$_POST["stu_id"];

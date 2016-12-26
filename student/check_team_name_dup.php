@@ -1,5 +1,5 @@
 <?php
-	include 'connect.php';
+	include '../connect.php';
 	$teamName=$_GET['teamName'];
 	//$teamName='T1226';
 	

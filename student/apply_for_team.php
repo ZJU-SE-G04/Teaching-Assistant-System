@@ -1,5 +1,5 @@
 <?php
-	include 'connect.php';
+	include '../connect.php';
 	session_start();
 	$uid=$_SESSION['user'];
 	$teamID=(int)$_GET['teamID'];

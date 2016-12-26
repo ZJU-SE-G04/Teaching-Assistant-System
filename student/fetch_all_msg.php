@@ -1,5 +1,5 @@
 <?php
-	include 'connect.php';
+	include '../connect.php';
 	session_start();
 	$uid=$_SESSION['user'];
 	//$uid='3140102222';
