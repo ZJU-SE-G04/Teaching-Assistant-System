@@ -49,11 +49,16 @@ function getNotice() {
 
 // ----初始化一些存储在js中的全局变量,added by zhangshichao------
     course_id=getQueryString("lesson_id");
-    course_name=getQueryString("course_name")
+    course_name=getQueryString("course_name");
+    $(".coursename").first().text(course_name);
+    $("#stu_course_name").text(course_name);
+    $("#TA_course_name").text(course_name);
     user_name=getQueryString("user_name");
-    user_id=getQueryString("user_id")
+    $("#username").text(user_name);
+    user_id=getQueryString("user_id");
     
-    show_class();
+    
+    show_class_init();//初始化班级
 
 }
 window.onload = getNotice;

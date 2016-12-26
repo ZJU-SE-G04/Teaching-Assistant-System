@@ -70,13 +70,16 @@ function change_class() {
 
     class_time=class_manage_select[index].innerHTML;
 
-    document.getElementById("class_manage_class_time").innerHTML=class_time;
+    $("#class_manage_class_time").text(class_time);
+
+    $(".x-class-time").text(class_time);
 
 
 }
-//-----根据course_id初始class_id
+//-----根据course_id初始class_id----
+//这个函数在页面加载时被调用
 
-function show_class() {
+function show_class_init() {
     $.ajax({
             url:"show_class.php?lesson_id="+course_id,
             success:function(result){
@@ -84,6 +87,7 @@ function show_class() {
                     class_id=result[i].class_id;
                     class_time=result[i].begin_time;
                 }
+                $(".x-class-time").text(class_time);
             }
         }
     );

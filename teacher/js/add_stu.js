@@ -14,12 +14,7 @@ function showStuInfo(){
 
 
 //显示当前班级信息
-    var course_name="软件工程管理";
-    var class_time="周二345";
-    document.getElementById("stu_course_name").innerHTML=course_name;
-    document.getElementById("stu_class_time").innerHTML=class_time;
-
-
+    
     var jsonObj;
     $.ajax({
         type:"GET",
