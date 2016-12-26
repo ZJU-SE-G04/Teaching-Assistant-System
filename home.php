@@ -13,15 +13,16 @@
 	}
 
 	function jumpto(){
-		include 'connect.php';
+		include 'connect1.php';
 		$uid=$_POST['user_id'];
 		$lesson_id=$_POST['lesson_id'];
+		
+		//$uid='3140102222';
+		//$lesson_id='ABCDE1';
 		if($uid=='null'){
-			echo 'student/student_learn.html?lesson_id='.$lesson_id;
+			echo '/student/student_learn.html?lesson_id='.$lesson_id;
 			return;
 		}
-		//$uid='111111';
-		//$lesson_id='ABCDE1';
 		$result=$conn->query('select * from user_table where id="'.$uid.'"');
 		$row=mysqli_fetch_assoc($result);
 		if($row!=null){
@@ -29,7 +30,7 @@
 			switch($row['level']){
 				case 1:{
 				//echo 'Location:/student/student_learn.html?lesson_id='.$lesson_id;
-				echo 'student/student_learn.html?lesson_id='.$lesson_id;
+				echo '/student/student_learn.html?lesson_id='.$lesson_id;
 				break;
 			}
 				case 3:{
@@ -58,7 +59,7 @@
 		//$uid='111111';
 		//$pwd='1111';
 		//echo 'select * from user_table where id="'.$uid.'" and pasword="'.$pwd.'";';
-		include 'connect.php';
+		include 'connect1.php';
 		$result=$conn->query('select * from user_table where id="'.$uid.'" and password="'.$pwd.'";');
 		$row=mysqli_fetch_assoc($result);
 		if($row==null){
