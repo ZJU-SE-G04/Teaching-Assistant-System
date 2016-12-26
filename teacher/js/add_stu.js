@@ -16,8 +16,6 @@ function showStuInfo(){
         type:"GET",
         url:"show_stu_info.php?class_id="+class_id,
         success:function (result) {
-
-
             var stu_info_loop=$(".stu_info_loop");
             stu_info_loop.children(".new").remove();
             for (var i = 0; i < result.length; i++) {
@@ -28,14 +26,10 @@ function showStuInfo(){
                 tmp.find(".s-depart").html(x.department);
                 tmp.find(".s-major").html(x.major);
                 tmp.find(".s-team-name").html(x.team_name);
-                tmp.find(".s-delete").attr("onclick","deleteStu("+x.id+")");
-                tmp.find(".s-update").attr("onclick","addStuUpdate("+x.id+")");
-
+                tmp.find(".s-delete").click(deleteStu);
+                tmp.find(".s-update").click(addStuUpdate);
                 stu_info_loop.append(tmp);
             }
-
-                
-
         }
     });
 
@@ -189,7 +183,11 @@ function  addStu(){
 //------------ delete a students' information -----------------
 
 
-function deleteStu(stu_id) {
+function deleteStu() {
+
+    var tr=$(this).parent().parent();
+    var stu_id=tr.children(":first").text();
+
     $.ajax({
         type:"GET",
         url:"delete_stu.php?class_id="+class_id+"&id="+stu_id,
@@ -199,8 +197,8 @@ function deleteStu(stu_id) {
                 window.alert(jsonObj["error_message"]);
             }
             else {
+                tr.remove();
                 window.alert("删除成功");
-                location.reload(true);
             }
         }
     });
