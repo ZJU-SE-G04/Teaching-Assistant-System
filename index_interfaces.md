@@ -12,7 +12,7 @@
     <tbody>
     <tr>
         <td>检查是否登录</td>
-        <td>index.php</td>
+        <td>home.php</td>
         <td>
             action=isLogin,<br>
             user_id=xxx <br>
@@ -25,7 +25,7 @@
     </tr>
     <tr>
         <td>登录</td>
-        <td>index.php</td>
+        <td>home.php</td>
         <td>
             action=login, <br>
             user_id=xxx, <br>
@@ -37,7 +37,7 @@
     </tr>
     <tr>
         <td>退出登录</td>
-        <td>index.php</td>
+        <td>home.php</td>
         <td>
             action=logout, <br>
             user_id=xxx, <br>
@@ -46,7 +46,7 @@
     </tr>
     <tr>
         <td>跳转至课程页面</td>
-        <td>index.php</td>
+        <td>home.php</td>
         <td>
             action=jump_to_lesson, <br>
             user_id=xxx, <br>

@@ -24,7 +24,7 @@ function logged() {
 function jumpToLesson(data) {
     var lessonId = data.getAttribute("data-id");
     $.post(
-        "index.php",
+        "home.php",
         {action: "jump_to_lesson", user_id:user_id, lesson_id:lessonId },
         function (url) {
             window.location.href = url; 
@@ -36,7 +36,7 @@ function login() {
     var id = document.getElementById("id").value;
     var password = document.getElementById("password").value;
 
-    $.post("index.php",
+    $.post("home.php",
         {action: "login", user_id: id, password: password},
         function (status) {
             if (status) {
@@ -63,7 +63,7 @@ function login() {
 function logout() {
     $.cookie('user_id', null);
     isLogin = false;
-    $.post("index.php",
+    $.post("home.php",
         {action: "logout", user_id: user_id},
         function (status) {
             location.reload();
@@ -79,7 +79,7 @@ function init() {
         logged();
     }
     else {
-        $.post("index.php",
+        $.post("home.php",
             {action: "isLogin", user_id: user_id},
             function (status) {
                 if (status) {
