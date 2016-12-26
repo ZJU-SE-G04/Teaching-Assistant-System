@@ -9,15 +9,6 @@ let POSTRE_NUM_PER_PAGE = 10;
 function gotoFirstPage() {
     window.location("/index.html");
 }
-function getQueryString(name) {
-    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-    var r = window.location.search.substr(1).match(reg);
-    if ( r != null ){
-        return decodeURI(r[2]);
-    }else{
-        return null;
-    }
-}
 $(document).ready(
     function () {
         //课程号，从首页传过来的参数获得
@@ -633,7 +624,7 @@ $(document).ready(
         $("#post_detail_page").hide();
 
 
-        //设置右上角的用户名
+        //设置
     })
 ;
 

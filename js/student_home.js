@@ -7,6 +7,7 @@ $(document).ready(
 
 //        $("#mod_pass_submit_btn").click(function () {
 //        })
+        var courseID = getQueryString("lesson_id");
         $(".alert").bind("closed.bs.alert", function () {
             alert("警告框被关闭");
 
