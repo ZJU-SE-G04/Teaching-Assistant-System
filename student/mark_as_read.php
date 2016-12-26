@@ -1,5 +1,5 @@
 <?php
-	include 'connect.php';
+	include '../connect.php';
 	$mid=$_GET['msg_id'];
 	//$mid=1;
 	$result = $conn->query("update private_msg_table set state=1 where msg_id=".$mid.";");

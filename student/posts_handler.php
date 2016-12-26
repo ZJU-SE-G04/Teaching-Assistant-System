@@ -21,7 +21,7 @@
 
 //发布帖子
 	function submitPost(){
-		include 'connect.php';
+		include '../connect.php';
 		error_reporting(E_ERROR|E_WARNING);
 		$border_type=(int)$_POST['border_type'];
 		$title=$_POST['title'];
@@ -54,7 +54,7 @@
 //获取帖子总数
 	function fetchNum(){
 
-		include 'connect.php';
+		include '../connect.php';
 		$lesson_id=$_GET["courseID"];//获取教师账号
 		$post_kind=(int)$_GET['post_kind'];
 		//$lesson_id='ABCDE1';
@@ -71,7 +71,7 @@
 
 //提交二级回复
 	function submitReRe(){
-		include 'connect.php';
+		include '../connect.php';
 		$topic_id=(int)$_POST['topic_id'];
 		$content=$_POST['content'];
 		$ofloor=(int)$_POST['floor'];
@@ -123,7 +123,7 @@
 
 //提交一级回复
 	function submitRe(){
-		include 'connect.php';
+		include '../connect.php';
 		error_reporting(E_ERROR|E_WARNING);
 		$topic_id=(int)$_POST['topic_id'];
 		$content=htmlspecialchars(stripcslashes($_POST['content']));
@@ -155,7 +155,7 @@
 
 //显示帖子列表
 	function fetchAll(){
-		include 'connect.php';
+		include '../connect.php';
 		$lesson_id=$_GET["courseID"];//获取教师账号
 		$post_kind=(int)$_GET['post_kind'];
 		$offset=(int)$_GET['offset'];
@@ -195,7 +195,7 @@
 
 //显示一个帖子的内容
 	function fetchDetail(){
-		include 'connect.php';
+		include '../connect.php';
 		error_reporting(E_ERROR|E_WARNING);
 		$topic_id=(int)$_GET['topic_id'];
 		//$topic_id=1;
@@ -217,7 +217,7 @@
 
 //一级回复
 	function fetchRe(){
-		include 'connect.php';
+		include '../connect.php';
 		error_reporting(E_ERROR|E_WARNING);
 		$topic_id=(int)$_GET['topic_id'];
 		$offset=(int)$_GET['offset'];

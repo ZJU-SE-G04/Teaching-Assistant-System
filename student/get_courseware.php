@@ -1,5 +1,5 @@
 <?php
-	include 'connect.php';
+	include '../connect.php';
 
 
 	$course_id=$_GET["courseID"];//获取教师账号

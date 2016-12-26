@@ -331,3 +331,10 @@ create table private_msg_table(
 	time datetime,#收到评论的时间
 	constraint foreign key (id) references user_table(id) on delete cascade on update cascade
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+create table link_table(
+	id int not null auto_increment,
+	link_name varchar(50),
+	link_address varchar(50),
+	primary key(id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -1,5 +1,5 @@
 <?php
-	include 'connect.php';
+	include '../connect.php';
 	$article_id=(int)$_GET["article_id"];//获取教师账号
 	$id=$_GET['id'];
 	$time=$_GET['time'];

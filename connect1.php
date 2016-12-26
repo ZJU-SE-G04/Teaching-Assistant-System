@@ -1,6 +1,4 @@
 <?php
-	header("Access-Control-Allow-Origin: *");
-	header("Content-Type: application/json; charset=UTF-8");
 	$servername = "120.77.34.254";
 	$username = "root";
 	$password = "exciting";

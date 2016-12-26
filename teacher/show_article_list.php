@@ -1,5 +1,5 @@
 <?php
-	include 'connect.php';
+	include '../connect.php';
 	error_reporting(E_ERROR|E_WARNING);
 	$lesson_id=$_GET["lesson_id"];//获取教师账号
 	$search=$_GET['needed_title'];

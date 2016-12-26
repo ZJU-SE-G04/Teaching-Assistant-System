@@ -1,5 +1,5 @@
 <?php
-	include 'connect.php';
+	include '../connect.php';
 	$topic_id=$_GET["topic_id"];//获取教师账号
 	//$topic_id=1;
 	//$lesson_id='ABCDE1';

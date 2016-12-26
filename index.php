@@ -32,23 +32,12 @@
 				//echo 'Location:/student/student_learn.html?lesson_id='.$lesson_id;
 				echo '/student/student_learn.html?lesson_id='.$lesson_id;
 				break;
-				}
-				case 2:{
-					$result=$conn->query('select * from lesson_table where lesson_id="'.$lesson_id.'"');
-					$row=mysqli_fetch_assoc($result);
-					//echo 'Location:teacher/show_article.html?lesson_id='.$lesson_id.'&course_name='.$row['lesson_name'].'&user_name='.$uname.'&user_id='.$uid;
-					echo 'teacher/show_article.html?lesson_id='.$lesson_id.'&course_name='.$row['lesson_name'].'&user_name='.$uname.'&user_id='.$uid.'&level=2';
-					break;
-				}
+			}
 				case 3:{
 					$result=$conn->query('select * from lesson_table where lesson_id="'.$lesson_id.'"');
 					$row=mysqli_fetch_assoc($result);
 					//echo 'Location:teacher/show_article.html?lesson_id='.$lesson_id.'&course_name='.$row['lesson_name'].'&user_name='.$uname.'&user_id='.$uid;
-					echo 'teacher/show_article.html?lesson_id='.$lesson_id.'&course_name='.$row['lesson_name'].'&user_name='.$uname.'&user_id='.$uid.'&level=3';
-					break;
-				}
-				case 4:{
-					echo 'administrator/administrator.html';
+					echo 'teacher/show_article.html?lesson_id='.$lesson_id.'&course_name='.$row['lesson_name'].'&user_name='.$uname.'&user_id='.$uid;
 					break;
 				}
 			}

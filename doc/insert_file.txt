@@ -165,3 +165,10 @@ insert into response_table values(5,'111111','2016-9-10 8:00:00','yes',2);
 insert into words_table values(null,'游客','2016-7-7',false,'给力');
 insert into words_table values(null,'路人A','2016-7-8',false,'强无敌');
 insert into words_table values(null,'路人B','2016-7-9',false,'666666');
+
+
+insert into link_table values(null, '浙江大学现代教务管理系统', 'http://jwbinfosys.zju.edu.cn');
+insert into link_table values(null, 'CC98论坛', 'http://www.cc98.org');
+insert into link_table values(null, '哔哩哔哩弹幕视频网', 'http://www.bilibili.com');
+insert into link_table values(null, 'Google', 'http://www.google.com');
+insert into link_table values(null, '浙江大学软件学院', 'http://www.cst.zju.edu.cn');

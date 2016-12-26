@@ -1,5 +1,5 @@
 <?php
-	include 'connect.php';
+	include '../connect.php';
 	error_reporting(E_ERROR|E_WARNING);
 	$lesson_id=$_GET["lesson_id"];//获取班级号
 	//$lesson_id='ABCDE1';
