@@ -12,7 +12,7 @@ var course_name;
 var course_id;
 var user_name;
 var user_id;
-
+var level;
 
 
 
@@ -30,7 +30,10 @@ window.onload = function() { //在前端存_id的值
 function show_class() {
     
     document.getElementById("class_manage_course_name").innerHTML=course_name;
-    
+
+    $(".x-class-manage-btn").click(change_class);
+
+
     $.ajax({
         type:"GET",
         url:"show_class.php?lesson_id="+course_id,
@@ -65,18 +68,24 @@ function show_class() {
 // -------- 选择不同班级,可以触发此函数 ----------
 
 function change_class() {
+    
+    
     var class_manage_select=document.getElementById("class_manage_select");
     var index=class_manage_select.selectedIndex;
 
     class_time=class_manage_select[index].innerHTML;
+    class_id=class_manage_select[index].id;
 
-    document.getElementById("class_manage_class_time").innerHTML=class_time;
+    $("#class_manage_class_time").text(class_time);
+
+    $(".x-class-time").text(class_time);
 
 
 }
-//-----根据course_id初始class_id
+//-----根据course_id初始class_id----
+//这个函数在页面加载时被调用
 
-function show_class() {
+function show_class_init() {
     $.ajax({
             url:"show_class.php?lesson_id="+course_id,
             success:function(result){
@@ -84,6 +93,7 @@ function show_class() {
                     class_id=result[i].class_id;
                     class_time=result[i].begin_time;
                 }
+                $(".x-class-time").text(class_time);
             }
         }
     );
