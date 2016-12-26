@@ -1,6 +1,13 @@
 # Teaching-Assistant-System
 ## Specification&&Requirements
 
+## 访问服务器备忘
+
+- 浏览器输入:http://120.77.34.254/Teaching-Assistant-System/
+- 访问系统中其他页面与访问本地类似,在http://120.77.34.254/Teaching-Assistant-System/后面添加路径即可
+- 服务器目前代码版本:d9cd509 - update home.php (推送于2016-12-26 13:37) <OldWa>
+- 一天推送一次,推送后请在README.md中更新服务器代码版本
+
 ## 写文档要求
 - 表名上，图名下，分开编号，编号根据小节定，如6-1  6-2  6-3
 
