@@ -1,4 +1,3 @@
-//getPageComments.php
 <?php
 	include 'connect.php';
 	$topicId=$_POST["topicId"];
