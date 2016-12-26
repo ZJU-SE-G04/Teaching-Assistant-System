@@ -1,6 +1,6 @@
 <?php
 	//尚未测试
-	include 'connect.php';
+	include '../connect.php';
 	$article_id=$_GET["article_id"];//获取教师账号
 	//$article_id=4;
 	$su=1;

@@ -1,5 +1,5 @@
 <?php
-	include 'connect.php';
+	include '../connect.php';
 	$article_id=(int)$_GET['article_id'];
 	$floor=(int)$_GET['floor'];
 //	$article_id=2;

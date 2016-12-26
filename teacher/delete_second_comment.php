@@ -1,6 +1,6 @@
 <?php
 	//尚未测试
-	include 'connect.php';
+	include '../connect.php';
 	$article_id=(int)$_GET["article_id"];//获取教师账号
 	$floor=(int)$_GET['floor'];
 	$re_floor=(int)$_GET['re_floor'];

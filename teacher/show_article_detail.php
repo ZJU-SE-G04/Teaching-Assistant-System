@@ -1,5 +1,5 @@
 <?php
-	include 'connect.php';
+	include '../connect.php';
 	error_reporting(E_ERROR|E_WARNING);
 	$article_id=(int)$_GET['article_id'];
 	//$article_id=2;

@@ -1,6 +1,6 @@
 <?php
 	//尚未测试
-	include 'connect.php';
+	include '../connect.php';
 	$class_id=$_GET["class_id"];//获取班级号
 	//$class_id=1;
 	if($class_id==null) echo 'SHIT';
