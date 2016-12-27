@@ -66,6 +66,9 @@ function getNotice() {
     show_class_init();//初始化班级
     $(".c-class-id").attr("value",class_id);
 
+   
+    test();
+
 
 }
 window.onload = getNotice;

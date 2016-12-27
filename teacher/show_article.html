@@ -24,6 +24,9 @@
     <link href="../bootstrap-3.3.7-dist/bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet"
           type="text/css"/>
 
+    <!--<script src="../bootstrap-3.3.7-dist/bootstrap-editable/bootstrap-editable.css"></script>-->
+
+
     <!--以下是Li Boao导入的css文件-->
     <link rel="stylesheet" href="../css/content.css">
 
@@ -778,7 +781,6 @@
             </div>
 
             <div id="class" class="tab-pane">
-                <!--<h3>你当前所在的班级是:<span id="course_name">xxx</span><span id="class_time">xxx</span></h3><h3>你当前所在的班级是:<span id="course_name">xxx</span><span id="class_time">xxx</span></h3>-->
                 <div class="bs-callout bs-callout-info">
                     <h4>你当前所在的班级是:</h4>
                     <span id="class_manage_course_name"></span><span id="class_manage_class_time"></span>
@@ -790,6 +792,7 @@
 
 
             </div>
+
             <div id="stuInfo" class="tab-pane">
                 <div class="bs-callout bs-callout-info">
                     <h4>以下是<span id="stu_course_name"></span><span class="x-class-time"></span>班的学生信息</h4>
@@ -805,11 +808,11 @@
 
 
                 <table class="table table-striped" id="StuInfoTable">
-                    <tr><th>学号</th><th>姓名</th><th>院系</th><th>专业</th><th>团队</th><th>删除</th><th>修改</th></tr>
+                    <tr><th>学号</th><th>姓名</th><th>院系</th><th>专业</th><th>团队</th></tr>
                     <tbody class="stu_info_loop">
                     <!-- loop start--><tr class="old s-one-info"><th class="s-stu-id"></th><th class="s-stu-name"></th><th class="s-depart"></th><th class="s-major"></th><th class="s-team-name"></th>
-                        <th><a class='glyphicon glyphicon-trash s-delete'></a></th>
-                        <th><a class='glyphicon glyphicon-edit s-update'></a></th>
+                        <!--<th><a class='glyphicon glyphicon-trash s-delete'></a></th>-->
+                        <!--<th><a class='glyphicon glyphicon-edit s-update'></a></th>-->
                     </tr> <!-- loop end-->
 
                     </tbody>
@@ -903,6 +906,8 @@
 <script src="js/add_article.js"></script>
 <script src="js/class_manage.js"></script>
 <script src="js/courseware.js"></script>
+<!--<script src="../bootstrap-3.3.7-dist/bootstrap-editable/bootstrap-editable.js"></script>-->
+
 
 <!--以下是谢俊东导入的js文件-->
 <script src="js/discuss_area.js"></script>
