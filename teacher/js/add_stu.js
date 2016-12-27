@@ -3,7 +3,6 @@
  */
 //------------- 一些全局变量 -----------
 
-var oldAddStuNumber=0;
 
 
 var old_id_update_stu;
@@ -11,6 +10,8 @@ var old_id_update_stu;
 //---------------show students' info-----------------
 
 function showStuInfo(){
+    // $("#s-update-area").hide();
+    // $("#s-add-area").hide();
 
     $.ajax({
         type:"GET",
@@ -36,106 +37,43 @@ function showStuInfo(){
 }
 
 //--------------- 增加 添加学生信息的 输入框-----------
-
-
-function addStuInput() {
-
-    var addStuNumberSelect=document.getElementById("addStuNumberSelect");
-    var index=addStuNumberSelect.selectedIndex;
-    var newAddStuNumber=addStuNumberSelect[index].value;
-
-    if(newAddStuNumber==oldAddStuNumber){
-        return;
-    }
-
-    if(newAddStuNumber==0){
-        document.getElementById("StuInfo").removeChild(document.getElementById("deletedAddStu"));
-        oldAddStuNumber=newAddStuNumber;
-        return;
-    }
-
-    if(document.getElementById("deletedAddStu")==null){
-        var parent=document.createElement("div");
-        parent.id="deletedAddStu";
-
-        var grandparent=document.getElementById("stuInfo");
-        grandparent.appendChild(parent);
-
-        var newNode = document.createElement("h3");
-        newNode.innerHTML = "输入学生信息";
-        parent.appendChild(newNode);
-
-        var newNodeDivRow = document.createElement("div");
-        newNodeDivRow.className = "row";
-        parent.appendChild(newNodeDivRow);
-
-        var newNodeForm = document.createElement("div");
-        newNodeForm.id = "addedFormStu";
-        parent.appendChild(newNodeForm);
-
-        var allInputRowsStu=document.createElement("div");
-        allInputRowsStu.id="allInputRowsStu";
-        newNodeForm.appendChild(allInputRowsStu);
-
-        newNodeDivRow.innerHTML = "<div class='col-sm-3'><label>学号</label> " +
-            " </div> <div class='col-sm-3'> " + "<label >姓名</label> " + "</div>" +
-            " <div class='col-sm-3'> <label>院系</label>  </div>" +
-            " <div class='col-sm-3'> <label >专业</label> </div>";
-    }
-    else {
-        var allInputRowsStu=document.getElementById("allInputRowsStu");
-    }
-
-    if(newAddStuNumber>oldAddStuNumber) {
-        for (var i = 0; i < newAddStuNumber-oldAddStuNumber; i++) {
-            var child = document.createElement("div");
-            child.className = "addedStuRow";
-            child.innerHTML = "<div class='row'><div class='col-sm-3'><input class='form-control t-stu-id' name='id[]' > " +
-                "</div> <div class='col-sm-3'> <input class='form-control t-stu-name'  name='name[]' >" +
-                " </div> <div class='col-sm-3'> <input class='form-control t-stu-department'  name='department[]'> " +
-                "</div> <div class='col-sm-3'> <input class='form-control t-stu-major' name='major[]' ></div></div>";
-            allInputRowsStu.appendChild(child);
-        }
-    }
-    else {
-        var  x=document.getElementsByClassName("addedStuRow");
-        for (var i = oldAddStuNumber-newAddStuNumber; i >0; i--) {
-            allInputRowsStu.removeChild(x[i-1]);
-        }
-
-    }
-
-    if(document.getElementById("add_Stu_final")==null) {
-        var newNodeButton = document.createElement("div");
-        newNodeButton.className = "row";
-        newNodeForm.appendChild(newNodeButton);
-        newNodeButton.innerHTML = " <div class='col-sm-9'>" +
-            "<button  class='btn btn-primary' id='cancel_stu_button' onclick='cancelStu()'>取消录入</button></div>" +
-            " <div class='col-sm-3'>" +
-            " <button  class='btn btn-primary' id='add_stu_final' onclick='addStu()'>确定录入</div>";
-
-    }
-
-    oldAddStuNumber=newAddStuNumber;
-}
+//
+//
+// function addStuInput() {
+//     var s_select=document.getElementById("addStuNumberSelect");
+//     var index=s_select.selectedIndex;
+//     var newAddStuNumber=s_select[index].value;//找到下拉框中值
+//     if(newAddStuNumber==0){
+//         return;
+//     }
+//     var s_add_in=$("#s-add-in");
+//     s_add_in.children(".new").remove();
+//     var i=0;
+//     for (i = 0; i < newAddStuNumber; i++) {
+//         var tmp = s_add_in.children(".old").clone().removeClass("old").addClass("new").show();
+//
+//         s_add_in.append(tmp);
+//     }
+//     s_add_in.parent().show();
+//
+// }
 
 //----------- 取消输入框 ----------------
+// function cancelStu() {
+//     document.getElementById("stuInfo").removeChild(document.getElementById("deletedAddStu"));
+//
+// }
 
-function cancelStu() {
-    document.getElementById("stuInfo").removeChild(document.getElementById("deletedAddStu"));
-    oldAddTANumber=0;
-
-}
 
 
 //-----------  将输入框的学生信息发送到后端,并处理返回结果---------------
 
 function  addStu(){
 
-    var t_stu_id=document.getElementsByClassName("t-stu-id");
-    var t_stu_name=document.getElementsByClassName("t-stu-name");
-    var t_stu_department=document.getElementsByClassName("t-stu-department");
-    var t_stu_major=document.getElementsByClassName("t-stu-major");
+    var t_stu_id=document.getElementsByClassName("s-add-id");
+    var t_stu_name=document.getElementsByClassName("s-add-name");
+    var t_stu_department=document.getElementsByClassName("s-add-depart");
+    var t_stu_major=document.getElementsByClassName("s-add-major");
 
     var arr_value_id;
     var arr_value_name;
@@ -147,28 +85,37 @@ function  addStu(){
     for(var i=0;i<t_stu_id.length;i++){
 
         arr_value_id=t_stu_id[i].value;
+        alert(arr_value_id);
         arr=arr+"&id[]="+arr_value_id;
 
         arr_value_name=t_stu_name[i].value;
         arr=arr+"&name[]="+arr_value_name;
 
+        alert(arr_value_name);
+
+
         arr_value_department=t_stu_department[i].value;
         arr=arr+"&department[]="+arr_value_department;
 
+        alert(arr_value_department);
+
+
         arr_value_major=t_stu_major[i].value;
         arr=arr+"&major[]="+arr_value_major;
+        alert(arr_value_major);
+
+
+
 
     }
 
     $.ajax({
-        type:"GET",
         url:"add_stu.php?class_id="+class_id+arr,
         success:function (result) {
             var jsonObj=result;
             if(jsonObj["if_success"]==0){
                 window.alert(jsonObj["error_message"]);
-                // $(".modal-content").text(json["error_message"]);
-                $('#myModal').modal(options)
+
             }
             else {
                 location.reload(true);
@@ -207,50 +154,15 @@ function deleteStu() {
 
 //--------------  add form for updating ------------------------
 
-function addStuUpdate(old_id) {
+function addStuUpdate() {
 
-    old_id_update_stu=old_id;
-
-    if( document.getElementById("updatedAddStu")==null) {
-        var parent = document.createElement("div");
-        parent.id = "updatedAddStu";
-        var grandparent = document.getElementById("stuInfo");
-        grandparent.appendChild(parent);
-        var newNode = document.createElement("h3");
-        newNode.innerHTML = "修改学生信息";
-        parent.appendChild(newNode);
-
-        var newNodeDivRow = document.createElement("div");
-        newNodeDivRow.className = "row";
-        parent.appendChild(newNodeDivRow);
-
-        var newNodeForm = document.createElement("div");
-        parent.appendChild(newNodeForm);
-
-        //--------- 标题栏 ----------------
-        newNodeDivRow.innerHTML = "<div class='col-sm-3'><label>学号</label> " +
-            " </div> <div class='col-sm-3'> " + "<label >姓名</label> " + "</div>" +
-            " <div class='col-sm-3'> <label>院系</label>  </div>" +
-            " <div class='col-sm-3'> <label >专业</label> </div>";
-
-        var child = document.createElement("div");
-        child.className = "addedStuRow";
-        child.innerHTML = "<div class='row'><div class='col-sm-3'><input class='form-control update-stu-input' > " +
-            "</div> <div class='col-sm-3'> <input class='form-control update-stu-input' >" +
-            " </div> <div class='col-sm-3'> <input class='form-control update-stu-input' > " +
-            "</div> <div class='col-sm-3'> <input class='form-control update-stu-input'  ></div></div>";
-        newNodeForm.appendChild(child);
-
-
-        var newNodeButton = document.createElement("div");
-        newNodeButton.className = "row";
-        newNodeForm.appendChild(newNodeButton);
-        newNodeButton.innerHTML = " <div class='col-sm-9'>" +
-            "<button  class='btn btn-primary' id='cancel_TA_button_update' onclick='cancelUpdateStu()'>取消修改</button></div>" +
-            " <div class='col-sm-3'>" +
-            " <button  class='btn btn-primary' id='update_TA_final' onclick='updateStu()'>确定修改</div>";
-
-    }
+    var s_one_info=$(this).parents(".s-one-info");
+    s_one_info.parent().children().removeClass("s-choose");
+    old_id_update_stu=s_one_info.children(":first").text();
+    s_one_info.addClass("s-choose");
+    $("#s-update-area").show();
+    $("#update_TA_final").click(updateStu);
+    
 }
 
 
@@ -258,7 +170,7 @@ function addStuUpdate(old_id) {
 
 
 function  cancelUpdateStu() {
-    document.getElementById("stuInfo").removeChild(document.getElementById("updatedAddStu"));
+   $("#s-update-area").hide();
 }
 
 // ---------- 向后端发送修改学生信息 -------------
@@ -266,20 +178,42 @@ function  cancelUpdateStu() {
 
 function updateStu() {
 
-    var update_stu_input=document.getElementsByClassName("update-stu-input");
-    var arr="&id="+update_stu_input[0].value+"&name="+update_stu_input[1].value+"&department="+update_stu_input[2].value+"&major="+update_stu_input[3].value;
+    var s_update_in=$(this).parents("#s-update-area").children("#s-update-in");
 
+    var id=s_update_in.find(".s-update-id").val();
+    var name=s_update_in.find(".s-update-name").val();
+    var depart=s_update_in.find(".s-update-depart").val();
+    var major=s_update_in.find(".s-update-major").val();
+
+    if(id==""||name==""||depart==""||major==""){
+        alert("信息不能为空");
+        return;
+    }
+
+    var arr="&id="+id+"&name="+name+"&department="+depart+"&major="+major;
     $.ajax({
-        type:"GET",
         url:"update_stu.php?class_id="+class_id+"&old_id="+old_id_update_stu+arr,
         success:function(result){
             jsonObj = result;
             if(jsonObj["if_success"]==0) {
+                alert(result["err_message"]);
 
             }
             else{
                 window.alert("修改成功");
-                location.reload(true);
+                var stu_info_loop=s_update_in.parents("#stuInfo").find(".stu_info_loop");
+                var tmp=stu_info_loop.children(".old").clone().removeClass("old").addClass("new").show();
+                tmp.find(".s-stu-id").html(id);
+                tmp.find(".s-stu-name").html(name);
+                tmp.find(".s-depart").html(depart);
+                tmp.find(".s-major").html(major);
+                tmp.find(".s-team-name").html("未组队");
+                tmp.find(".s-delete").click(deleteStu);
+                tmp.find(".s-update").click(addStuUpdate);
+                stu_info_loop.append(tmp);
+                stu_info_loop.children(".s-choose").remove();
+
+                $("#s-add-area").hide();
             }
         }
     });

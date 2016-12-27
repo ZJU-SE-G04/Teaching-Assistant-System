@@ -15,16 +15,6 @@ var user_id;
 var level;
 
 
-
-window.onload = function() { //在前端存_id的值
-    $(".c-course-id").attr("value",course_id);
-};
-window.onload = function() { //在前端存_id的值
-    $(".c-class-id").attr("value",class_id);
-};
-
-
-
 //--------- 显示当前课程的所有班级---------
 
 function show_class() {
@@ -39,8 +29,6 @@ function show_class() {
         url:"show_class.php?lesson_id="+course_id,
         success:function(result){
             jsonObj=result;
-
-
 
             var class_manage_select=document.getElementById("class_manage_select");
 
