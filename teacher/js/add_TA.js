@@ -1,13 +1,3 @@
-/**
- * Created by achao_zju on 13/11/2016.
- */
-
-
-//一些全局变量
-
-var old_id_update_TA;//用于更新助教信息
-
-
 // ------------------show TAs' info-------------------------
 
 
@@ -35,7 +25,7 @@ function showTAInfo(){
                 tmp.find(".t-depart").html(x.department);
                 tmp.find(".t-major").html(x.major);
                 tmp.find(".t-delete").click(deleteTA);
-                tmp.find(".t-update").click(addTAUpdate);
+                tmp.find(".t-update").click(getOldId);
                 t_info_loop.append(tmp);
             }
 
@@ -49,7 +39,6 @@ function showTAInfo(){
     t_update_area.find("#t-update-cancel").click(function () {
         t_update_area.hide();
     })
-
 
 }
 
@@ -78,9 +67,6 @@ function  addTAInput() {
 }
 
 // ------------------添加助教信息,发送请求给后端-------------------
-
-
-
 
 function addTA(){
 
@@ -173,16 +159,11 @@ function deleteTA() {
 
 
 
-function addTAUpdate() {
+function getOldId() {
     var t_one_info=$(this).parents(".t-one-info");
-    t_one_info.parent().children().removeClass("t-choose");
-    old_id_update_stu=t_one_info.children(":first").text();
-    t_one_info.addClass("t-choose");
-    $("#t-update-area").show();
-    $("#t-info-loop").append("<tr class='test'><th class='t-id'><input class='form-control'></th><th class='t-name'></th><th class='t-depart'></th><th class='t-major'></th> " +
-        "<th><a class='glyphicon glyphicon-trash t-delete'></a></th> " +
-        "<th><a class='glyphicon glyphicon-edit t-update'></a></th> " +
-        "</tr>");
+    var t_info_loop=t_one_info.parent();
+    t_info_loop.find(".t-chosen").removeClass("t-chosen");
+    t_one_info.addClass("t-chosen");
 }
 
 
@@ -192,14 +173,20 @@ function addTAUpdate() {
 function updateTA() {
 
 
-    var update_TA_input=document.getElementsByClassName("update-TA-input");
+    var t_update_in=$("#t-update-in");
+    var id=t_update_in.find(".t-update-id").val();
+    var name=t_update_in.find(".t-update-name").val();
+    var depart=t_update_in.find(".t-update-depart").val();
+    var major=t_update_in.find(".t-update-major").val();
 
-    var arr="&id="+update_TA_input[0].value+"&name="+update_TA_input[1].value+"&department="+update_TA_input[2].value+"&major="+update_TA_input[3].value;
+    var t_chosen=$(".t-chosen");
+    var old_id=t_chosen.find(".t-id");
 
+
+    var arr="&id="+id+"&name="+name+"&department="+depart+"&major="+major;
 
     $.ajax({
-        type:"GET",
-        url:"update_TA.php?class_id="+class_id+"&old_id="+old_id_update_TA+arr,
+        url:"update_TA.php?class_id="+class_id+"&old_id="+old_id+arr,
         success:function(result){
             jsonObj = result;
             if(jsonObj["if_success"]==0) {
@@ -207,7 +194,10 @@ function updateTA() {
             }
             else{
                 window.alert("修改成功");
-                location.reload(true);
+                t_chosen.find(".t-id").html(id);
+                t_chosen.find(".t-name").html(name);
+                t_chosen.find(".t-depart").html(depart);
+                t_chosen.find(".t-major").html(major);
             }
         }
     });
@@ -215,40 +205,6 @@ function updateTA() {
 
 }
 
-
-
-
-$(document).ready(function(){
-    var tds =$("td");
-    tds.click(tdclick);
-});
-
-function tdclick(){
-    var td =$(this);
-    var tdtext =td.text();
-    td.html("");
-    var inputtext =$("<input>");
-    inputtext.attr("value",tdtext);
-
-    inputtext.keyup(function(event){
-        var keycode = event || window.event;
-        var code =keycode.keyCode;
-        if(code == 13){
-            var inputtext =$(this);
-            var tdtext =inputtext.val();
-            var ts =inputtext.parent();
-            ts.html(tdtext);
-            ts.click(tdclick);
-        }
-
-    });
-
-    td.append(inputtext);
-    var aa =inputtext.get(0);
-    aa.select();
-    td.unbind();
-
-};
 
 
 

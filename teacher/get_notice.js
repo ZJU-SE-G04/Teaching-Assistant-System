@@ -64,11 +64,10 @@ function getNotice() {
     }
 
     show_class_init();//初始化班级
-    $(".c-class-id").attr("value",class_id);
+    $(".c-class-id").attr("value",class_id);//后面还缺一句陈述?
 
-   
-    test();
-
+    
+    
 
 }
 window.onload = getNotice;
