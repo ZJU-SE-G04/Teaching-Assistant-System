@@ -8,6 +8,52 @@
 var old_id_update_TA;//用于更新助教信息
 
 
+// ------------------show TAs' info-------------------------
+
+
+
+
+function showTAInfo(){
+
+    var t_add_area=$("#t-add-area");
+    var t_update_area=t_add_area.next();
+    t_add_area.hide();
+    t_update_area.hide();
+
+    $.ajax({
+        url:"show_TA_info.php?class_id="+class_id,
+        success:function(result){
+
+
+            var t_info_loop=$("#t-info-loop");
+            t_info_loop.children(".new").remove();
+            for (var i = 0; i < result.length; i++) {
+                var x=result[i];
+                var tmp=t_info_loop.children(".old").clone().removeClass("old").addClass("new").show();
+                tmp.find(".t-id").html(x.id);
+                tmp.find(".t-name").html(x.name);
+                tmp.find(".t-depart").html(x.department);
+                tmp.find(".t-major").html(x.major);
+                tmp.find(".t-delete").click(deleteTA);
+                tmp.find(".t-update").click(addTAUpdate);
+                t_info_loop.append(tmp);
+            }
+
+        }
+    });
+    var t_add_in=t_add_area.children("#t-add-in");
+    t_add_in.next().find("#t-add-final").click(addTA);
+    t_add_in.next().find("#t-add-cancel").click(function () {
+        t_add_area.hide();
+    });
+    t_update_area.find("#t-update-cancel").click(function () {
+        t_update_area.hide();
+    })
+
+
+}
+
+
 // ------------------添加输入框，输入框用于添加助教信息-------------------
 
 function  addTAInput() {
@@ -28,7 +74,7 @@ function  addTAInput() {
     }
     t_add_in.parent().show();
 
-    t_add_in.next().find("#t-add-final").click(addTA);
+
 }
 
 // ------------------添加助教信息,发送请求给后端-------------------
@@ -44,7 +90,6 @@ function addTA(){
     var major;
     var arr="";
 
-
     var t_add_in=$(this).parents("#t-add-area").children("#t-add-in");
     t_add_in.children(".new").each(function (i) {
         id=$(this).find(".t-add-id").val();
@@ -59,6 +104,7 @@ function addTA(){
             window.alert("信息不能为空");
             return;
         }
+        console.log(arr);
 
     });
 
@@ -91,48 +137,11 @@ function addTA(){
 }
 
 
-// ------------------取消修改助教信息------------------------
-
-
-
-function  cancelTA() {
-    $("#t-add-area").hide();
-}
-
-// ------------------show TAs' info-------------------------
 
 
 
 
-function showTAInfo(){
 
-    $("#t-update-area").hide();
-    $("#t-add-area").hide();
-
-    $.ajax({
-        url:"show_TA_info.php?class_id="+class_id,
-        success:function(result){
-
-
-            var t_info_loop=$("#t-info-loop");
-            t_info_loop.children(".new").remove();
-            for (var i = 0; i < result.length; i++) {
-                var x=result[i];
-                var tmp=t_info_loop.children(".old").clone().removeClass("old").addClass("new").show();
-                tmp.find(".t-id").html(x.id);
-                tmp.find(".t-name").html(x.name);
-                tmp.find(".t-depart").html(x.department);
-                tmp.find(".t-major").html(x.major);
-                tmp.find(".t-delete").click(deleteTA);
-                tmp.find(".t-update").click(addTAUpdate);
-                t_info_loop.append(tmp);
-            }
-
-        }
-    });
-
-
-}
 
 // ------------------delete  a TA's info-------------------------
 
@@ -159,6 +168,24 @@ function deleteTA() {
 }
 
 
+
+// ------------------add a form  for updating TA-------------------------
+
+
+
+function addTAUpdate() {
+    var t_one_info=$(this).parents(".t-one-info");
+    t_one_info.parent().children().removeClass("t-choose");
+    old_id_update_stu=t_one_info.children(":first").text();
+    t_one_info.addClass("t-choose");
+    $("#t-update-area").show();
+    $("#t-info-loop").append("<tr class='test'><th class='t-id'><input class='form-control'></th><th class='t-name'></th><th class='t-depart'></th><th class='t-major'></th> " +
+        "<th><a class='glyphicon glyphicon-trash t-delete'></a></th> " +
+        "<th><a class='glyphicon glyphicon-edit t-update'></a></th> " +
+        "</tr>");
+}
+
+
 // ------------------update a TA's info-------------------------
 
 
@@ -181,10 +208,7 @@ function updateTA() {
             else{
                 window.alert("修改成功");
                 location.reload(true);
-
             }
-
-
         }
     });
     
@@ -193,21 +217,38 @@ function updateTA() {
 
 
 
-// ------------------add a form  for updating TA-------------------------
 
+$(document).ready(function(){
+    var tds =$("td");
+    tds.click(tdclick);
+});
 
+function tdclick(){
+    var td =$(this);
+    var tdtext =td.text();
+    td.html("");
+    var inputtext =$("<input>");
+    inputtext.attr("value",tdtext);
 
-function addTAUpdate(old_id) {
-}
+    inputtext.keyup(function(event){
+        var keycode = event || window.event;
+        var code =keycode.keyCode;
+        if(code == 13){
+            var inputtext =$(this);
+            var tdtext =inputtext.val();
+            var ts =inputtext.parent();
+            ts.html(tdtext);
+            ts.click(tdclick);
+        }
 
+    });
 
-// ------------------取消修改助教信息-------------------------
+    td.append(inputtext);
+    var aa =inputtext.get(0);
+    aa.select();
+    td.unbind();
 
-
-function  cancelUpdateTA() {
-    document.getElementById("TAInfo").removeChild(document.getElementById("updatedAddTA"));
-}
-
+};
 
 
 
