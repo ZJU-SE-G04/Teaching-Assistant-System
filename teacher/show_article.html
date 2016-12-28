@@ -24,7 +24,6 @@
     <link href="../bootstrap-3.3.7-dist/bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet"
           type="text/css"/>
 
-    <!--<script src="../bootstrap-3.3.7-dist/bootstrap-editable/bootstrap-editable.css"></script>-->
 
 
     <!--以下是Li Boao导入的css文件-->
@@ -822,12 +821,15 @@
             <div id="TAInfo" class="tab-pane">
                 <div class="bs-callout bs-callout-info">
                     <h4>以下是<span id="TA_course_name"></span><span class="x-class-time"></span>班的助教信息</h4></div>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#t-add-modal">
+                    录入助教信息
+                </button>
                     <table class="table table-striped" id="t-table">
                         <tr><th>学号</th><th>姓名</th><th>院系</th><th>专业</th><th>删除</th><th>修改</th></tr>
                         <tbody id="t-info-loop">
                         <!-- loop start--><tr class="old t-one-info"><td class="t-id"></td><td class="t-name"></td><td class="t-depart"></td><td class="t-major"></td>
-                            <td><a class='glyphicon glyphicon-trash t-delete'></a></td>
-                            <td><a  data-toggle="modal" data-target="#t-update-modal" class='glyphicon glyphicon-edit t-update'></a></td>
+                            <td><a  data-toggle="modal"   class='glyphicon glyphicon-trash t-delete'></a></td>
+                            <td><a data-toggle="modal"  data-target="#t-update-modal" class='glyphicon glyphicon-edit t-update'></a></td>
                         </tr> <!-- loop end-->
                         </tbody>
                     </table>
@@ -837,7 +839,7 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                <h4 class="modal-title" id="myModalLabel">修改助教信息</h4>
+                                <h4 class="modal-title" id="t-update-modal-title">修改助教信息</h4>
                             </div>
                             <div class="modal-body">
                                 <div class="row">
@@ -860,38 +862,35 @@
                     </div>
                 </div>
 
-                    <div class="row" id="t_info_row">
-                        <div  class='col-md-3' id='add_t_hint'>
-                            <p  style='float: right'>手动添加助教:</p></div>
-                        <div  class='col-md-1' id='add_t_select' >  <div class='form-group'>
-                            <select id='t-select' class='form-control' onchange='addTAInput()'>
-                                <option>0</option><option>1</option><option>2</option><option>3</option>
-                            </select></div> </div>
-                    </div>
-                    <div id="t-add-area">
-                        <h3>输入助教信息</h3>
-                        <div class="row">
-                            <div class='col-md-3'><label>学号</label>
-                            </div> <div class='col-md-3'> <label >姓名</label> </div>
-                            <div class='col-md-3'> <label>院系</label>  </div>
-                            <div class='col-md-3'> <label >专业</label> </div></div>
+                <div class="modal fade" id="t-add-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title" id="t-add-modal-title">添加助教信息</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class='col-md-3'><label>学号</label></div>
+                                    <div class='col-md-3'><label >姓名</label> </div>
+                                    <div class='col-md-3'> <label>院系</label>  </div>
+                                    <div class='col-md-3'> <label >专业</label> </div>
+                                </div>
 
-                        <div id="t-add-in">
-                            <div class='row old'><div class='col-md-3'><input class='form-control t-add-id' name='id[]' >
-                            </div> <div class='col-md-3'> <input class='form-control t-add-name'  name='name[]' >
-                            </div> <div class='col-md-3'> <input class='form-control t-add-depart'  name='department[]'>
-                            </div> <div class='col-md-3'> <input class='form-control t-add-major' name='major[]' ></div></div>
+                                    <div class='row' id="t-add-in"><div class='col-md-3'><input class='form-control t-add-id' name='id[]' >
+                                    </div> <div class='col-md-3'> <input class='form-control t-add-name'  name='name[]' >
+                                    </div> <div class='col-md-3'> <input class='form-control t-add-depart'  name='department[]'>
+                                    </div> <div class='col-md-3'> <input class='form-control t-add-major' name='major[]' ></div></div>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消录入</button>
+                                <button type="button" class="btn btn-primary"  onclick="addTA()">确定录入</button>
+                            </div>
                         </div>
-                        <div class="row">
-                            <div class='col-md-9'>
-                                <button  class='btn btn-primary' id='t-add-cancel'>取消录入</button></div>
-                            <div class='col-md-3'>
-                                <button  class='btn btn-primary' id='t-add-final' >确定录入</button></div>
-                        </div>
                     </div>
-
-
-
+                </div>
             </div>
         </div>
     </div>
@@ -913,7 +912,6 @@
 <script src="js/add_article.js"></script>
 <script src="js/class_manage.js"></script>
 <script src="js/courseware.js"></script>
-<!--<script src="../bootstrap-3.3.7-dist/bootstrap-editable/bootstrap-editable.js"></script>-->
 
 
 <!--以下是谢俊东导入的js文件-->

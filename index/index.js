@@ -7,7 +7,7 @@ var user_id, user_name;
 function logged() {
     if (isLogin) {
         user_name = $.cookie('user_name');
-        document.getElementById("register").style.display = "none";
+        // document.getElementById("register").style.display = "none";//因为不需要注册
         document.getElementById("login").style.display = "none";
         document.getElementById("info").style.display = "inline";
 
@@ -15,7 +15,7 @@ function logged() {
         a.innerHTML = '你好，' + user_name + ' <span class="caret"></span>';
     }
     else {
-        document.getElementById("register").style.display = "inline";
+        // document.getElementById("register").style.display = "inline";//因为不需要注册,
         document.getElementById("login").style.display = "inline";
         document.getElementById("info").style.display = "none";
     }
@@ -98,3 +98,72 @@ function init() {
 
 
 window.onload = init;
+
+
+
+//-----added by achao below---
+function  giveId() {
+    $('#login_detail').modal('hide');
+    $('#fe_answer_question').hide();
+    $('#fe_pwd').modal('show');
+    $('#reset_pwd').hide();
+
+
+
+}
+function  giveIdBa() {
+    $('#login_detail').modal('show');
+    $('#fe_pwd').modal('hide');
+
+}
+function  answerQuestion() {
+    var id=$("#fe_id").val();
+    console.log(id);
+    $('#fe_give_id').hide();
+    $('#fe_answer_question').show();
+    // $("#fe_pwd").f$.ajax({
+    //     url:"index/php/fetch_question.php?id="+id,
+    //     success:function (res) {
+    //         if(res["if_success"]==0){
+    //             window.alert(res["err_message"]);
+    //         }else {
+    //             // console.log(res['question']);
+    //             // console.log(res["if_success"]);
+    //
+    //             $('#fe_give_id').hide();
+    //             $('#fe_answer_question').show();
+    //             $('#fe_question').html(res['question']);
+    //             $("#fe_pwd").find(".modal-title").html("步骤2:回答密保问题");
+    //         }
+    //     }
+    // });ind(".modal-title").html("步骤2:回答密保问题");
+    //
+}
+function answerQuestionBa() {
+    $('#fe_give_id').show();
+    $('#fe_answer_question').hide();
+    $("#fe_pwd").find(".modal-title").html("步骤1:输入用户名");
+
+}
+function  verifyQuestion() {
+    var id=$("#fe_id").val();
+    var answer=$("#fe_answer").val();
+    $("#fe_pwd").find(".modal-title").html("步骤2:回答密保问题");
+    console.log(answer);
+
+    $('#reset_pwd').show();
+    $('#fe_answer_question').hide();
+
+    // $.ajax({
+    //     url:"index/php/verify_question.php?id="+id+"&answer="+answer,
+    //     success:function (res) {
+    //         if(res["if_success"]==0){
+    //             window.alert(res["err_message"]);
+    //         }else {
+    //             $('#reset_pwd').show();
+    //             $('#fe_answer_question').hide();
+    //
+    //         }
+    //     }
+    // });
+}

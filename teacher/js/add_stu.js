@@ -1,11 +1,4 @@
-/**
- * Created by achao_zju on 22/11/2016.
- */
-//------------- 一些全局变量 -----------
 
-
-
-var old_id_update_stu;
 
 //---------------show students' info-----------------
 
@@ -25,7 +18,6 @@ function showStuInfo(){
                 tmp.find(".s-depart").html(x.department);
                 tmp.find(".s-major").html(x.major);
                 tmp.find(".s-team-name").html(x.team_name);
-
                 stu_info_loop.append(tmp);
             }
         }

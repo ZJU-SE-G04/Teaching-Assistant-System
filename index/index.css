@@ -69,3 +69,6 @@ a:hover{
 .grey{
     color: grey;
 }
+a{
+    cursor: pointer;
+}

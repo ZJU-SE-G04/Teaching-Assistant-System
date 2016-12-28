@@ -1,8 +1,5 @@
 // ------------------show TAs' info-------------------------
 
-
-
-
 function showTAInfo(){
 
     var t_add_area=$("#t-add-area");
@@ -33,38 +30,10 @@ function showTAInfo(){
     });
     var t_add_in=t_add_area.children("#t-add-in");
     t_add_in.next().find("#t-add-final").click(addTA);
-    t_add_in.next().find("#t-add-cancel").click(function () {
-        t_add_area.hide();
-    });
-    t_update_area.find("#t-update-cancel").click(function () {
-        t_update_area.hide();
-    })
 
 }
 
 
-// ------------------添加输入框，输入框用于添加助教信息-------------------
-
-function  addTAInput() {
-    var t_select=document.getElementById("t-select");
-    var index=t_select.selectedIndex;
-    var num=t_select[index].value;//找到下拉框中值
-
-    if(num==0){
-        $("#t-add-area").hide();
-        return;
-    }
-    var t_add_in=$("#t-add-in");
-    t_add_in.children(".new").remove();
-    var i=0;
-    for (i = 0; i < num; i++) {
-        var tmp = t_add_in.children(".old").clone().removeClass("old").addClass("new").show();
-        t_add_in.append(tmp);
-    }
-    t_add_in.parent().show();
-
-
-}
 
 // ------------------添加助教信息,发送请求给后端-------------------
 
@@ -76,23 +45,20 @@ function addTA(){
     var major;
     var arr="";
 
-    var t_add_in=$(this).parents("#t-add-area").children("#t-add-in");
-    t_add_in.children(".new").each(function (i) {
-        id=$(this).find(".t-add-id").val();
+    var t_add_in=$("#t-add-in");
+        id=t_add_in.find(".t-add-id").val();
         arr=arr+"&id[]="+id;
-        name=$(this).find(".t-add-name").val();
+        name=t_add_in.find(".t-add-name").val();
         arr=arr+"&name[]="+name;
-        depart=$(this).find(".t-add-depart").val();
+        depart=t_add_in.find(".t-add-depart").val();
         arr=arr+"&department[]="+depart;
-        major=$(this).find(".t-add-major").val();
+        major=t_add_in.find(".t-add-major").val();
         arr=arr+"&major[]="+major;
         if(id==""||name==""||depart==""||major==""){
             window.alert("信息不能为空");
             return;
         }
         console.log(arr);
-
-    });
 
 
     $.ajax({
@@ -111,29 +77,19 @@ function addTA(){
                 tmp.find(".t-depart").html(depart);
                 tmp.find(".t-major").html(major);
                 tmp.find(".t-delete").click(deleteTA);
-                tmp.find(".t-update").click(addTAUpdate);
-                t_info_loop.append(tmp);
-                t_info_loop.children(".s-choose").remove();
-
-                $("#t-add-area").hide();
+                tmp.find(".t-update").click(getOldId);
+                $('#t-add-modal').modal('hide')
+                t_info_loop.prepend(tmp);
             }
         }
     })
 
 }
 
-
-
-
-
-
-
-
 // ------------------delete  a TA's info-------------------------
 
 
 function deleteTA() {
-
 
     var tr=$(this).parent().parent();
     var t_id=tr.children(":first").text();
@@ -172,7 +128,6 @@ function getOldId() {
 
 function updateTA() {
 
-
     var t_update_in=$("#t-update-in");
     var id=t_update_in.find(".t-update-id").val();
     var name=t_update_in.find(".t-update-name").val();
@@ -182,18 +137,16 @@ function updateTA() {
     var t_chosen=$(".t-chosen");
     var old_id=t_chosen.find(".t-id");
 
-
     var arr="&id="+id+"&name="+name+"&department="+depart+"&major="+major;
-
     $.ajax({
         url:"update_TA.php?class_id="+class_id+"&old_id="+old_id+arr,
-        success:function(result){
-            jsonObj = result;
-            if(jsonObj["if_success"]==0) {
-                window.alert("修改失败");
+        success:function(res){
+            if(res["if_success"]==0) {
+                window.alert(res["err_message"]);
             }
             else{
                 window.alert("修改成功");
+                $('#t-update-modal').modal('hide')
                 t_chosen.find(".t-id").html(id);
                 t_chosen.find(".t-name").html(name);
                 t_chosen.find(".t-depart").html(depart);
