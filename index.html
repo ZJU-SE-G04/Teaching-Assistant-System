@@ -67,7 +67,7 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
-<div id="fe_pwd" class="modal fade" tabindex="-1" role="dialog" style="margin-top: 8%">
+<div id="fe_pwd_modal" class="modal fade" tabindex="-1" role="dialog" style="margin-top: 8%">
     <div class="modal-dialog" role="document" style="width: 500px;">
         <div class="modal-content">
             <div class="modal-header">
@@ -82,7 +82,8 @@
                         <input type="text" class="form-control" id="fe_id" placeholder="用户名">
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-primary" onclick="answerQuestion()" >确认</button>
+                        <button type="button" class="btn btn-primary" onclick="giveIdBa()" >上一步</button>
+                        <button type="button" class="btn btn-primary" onclick="answerQuestion()" >下一步</button>
                     </div>
                     <!---->
                 </form>
@@ -93,7 +94,6 @@
                     </div>
                     <div class="form-group">
                         <button type="button" class="btn btn-primary" onclick="answerQuestionBa()" >上一步</button>
-
                         <button type="button" class="btn btn-primary" onclick="verifyQuestion()" >下一步</button>
                     </div>
                     <!---->
@@ -108,9 +108,7 @@
                         <input type="password" class="form-control" id="re_new_pwd" >
                     </div>
                     <div class="form-group">
-                        <button type="button" class="btn btn-primary" onclick="answerQuestionBa()" >上一步</button>
-
-                        <button type="button" class="btn btn-primary" onclick="verifyQuestion()" >下一步</button>
+                        <button type="button" class="btn btn-primary" onclick="resetPwd()" >确认</button>
                     </div>
                     <!---->
                 </form>

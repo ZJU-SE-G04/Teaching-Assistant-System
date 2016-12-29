@@ -37,14 +37,17 @@ function  articleUpdate(needed_title) {
     $("#write_article").hide();
     $("#articleLoop").show();
     $("#update_article").hide();
-    var write_article_button=$("#write_article_button");
-    write_article_button.click(showWriteArticle);
-    write_article_button.show();
+    var write_article_button = $("#write_article_button");
+    if(level==3) {
+        write_article_button.click(showWriteArticle);
+        write_article_button.show();
+    }else {
+        write_article_button.hide();
+    }
+
     var articleBack=write_article_button.prev();
     articleBack.hide();
     articleBack.click(returnToArticleList);
-
-
 
     if(needed_title==null){
         needed_title='';
@@ -85,12 +88,7 @@ function  showWriteArticle() {
     $(this).hide();
     $("#write_article").show();
     $(this).prev().show()
-
-    
 }
-
-
-
 
 //-------------- write an article-----------
 
@@ -174,7 +172,6 @@ function cancelUpdateArticle() {
 //-----------delete an article---------------------------
 function  deleteArticle(article_id) {
     $.ajax({
-        type:"GET",
         url:"delete_article.php?article_id="+article_id,
         success:function (result) {
             var jsonObj=result;
@@ -221,8 +218,12 @@ function articleShow() {
 
             articleDetail_local.find(".x-title").html(title);
             articleDetail_local.find(".x-author").html(author);
-            articleDetail_local.find(".x-edit").attr("onclick","updateArticle("+article_id+")");
-            articleDetail_local.find(".x-trash").attr("onclick","deleteArticle("+article_id+")");
+            if(level==3) {
+                articleDetail_local.find(".x-edit").attr("onclick", "updateArticle(" + article_id + ")");
+                articleDetail_local.find(".x-trash").attr("onclick", "deleteArticle(" + article_id + ")");
+                articleDetail_local.find(".x-edit").show();
+                articleDetail_local.find(".x-trash").show();
+            }
             articleDetail_local.find(".x-time").html(time);
             articleDetail_local.find(".x-body").html(articleDetail["article_content"]);
 
@@ -233,7 +234,8 @@ function articleShow() {
 
             var posts_list_ul=post_detail_page.find(".posts-list-ul");
             posts_list_ul.children(".new").remove();
-            for (var i in articleDetail["comment"]) {
+            var i;
+            for (i in articleDetail["comment"]) {
                 var x = articleDetail["comment"][i];
                 var tmp = posts_list_ul.children(".old").clone().removeClass("old").addClass("new").show();
 
@@ -297,7 +299,7 @@ function deleteComment() {
 function  returnToArticleList() {
     $("#articleLoop").show();
     $("#articleDetail").hide();
-    $(this).hide()
+    $(this).hide();
     $("#write_article_button").show();
 
 }
@@ -377,7 +379,7 @@ function withdraw_second_comment() {
 }
 //---------收起后重新显示二级回复------
 function re_show_second_comment() {
-    $(this).parents(".posts-list-item").find(".post-comments-area").show()
+    $(this).parents(".posts-list-item").find(".post-comments-area").show();
     $(this).one("click",withdraw_second_comment);
     $(this).text("收起评论");
 }
@@ -410,6 +412,10 @@ function deleteSecondComment() {
 function add_second_comment() {
     var post_comments_area=$(this).parents(".post-comments-area");
     var content=post_comments_area.find("textarea").val();
+    if(content==""){
+        window.alert("回复内容不能为空");
+        return;
+    }
     // alert(content);
     var posts_list_item=post_comments_area.parent();
     var floor=posts_list_item.find(".x-floor").text();
@@ -501,9 +507,13 @@ function add_second_comment_second() {
 
 function  add_comment() {
     var content=ue_add_comment.getContent();
-    alert(content);
+    if(content==""){
+        window.alert("回复内容不能为空");
+        return;
+    }
+    // alert(content);
     var current_time=getNowFormatDate();
-    alert(current_time);
+    // alert(current_time);
 
 
     var posts_list_ul=$(".posts-list-ul");
@@ -524,6 +534,8 @@ function  add_comment() {
         url:"add_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content,
         success:function (result) {
             if(result["if_success"]==1){
+                var x_commment_number=$(".x-comment-number");
+                x_commment_number.html(parseInt(x_commment_number.text())+1);
             }
             else{
                 window.alert(result["err_message"]);
