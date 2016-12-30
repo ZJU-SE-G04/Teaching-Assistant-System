@@ -59,7 +59,8 @@ function  articleUpdate(needed_title) {
             var articleRecords=result;
             var articleLoop=$("#articleLoop");
             articleLoop.children(".new").remove();
-            for (var i in articleRecords) {
+            var i;
+            for (i in articleRecords) {
                 var x = articleRecords[i];
                 var tmp = articleLoop.children(".old").clone().removeClass("old").addClass("new").show();
 
@@ -492,10 +493,9 @@ function getNowFormatDate() {
     if (strDate >= 0 && strDate <= 9) {
         strDate = "0" + strDate;
     }
-    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+    return date.getFullYear() + seperator1 + month + seperator1 + strDate
         + " " + date.getHours() + seperator2 + date.getMinutes()
-        + seperator2 + date.getSeconds();
-    return currentdate;
+        + seperator2 + date.getSeconds();//current date
 }
 
 
