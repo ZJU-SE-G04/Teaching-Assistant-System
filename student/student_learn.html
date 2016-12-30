@@ -16,6 +16,9 @@
     <!--add by Li Boao-->
     <link rel="stylesheet" href="../css/content.css">
     <link rel="stylesheet" href="../css/docs.css">
+    <!--add by 章世超-->
+    <link rel="stylesheet" href="../teacher/css/show_article.css">
+
 
     <script type="text/javascript" src="../ueditor/ueditor.config.js"></script>
     <script type="text/javascript" src="../ueditor/ueditor.all.js"></script>
@@ -182,7 +185,177 @@
                 </div>
             </div>
             <div id="article_pane" class="tab-pane">
-                文章
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="input-group">
+                            <input type="text" class="form-control input-lg"><span
+                                class="input-group-addon btn btn-primary" onclick="search_article(this)">搜索</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3 right">
+                        <button type="button" class="btn btn-primary w3-right" id="articleBack">
+                            返回列表&nbsp;<span class="glyphicon glyphicon-share-alt"></span>
+                        </button>
+                        <button class='btn btn-primary' id='write_article_button'>撰写文章
+                        </button>
+                    </div>
+                </div>
+                <div class="panel-group" style="padding-top:35px" id="articleLoop">
+                    <div class="panel panel-default old w3-hover-shadow ">  <!--loop start-->
+                        <div class="panel-heading w3-hover-grey clickable">
+                            <span class="glyphicon glyphicon-file"></span>&nbsp;<strong class="x-title"></strong>
+                            <span class="x-article-id" style="display: none"></span>
+                        </div>
+                        <div class="panel-body"><p class="x-contentDigest"></p></div>
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col-md-1 right"><a class="glyphicon glyphicon-trash x-trash"></a></div>
+
+                                <div class="col-md-4 left">
+                                    <!--col-md-offset-8 col-xs-6 col-xs-offset-2-->
+                                    <span class="x-time"></span>
+                                </div>
+                                <div class="col-md-2 left ">
+                                    <span>作者:&nbsp;&nbsp;</span><span class="x-author"></span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>  <!--loop end-->
+                </div>
+
+
+                <div id="articleDetail">
+                    <div class="row">
+                        <h2 class="x-title"></h2>
+                        <h5>
+                            <small>
+                                <span class="glyphicon glyphicon-user"></span> 作者：<span class="x-author"></span>&nbsp;&nbsp;
+                                <span class="glyphicon glyphicon-time"></span> 发表时间：<span class="x-time"></span>
+                                <span class="glyphicon glyphicon-edit x-edit" onclick="updateArticle()" style="display: none">编辑文章</span>
+                                <span class="glyphicon glyphicon-trash x-trash" style="display: none">删除文章</span>
+
+                            </small>
+                        </h5>
+                        <br>
+                        <p class="x-body"></p>
+                        <hr>
+                    </div>
+
+                    <!--帖子详情页面-->
+                    <div id="x_post_detail_page">
+                        <p class="f-post-comment-num">评论数:<span class="x-comment-number"></span></p>
+                        <div class="posts-list-container">
+                            <ul class="posts-list-ul">
+                                <li class="posts-list-item old ">  <!-- loop start-->
+                                    <div>
+                                        <div class="posts-list-item-title x-content"></div>
+                                        <div class="posts-list-item-btm">
+                                            <span class="posts-list-item-nick inline x-name"></span>
+                                            &nbsp;&nbsp;<span>|
+                                        </span>&nbsp;&nbsp;
+                                            <span class="posts-list-item-btm x-time"></span>
+                                            <div class="right">
+                                                <a class="glyphicon glyphicon-trash x-first-delete"></a>
+                                                <span class="x-first-delete">|</span>
+                                                <a class="post-comment-btn  x-comment">评论</a>
+                                                <span class="posts-list-item-nick" style="display: none;">#<span
+                                                        class="x-floor"></span>楼</span><!-- floor id ~~ -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="post-comments-area" >
+                                        <div class="post-comment-area-body">
+                                            <span class="x-second-comment-number" style="display: none"></span>
+                                            <div class="post-comment old"><!-- loop start 二级回复区-->
+                                                <div class="post-comment-content x-content"></div>
+                                                <div class="posts-list-item-btm">
+                                                    <span class="x-re-floor" style="display: none"></span>
+                                                    <span class="nick-color x-name"></span>
+                                                    <span class="x-second-comment-id" style="display: none"></span>
+                                                    <span class="x-response">&nbsp;回复&nbsp;</span><span
+                                                        class="nick-color x-re-name"></span>
+                                                    &nbsp;&nbsp;<span>|</span>&nbsp;&nbsp;
+                                                    <span class="posts-list-item-date x-time"></span>
+                                                    <div class="right">
+                                                        <a class="glyphicon glyphicon-trash x-delete"></a>
+                                                        <span class="x-delete">|</span>
+                                                        <a class="post-comment-btn">回复</a>
+                                                    </div>
+                                                </div>
+                                            </div> <!-- loop end-->
+                                        </div>
+                                    </div>
+                                </li><!-- loop end-->
+
+                            </ul>
+
+                            <div>
+                                <script id="container" name="content" type="text/plain">
+                                </script>
+                                <script type="text/javascript">
+                                    var ue_add_comment = UE.getEditor('container');
+                                </script>
+                            </div>
+                            <button class="p-btn" onclick="add_comment()" style="margin-top: 15px">发表回复</button>
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div id="write_article">
+                    <p class="subtit">文章标题</p>
+                    <input type="text" id="article_title" style="width:800px;">
+                    <p class="subtit">文章内容</p>
+
+                    <!-- 加载编辑器的容器 -->
+                    <div>
+                        <script id="container_write" name="content" type="text/plain" style="height:700px">
+                        </script>
+                        <script type="text/javascript">
+                            var ue = UE.getEditor('container_write');
+                        </script>
+                    </div>
+                    <div class="row">
+                        <div class='col-md-9'>
+                            <button class='btn btn-primary' id="cancel_write_article" onclick='cancelArticle()'>取消发布
+                            </button>
+                        </div>
+                        <div class='col-sm-3'>
+                            <button class='btn btn-primary' id="final_write_article" onclick='writeArticle()'>发布文章
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div id="update_article">
+                    <p class="subtit">文章标题</p>
+                    <input type="text" id="article_title_update" style="width:800px;">
+                    <p class="subtit">文章内容</p>
+
+                    <!-- 加载编辑器的容器 -->
+                    <div>
+                        <script id="container_update" name="content" type="text/plain">
+                        </script>
+                        <!-- 配置文件 -->
+
+                        <!-- 实例化编辑器 -->
+                        <script type="text/javascript">
+                            var ue_update = UE.getEditor('container_update');
+                        </script>
+                    </div>
+                    <div class="row">
+                        <div class='col-sm-9'>
+                            <button class='btn btn-primary cancel-ok-button' onclick='cancelUpdateArticle()'>取消修改
+                            </button>
+                        </div>
+                        <div class='col-sm-3'>
+                            <button class='btn btn-primary cancel-ok-button x-button'>修改文章</button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div id="examin_pane" class="tab-pane">
                 <h3 class="page-header">请选择一项测试或实验报告</h3>
@@ -514,5 +687,8 @@
 <script src="/js/header.js"></script>
 <script src="/js/student_learn.js" type="text/javascript"></script>
 <!--<script src="http://vjs.zencdn.net/5.8.8/video.js"></script>-->
+<!--章世超文章区添加的js-->
+<script src="../teacher/js/add_article.js"></script>
+
 </body>
 </html>
