@@ -49,25 +49,30 @@ function getNotice() {
 
 // ----初始化一些存储在js中的全局变量,added by zhangshichao------
     course_id=getQueryString("lesson_id");
-    $(".c-course-id").attr("value",course_id);
-
     course_name=getQueryString("course_name");
     $(".coursename").first().text(course_name);
     $("#stu_course_name").text(course_name);
     $("#TA_course_name").text(course_name);
+
     user_name=getQueryString("user_name");
     $("#username").text(user_name);
     user_id=getQueryString("user_id");
     level=getQueryString("level");
     if(level==3){//助教不能管理助教信息
         $(".t-check").css("display","block");
+        user_name+="老师";
+        console.log(user_name);
+    }
+    else{
+        user_name+="助教";
+        console.log(user_name);
     }
 
     show_class_init();//初始化班级
     $(".c-class-id").attr("value",class_id);
+    $(".c-course-id").attr("value",course_id);
 
-   
-    test();
+
 
 
 }

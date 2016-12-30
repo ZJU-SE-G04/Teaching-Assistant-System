@@ -69,3 +69,17 @@ a:hover{
 .grey{
     color: grey;
 }
+a{
+    cursor: pointer;
+}
+
+
+/*added by zhangshichao below*/
+/*.fe_error_tip{*/
+    /*display: inline-block;*/
+    /*line-height: 16px;*/
+    /*padding: 0 10px;*/
+    /*font-size: 12px;*/
+    /*text-align: left;*/
+    /*color: #ff0a0a;*/
+/*}*/

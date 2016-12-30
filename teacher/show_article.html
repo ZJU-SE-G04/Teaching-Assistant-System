@@ -24,7 +24,6 @@
     <link href="../bootstrap-3.3.7-dist/bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet"
           type="text/css"/>
 
-    <!--<script src="../bootstrap-3.3.7-dist/bootstrap-editable/bootstrap-editable.css"></script>-->
 
 
     <!--以下是Li Boao导入的css文件-->
@@ -164,8 +163,8 @@
                             <small>
                                 <span class="glyphicon glyphicon-user"></span> 作者：<span class="x-author"></span>&nbsp;&nbsp;
                                 <span class="glyphicon glyphicon-time"></span> 发表时间：<span class="x-time"></span>
-                                <span class="glyphicon glyphicon-edit x-edit" onclick="updateArticle()">编辑文章</span>
-                                <span class="glyphicon glyphicon-trash x-trash">删除文章</span>
+                                <span class="glyphicon glyphicon-edit x-edit" onclick="updateArticle()" style="display: none">编辑文章</span>
+                                <span class="glyphicon glyphicon-trash x-trash" style="display: none">删除文章</span>
 
                             </small>
                         </h5>
@@ -175,12 +174,12 @@
                     </div>
 
                     <!--帖子详情页面-->
-                    <div id="post_detail_page">
+                    <div id="x_post_detail_page">
                         <p class="f-post-comment-num">评论数:<span class="x-comment-number"></span></p>
                         <div class="posts-list-container">
                             <ul class="posts-list-ul">
                                 <li class="posts-list-item old ">  <!-- loop start-->
-                                    <div class="">
+                                    <div>
                                         <div class="posts-list-item-title x-content"></div>
                                         <div class="posts-list-item-btm">
                                             <span class="posts-list-item-nick inline x-name"></span>
@@ -196,7 +195,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="post-comments-area">
+                                    <div class="post-comments-area" >
                                         <div class="post-comment-area-body">
                                             <span class="x-second-comment-number" style="display: none"></span>
                                             <div class="post-comment old"><!-- loop start 二级回复区-->
@@ -217,11 +216,6 @@
                                                 </div>
                                             </div> <!-- loop end-->
                                         </div>
-
-                                        <div class="add-post-comment">
-                                            添加评论...
-                                        </div>
-                                        <!--<textarea name="post-comment" id="" cols="30" rows="10" placeholder="添加评论..."></textarea>-->
                                     </div>
                                 </li><!-- loop end-->
 
@@ -810,9 +804,9 @@
                 <table class="table table-striped" id="StuInfoTable">
                     <tr><th>学号</th><th>姓名</th><th>院系</th><th>专业</th><th>团队</th></tr>
                     <tbody class="stu_info_loop">
-                    <!-- loop start--><tr class="old s-one-info"><th class="s-stu-id"></th><th class="s-stu-name"></th><th class="s-depart"></th><th class="s-major"></th><th class="s-team-name"></th>
-                        <!--<th><a class='glyphicon glyphicon-trash s-delete'></a></th>-->
-                        <!--<th><a class='glyphicon glyphicon-edit s-update'></a></th>-->
+                    <!-- loop start--><tr class="old s-one-info"><td class="s-stu-id"></td><td class="s-stu-name"></td><td class="s-depart"></td><td class="s-major"></td><td class="s-team-name"></td>
+                        <!--<td><a class='glyphicon glyphicon-trash s-delete'></a></td>-->
+                        <!--<td><a class='glyphicon glyphicon-edit s-update'></a></td>-->
                     </tr> <!-- loop end-->
 
                     </tbody>
@@ -822,73 +816,80 @@
             <div id="TAInfo" class="tab-pane">
                 <div class="bs-callout bs-callout-info">
                     <h4>以下是<span id="TA_course_name"></span><span class="x-class-time"></span>班的助教信息</h4></div>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#t-add-modal">
+                    录入助教信息
+                </button>
                     <table class="table table-striped" id="t-table">
                         <tr><th>学号</th><th>姓名</th><th>院系</th><th>专业</th><th>删除</th><th>修改</th></tr>
                         <tbody id="t-info-loop">
-                        <!-- loop start--><tr class="old t-one-info"><th class="t-id"></th><th class="t-name"></th><th class="t-depart"></th><th class="t-major"></th>
-                            <th><a class='glyphicon glyphicon-trash t-delete'></a></th>
-                            <th><a class='glyphicon glyphicon-edit t-update'></a></th>
+                        <!-- loop start--><tr class="old t-one-info"><td class="t-id"></td><td class="t-name"></td><td class="t-depart"></td><td class="t-major"></td>
+                            <td><a  data-toggle="modal"   class='glyphicon glyphicon-trash t-delete'></a></td>
+                            <td><a data-toggle="modal"  data-target="#t-update-modal" class='glyphicon glyphicon-edit t-update'></a></td>
                         </tr> <!-- loop end-->
                         </tbody>
                     </table>
 
-                    <div class="row" id="t_info_row">
-                        <div  class='col-md-3' id='add_t_hint'>
-                            <p  style='float: right'>手动添加助教:</p></div>
-                        <div  class='col-md-1' id='add_t_select' >  <div class='form-group'>
-                            <select id='t-select' class='form-control' onchange='addTAInput()'>
-                                <option>0</option><option>1</option><option>2</option><option>3</option>
-                            </select></div> </div>
-                    </div>
-                    <div id="t-add-area">
-                        <h3>输入助教信息</h3>
-                        <div class="row">
-                            <div class='col-md-3'><label>学号</label>
-                            </div> <div class='col-md-3'> <label >姓名</label> </div>
-                            <div class='col-md-3'> <label>院系</label>  </div>
-                            <div class='col-md-3'> <label >专业</label> </div></div>
+                <div class="modal fade" id="t-update-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title" id="t-update-modal-title">修改助教信息</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class='col-md-3'><label>学号</label></div>
+                                    <div class='col-md-3'><label >姓名</label> </div>
+                                    <div class='col-md-3'> <label>院系</label>  </div>
+                                    <div class='col-md-3'> <label >专业</label> </div>
+                                </div>
+                                <div class='row' id="t-update-in"> <div class='col-md-3'><input class='form-control t-update-id' >
+                                </div> <div class='col-md-3'> <input class='form-control t-update-name' >
+                                </div> <div class='col-md-3'> <input class='form-control t-update-depart' >
+                                </div> <div class='col-md-3'> <input class='form-control t-update-major'  ></div></div>
 
-                        <div id="t-add-in">
-                            <div class='row old'><div class='col-md-3'><input class='form-control t-add-id' name='id[]' >
-                            </div> <div class='col-md-3'> <input class='form-control t-add-name'  name='name[]' >
-                            </div> <div class='col-md-3'> <input class='form-control t-add-depart'  name='department[]'>
-                            </div> <div class='col-md-3'> <input class='form-control t-add-major' name='major[]' ></div></div>
-                        </div>
-                        <div class="row">
-                            <div class='col-md-9'>
-                                <button  class='btn btn-primary' id='t-add-cancel'>取消录入</button></div>
-                            <div class='col-md-3'>
-                                <button  class='btn btn-primary' id='t-add-final' >确定录入</button></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消修改</button>
+                                <button type="button" class="btn btn-primary"  onclick="updateTA()">确定修改</button>
+                            </div>
                         </div>
                     </div>
+                </div>
 
-                    <div id="t-update-area">
-                        <h3>修改助教信息</h3>
-                        <div class="row">
-                            <div class='col-md-3'><label>学号</label></div>
-                            <div class='col-md-3'><label >姓名</label> </div>
-                            <div class='col-md-3'> <label>院系</label>  </div>
-                            <div class='col-md-3'> <label >专业</label> </div>
+                <div class="modal fade" id="t-add-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title" id="t-add-modal-title">添加助教信息</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class='col-md-3'><label>学号</label></div>
+                                    <div class='col-md-3'><label >姓名</label> </div>
+                                    <div class='col-md-3'> <label>院系</label>  </div>
+                                    <div class='col-md-3'> <label >专业</label> </div>
+                                </div>
+
+                                    <div class='row' id="t-add-in"><div class='col-md-3'><input class='form-control t-add-id' name='id[]' >
+                                    </div> <div class='col-md-3'> <input class='form-control t-add-name'  name='name[]' >
+                                    </div> <div class='col-md-3'> <input class='form-control t-add-depart'  name='department[]'>
+                                    </div> <div class='col-md-3'> <input class='form-control t-add-major' name='major[]' ></div></div>
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消录入</button>
+                                <button type="button" class="btn btn-primary"  onclick="addTA()">确定录入</button>
+                            </div>
                         </div>
-                        <div class='row' id="t-update-in"> <div class='col-md-3'><input class='form-control t-update-id' >
-                        </div> <div class='col-md-3'> <input class='form-control t-update-name' >
-                        </div> <div class='col-md-3'> <input class='form-control t-update-depart' >
-                        </div> <div class='col-md-3'> <input class='form-control t-update-major'  ></div></div>
-
-                        <div class="row">
-                            <div class='col-md-9'>
-                                <button  class='btn btn-primary my-btn' id='t-update-cancel' onclick='cancelUpdateStu()'>取消修改</button></div>
-                            <div class='col-md-3'>
-                                <button  class='btn btn-primary my-btn' id='t-update-final' >确定修改</button></div>
-                        </div>
-
                     </div>
-
+                </div>
             </div>
         </div>
     </div>
 </div>
-
 
 
 <!--以下是bootstrap file input的js文件-->
@@ -906,7 +907,6 @@
 <script src="js/add_article.js"></script>
 <script src="js/class_manage.js"></script>
 <script src="js/courseware.js"></script>
-<!--<script src="../bootstrap-3.3.7-dist/bootstrap-editable/bootstrap-editable.js"></script>-->
 
 
 <!--以下是谢俊东导入的js文件-->

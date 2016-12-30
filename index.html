@@ -12,17 +12,16 @@
     <!--<link rel="stylesheet" href="css/stu_learn.css">-->
     <link rel="stylesheet" href="css/docs.css">
     <!--<link rel="stylesheet" href="css/pt_pages.css">-->
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="index/index.css">
 
     <script src="jquery/jquery-3.1.1.js"></script>
     <script src="bootstrap-3.3.7-dist/js/bootstrap.js"></script>
     <script src="bootstrap-3.3.7-dist/js/npm.js"></script>
     <script src="jquery/jquery.cookie.js"></script>
 
-    <script src="index.js"></script>
+    <script src="index/index.js"></script>
 </head>
 <body>
-120.77.34.254
 <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target=".bs-example-modal-sm">Small modal</button>-->
 
 <div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
@@ -54,6 +53,7 @@
                             <label>
                                 <input type="checkbox"> 记住我
                             </label>
+                            <a onclick="giveId()">忘记登录密码,取回密码</a>
                         </div>
                     </div>
                     <!---->
@@ -66,6 +66,81 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<div id="fe_pwd_modal" class="modal fade" tabindex="-1" role="dialog" style="margin-top: 8%">
+    <div class="modal-dialog" role="document" style="width: 500px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">步骤1:输入用户名</h4>
+            </div>
+            <div class="modal-body" style="padding-left: 60px; padding-right: 60px; padding-top: 20px;">
+
+                <form action="#" id="fe_give_id" method="get" class="form-horizontal">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="fe_id" placeholder="用户名">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" onclick="giveIdBa()" >上一步</button>
+                        <button type="button" class="btn btn-primary" onclick="answerQuestion()" >下一步</button>
+                    </div>
+                    <!---->
+                </form>
+                <form action="#" id="fe_answer_question" method="get" class="form-horizontal">
+                    <div id="fe_question">后端返回的问题</div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="fe_answer" placeholder="回答">
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" onclick="answerQuestionBa()" >上一步</button>
+                        <button type="button" class="btn btn-primary" onclick="verifyQuestion()" >下一步</button>
+                    </div>
+                    <!---->
+                </form>
+                <form action="#" id="reset_pwd" method="get" class="form-horizontal">
+                    <div >请设置新密码</div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="new_pwd" >
+                    </div>
+                    <div >再次输入新密码</div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="re_new_pwd" >
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" onclick="resetPwd()" >确认</button>
+                    </div>
+                    <!---->
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<!--<div id="fe_answer_question" class="modal fade" tabindex="-1" role="dialog" style="margin-top: 8%">-->
+    <!--<div class="modal-dialog" role="document" style="width: 500px;">-->
+        <!--<div class="modal-content">-->
+            <!--<div class="modal-header">-->
+                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span-->
+                        <!--aria-hidden="true">&times;</span></button>-->
+                <!--<h4 class="modal-title">取回密码</h4>-->
+            <!--</div>-->
+            <!--<div class="modal-body" style="padding-left: 60px; padding-right: 60px; padding-top: 20px;">-->
+
+                <!--<form action="#" method="get" class="form-horizontal">-->
+                    <!--<div id="fe_question">后端返回的问题</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<input type="text" class="form-control" id="fe_answer" placeholder="回答">-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                        <!--<button type="button" class="btn btn-primary" onclick="answerQuestion()" >下一步</button>-->
+                    <!--</div>-->
+                    <!--&lt;!&ndash;&ndash;&gt;-->
+                <!--</form>-->
+            <!--</div>-->
+        <!--</div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
+    <!--</div>&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
+<!--</div>&lt;!&ndash; /.modal &ndash;&gt;-->
 
 <nav class="navbar navbar-inverse" style="margin-bottom: 0">
     <div class="container-fluid">
@@ -98,7 +173,6 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li id="register"><a href="#">注册</a></li>
                 <li id="login"><a href="#" data-toggle="modal" data-target="#login_detail">登录</a></li>
 
 

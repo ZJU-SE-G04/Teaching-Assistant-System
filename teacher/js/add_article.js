@@ -1,5 +1,6 @@
 
-
+//文章区bug
+//插入一个一级回复后,在这个一级回复上不能回复,因为只是前端刷新
 
 //-------一些全局变量---------
 
@@ -37,14 +38,17 @@ function  articleUpdate(needed_title) {
     $("#write_article").hide();
     $("#articleLoop").show();
     $("#update_article").hide();
-    var write_article_button=$("#write_article_button");
-    write_article_button.click(showWriteArticle);
-    write_article_button.show();
+    var write_article_button = $("#write_article_button");
+    if(level==3) {
+        write_article_button.click(showWriteArticle);
+        write_article_button.show();
+    }else {
+        write_article_button.hide();
+    }
+
     var articleBack=write_article_button.prev();
     articleBack.hide();
     articleBack.click(returnToArticleList);
-
-
 
     if(needed_title==null){
         needed_title='';
@@ -55,7 +59,8 @@ function  articleUpdate(needed_title) {
             var articleRecords=result;
             var articleLoop=$("#articleLoop");
             articleLoop.children(".new").remove();
-            for (var i in articleRecords) {
+            var i;
+            for (i in articleRecords) {
                 var x = articleRecords[i];
                 var tmp = articleLoop.children(".old").clone().removeClass("old").addClass("new").show();
 
@@ -76,6 +81,8 @@ function  articleUpdate(needed_title) {
         }
     });
 }
+//-------显示二级评论--------
+
 
 
 //------------show input for writing a article----------
@@ -85,12 +92,7 @@ function  showWriteArticle() {
     $(this).hide();
     $("#write_article").show();
     $(this).prev().show()
-
-    
 }
-
-
-
 
 //-------------- write an article-----------
 
@@ -174,7 +176,6 @@ function cancelUpdateArticle() {
 //-----------delete an article---------------------------
 function  deleteArticle(article_id) {
     $.ajax({
-        type:"GET",
         url:"delete_article.php?article_id="+article_id,
         success:function (result) {
             var jsonObj=result;
@@ -221,28 +222,31 @@ function articleShow() {
 
             articleDetail_local.find(".x-title").html(title);
             articleDetail_local.find(".x-author").html(author);
-            articleDetail_local.find(".x-edit").attr("onclick","updateArticle("+article_id+")");
-            articleDetail_local.find(".x-trash").attr("onclick","deleteArticle("+article_id+")");
+            if(level==3) {//教师才可以删除和编辑文章
+                articleDetail_local.find(".x-edit").attr("onclick", "updateArticle(" + article_id + ")");
+                articleDetail_local.find(".x-trash").attr("onclick", "deleteArticle(" + article_id + ")");
+                articleDetail_local.find(".x-edit").show();
+                articleDetail_local.find(".x-trash").show();
+            }
             articleDetail_local.find(".x-time").html(time);
             articleDetail_local.find(".x-body").html(articleDetail["article_content"]);
 
 
-            var post_detail_page=articleDetail_local.find("#post_detail_page");
+            var post_detail_page=articleDetail_local.find("#x_post_detail_page");
             post_detail_page.find(".x-comment-number").text(articleDetail["comment_number"]);
 
 
             var posts_list_ul=post_detail_page.find(".posts-list-ul");
             posts_list_ul.children(".new").remove();
-            for (var i in articleDetail["comment"]) {
+            var i;
+            for (i in articleDetail["comment"]) {
                 var x = articleDetail["comment"][i];
                 var tmp = posts_list_ul.children(".old").clone().removeClass("old").addClass("new").show();
-
-
                 tmp.find(".x-floor").html(x.floor);
                 tmp.find(".x-name").html(x.user_name);
                 tmp.find(".x-time").html(x.time);
                 tmp.find(".x-content").html(x.content);
-                tmp.find(".x-comment").one("click",showSecondComment);
+                tmp.find(".x-comment").click(add_second_comment_tx);
                 tmp.find(".post-comments-area").hide();
 
                 if(user_id!=x.id){
@@ -252,6 +256,8 @@ function articleShow() {
                     tmp.find(".glyphicon").click(deleteComment);
                 }
                 posts_list_ul.append(tmp);
+
+                showSecondComment(x.floor);
             }
 
 
@@ -260,69 +266,22 @@ function articleShow() {
 
 }
 
+function showSecondComment(floor) {
 
-
-
-
-//------------ 删除一级评论-----------
-
-function deleteComment() {
-    $(this).parent().parent().parent().parent().hide();
-    var floor=$(this).parent().find(".x-floor").text();
-
-    var x_comment_number=$(".x-comment-number");
-     x_comment_number.text(x_comment_number.text()-1);
-    
-    $.ajax({
-        type:"GET",
-        url:"delete_comment.php?article_id="+article_id+"&floor="+floor,
-        success:function (result) {
-            if(result["if_success"]==0){
-                window.alert(result["error_message"]);
-            }
-            else
-            {
-                alert("删除成功");
-            }
-
-
-        }
-    });
-
-}
-
-
-
-
-function  returnToArticleList() {
-    $("#articleLoop").show();
-    $("#articleDetail").hide();
-    $(this).hide()
-    $("#write_article_button").show();
-
-}
-
-
-
-//-------显示二级评论--------
-
-function showSecondComment() {
-    var floor=$(this).parent().find(".x-floor").text();
-    var posts_list_item=$(this).parents(".posts-list-item");
-
-
+    var posts_list_item=$(".posts-list-ul").children().last();
 
     $.ajax({
-        type:"GET",
         url:"show_second_comment.php?article_id="+article_id+"&floor="+floor,
         success:function (result) {
             var secondComment=result;
             var second_comment_number=secondComment["second_comment_number"];
 
+
             var post_comment_area_body=posts_list_item.find(".post-comment-area-body");
-            post_comment_area_body.find(".x-second-comment-number").html(second_comment_number);
+            // post_comment_area_body.find(".x-second-comment-number").html(second_comment_number);
             post_comment_area_body.children(".new").remove();
-            for (var i in secondComment["second_comment"]) {
+            var i;
+            for ( i in secondComment["second_comment"]) {
                 var tmp = post_comment_area_body.children(".old").clone().removeClass("old").addClass("new").show();
                 var x=secondComment["second_comment"][i];
 
@@ -332,7 +291,7 @@ function showSecondComment() {
 
                 tmp.find(".x-content").html(x.content);
                 tmp.find(".x-re-floor").html(x.re_floor);
-                tmp.find(".post-comment-btn").click(add_second_comment_second);
+                tmp.find(".post-comment-btn").click(add_second_comment_second_tx);
                 if(x.re_user_name!="0") {
                     tmp.find(".x-re-name").html(x.re_user_name);
                 }
@@ -346,10 +305,10 @@ function showSecondComment() {
                     tmp.find(".x-delete").click(deleteSecondComment);
                 }
                 post_comment_area_body.append(tmp);
-
-
             }
-            posts_list_item.find(".post-comments-area").show();
+            if(second_comment_number!=0) {
+                posts_list_item.find(".post-comments-area").show();
+            }
 
             post_comment_area_body.parent().find(".add-post-comment").click(function () {
                 $(this).hide();
@@ -364,23 +323,49 @@ function showSecondComment() {
         }
 
     });
-    $(this).text("收起评论");
-    $(this).one("click",withdraw_second_comment);
 
 }
 
-//--------收起二级回复--------
-function withdraw_second_comment() {
-    $(this).parents(".posts-list-item").find(".post-comments-area").hide();
-    $(this).one("click",re_show_second_comment);
-    $(this).text("评论");
+
+
+
+//------------ 删除一级评论-----------
+
+function deleteComment() {
+    $(this).parent().parent().parent().parent().hide();
+    var floor=$(this).parent().find(".x-floor").text();
+
+    var x_comment_number=$(".x-comment-number");
+     x_comment_number.text(x_comment_number.text()-1);
+
+    $.ajax({
+        type:"GET",
+        url:"delete_comment.php?article_id="+article_id+"&floor="+floor,
+        success:function (result) {
+            if(result["if_success"]==0){
+                window.alert(result["error_message"]);
+            }
+            else
+            {
+                alert("删除成功");
+            }
+        }
+    });
 }
-//---------收起后重新显示二级回复------
-function re_show_second_comment() {
-    $(this).parents(".posts-list-item").find(".post-comments-area").show()
-    $(this).one("click",withdraw_second_comment);
-    $(this).text("收起评论");
+
+
+
+
+function  returnToArticleList() {
+    $("#articleLoop").show();
+    $("#articleDetail").hide();
+    $(this).hide();
+    $("#write_article_button").show();
+
 }
+
+
+
 
 //---------删除一个楼中楼回复,实现局部刷新-------------
 function deleteSecondComment() {
@@ -405,48 +390,91 @@ function deleteSecondComment() {
     });
 
 }
+//------回复层主-----------
+
+function add_second_comment_tx() {
+    var posts_list_item=$(this).parents(".posts-list-item");
+    re_user_name='0';
+    re_user_id='0';
+
+    //以下为文本输入框
+    var comment_area = $("<textarea placeholder='回复层主"+"'></textarea>").css("margin-bottom", "10px");
+    var textBtnDiv=$("<div style='margin-bottom: 10px'></div>").addClass("text-btn-div");
+    textBtnDiv.append(comment_area);
+    textBtnDiv.append();
+    var submit_btn = $("<button  style='margin-bottom: 5px;float: right'>提交</button>").addClass("p-btn-sm");
+    submit_btn.click(add_second_comment);
+    comment_area.after(submit_btn);
+    posts_list_item.find(".post-comment-area-body").prepend(textBtnDiv);
+    posts_list_item.find(".post-comments-area").show();
+
+}
+
+//------回复楼中楼出现输入框-----------
+
+function add_second_comment_second_tx() {
+    var post_comment_list_btm=$(this).parents(".posts-list-item-btm");
+    re_user_id=post_comment_list_btm.find(".x-second-comment-id").text();
+    // window.alert(re_user_id);
+
+    re_user_name=post_comment_list_btm.find(".x-name").text();
+
+    var comment_area = $("<textarea placeholder='回复"+re_user_name+"'></textarea>").css("margin-bottom", "10px");
+    // comment_area.focus = true;
+
+    var textBtnDiv=$("<div style='margin-bottom: 10px'></div>").addClass("text-btn-div");
+    textBtnDiv.append(comment_area);
+    textBtnDiv.append();
+
+
+    var submit_btn = $("<button  style='margin-bottom: 5px;float: right'>提交</button>").addClass("p-btn-sm");
+    submit_btn.click(add_second_comment);
+    comment_area.after(submit_btn);
+
+    post_comment_list_btm.parent().after(textBtnDiv);
+
+}
 
 //-----------插入二级回复-----------
 function add_second_comment() {
     var post_comments_area=$(this).parents(".post-comments-area");
     var content=post_comments_area.find("textarea").val();
+    if(content==""){
+        window.alert("回复内容不能为空");
+        return;
+    }
     // alert(content);
     var posts_list_item=post_comments_area.parent();
     var floor=posts_list_item.find(".x-floor").text();
 
    var current_time=getNowFormatDate();//get the time
 
-    $(this).prev().val("");//还原输入框中内容
-
-    var post_comment_area_body=post_comments_area.find(".post-comment-area-body");
-    var tmp = post_comment_area_body.children(".old").clone().removeClass("old").addClass("new").show();
-    tmp.find(".x-name").html(user_name);
-    tmp.find(".x-content").html(content);
-    if(re_user_name!="0") {
-        tmp.find(".x-re-name").html(re_user_name);
-    }
-    else {
-        tmp.find(".x-response").html("");
-    }
-
-    tmp.find(".x-time").html(current_time);
-
-
-    tmp.find(".x-delete").click(deleteSecondComment);
-    post_comment_area_body.append(tmp);
-
+    // $(this).prev().val("");//还原输入框中内容
 
     $.ajax({
-        type:"GET",
         url:"add_second_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content+"&floor="+floor+"&re_id="+re_user_id,
         success:function (result) {
             if(result["if_success"]==1){
-                post_comment_area_body.find(".text-btn-div").hide();
+                var post_comment_area_body=post_comments_area.find(".post-comment-area-body");
+                var tmp = post_comment_area_body.children(".old").clone().removeClass("old").addClass("new").show();
+                tmp.find(".x-name").html(user_name);
+                tmp.find(".x-content").html(content);
+                if(re_user_name!="0") {//有回复人
+                    tmp.find(".x-re-name").html(re_user_name);
+                }
+                else {
+                    tmp.find(".x-response").html("");
+                }
+
+                tmp.find(".x-time").html(current_time);
+                tmp.find(".x-delete").click(deleteSecondComment);
+                tmp.find(".post-comment-btn").click(add_second_comment_second_tx);
+                post_comment_area_body.append(tmp);
+                post_comment_area_body.find(".text-btn-div").remove();
             }
             else{
                 window.alert(result["err_message"]);
             }
-
         }
 
     });
@@ -465,65 +493,43 @@ function getNowFormatDate() {
     if (strDate >= 0 && strDate <= 9) {
         strDate = "0" + strDate;
     }
-    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate
+    return date.getFullYear() + seperator1 + month + seperator1 + strDate
         + " " + date.getHours() + seperator2 + date.getMinutes()
-        + seperator2 + date.getSeconds();
-    return currentdate;
+        + seperator2 + date.getSeconds();//current date
 }
 
-//------针对楼中楼 add second comment 需要对re_user_id和re_user_name进行调整-----------
-
-function add_second_comment_second() {
-    var post_comment_list_btm=$(this).parents(".posts-list-item-btm");
-    re_user_id=post_comment_list_btm.find(".x-second-comment-id").text();
-    // window.alert(re_user_id);
-
-    re_user_name=post_comment_list_btm.find(".x-name").text();
-
-    var comment_area = $("<textarea placeholder='回复"+re_user_name+"'></textarea>").css("margin-bottom", "10px");
-    // comment_area.focus = true;
-
-    var textBtnDiv=$("<div style='margin-bottom: 10px'></div>").addClass("text-btn-div");
-    textBtnDiv.append(comment_area);
-    textBtnDiv.append();
-    
-
-    var submit_btn = $("<button  style='margin-bottom: 5px;float: right'>提交</button>").addClass("p-btn-sm");
-    submit_btn.click(add_second_comment);
-    comment_area.after(submit_btn);
-    
-    post_comment_list_btm.parent().after(textBtnDiv);
-
-}
 
 
 //---------插入一级回复------------
 
 function  add_comment() {
     var content=ue_add_comment.getContent();
-    alert(content);
+    if(content==""){
+        window.alert("回复内容不能为空");
+        return;
+    }
+    // alert(content);
     var current_time=getNowFormatDate();
-    alert(current_time);
-
-
-    var posts_list_ul=$(".posts-list-ul");
-    var tmp = posts_list_ul.children(".old").clone().removeClass("old").addClass("new").show();
-
-
-    tmp.find(".x-name").html(user_name);
-    tmp.find(".x-time").html(current_time);
-    tmp.find(".x-content").html(content);
-    tmp.find(".x-comment").one("click",showSecondComment);
-    tmp.find(".post-comments-area").hide();
-    tmp.find(".glyphicon").click(deleteComment);
-
-    posts_list_ul.append(tmp);
+    // alert(current_time);
 
     $.ajax({
        type:"GET",
         url:"add_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content,
         success:function (result) {
             if(result["if_success"]==1){
+                var posts_list_ul=$(".posts-list-ul");
+                var tmp = posts_list_ul.children(".old").clone().removeClass("old").addClass("new").show();
+                tmp.find(".x-name").html(user_name);
+                tmp.find(".x-time").html(current_time);
+                tmp.find(".x-content").html(content);
+                tmp.find(".x-comment").click(add_second_comment_tx);
+                tmp.find(".post-comments-area").hide();
+                tmp.find(".glyphicon").click(deleteComment);
+                posts_list_ul.append(tmp);
+
+                var x_commment_number=$(".x-comment-number");
+                x_commment_number.html(parseInt(x_commment_number.text())+1);//一级评论数+1;
+                ue_add_comment.setContent("");//清除内容
             }
             else{
                 window.alert(result["err_message"]);

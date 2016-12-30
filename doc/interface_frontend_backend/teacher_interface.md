@@ -6,7 +6,7 @@
 |显示当前课程当前班级的助教信息|show_TA_info.php?class_id=xxx      | [{"name":"xxx", "id":"xxx", "department":"xxx", "major":"xxx"}{"name":"xxx", "id":"xxx", "department":"xxx", "major":"xxx"}...]|无|是
 |手动添加助教信息|add_TA.php?class_id=xxx[{"id":"xxx","name":"xxx","department":"xxx","major":"xxx"}{"id":"xxx","name":"xxx","department":"xxx","major":"xxx"}...] | 插入成功：{"if_success":1,error_message:"null"};插入失败：{"if_success":0,"error_messgae":"xxx"}|注明:成功或失败返回的是整数1或0,在网上查了下submit多行数据的用法，该功能后端php处理样例为/teacher/achao/php/add_TA.php|是
 |根据助教id删除一行的助教信息|delete_TA.php?class_id=xxx&id=xxx | 删除成功：{"if_success":1,error_message:"null"};删除失败：{"if_success":0,"error_messgae":"xxx"}|成功或失败返回的是整数1或0|是
-|修改其中一行的助教信息|update_TA.php?class_id=xxx&old_id=xxx&&name=xxx&&id=xxx&&department=xxx&major=xxx |  修改成功：{"if_success":1,error_message:"null"};修改失败：{"if_success":0,"error_messgae":"xxx"}|old_id是助教的原有id,因为老师可能输错了id,需要修改,成功或失败返回的是整数1或0|是
+|修改其中一行的助教信息|update_TA.php?class_id=xxx&old_id=xxx&&name=xxx&&id=xxx&&department=xxx&major=xxx |  修改成功：{"if_success":1,error_message:"null"};修改失败：{"if_success":0,"error_messgae":"xxx"}|old_id是助教的原有id,因为老师可能输错了id,需要修改,成功或失败返回的是整数1或0|否,部分不能删除
 
 
 ### 管理学生模块
