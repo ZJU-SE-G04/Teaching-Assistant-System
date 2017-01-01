@@ -16,13 +16,15 @@
     <!--add by Li Boao-->
     <link rel="stylesheet" href="../css/content.css">
     <link rel="stylesheet" href="../css/docs.css">
-
     <!--add by 章世超-->
-    <link rel="stylesheet" href="../article/show_article.css">
+    <link rel="stylesheet" href="../article_mod/show_article.css">
     <!--以下两个样式：文章区用到的样式-->
     <link rel="stylesheet" href="../administrator/w3.css">
     <link rel="stylesheet" href="../administrator/administrator.css">
-
+    <!--bootstrap file input-->
+    <link href="../bootstrap-3.3.7-dist/bootstrap-fileinput/bootstrap.min.css" rel="stylesheet">
+    <link href="../bootstrap-3.3.7-dist/bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet"
+          type="text/css"/>
 
     <script type="text/javascript" src="../ueditor/ueditor.config.js"></script>
     <script type="text/javascript" src="../ueditor/ueditor.all.js"></script>
@@ -70,10 +72,10 @@
                 <ul class="nav-pills nav nav-stacked">
                     <li class=""><a href="#notice_pane" data-toggle="tab">公告</a></li>
                     <li class=""><a href="#course_intro_pane" data-toggle="tab">课程介绍</a></li>
-                    <li class=""><a href="#courseware_pane" data-toggle="tab">课件资料</a></li>
+                    <li class="active"><a href="#courseware_pane" data-toggle="tab">课件资料</a></li>
                     <li class=""><a href="#article_pane" onclick="articleUpdate()" data-toggle="tab">教师文章</a></li>
                     <li class=""><a href="#examin_pane" data-toggle="tab">测验与作业</a></li>
-                    <li class="active"><a href="#discuss_area_pane" data-toggle="tab">讨论区</a></li>
+                    <li class=""><a href="#discuss_area_pane" data-toggle="tab">讨论区</a></li>
                     <!--<li class="">-->
                     <!--<a href="#">组队</a>-->
                     <!--<ul class="dropdown-menu pull-right" role="menu">-->
@@ -151,10 +153,19 @@
                     <p></p>
                 </div>
             </div>
-            <div id="courseware_pane" class="tab-pane">
+            <div id="courseware_pane" class="tab-pane in active">
+                <select id="c-kind-select" class="form-control">
+                    <option>课件</option>
+                    <option>模板</option>
+                    <option>参考资料</option>
+                    <option>以往优秀作业</option>
+                    <option>教学视频</option>
+                    <option>教学音频</option>
+                </select>
+                <input id="c-upload-file" name="file" type="file" class="file">
                 <div id="courseware_nonpreview_area">
                     <div class="titleBox" id="ppt_ddMenu_title">
-                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-title">课件</span>
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-title c-kind">课件</span>
                     </div>
 
                     <div id="course_ppts_list" class="courseware_list">
@@ -166,23 +177,23 @@
                         <!--</div>-->
                     </div>
                     <div class="titleBox" id="tpl_ddMenu_title">
-                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">模板</span>
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0 c-kind">模板</span>
                     </div>
                     <div id="tpls_list" class="courseware_list"></div>
                     <div class="titleBox" id="refMaterial_ddMenu_title">
-                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">参考资料</span>
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0 c-kind">参考资料</span>
                     </div>
                     <div id="refMaterial_list" class="courseware_list"></div>
                     <div class="titleBox" id="past_hw_ddMenu_title">
-                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">以往优秀作业</span>
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0 c-kind">以往优秀作业</span>
                     </div>
                     <div id="past_hw_list" class="courseware_list"></div>
                     <div class="titleBox" id="teach_video_ddMenu_title">
-                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">教学视频</span>
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0 c-ware-kind">教学视频</span>
                     </div>
                     <div id="teach_video_list" class="courseware_list"></div>
                     <div class="titleBox" id="teach_audio_ddMenu_title">
-                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">教学音频</span>
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0 c-ware-kind">教学音频</span>
                     </div>
                     <div id="teach_audio_list" class="courseware_list"></div>
                 </div>
@@ -428,7 +439,7 @@
                     </div>
                 </div>
             </div>
-            <div id="discuss_area_pane" class="tab-pane in active">
+            <div id="discuss_area_pane" class="tab-pane">
                 <div id="discuss_home_page">
                     <div class="bottom-line" id="discuss_header">
                         <span class="left f-discuss-header">讨论区</span>
@@ -680,6 +691,13 @@
 <script src="../js/jquery-validation-1.14.0_dist_jquery.validate.js"></script>
 <script src="../js/jquery-validation-1.14.0_dist_localization_messages_zh.js"></script>
 
+以下是bootstrap file input的js文件
+<script src="../bootstrap-3.3.7-dist/bootstrap-fileinput/jquery.min.js"></script>
+<script> var jq211 = jQuery.noConflict(true); </script>
+重命名jquery,防止覆盖引入的jQuery
+<script src="../bootstrap-3.3.7-dist/bootstrap-fileinput/js/fileinput.min.js"></script>
+<script src="../bootstrap-3.3.7-dist/bootstrap-fileinput/js/locales/zh.js"></script>
+
 <script type="text/javascript">
     var ue = UE.getEditor('submitPost_editor');
     var uec = UE.getEditor('submitRe_editor')
@@ -691,7 +709,10 @@
 <script src="../js/student_learn.js" type="text/javascript"></script>
 <!--<script src="http://vjs.zencdn.net/5.8.8/video.js"></script>-->
 <!--章世超文章区添加的js-->
-<script src="../article/add_article.js"></script>
+<script src="../article_mod/add_article.js"></script>
+<script src="../courseware_mod/courseware.js"></script>
+
+
 
 </body>
 </html>

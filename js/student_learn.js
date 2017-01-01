@@ -147,18 +147,19 @@ $(document).ready(
                         var c_delete_area = $("<div class='download-btn right'></div>");
                         c_delete_area.append($("<span class='glyphicon-trash glyphicon c-trash'></span>"));
                         c_delete_area.find(".c-trash").click(function () {
-                            $(this).parent().parent().remove()
+                            $(this).parents(".each_datum").remove();
+                            var id=$(this).parents(".each_datum").find(".c-id").text();
                             $.ajax({
-                                url: "delete_courseware.php?courseware_id=" + xxx,
+                                url: "../courseware_mod/php/delete_ware.php?ware_id=" + id,
                                 success: function (result) {
-                                    if (result["if_success"] == 0) {
-                                        alert(result["err_message"]);
-                                    }
-
+                                    
                                 }
                             });
                         });
                         item_ele.append(c_delete_area);
+                        var c_id=$("<div class='c-id' style='display: none'></div>");//c-id存储课件id
+                        c_id.html(item['courseware_id']);
+                        item_ele.append(c_id);
                         //----------------
 
 
@@ -171,6 +172,11 @@ $(document).ready(
             });
             $(".courseware_list").hide();
         });
+        
+        
+
+
+
 
 
         /************************************* 讨论区 ******************************************/
@@ -636,4 +642,5 @@ $(document).ready(
         //设置
     })
 ;
+
 

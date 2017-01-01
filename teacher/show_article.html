@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="../css/header.css">
 
 
-    <link rel="stylesheet" href="../article/show_article.css">
+    <link rel="stylesheet" href="../article_mod/show_article.css">
     <link rel="stylesheet" href="css/add_TA.css">
     <link rel="stylesheet" href="css/add_stu.css">
     <link rel="stylesheet" href="css/class_manage.css">
@@ -287,8 +287,6 @@
                 </div>
             </div>
             <div id="courseware_pane" class="tab-pane">
-                <form action="upload_coureseware.php" method="get">
-                    <input class="c-course-id" name="lesson_id" style="display: none">
                     <select name="courseware_kind" class="form-control">
                         <option>课件</option>
                         <option>模板</option>
@@ -297,9 +295,8 @@
                         <option>教学视频</option>
                         <option>教学音频</option>
                     </select>
-
                     <input id="input-id" name="file" type="file" class="file" multiple>
-                </form>
+
 
 
                 <div class="titleBox" id="ppt_btn">
@@ -790,8 +787,6 @@
                     <h4>以下是<span id="stu_course_name"></span><span class="x-class-time"></span>班的学生信息</h4>
                 </div>
 
-
-                <input class="c-class-id" name="class_id" style="display: none">
                 <label>用Excel重置学生信息</label>
                 <input id="x-upload-file" name="file" type="file" class="file">
 
@@ -900,12 +895,10 @@
 <script src="../bootstrap-3.3.7-dist/bootstrap-fileinput/js/locales/zh.js"></script>
 
 
-
-
 <!--以下是zhang shichao导入的js文件-->
 <script src="js/add_TA.js"></script>
 <script src="js/add_stu.js"></script>
-<script src="../article/add_article.js"></script>
+<script src="../article_mod/add_article.js"></script>
 <script src="js/class_manage.js"></script>
 
 

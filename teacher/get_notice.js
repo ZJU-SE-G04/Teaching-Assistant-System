@@ -67,8 +67,6 @@ function getNotice() {
     }
 
     show_class_init();//初始化班级
-    $(".c-class-id").attr("value",class_id);
-    $(".c-course-id").attr("value",course_id);
 
     
 }

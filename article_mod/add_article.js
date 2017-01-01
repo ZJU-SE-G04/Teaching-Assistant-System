@@ -9,7 +9,7 @@ var re_user_name='0';//被回复人姓名
 var re_user_id="0";//被回复人id
 
 
-//-------show an article list--------
+//-------show an article_mod list--------
 
 
 function  articleUpdate(needed_title) {
@@ -33,7 +33,7 @@ function  articleUpdate(needed_title) {
         needed_title='';
     }
     $.ajax({
-        url:"../article/php/show_article_list.php?lesson_id="+course_id+"&needed_title="+needed_title,
+        url:"../article_mod/php/show_article_list.php?lesson_id="+course_id+"&needed_title="+needed_title,
         success:function (result) {
             var articleRecords=result;
             var articleLoop=$("#articleLoop");
@@ -49,7 +49,7 @@ function  articleUpdate(needed_title) {
                 else {
                     tmp.find(".x-trash").hide()
                 }
-                tmp.find(".x-article-id").html(x.article_id);
+                tmp.find(".x-article_mod-id").html(x.article_id);
                 tmp.find(".x-title").html(x.title);
                 tmp.find(".x-contentDigest").html(x.short_content);
                 tmp.find(".x-time").html(x.time);
@@ -65,7 +65,7 @@ function  articleUpdate(needed_title) {
 
 
 
-//------------show input for writing a article----------
+//------------show input for writing a article_mod----------
 
 function  showWriteArticle() {
     $("#articleLoop").hide();
@@ -74,7 +74,7 @@ function  showWriteArticle() {
     $(this).prev().show()
 }
 
-//-------------- write an article-----------
+//-------------- write an article_mod-----------
 
 
 function  writeArticle() {
@@ -83,7 +83,7 @@ function  writeArticle() {
 
     $.ajax({
             type:"GET",
-            url:"../article/php/add_article.php?lesson_id="+course_id+"&id="+user_id+"&title="+title+"&content="+content,
+            url:"../article_mod/php/add_article.php?lesson_id="+course_id+"&id="+user_id+"&title="+title+"&content="+content,
             success:function (result) {
                 var jsonObj=result;
                 if(jsonObj["if_success"]==1){
@@ -99,7 +99,7 @@ function  writeArticle() {
 
 }
 
-//--------------- cancel writing an article---------
+//--------------- cancel writing an article_mod---------
 
 function  cancelArticle() {
     document.getElementById("articleLoop").style.display="block";
@@ -109,7 +109,7 @@ function  cancelArticle() {
 }
 
 
-//-----------update an article ----------
+//-----------update an article_mod ----------
 function updateArticle(article_id) {
     var update_article=$("#update_article");
     update_article.show();
@@ -128,7 +128,7 @@ function  submitUpdateArticle(article_id) {
     var content=ue_update.getContent();
     $.ajax({
       type:"GET",
-        url:"../article/php/update_article.php?article_id="+article_id+"&title="+title+"&content="+content,
+        url:"../article_mod/php/update_article.php?article_id="+article_id+"&title="+title+"&content="+content,
         success:function (result) {
             var jsonObj=result;
             if(jsonObj["if_success"]==1){
@@ -145,7 +145,7 @@ function  submitUpdateArticle(article_id) {
 }
 
 
-//----------cancel updating an article-----------------------
+//----------cancel updating an article_mod-----------------------
 
 function cancelUpdateArticle() {
     $("#update_article").hide();
@@ -153,10 +153,10 @@ function cancelUpdateArticle() {
     $("#write_article_button").show()
 }
 
-//-----------delete an article---------------------------
+//-----------delete an article_mod---------------------------
 function  deleteArticle(article_id) {
     $.ajax({
-        url:"../article/php/delete_article.php?article_id="+article_id,
+        url:"../article_mod/php/delete_article.php?article_id="+article_id,
         success:function (result) {
             var jsonObj=result;
             if(jsonObj["if_success"]==1){
@@ -174,7 +174,7 @@ function  deleteArticle(article_id) {
 }
 
 
-//------show article details and comments(first)---------
+//------show article_mod details and comments(first)---------
 
 function articleShow() {
 
@@ -187,11 +187,11 @@ function articleShow() {
 
 
     var parent=$(this).parent();
-    article_id=parent.find(".x-article-id").text();
+    article_id=parent.find(".x-article_mod-id").text();
 
     $.ajax({
         type:"GET",
-        url:"../article/php/show_article_detail.php?article_id="+article_id+"",
+        url:"../article_mod/php/show_article_detail.php?article_id="+article_id+"",
         success:function (result) {
             var articleDetail=result;
 
@@ -251,7 +251,7 @@ function showSecondComment(floor) {
     var posts_list_item=$(".posts-list-ul").children().last();
 
     $.ajax({
-        url:"../article/php/show_second_comment.php?article_id="+article_id+"&floor="+floor,
+        url:"../article_mod/php/show_second_comment.php?article_id="+article_id+"&floor="+floor,
         success:function (result) {
             var secondComment=result;
             var second_comment_number=secondComment["second_comment_number"];
@@ -321,7 +321,7 @@ function  add_comment() {
 
     $.ajax({
         type:"GET",
-        url:"../article/php/add_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content,
+        url:"../article_mod/php/add_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content,
         success:function (result) {
             if(result["if_success"]==1){
                 var posts_list_ul=$(".posts-list-ul");
@@ -365,7 +365,7 @@ function deleteComment() {
 
     $.ajax({
         type:"GET",
-        url:"../article/php/delete_comment.php?article_id="+article_id+"&floor="+floor,
+        url:"../article_mod/php/delete_comment.php?article_id="+article_id+"&floor="+floor,
         success:function (result) {
             if(result["if_success"]==0){
                 window.alert(result["error_message"]);
@@ -405,7 +405,7 @@ function deleteSecondComment() {
 
     $.ajax({
        type:"GET",
-        url:"../article/php/delete_second_comment.php?article_id="+article_id+"&floor="+floor+"&re_floor="+re_floor,
+        url:"../article_mod/php/delete_second_comment.php?article_id="+article_id+"&floor="+floor+"&re_floor="+re_floor,
         success:function (result) {
             if(result["if_success"]==1){
                 post_comment.find(".x-re-floor").parent().parent().hide();
@@ -479,7 +479,7 @@ function add_second_comment() {
     // $(this).prev().val("");//还原输入框中内容
 
     $.ajax({
-        url:"../article/php/add_second_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content+"&floor="+floor+"&re_id="+re_user_id,
+        url:"../article_mod/php/add_second_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content+"&floor="+floor+"&re_id="+re_user_id,
         success:function (result) {
             if(result["if_success"]==1){
                 var post_comment_area_body=post_comments_area.find(".post-comment-area-body");
