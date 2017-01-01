@@ -9,11 +9,10 @@
     <link rel="stylesheet" href="../css/header.css">
 
 
-    <link rel="stylesheet" href="css/show_article.css">
+    <link rel="stylesheet" href="../article/show_article.css">
     <link rel="stylesheet" href="css/add_TA.css">
     <link rel="stylesheet" href="css/add_stu.css">
     <link rel="stylesheet" href="css/class_manage.css">
-    <link rel="stylesheet" href="css/courseware.css">
 
     <!--以下两个样式：文章区用到的样式-->
     <link rel="stylesheet" href="../administrator/w3.css">
@@ -23,7 +22,6 @@
     <link href="../bootstrap-3.3.7-dist/bootstrap-fileinput/bootstrap.min.css" rel="stylesheet">
     <link href="../bootstrap-3.3.7-dist/bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet"
           type="text/css"/>
-
 
 
     <!--以下是Li Boao导入的css文件-->
@@ -82,9 +80,9 @@
                 <li class="tab-style"><a href="#report" data-toggle="tab" onclick="correctReport()">报告与文档</a></li>
                 <!--<li class="tab-style"><a href="#correct_report" data-toggle="tab">批改实验报告</a></li>-->
                 <li class="tab-style"><a href="#exercise" data-toggle="tab">发布作业</a></li>
-                <li class="tab-style active"><a href="#discuss_area_pane" data-toggle="tab">讨论区</a></li>
+                <li class="tab-style"><a href="#discuss_area_pane" data-toggle="tab">讨论区</a></li>
                 <li class="tab-style"><a href="#class" data-toggle="tab" onclick="show_class()">班级信息</a></li>
-                <li class="tab-style"><a href="#stuInfo" data-toggle="tab" onclick="showStuInfo()">学生信息</a></li>
+                <li class="tab-style active"><a href="#stuInfo" data-toggle="tab" onclick="showStuInfo()">学生信息</a></li>
                 <li class="tab-style  t-check" style="display: none"><a href="#TAInfo" data-toggle="tab" id="TA" onclick="showTAInfo()">助教信息</a></li>
 
             </ul>
@@ -116,7 +114,7 @@
 
             </div>
             <div id="article" class="tab-pane">
-                <div class="row">
+                <div class="row" style="margin-top: 15px">
                     <div class="col-md-9">
                         <div class="input-group">
                             <input type="text" class="form-control input-lg"><span
@@ -235,7 +233,7 @@
 
                 </div>
 
-                <div id="write_article">
+                <div id="write_article" >
                     <p class="subtit">文章标题</p>
                     <input type="text" id="article_title" style="width:800px;">
                     <p class="subtit">文章内容</p>
@@ -245,7 +243,7 @@
                         <script id="container_write" name="content" type="text/plain" style="height:700px">
                         </script>
                         <script type="text/javascript">
-                            var ue = UE.getEditor('container_write');
+                            var ue_write = UE.getEditor('container_write');
                         </script>
                     </div>
                     <div class="row">
@@ -543,7 +541,7 @@
 
             </div>
 
-            <div id="discuss_area_pane" class="tab-pane in active">
+            <div id="discuss_area_pane" class="tab-pane">
                 <div id="discuss_home_page">
                     <div class="bottom-line" id="discuss_header">
                         <span class="left f-discuss-header">讨论区</span>
@@ -787,19 +785,17 @@
 
             </div>
 
-            <div id="stuInfo" class="tab-pane">
+            <div id="stuInfo" class="tab-pane in active">
                 <div class="bs-callout bs-callout-info">
                     <h4>以下是<span id="stu_course_name"></span><span class="x-class-time"></span>班的学生信息</h4>
                 </div>
 
 
-                <form action="add_stu_excel.php" method="get" style="margin-bottom: 15px">
+                <form action="php/add_stu_excel.php" method="post" style="margin-bottom: 15px" enctype="multipart/form-data">
                     <input class="c-class-id" name="class_id" style="display: none">
-
                     <label>用Excel重置学生信息</label>
                     <input name="file" type="file" class="file">
                 </form>
-
 
                 <table class="table table-striped" id="StuInfoTable">
                     <tr><th>学号</th><th>姓名</th><th>院系</th><th>专业</th><th>团队</th></tr>
@@ -816,7 +812,7 @@
             <div id="TAInfo" class="tab-pane">
                 <div class="bs-callout bs-callout-info">
                     <h4>以下是<span id="TA_course_name"></span><span class="x-class-time"></span>班的助教信息</h4></div>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#t-add-modal">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#t-add-modal" style="margin-bottom: 10px">
                     录入助教信息
                 </button>
                     <table class="table table-striped" id="t-table">
@@ -896,17 +892,17 @@
 <script src="../bootstrap-3.3.7-dist/bootstrap-fileinput/jquery.min.js"></script>
 <script src="../bootstrap-3.3.7-dist/bootstrap-fileinput/js/fileinput.min.js"></script>
 
+
 <!--以下是jQuery 和 bootstrap的js文件-->
-<script src="../jquery/jquery-3.1.1.min.js"></script>
+<!--<script src="../jquery/jquery-3.1.1.min.js"></script>-->
 <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script src="../jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 
 <!--以下是zhang shichao导入的js文件-->
 <script src="js/add_TA.js"></script>
 <script src="js/add_stu.js"></script>
-<script src="js/add_article.js"></script>
+<script src="../article/add_article.js"></script>
 <script src="js/class_manage.js"></script>
-<script src="js/courseware.js"></script>
 
 
 <!--以下是谢俊东导入的js文件-->

@@ -8,27 +8,6 @@ var article_id;//在点击文章后被初始化
 var re_user_name='0';//被回复人姓名
 var re_user_id="0";//被回复人id
 
-//------- wo get it
-$(document).ready(function() {
-    // $("#notice").addClass("in active");
-    // $("#notice").addClass("x-old-nav");
-    // // $(".content-blk.message").show();
-
-    $("#article").click(function () {
-        // var x_old_nav=$(".x-old-nav");
-        // x_old_nav.removeClass("active");
-        // x_old_nav.removeClass("x-old-nav");
-       $("#notice").removeClass("in active");
-
-
-
-        // $(".content-blk").hide();
-        // var s = $(this).attr("id");
-        // $("." + s).show();
-    });
-
-    // $("#articleBack").click(articleUpdate);
-});
 
 //-------show an article list--------
 
@@ -54,7 +33,7 @@ function  articleUpdate(needed_title) {
         needed_title='';
     }
     $.ajax({
-        url:"show_article_list.php?lesson_id="+course_id+"&needed_title="+needed_title,
+        url:"../article/php/show_article_list.php?lesson_id="+course_id+"&needed_title="+needed_title,
         success:function (result) {
             var articleRecords=result;
             var articleLoop=$("#articleLoop");
@@ -78,10 +57,11 @@ function  articleUpdate(needed_title) {
                 articleLoop.append(tmp);
             }
             articleLoop.find(".panel-heading").click(articleShow);  //all heading created
+            articleLoop.children(".old").hide();//隐藏old 
+
         }
     });
 }
-//-------显示二级评论--------
 
 
 
@@ -99,11 +79,11 @@ function  showWriteArticle() {
 
 function  writeArticle() {
     var title=document.getElementById("article_title").value;
-    var content=ue.getContent();
+    var content=ue_write.getContent();
 
     $.ajax({
             type:"GET",
-            url:"add_article.php?lesson_id="+course_id+"&id="+user_id+"&title="+title+"&content="+content,
+            url:"../article/php/add_article.php?lesson_id="+course_id+"&id="+user_id+"&title="+title+"&content="+content,
             success:function (result) {
                 var jsonObj=result;
                 if(jsonObj["if_success"]==1){
@@ -148,7 +128,7 @@ function  submitUpdateArticle(article_id) {
     var content=ue_update.getContent();
     $.ajax({
       type:"GET",
-        url:"update_article.php?article_id="+article_id+"&title="+title+"&content="+content,
+        url:"../article/php/update_article.php?article_id="+article_id+"&title="+title+"&content="+content,
         success:function (result) {
             var jsonObj=result;
             if(jsonObj["if_success"]==1){
@@ -176,7 +156,7 @@ function cancelUpdateArticle() {
 //-----------delete an article---------------------------
 function  deleteArticle(article_id) {
     $.ajax({
-        url:"delete_article.php?article_id="+article_id,
+        url:"../article/php/delete_article.php?article_id="+article_id,
         success:function (result) {
             var jsonObj=result;
             if(jsonObj["if_success"]==1){
@@ -211,7 +191,7 @@ function articleShow() {
 
     $.ajax({
         type:"GET",
-        url:"show_article_detail.php?article_id="+article_id+"",
+        url:"../article/php/show_article_detail.php?article_id="+article_id+"",
         success:function (result) {
             var articleDetail=result;
 
@@ -271,7 +251,7 @@ function showSecondComment(floor) {
     var posts_list_item=$(".posts-list-ul").children().last();
 
     $.ajax({
-        url:"show_second_comment.php?article_id="+article_id+"&floor="+floor,
+        url:"../article/php/show_second_comment.php?article_id="+article_id+"&floor="+floor,
         success:function (result) {
             var secondComment=result;
             var second_comment_number=secondComment["second_comment_number"];
@@ -327,6 +307,51 @@ function showSecondComment(floor) {
 }
 
 
+//---------插入一级回复------------
+
+function  add_comment() {
+    var content=ue_add_comment.getContent();
+    if(content==""){
+        window.alert("回复内容不能为空");
+        return;
+    }
+    // alert(content);
+    var current_time=getNowFormatDate();
+    // alert(current_time);
+
+    $.ajax({
+        type:"GET",
+        url:"../article/php/add_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content,
+        success:function (result) {
+            if(result["if_success"]==1){
+                var posts_list_ul=$(".posts-list-ul");
+                var tmp = posts_list_ul.children(".old").clone().removeClass("old").addClass("new").show();
+                tmp.find(".x-name").html(user_name);
+                tmp.find(".x-time").html(current_time);
+                tmp.find(".x-content").html(content);
+                tmp.find(".x-comment").click(add_second_comment_tx);
+                tmp.find(".post-comments-area").hide();
+                tmp.find(".glyphicon").click(deleteComment);
+                posts_list_ul.append(tmp);
+
+                var x_commment_number=$(".x-comment-number");
+                x_commment_number.html(parseInt(x_commment_number.text())+1);//一级评论数+1;
+                ue_add_comment.setContent("");//清除内容
+            }
+            else{
+                window.alert(result["err_message"]);
+            }
+
+        }
+
+    });
+
+}
+function search_article(obj) {
+    var needed_title=obj.previousSibling.value;
+    articleUpdate(needed_title);
+}
+
 
 
 //------------ 删除一级评论-----------
@@ -340,7 +365,7 @@ function deleteComment() {
 
     $.ajax({
         type:"GET",
-        url:"delete_comment.php?article_id="+article_id+"&floor="+floor,
+        url:"../article/php/delete_comment.php?article_id="+article_id+"&floor="+floor,
         success:function (result) {
             if(result["if_success"]==0){
                 window.alert(result["error_message"]);
@@ -360,7 +385,9 @@ function  returnToArticleList() {
     $("#articleLoop").show();
     $("#articleDetail").hide();
     $(this).hide();
-    $("#write_article_button").show();
+    if(level==3) {
+        $("#write_article_button").show();
+    }
 
 }
 
@@ -378,7 +405,7 @@ function deleteSecondComment() {
 
     $.ajax({
        type:"GET",
-        url:"delete_second_comment.php?article_id="+article_id+"&floor="+floor+"&re_floor="+re_floor,
+        url:"../article/php/delete_second_comment.php?article_id="+article_id+"&floor="+floor+"&re_floor="+re_floor,
         success:function (result) {
             if(result["if_success"]==1){
                 post_comment.find(".x-re-floor").parent().parent().hide();
@@ -452,7 +479,7 @@ function add_second_comment() {
     // $(this).prev().val("");//还原输入框中内容
 
     $.ajax({
-        url:"add_second_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content+"&floor="+floor+"&re_id="+re_user_id,
+        url:"../article/php/add_second_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content+"&floor="+floor+"&re_id="+re_user_id,
         success:function (result) {
             if(result["if_success"]==1){
                 var post_comment_area_body=post_comments_area.find(".post-comment-area-body");
@@ -499,48 +526,3 @@ function getNowFormatDate() {
 }
 
 
-
-//---------插入一级回复------------
-
-function  add_comment() {
-    var content=ue_add_comment.getContent();
-    if(content==""){
-        window.alert("回复内容不能为空");
-        return;
-    }
-    // alert(content);
-    var current_time=getNowFormatDate();
-    // alert(current_time);
-
-    $.ajax({
-       type:"GET",
-        url:"add_comment.php?article_id="+article_id+"&id="+user_id+"&time="+current_time+"&content="+content,
-        success:function (result) {
-            if(result["if_success"]==1){
-                var posts_list_ul=$(".posts-list-ul");
-                var tmp = posts_list_ul.children(".old").clone().removeClass("old").addClass("new").show();
-                tmp.find(".x-name").html(user_name);
-                tmp.find(".x-time").html(current_time);
-                tmp.find(".x-content").html(content);
-                tmp.find(".x-comment").click(add_second_comment_tx);
-                tmp.find(".post-comments-area").hide();
-                tmp.find(".glyphicon").click(deleteComment);
-                posts_list_ul.append(tmp);
-
-                var x_commment_number=$(".x-comment-number");
-                x_commment_number.html(parseInt(x_commment_number.text())+1);//一级评论数+1;
-                ue_add_comment.setContent("");//清除内容
-            }
-            else{
-                window.alert(result["err_message"]);
-            }
-
-        }
-
-    });
-
-}
-function search_article(obj) {
-    var needed_title=obj.previousSibling.value;
-    articleUpdate(needed_title);
-}

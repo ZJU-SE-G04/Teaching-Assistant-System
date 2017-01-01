@@ -29,8 +29,8 @@ function showTAInfo(){
         }
     });
     var t_add_in=t_add_area.children("#t-add-in");
-    t_add_in.next().find("#t-add-final").click(addTA);
-
+    t_add_in.next().find("#t-add-final").click(addTA);//录入助教信息click
+    
 }
 
 

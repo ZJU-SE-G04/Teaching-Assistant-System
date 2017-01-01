@@ -61,20 +61,16 @@ function getNotice() {
     if(level==3){//助教不能管理助教信息
         $(".t-check").css("display","block");
         user_name+="老师";
-        console.log(user_name);
     }
     else{
         user_name+="助教";
-        console.log(user_name);
     }
 
     show_class_init();//初始化班级
     $(".c-class-id").attr("value",class_id);
     $(".c-course-id").attr("value",course_id);
 
-
-
-
+    
 }
 window.onload = getNotice;
 

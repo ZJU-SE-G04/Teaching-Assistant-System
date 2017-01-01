@@ -3,6 +3,7 @@
 //---------------show students' info-----------------
 
 function showStuInfo(){
+    $("#stuInfo").find(".fileinput-upload-button").attr("onclick","add_stu_excel()");
 
     $.ajax({
         type:"GET",
@@ -24,3 +25,31 @@ function showStuInfo(){
     });
 
 }
+
+// function  add_stu_excel() {
+//     // var file=$("#stuInfo").find(".btn-file").find(".file").files[0];
+//     // var file=document.getElementById("stuInfo").getElementsByClassName("file").get[0].files[0];
+//     // var file=$("input[type='file']").val();
+//     // console.log(file);
+//
+//
+//         var formData = new FormData($( "#x-file-upload" )[0]);
+//     console.log(formData);
+//         $.ajax({
+//             url: 'php/add_stu_excel.php' ,
+//             type: 'POST',
+//             data: json,
+//             async: false,
+//             cache: false,
+//             contentType: false,
+//             processData: false,
+//             success: function (returndata) {
+//                 alert(returndata);
+//             }
+//             // error: function (returndata) {
+//             //     alert(returndata);
+//             // }
+//         });
+//
+//
+// }

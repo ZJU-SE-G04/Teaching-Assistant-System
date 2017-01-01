@@ -1,7 +1,3 @@
-/**
- * Created by achao_zju on 26/11/2016.
- */
-
 //--------- 一些全局变量 ------
 //这些全局变量在get_notice.js中初始化初始化
 
@@ -13,6 +9,7 @@ var course_id;
 var user_name;
 var user_id;
 var level;
+
 
 
 //--------- 显示当前课程的所有班级---------

@@ -3,6 +3,13 @@
  * Created by dddong on 16/11/17.
  */
 
+//added by zhangshichao
+var course_id;
+var level=1;
+var user_name;
+var user_id;
+
+
 let POSTNUM_PER_PAGE = 10;
 let POSTRE_NUM_PER_PAGE = 10;
 
@@ -13,6 +20,8 @@ $(document).ready(
     function () {
         //课程号，从首页传过来的参数获得
         var courseID = getQueryString("lesson_id");
+        course_id=courseID;//achao
+
 
         //获取课程信息，包括课程所有老师
         function get_course_intro() {
