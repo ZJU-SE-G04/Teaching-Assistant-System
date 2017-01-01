@@ -15,10 +15,10 @@
 |功能名      |前端调用后端的URL                             | 后端返回前端的数据(json)                   |备注          |后端是否完成    |
 |-----------------|-------------------------------------------|--------------------------------------------|---------------|----------|
 |显示当前课程当前班级的学生信息|show_stu_info.php?class_id=xxx      | [{"name":"xxx", "id":"xxx", "department":"xxx", "major":"xxx","team_name":"xxx"}{"name":"xxx", "id":"xxx", "department":"xxx", "major":"xxx","team_name":"xxx"}...]|如果当前学生尚未组队,请返回:"未组队"|是
-|手动添加学生信息|add_stu.php?class_id=xxx[{"id":"xxx","name":"xxx","department":"xxx","major":"xxx"}{"id":"xxx","name":"xxx","department":"xxx","major":"xxx"}...] | 插入成功：{"if_success":1,error_message:"null"};插入失败：{"if_success":0,"error_messgae":"xxx"}|注明:成功或失败返回的是整数1或0,与添加助教相同|是
-|根据id删除一行的学生信息|delete_stu.php?class_id=xxx&id=xxx | 删除成功：{"if_success":1,error_message:"null"};删除失败：{"if_success":0,"error_messgae":"xxx"}|成功或失败返回的是整数1或0|是
-|用Excel批量导入学生信息|add_stu_excel.php?class_id=xxx&file=xxx| 无|导入的信息包括学号,姓名,院系,专业,每次导入都是对原有学生信息的重置,注意!不是添加!|否
-|修改其中一行的学生信息|update_stu.php?class_id=xxx&old_id=xxx&&name=xxx&&id=xxx&&department=xxx&major=xxx&team_name=xxx |  修改成功：{"if_success":1,error_message:"null"};修改失败：{"if_success":0,"error_messgae":"xxx"}|old_id是学生的原有id,因为老师可能输错了id,需要修改,成功或失败返回的是整数1或0|是
+|手动添加学生信息|add_stu.php?class_id=xxx[{"id":"xxx","name":"xxx","department":"xxx","major":"xxx"}{"id":"xxx","name":"xxx","department":"xxx","major":"xxx"}...] | 插入成功：{"if_success":1,error_message:"null"};插入失败：{"if_success":0,"error_messgae":"xxx"}|注明:成功或失败返回的是整数1或0,与添加助教相同|被砍👀
+|根据id删除一行的学生信息|delete_stu.php?class_id=xxx&id=xxx | 删除成功：{"if_success":1,error_message:"null"};删除失败：{"if_success":0,"error_messgae":"xxx"}|成功或失败返回的是整数1或0|被砍
+|用Excel批量导入学生信息|| 任意json对象,为空也可以|导入的信息包括学号,姓名,院系,专业,每次导入都是对原有学生信息的重置,注意!不是添加!|否
+|修改其中一行的学生信息|update_stu.php?class_id=xxx&old_id=xxx&&name=xxx&&id=xxx&&department=xxx&major=xxx&team_name=xxx |  修改成功：{"if_success":1,error_message:"null"};修改失败：{"if_success":0,"error_messgae":"xxx"}|old_id是学生的原有id,因为老师可能输错了id,需要修改,成功或失败返回的是整数1或0|被砍
 
 
 ### 管理班级
@@ -48,9 +48,11 @@
 |添加一条一级回复|add_comment.php?article_id=xxx&id=xxx&time=xxx&content=xxx|成功:{"if_success":1,"error_message":"null"},失败成功:{"if_success":0,"error_message":"xxx"}|!!!为了方便局部刷新,这里的时间由前段获取,后端不必重复获取;前端floor不方便获取,希望后端根据当前最大楼层号+1生成;|是
 |搜索文章标题显示符合要求的文章列表|show_article_list.php?lesson_id=xxx&&needed_title=xxx|[{"article_id":"xxx","title":"xxx","id":"xxx","user_name":"xxx","short_content":"xxx","time":"xxx"}{"article_id":"xxx","title":"xxx","id":"xxx","user_name":"xxx","short_content":"xxx","time":"xxx"}...]|前端要做到代码重用,id是发布人账号，short_content是文章内容前140个字符,user_name是作者姓名|是
 
+### bug(备忘)
+- jquery.min.js版本冲突
+- 删除助教表信息导致用户表信息删除
 
-### To be continued……
-- 其余尚未完成或者还未定型
+
 &#10004;
 ···
 

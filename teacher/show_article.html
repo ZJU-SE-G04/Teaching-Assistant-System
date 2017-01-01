@@ -791,11 +791,9 @@
                 </div>
 
 
-                <form action="php/add_stu_excel.php" method="post" style="margin-bottom: 15px" enctype="multipart/form-data">
-                    <input class="c-class-id" name="class_id" style="display: none">
-                    <label>用Excel重置学生信息</label>
-                    <input name="file" type="file" class="file">
-                </form>
+                <input class="c-class-id" name="class_id" style="display: none">
+                <label>用Excel重置学生信息</label>
+                <input id="x-upload-file" name="file" type="file" class="file">
 
                 <table class="table table-striped" id="StuInfoTable">
                     <tr><th>学号</th><th>姓名</th><th>院系</th><th>专业</th><th>团队</th></tr>
@@ -888,15 +886,21 @@
 </div>
 
 
-<!--以下是bootstrap file input的js文件-->
-<script src="../bootstrap-3.3.7-dist/bootstrap-fileinput/jquery.min.js"></script>
-<script src="../bootstrap-3.3.7-dist/bootstrap-fileinput/js/fileinput.min.js"></script>
-
 
 <!--以下是jQuery 和 bootstrap的js文件-->
-<!--<script src="../jquery/jquery-3.1.1.min.js"></script>-->
+<script src="../jquery/jquery-3.1.1.min.js"></script>
 <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script src="../jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+
+<!--以下是bootstrap file input的js文件-->
+<script src="../bootstrap-3.3.7-dist/bootstrap-fileinput/jquery.min.js"></script>
+<script> var jq211 = jQuery.noConflict(true); </script>
+<!--重命名jquery,防止覆盖引入的jQuery-->
+<script src="../bootstrap-3.3.7-dist/bootstrap-fileinput/js/fileinput.min.js"></script>
+<script src="../bootstrap-3.3.7-dist/bootstrap-fileinput/js/locales/zh.js"></script>
+
+
+
 
 <!--以下是zhang shichao导入的js文件-->
 <script src="js/add_TA.js"></script>

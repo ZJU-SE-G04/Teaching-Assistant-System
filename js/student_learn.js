@@ -4,7 +4,7 @@
  */
 
 //added by zhangshichao
-var course_id;
+var course_id='ABCDE1';
 var level=1;
 var user_name;
 var user_id;

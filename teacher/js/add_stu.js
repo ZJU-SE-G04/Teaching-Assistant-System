@@ -1,10 +1,6 @@
-
-
 //---------------show students' info-----------------
 
 function showStuInfo(){
-    $("#stuInfo").find(".fileinput-upload-button").attr("onclick","add_stu_excel()");
-
     $.ajax({
         type:"GET",
         url:"show_stu_info.php?class_id="+class_id,
@@ -26,30 +22,17 @@ function showStuInfo(){
 
 }
 
-// function  add_stu_excel() {
-//     // var file=$("#stuInfo").find(".btn-file").find(".file").files[0];
-//     // var file=document.getElementById("stuInfo").getElementsByClassName("file").get[0].files[0];
-//     // var file=$("input[type='file']").val();
-//     // console.log(file);
-//
-//
-//         var formData = new FormData($( "#x-file-upload" )[0]);
-//     console.log(formData);
-//         $.ajax({
-//             url: 'php/add_stu_excel.php' ,
-//             type: 'POST',
-//             data: json,
-//             async: false,
-//             cache: false,
-//             contentType: false,
-//             processData: false,
-//             success: function (returndata) {
-//                 alert(returndata);
-//             }
-//             // error: function (returndata) {
-//             //     alert(returndata);
-//             // }
-//         });
-//
-//
-// }
+$("#x-upload-file").fileinput({//bootstrap异步上传文件
+    language: 'zh',
+    uploadUrl: "php/add_stu_excel.php", //异步上传地址
+    maxFileCount: 1, //上传数量限制
+    allowedFileExtensions: ['csv']
+
+    //previewFileIcon: "<i class='glyphicon glyphicon-king'></i>" //选择文件后缩略图
+}).on("fileuploaded", function (event,data) {
+    //异步上传后返回结果处理
+    //后台一定要返回json对象,空的也行。否则会出现提示警告。
+    //返回对象的同时会显示进度条，可以根据返回值进行一些功能扩展
+
+});
+

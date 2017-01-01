@@ -146,7 +146,7 @@ function updateTA() {
             }
             else{
                 window.alert("修改成功");
-                $('#t-update-modal').modal('hide')
+                $('#t-update-modal').modal('hide');
                 t_chosen.find(".t-id").html(id);
                 t_chosen.find(".t-name").html(name);
                 t_chosen.find(".t-depart").html(depart);
