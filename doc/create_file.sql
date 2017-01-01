@@ -89,7 +89,8 @@ create table student_table(
 	name varchar(20),#学生真名
 	department varchar(60),#学生院系
 	major varchar(20),#学生专业
-	constraint foreign key (id) references user_table(id) on delete cascade on update cascade,
+  if_quit varchar(1) DEFAULT '0',#这个变量用于重置学生信息,具体作用可以问章世超
+  constraint foreign key (id) references user_table(id) on delete cascade on update cascade,
 	primary key(id)
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table study_table(
