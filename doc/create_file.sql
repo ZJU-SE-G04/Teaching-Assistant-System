@@ -12,7 +12,7 @@ use teaching_db;
 #用户表
 create table user_table(
 	id varchar(10),#用户ID
-	password varchar(16) not null,#用户密码
+	password varchar(32) not null,#用户密码
 	user_name varchar(20) not null,#用户名
 	level int not null,#权限级别（身份）
 	email varchar(30),#邮箱地址
