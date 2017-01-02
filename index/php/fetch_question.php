@@ -10,7 +10,7 @@
 	$row=mysqli_fetch_assoc($result);
 	if($row==null){
 		$arr['if_success']=0;
-		$arr['err_message']='不存在此用户,返回上一步重新输入';
+		$arr['err_message']='不存在此用户,请重新输入';
 	}else{
 		if($row['question']==null){
 			$arr['if_success']=0;

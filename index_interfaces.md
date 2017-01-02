@@ -57,18 +57,7 @@
             (区分不同课程，不同身份) <br>
         </td>
     </tr>
-     <tr>
-            <td>取回密码:根据账号得到密码问题</td>
-            <td>home.php</td>
-            <td>
-                action=fetch_question, <br>
-                user_id=xxx<br>
-            </td>
-            <td>
-                json <br>
-                (区分不同课程，不同身份) <br>
-            </td>
-        </tr>
+
     </tbody>
 </table>
 

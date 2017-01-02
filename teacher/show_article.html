@@ -75,14 +75,14 @@
         <div class="col-md-2" id="left-side">
             <ul class="nav nav-pills nav-stacked">
                 <li class="tab-style"><a href="#notice" data-toggle="tab">公告</a></li>
-                <li class="tab-style"><a href="#article" data-toggle="tab" onclick="articleUpdate()">最新文章</a></li>
+                <li class="tab-style active"><a href="#article" data-toggle="tab" onclick="articleUpdate()">最新文章</a></li>
                 <li class="tab-style"><a href="#courseware_pane" data-toggle="tab">课程资料</a></li>
                 <li class="tab-style"><a href="#report" data-toggle="tab" onclick="correctReport()">报告与文档</a></li>
                 <!--<li class="tab-style"><a href="#correct_report" data-toggle="tab">批改实验报告</a></li>-->
                 <li class="tab-style"><a href="#exercise" data-toggle="tab">发布作业</a></li>
                 <li class="tab-style"><a href="#discuss_area_pane" data-toggle="tab">讨论区</a></li>
                 <li class="tab-style"><a href="#class" data-toggle="tab" onclick="show_class()">班级信息</a></li>
-                <li class="tab-style active"><a href="#stuInfo" data-toggle="tab" onclick="showStuInfo()">学生信息</a></li>
+                <li class="tab-style"><a href="#stuInfo" data-toggle="tab" onclick="showStuInfo()">学生信息</a></li>
                 <li class="tab-style  t-check" style="display: none"><a href="#TAInfo" data-toggle="tab" id="TA" onclick="showTAInfo()">助教信息</a></li>
 
             </ul>
@@ -286,57 +286,49 @@
                     </div>
                 </div>
             </div>
-            <div id="courseware_pane" class="tab-pane">
-                    <select name="courseware_kind" class="form-control">
-                        <option>课件</option>
-                        <option>模板</option>
-                        <option>参考资料</option>
-                        <option>以往优秀作业</option>
-                        <option>教学视频</option>
-                        <option>教学音频</option>
-                    </select>
-                    <input id="input-id" name="file" type="file" class="file" multiple>
-
-
-
-                <div class="titleBox" id="ppt_btn">
-                    <span class="glyphicon glyphicon-menu-down"></span><span class="f-title">课件</span>
-                </div>
-
-                <div id="course_ppt" class="datum-content">
-                    <div class="each_datum">
-                        <a class="x-blue">第一章ppt</a>
-                        <div class="download-btn">
-                            <a class="x-blue"> <span class="glyphicon glyphicon-download"></span> </a>
-                        </div>
+            <div id="courseware_pane" class="tab-pane in active">
+                <select id="c-kind-select" class="form-control">
+                    <option>课件</option>
+                    <option>模板</option>
+                    <option>参考资料</option>
+                    <option>以往优秀作业</option>
+                    <option>教学视频</option>
+                    <option>教学音频</option>
+                </select>
+                <input id="c-upload-file" name="file" type="file" class="file">
+                <div id="courseware_nonpreview_area">
+                    <div class="titleBox" id="ppt_ddMenu_title">
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-title c-kind">课件</span>
                     </div>
-                    <div class="each_datum">
-                        <a class="x-blue">第二章ppt</a>
-                        <div class="download-btn">
-                            <a class="x-blue"><span class="glyphicon glyphicon-download"></span></a>
-                        </div>
+
+                    <div id="course_ppts_list" class="courseware_list">
+                        <!--<div class="each_datum">-->
+                        <!--<a>第一章ppt</a>-->
+                        <!--<div class="download-btn">-->
+                        <!--<a> <span class="glyphicon glyphicon-download"></span> </a>-->
+                        <!--</div>-->
+                        <!--</div>-->
                     </div>
-                    <div class="each_datum">
-                        <a class="x-blue">第三章ppt</a>
-                        <div class="download-btn">
-                            <a class="x-blue"><span class="glyphicon glyphicon-download"></span></a>
-                        </div>
+                    <div class="titleBox" id="tpl_ddMenu_title">
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0 c-kind">模板</span>
                     </div>
-                </div>
-                <div class="titleBox">
-                    <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">模板</span>
-                </div>
-                <div class="titleBox">
-                    <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">参考资料</span>
-                </div>
-                <div class="titleBox">
-                    <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">以往优秀作业</span>
-                </div>
-                <div class="titleBox">
-                    <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">教学视频</span>
-                </div>
-                <div class="titleBox">
-                    <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">教学音频</span>
+                    <div id="tpls_list" class="courseware_list"></div>
+                    <div class="titleBox" id="refMaterial_ddMenu_title">
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0 c-kind">参考资料</span>
+                    </div>
+                    <div id="refMaterial_list" class="courseware_list"></div>
+                    <div class="titleBox" id="past_hw_ddMenu_title">
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0 c-kind">以往优秀作业</span>
+                    </div>
+                    <div id="past_hw_list" class="courseware_list"></div>
+                    <div class="titleBox" id="teach_video_ddMenu_title">
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0 c-ware-kind">教学视频</span>
+                    </div>
+                    <div id="teach_video_list" class="courseware_list"></div>
+                    <div class="titleBox" id="teach_audio_ddMenu_title">
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0 c-ware-kind">教学音频</span>
+                    </div>
+                    <div id="teach_audio_list" class="courseware_list"></div>
                 </div>
             </div>
             <div id="report" class="tab-pane">
@@ -782,7 +774,7 @@
 
             </div>
 
-            <div id="stuInfo" class="tab-pane in active">
+            <div id="stuInfo" class="tab-pane">
                 <div class="bs-callout bs-callout-info">
                     <h4>以下是<span id="stu_course_name"></span><span class="x-class-time"></span>班的学生信息</h4>
                 </div>
@@ -900,6 +892,7 @@
 <script src="js/add_stu.js"></script>
 <script src="../article_mod/add_article.js"></script>
 <script src="js/class_manage.js"></script>
+<script src="../courseware_mod/courseware.js"></script>
 
 
 <!--以下是谢俊东导入的js文件-->

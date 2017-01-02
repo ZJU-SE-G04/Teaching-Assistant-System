@@ -3,7 +3,7 @@
 	$uid=$_GET['id'];
 	$new=$_GET['new_pwd'];
 	//$uid='3140101111';
-	//$new='666666';
+//$new='666666';
 
 	$state=0;
 	$msg='';

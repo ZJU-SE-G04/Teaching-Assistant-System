@@ -29,8 +29,9 @@
 ### 课程资料
 |功能名      |前端调用后端的URL                             | 后端返回前端的数据(json)                   |备注          |后端是否完成    |
 |-----------------|-------------------------------------------|--------------------------------------------|---------------|----------|
-|上传课程资料|upload_courseware.php?lesson_id=xxx&courseware_kind=xxx&file=xxx|无 |courseware_name后端根据传过去的file获取,courseware_link是文件存储在服务器上路径,后端自己安排,成功或失败返回的是整数1或0|否
-|删除课程资料|delete_courseware.php?courseware_id=xxx|上传成功：{"if_success":1,error_message:"null"};上传失败：{"if_success":0,"error_messgae":"xxx"} |成功或失败返回的是整数1或0|否
+|上传课程资料|POST:../courseware_mod/php/upload.php 上传参数:file:xxx(bootstrap file-input实现),extradata={courseware_kind:xxx,course_id:xxx}|无 |无|是
+|删除课程资料|delete_courseware.php?courseware_id=xxx|空的json|无|是
+|下载课程资料|无|无|无|是
 
 
 ### 文章模块
@@ -50,7 +51,6 @@
 
 ### bug(备忘)
 - jquery.min.js版本冲突
-- 删除助教表信息导致用户表信息删除
 
 
 &#10004;

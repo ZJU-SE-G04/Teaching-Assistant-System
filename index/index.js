@@ -122,7 +122,7 @@ function  answerQuestion() {
     // $('#fe_answer_question').show();
     // $("#fe_pwd_modal").find(".modal-title").html("步骤2:回答密保问题");
 
-    $("#fe_pwd_modal").f$.ajax({
+    $.ajax({
         url:"index/php/fetch_question.php?id="+id,
         success:function (res) {
             if(res["if_success"]==0){
@@ -149,7 +149,6 @@ function answerQuestionBa() {
 function  verifyQuestion() {
     var id=$("#fe_id").val();
     var answer=$("#fe_answer").val();
-    $("#fe_pwd_modal").find(".modal-title").html("步骤3:重置密码");
     console.log(answer);
 
     // $('#reset_pwd').show();
@@ -159,6 +158,7 @@ function  verifyQuestion() {
         url:"index/php/verify_question.php?id="+id+"&answer="+answer,
         success:function (res) {
             if(res["if_success"]==0){
+                $("#fe_pwd_modal").find(".modal-title").html("步骤3:重置密码");
                 window.alert(res["err_message"]);
             }else {
                 $('#reset_pwd').show();
@@ -180,7 +180,7 @@ function  resetPwd() {
     // $('#fe_pwd_modal').modal("hide");
 
     $.ajax({
-        url:"index/php/verify_question.php?id="+id+"&password"+new_pwd,
+        url:"index/php/reset_pwd.php?id="+id+"&new_pwd="+new_pwd,
         success:function (res) {
             if(res["if_success"]==0){
                 window.alert(res["err_message"]);

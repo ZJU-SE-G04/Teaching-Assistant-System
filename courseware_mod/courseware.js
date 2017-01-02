@@ -30,7 +30,7 @@ $("#c-upload-file").fileinput({//bootstrap异步上传文件
 
 function c_show_courseware() {
     $.ajax({
-        url: "get_courseware.php?courseID=" +course_id,
+        url: "get_courseware.php?courseID=" + course_id,
         async: false,
         success: function (result, status) {
             $("#courseware_nonpreview_area").show();
@@ -69,7 +69,9 @@ function c_show_courseware() {
                 //如果是视频
                 if (item_kind === "教学视频") {
                     preview_link.click(function () {
-                        window.open("watch_video.html?vid=" + $(this).attr("title"));
+                        window.open("watch_video/watch_video.html?vid=" + $(this).attr("title")+$(this).text());
+                        // window.open("watch_video/watch_video.html?vid=/Teaching-Assistant-System/file/video/seven.mp4");
+
                     })
                 }
                 // //如果是ppt
@@ -79,14 +81,15 @@ function c_show_courseware() {
                 // }
                 item_ele.append(preview_link);
                 var download_area = $("<div class='download-btn right'></div>");
-                var download_link = $("<a></a>").attr("href", item['courseware_link']).attr("download", item['courseware_name']);
+                var download_link = $("<a></a>").attr("href", item['courseware_link']+item['courseware_name']).attr("download", item['courseware_name']);
                 download_link.append($("<span class='glyphicon-download glyphicon'></span>"));
                 download_area.append(download_link);
 
                 //-----add by achao----
-                var c_delete_area = $("<div class='download-btn right'></div>");
+                var c_delete_area = $("<div class='download-btn right' style='margin-left: 10px;margin-top: 5px'></div>");
                 c_delete_area.append($("<span class='glyphicon-trash glyphicon c-trash'></span>"));
                 c_delete_area.find(".c-trash").click(function () {
+                    $(this).parents(".each_datum").remove();
                     var id=$(this).parents(".each_datum").find(".c-id").text();
                     $.ajax({
                         url: "../courseware_mod/php/delete_ware.php?ware_id=" + id,
@@ -109,4 +112,5 @@ function c_show_courseware() {
 
         }
     });
+    
 }
