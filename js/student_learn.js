@@ -5,7 +5,7 @@
 
 //added by zhangshichao
 var course_id='ABCDE1';
-var level=1;
+var level=0;
 var user_name;
 var user_id;
 
@@ -74,6 +74,7 @@ $(document).ready(
 
 
         /******************************课件资料部分************************************/
+        
 
         //课件资料页面改变下拉列表项的箭头
         $(".titleBox").click(function () {
@@ -129,7 +130,7 @@ $(document).ready(
                         //如果是视频
                         if (item_kind === "教学视频") {
                             preview_link.click(function () {
-                                window.open("watch_video/watch_video.html?vid=" + $(this).attr("title")+$(this).text());
+                                window.open("/Teaching-Assistant-System/courseware_mod/watch_video.html?vid=" + $(this).attr("title")+$(this).text());
                                 // window.open("watch_video/watch_video.html?vid=/Teaching-Assistant-System/file/video/seven.mp4");
 
                             })
@@ -146,26 +147,27 @@ $(document).ready(
                         download_area.append(download_link);
 
                         //-----add by achao----
-                        var c_delete_area = $("<div class='download-btn right' style='margin-left: 10px;margin-top: 5px'></div>");
-                        c_delete_area.append($("<span class='glyphicon-trash glyphicon c-trash'></span>"));
-                        c_delete_area.find(".c-trash").click(function () {
-                            $(this).parents(".each_datum").remove();
-                            var id=$(this).parents(".each_datum").find(".c-id").text();
-                            $.ajax({
-                                url: "../courseware_mod/php/delete_ware.php?ware_id=" + id,
-                                success: function (result) {
-                                    
-                                }
-                            });
-                        });
-                        item_ele.append(c_delete_area);
-                        var c_id=$("<div class='c-id' style='display: none'></div>");//c-id存储课件id
-                        c_id.html(item['courseware_id']);
-                        item_ele.append(c_id);
+                        // var c_delete_area = $("<div class='download-btn right' style='margin-left: 10px;margin-top: 5px'></div>");
+                        // c_delete_area.append($("<span class='glyphicon-trash glyphicon c-trash'></span>"));
+                        // c_delete_area.find(".c-trash").click(function () {
+                        //     $(this).parents(".each_datum").remove();
+                        //     var id=$(this).parents(".each_datum").find(".c-id").text();
+                        //     $.ajax({
+                        //         url: "../courseware_mod/php/delete_ware.php?ware_id=" + id,
+                        //         success: function (result) {
+                        //
+                        //         }
+                        //     });
+                        // });
+                        // item_ele.append(c_delete_area);
+                        // var c_id=$("<div class='c-id' style='display: none'></div>");//c-id存储课件id
+                        // c_id.html(item['courseware_id']);
+                        // item_ele.append(c_id);
                         //----------------
 
-
-                        item_ele.append(download_area);
+                        if(level!=1) {//游客看不见下载区……
+                            item_ele.append(download_area);
+                        }
                         list_ele.append(item_ele);
 
                     }

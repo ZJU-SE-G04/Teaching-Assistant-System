@@ -69,7 +69,7 @@ function c_show_courseware() {
                 //如果是视频
                 if (item_kind === "教学视频") {
                     preview_link.click(function () {
-                        window.open("watch_video/watch_video.html?vid=" + $(this).attr("title")+$(this).text());
+                        window.open("/Teaching-Assistant-System/courseware_mod/watch_video.html?vid=" + $(this).attr("title")+$(this).text());
                         // window.open("watch_video/watch_video.html?vid=/Teaching-Assistant-System/file/video/seven.mp4");
 
                     })
