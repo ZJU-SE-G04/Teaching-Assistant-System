@@ -1,6 +1,7 @@
 /**
  * Created by dddong on 16/12/26.
  */
+var hasLogin = false;
 function getQueryString(name) {
     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
     var r = window.location.search.substr(1).match(reg);
@@ -26,7 +27,7 @@ $(document).ready(function () {
         user_id=$.cookie("user_id");
         user_name=$.cookie("user_name");//added by achao
         level=1;//achao
-
+        hasLogin = true;
     }
 
 
