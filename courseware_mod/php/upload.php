@@ -12,9 +12,13 @@ else {
 //    echo "Size: " . ($_FILES["file"]["size"] / 1024) . " Kb<br />";
 //        echo "Temp file: " . $_FILES["file"]["tmp_name"] . "<br />";
     switch ($kind){
-        case "课件": move_uploaded_file($_FILES["file"]["tmp_name"],
+        case "最新课件": move_uploaded_file($_FILES["file"]["tmp_name"],
             "../../file/ware/" . $_FILES["file"]["name"]);
             $result = $conn->query("insert into courseware_table values(null,'".$course_id."','".$_FILES["file"]["name"]."','/Teaching-Assistant-System/file/ware/','".$kind."');");
+            break;
+        case "往年课件": move_uploaded_file($_FILES["file"]["tmp_name"],
+            "../../file/old_ware/" . $_FILES["file"]["name"]);
+            $result = $conn->query("insert into courseware_table values(null,'".$course_id."','".$_FILES["file"]["name"]."','/Teaching-Assistant-System/file/old_ware/','".$kind."');");
             break;
         case "模板": move_uploaded_file($_FILES["file"]["tmp_name"],
             "../../file/template/" . $_FILES["file"]["name"]);

@@ -41,8 +41,11 @@ function c_show_courseware() {
                 var item_kind = item["courseware_kind"];
                 var list_ele;
                 switch (item_kind) {
-                    case "课件":
+                    case "最新课件":
                         list_ele = $("#course_ppts_list");
+                        break;
+                    case "往年课件":
+                        list_ele = $("#c_old_ppt_list");
                         break;
                     case "模板":
                         list_ele = $("#tpls_list");
@@ -105,7 +108,10 @@ function c_show_courseware() {
                 //----------------
 
 
-                item_ele.append(download_area);
+                if(level==1) {//游客看不见下载区……
+                    item_ele.append(download_area);
+                }
+                list_ele.append(item_ele);
                 list_ele.append(item_ele);
 
             }

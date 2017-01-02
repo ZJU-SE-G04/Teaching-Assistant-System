@@ -71,6 +71,9 @@
 	function login(){
 		$uid=$_POST['user_id'];
 		$pwd=$_POST['password'];
+		$pwd = md5($pwd);//md5加密
+//		echo $pwd;
+
 		//$uid='111111';
 		//$pwd='1111';
 		//echo 'select * from user_table where id="'.$uid.'" and pasword="'.$pwd.'";';

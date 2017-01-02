@@ -59,6 +59,8 @@
 		//$uid='111111';
 		//$pwd='1111';
 		//echo 'select * from user_table where id="'.$uid.'" and pasword="'.$pwd.'";';
+		$pwd = md5($pwd);//md5加密
+//		echo $pwd;
 		include 'connect1.php';
 		$result=$conn->query('select * from user_table where id="'.$uid.'" and password="'.$pwd.'";');
 		$row=mysqli_fetch_assoc($result);

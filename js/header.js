@@ -16,8 +16,6 @@ $(document).ready(function () {
     if($.cookie("user_id") == "null") {
         var num=1+Math.round(99*Math.random());
         user_name="游客"+num;//
-        var c_kind_select=$("#c-kind-select");
-        c_kind_select.next().hide();
         // $("#username").text("游客");
         $("#username").text(user_name);
         $("#username").attr("href", "#");
@@ -28,8 +26,7 @@ $(document).ready(function () {
         user_id=$.cookie("user_id");
         user_name=$.cookie("user_name");//added by achao
         level=1;//achao
-        var c_kind_select=$("#c-kind-select");
-        c_kind_select.show();
+
     }
 
 

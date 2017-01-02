@@ -158,9 +158,9 @@ function  verifyQuestion() {
         url:"index/php/verify_question.php?id="+id+"&answer="+answer,
         success:function (res) {
             if(res["if_success"]==0){
-                $("#fe_pwd_modal").find(".modal-title").html("步骤3:重置密码");
                 window.alert(res["err_message"]);
             }else {
+                $("#fe_pwd_modal").find(".modal-title").html("步骤3:重置密码");
                 $('#reset_pwd').show();
                 $('#fe_answer_question').hide();
 

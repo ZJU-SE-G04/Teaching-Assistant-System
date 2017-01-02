@@ -50,7 +50,7 @@
             <div style="margin-left: 50px">
                 <div class="nickname f-f0 f-fc-gray f-thide">
                     你好,
-                    <a id="username" class="f-fc-gray" href="/student/student_home.html" target="_blank"></a>
+                    <a id="username" class="f-fc-gray" href="teacher_home/teacher_home.html" target="_blank"></a>
                 </div>
             </div>
         </div>
@@ -289,7 +289,8 @@
             </div>
             <div id="courseware_pane" class="tab-pane in active">
                 <select id="c-kind-select" class="form-control">
-                    <option>课件</option>
+                    <option>最新课件</option>
+                    <option>往年课件</option>
                     <option>模板</option>
                     <option>参考资料</option>
                     <option>以往优秀作业</option>
@@ -299,7 +300,7 @@
                 <input id="c-upload-file" name="file" type="file" class="file">
                 <div id="courseware_nonpreview_area">
                     <div class="titleBox" id="ppt_ddMenu_title">
-                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-title c-kind">课件</span>
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-title c-kind">最新课件</span>
                     </div>
 
                     <div id="course_ppts_list" class="courseware_list">
@@ -310,6 +311,10 @@
                         <!--</div>-->
                         <!--</div>-->
                     </div>
+                    <div class="titleBox" id="c_old_ppt">
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0 c-kind">往年课件</span>
+                    </div>
+                    <div id="c_old_ppt_list" class="courseware_list"></div>
                     <div class="titleBox" id="tpl_ddMenu_title">
                         <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0 c-kind">模板</span>
                     </div>

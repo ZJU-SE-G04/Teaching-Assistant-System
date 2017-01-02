@@ -1,9 +1,12 @@
 <?php
+
 	include '../../connect.php';
+	include 'check_pwd_valid.php';
 	$uid=$_GET['id'];
 	$new=$_GET['new_pwd'];
 	//$uid='3140101111';
 //$new='666666';
+	$new = md5(checkStringSafety($new));
 
 	$state=0;
 	$msg='';
@@ -17,4 +20,6 @@
 	
 	echo json_encode($arr, JSON_UNESCAPED_UNICODE);
 	$conn->close();
+
+
 ?>
