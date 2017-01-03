@@ -21,7 +21,7 @@ function logged() {
     }
 }
 
-function jumpToLesson(data) {
+function jumpToLesson(data) { 
     var lessonId = data.getAttribute("data-id");
     $.post(
         "home.php",
