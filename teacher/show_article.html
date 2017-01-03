@@ -46,8 +46,7 @@
 <!--这个部分复制自header.html,不能直接include,因为要改其中的课程名-->
 <div class="container-fluid">
     <div class="row" id="header_topBar">
-        <div class="col-md-6"><a href="/index.html" target="_self"><img src="../img/logo_gray_large.png" alt="258x71"
-                                                                        class="img-responsive"></a></div>
+        <div class="col-md-6"><a href="../index.html" target="_self"><img src="../img/logo_gray_large.png" alt="258x71" class="img-responsive"></a></div>
         <div class="col-md-2 col-md-offset-4" id="nameLink">
             <div style="margin-left: 50px">
                 <div class="nickname f-f0 f-fc-gray f-thide">
@@ -66,6 +65,7 @@
             <div class="col-md-9" id="header_courseName">
                 <div class="coursename f-f0 f-fc-black"><strong></strong><br>
                 </div>
+                <div class="f-fc-black f-f0 teacherName">金波</div>
             </div>
         </div>
     </div>
@@ -981,7 +981,18 @@
 <script src="js/discuss_area.js"></script>
 <script src="../js/jquery-validation-1.14.0_dist_jquery.validate.js"></script>
 <script src="../js/jquery-validation-1.14.0_dist_localization_messages_zh.js"></script>
-
+<script>
+    $.ajax({
+        url: "../student/get_course_teacher.php?courseID=" + courseID, async: true,
+        success: function (result) {
+            var jsonObj = result;
+            $(".teacherName").text("");
+            for (var i = 0; i < jsonObj.length; i++) {
+                $(".teacherName").append(jsonObj[i].name + " ");
+            }
+        }
+    });
+</script>
 <!--以下是Li Boao导入的js文件-->
 <script src="get_notice.js"></script>
 <script src="release_quiz_detail.js"></script>

@@ -3,7 +3,6 @@
  */
 var isLogin;
 var user_id, user_name;
-var youke_user_name;
 
 function logged() {
     if (isLogin) {
@@ -75,8 +74,6 @@ function logout() {
 
 function init() {
     user_id = $.cookie('user_id');
-    var num=1+Math.round(99*Math.random());//achao
-    youke_user_name="游客"+num;//achao 给游客随机分配一个名字,用于留言
     if (user_id == "null") {
         isLogin = false;
         logged();
@@ -97,6 +94,7 @@ function init() {
             }
         );
     }
+    get_friend_link();
 }
 
 
@@ -196,50 +194,15 @@ function  resetPwd() {
 
 }
 
-function leaveNote() {
-    var note=$('#note');
-    var content=note.find('textarea').val();
-    // console.log(content);
-    var time=getNowFormatDate();
-    var name;
-    if(isLogin){
-        name=user_name;
-    }else{
-        name=youke_user_name;
-    }
-    // console.log(time);
-    // console.log(name);
-
-
+function get_friend_link() {
     $.ajax({
-        type:'POST',
-        data:{content:content,name:name,time:time},
-        url:"index/php/leave_note.php",
-        success:function (res) {
-            if(res["if_success"]==0){
-                window.alert(res["err_message"]);
-            }else {
-                window.alert("留言成功,谢谢您的意见和建议");
-                $('#note').modal("hide");
+        url: "index/php/get_friend_link.php",
+        success: function (res) {
+            $("#footer").html("");
+            for(var i = 0; i < res.length; i++) {
+                var link_ele = $("<a></a>").attr("href", res[i].link_address).text(res[i].link_name);
+                $("#footer").append(link_ele);
             }
         }
-    });
-
-}
-
-function getNowFormatDate() {
-    var date = new Date();
-    var seperator1 = "-";
-    var seperator2 = ":";
-    var month = date.getMonth() + 1;
-    var strDate = date.getDate();
-    if (month >= 1 && month <= 9) {
-        month = "0" + month;
-    }
-    if (strDate >= 0 && strDate <= 9) {
-        strDate = "0" + strDate;
-    }
-    return date.getFullYear() + seperator1 + month + seperator1 + strDate
-        + " " + date.getHours() + seperator2 + date.getMinutes()
-        + seperator2 + date.getSeconds();//current date
+    })
 }

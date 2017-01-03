@@ -13,7 +13,7 @@ $("#c-upload-file").fileinput({//bootstrap异步上传文件
         var kind=c_kind_select[index].innerHTML;
         console.log(kind);
         var data ={
-            course_id:course_id,
+            course_id:courseID,
             courseware_kind:kind
         };
         return data;
@@ -30,7 +30,7 @@ $("#c-upload-file").fileinput({//bootstrap异步上传文件
 
 function c_show_courseware() {
     $.ajax({
-        url: "get_courseware.php?courseID=" + course_id,
+        url: "get_courseware.php?courseID=" + courseID,
         async: false,
         success: function (result, status) {
             $("#courseware_nonpreview_area").show();

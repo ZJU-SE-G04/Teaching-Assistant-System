@@ -4,7 +4,7 @@
  */
 
 //added by zhangshichao
-var course_id='ABCDE1';
+var courseID='ABCDE1';
 var level=0;
 var user_name;
 var user_id;
@@ -13,14 +13,10 @@ var user_id;
 let POSTNUM_PER_PAGE = 10;
 let POSTRE_NUM_PER_PAGE = 10;
 
-function gotoFirstPage() {
-    window.location("/index.html");
-}
 $(document).ready(
     function () {
         //课程号，从首页传过来的参数获得
-        var courseID = getQueryString("lesson_id");
-        course_id=courseID;//achao
+        courseID = getQueryString("lesson_id");
 
 
         //获取课程信息，包括课程所有老师
@@ -91,7 +87,7 @@ $(document).ready(
 
         $("a[href='#courseware_pane']").click(function () {
             $.ajax({
-                url: "get_courseware.php?courseID=" + course_id,
+                url: "get_courseware.php?courseID=" + courseID,
                 async: false,
                 success: function (result, status) {
                     $("#courseware_nonpreview_area").show();
@@ -225,7 +221,7 @@ $(document).ready(
             var topic_id = $("#post_detail_page .post-detail").attr("topic_id");
             var num;
             $.ajax({
-                url: "/student/fetch_post_re_num.php?topic_id=" + topic_id,
+                url: "fetch_post_re_num.php?topic_id=" + topic_id,
                 async: false,
                 success: function (data) {
                     num = data['num'];
@@ -430,7 +426,7 @@ $(document).ready(
 
         function fetch_border_posts(border_name, border_type, offset, count, search) {
             $.ajax({
-                url: "posts_handler.php?action=fetchAll&courseID=" + courseID + "&post_kind=" + border_type + "&offset=" + offset + "&count=" + count + "&search=" + search,
+                url: "posts_handler.php?action=fetchAll&courseID=" + courseID+ "&post_kind=" + border_type + "&offset=" + offset + "&count=" + count + "&search=" + search,
                 success: function (result) {
                     //界面切换
                     $("#discuss_home_page").hide();
@@ -564,10 +560,20 @@ $(document).ready(
 
                 var ueContent = UE.getEditor('submitPost_editor').getContent();
                 if (ueContent === "") return false;
+
+                var border_type = -1;
+                if(border_name == "老师答疑区") {
+                    border_type = 0;
+                } else if(border_name == "综合讨论区") {
+                    border_type = 1;
+                } else if(border_name == "小组讨论区") {
+                    border_type = 2;
+                }
                 $.post("posts_handler.php?action=submitPost", {
-                    border_type: border_name,
+                    border_type: border_type,
                     title: title,
-                    content: ueContent
+                    content: ueContent,
+                    course_id: courseID,
                 }, function (result, status) {
                     alert(result['msg']);
                     $("#test_div").html(result);
