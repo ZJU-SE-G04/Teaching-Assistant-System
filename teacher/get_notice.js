@@ -60,11 +60,8 @@ function getNotice() {
     level=getQueryString("level");
     if(level==3){//助教不能管理助教信息
         $(".t-check").css("display","block");
-        user_name+="老师";
     }
-    else{
-        user_name+="助教";
-    }
+    
 
     show_class_init();//初始化班级
 

@@ -44,12 +44,12 @@ function  articleUpdate(needed_title) {
                 var tmp = articleLoop.children(".old").clone().removeClass("old").addClass("new").show();
 
                 if(x.id==user_id) {
-                    tmp.find(".x-trash").attr("onclick", "deleteArticle(" + x.article_id + ")");
+                    tmp.find(".x-trash").click(deleteArticle);
                 }
                 else {
                     tmp.find(".x-trash").hide()
                 }
-                tmp.find(".x-article_mod-id").html(x.article_id);
+                tmp.find(".x-article-id").html(x.article_id);
                 tmp.find(".x-title").html(x.title);
                 tmp.find(".x-contentDigest").html(x.short_content);
                 tmp.find(".x-time").html(x.time);
@@ -79,19 +79,38 @@ function  showWriteArticle() {
 
 function  writeArticle() {
     var title=document.getElementById("article_title").value;
+    console.log(title);
     var content=ue_write.getContent();
+    console.log(content);
+    var mydiv=$("<div></div>");
+    mydiv.innerHTML=content;
+    console.log(mydiv);
+    // console.log(mydiv.textContent);
 
     $.ajax({
             type:"GET",
             url:"../article_mod/php/add_article.php?lesson_id="+course_id+"&id="+user_id+"&title="+title+"&content="+content,
-            success:function (result) {
-                var jsonObj=result;
-                if(jsonObj["if_success"]==1){
+            success:function (res) {
+                if(res["if_success"]==1){
+                    // var loop=$("#articleLoop");
+                    // var tmp = loop.children(".old").clone().removeClass("old").addClass("new").show();
+                    // tmp.find(".x-trash").click(deleteArticle);
+                    // tmp.find(".x-article-id").html(x.article_id);
+                    // tmp.find(".x-title").html(x.title);
+                    // tmp.find(".x-contentDigest").html(x.short_content);
+                    // tmp.find(".x-time").html(x.time);
+                    // tmp.find(".x-author").html(x.user_name);
+
+                    
                     window.alert("文章发布成功");
                     location.reload(true);
+                    // loop.show();
+                    // loop.append(tmp);
+                    // $('#write_article_button').show();
+                    // $("#articleDetail").hide();
                 }
                 else {
-                    window.alert(jsonObj["error_message"]);
+                    window.alert(res["error_message"]);
                 }
             }
         }
@@ -107,7 +126,6 @@ function  cancelArticle() {
     document.getElementById("write_article").style.display="none";
 
 }
-
 
 //-----------update an article_mod ----------
 function updateArticle(article_id) {
@@ -145,35 +163,52 @@ function  submitUpdateArticle(article_id) {
 }
 
 
-//----------cancel updating an article_mod-----------------------
+//----------cancel updating an article-----------------------
 
 function cancelUpdateArticle() {
     $("#update_article").hide();
     $("#articleLoop").show();
     $("#write_article_button").show()
 }
-
-//-----------delete an article_mod---------------------------
-function  deleteArticle(article_id) {
+//-----------删除文章列表中的文章---------------------------
+function  deleteArticle() {
+    var panel_default=$(this).parents(".new");
+    console.log($(this));
+    var arti_id=panel_default.find(".x-article-id").text();
+    console.log(arti_id);
     $.ajax({
-        url:"../article_mod/php/delete_article.php?article_id="+article_id,
-        success:function (result) {
-            var jsonObj=result;
-            if(jsonObj["if_success"]==1){
-                window.alert("成功删除");
-                location.reload(true);
+        url:"../article_mod/php/delete_article.php?article_id="+arti_id,
+        success:function (res) {
+            if(res["if_success"]==1){
+                panel_default.remove();
             }
             else {
-                window.alert(jsonObj["error_message"]);
+                window.alert(res["error_message"]);
             }
-
         }
     }
     )
-
 }
-
-
+//---------在查看文章详情时候删除文章-----------
+function  delete_article_in_detail() {
+    $.ajax({
+            url:"../article_mod/php/delete_article.php?article_id="+article_id,
+            success:function (res) {
+                if(res["if_success"]==1){
+                    window.alert("删除成功");
+                    var loop=$("#articleLoop");
+                    loop.show();
+                    loop.children(".x-chosen").remove();
+                    $('#write_article_button').show();
+                    $("#articleDetail").hide();
+                }
+                else {
+                    window.alert(res["error_message"]);
+                }
+            }
+        }
+    )
+}
 //------show article_mod details and comments(first)---------
 
 function articleShow() {
@@ -185,36 +220,36 @@ function articleShow() {
     write_article_button.hide();
     write_article_button.prev().show();
 
-
     var parent=$(this).parent();
-    article_id=parent.find(".x-article_mod-id").text();
+    parent.parent().children().removeClass("x-chosen");
+    parent.addClass("x-chosen");
+    // console.log(parent);
+    article_id=parent.find(".x-article-id").text();
+    // console.log(article_id);
 
     $.ajax({
         type:"GET",
-        url:"../article_mod/php/show_article_detail.php?article_id="+article_id+"",
+        url:"../article_mod/php/show_article_detail.php?article_id="+article_id,
         success:function (result) {
             var articleDetail=result;
-
             var title=parent.find(".x-title").text();
             var author=parent.find(".x-author").text();
             var time=parent.find(".x-time").text();
-
 
             articleDetail_local.find(".x-title").html(title);
             articleDetail_local.find(".x-author").html(author);
             if(level==3) {//教师才可以删除和编辑文章
                 articleDetail_local.find(".x-edit").attr("onclick", "updateArticle(" + article_id + ")");
-                articleDetail_local.find(".x-trash").attr("onclick", "deleteArticle(" + article_id + ")");
+                articleDetail_local.find(".x-trash").click(delete_article_in_detail);
                 articleDetail_local.find(".x-edit").show();
                 articleDetail_local.find(".x-trash").show();
             }
             articleDetail_local.find(".x-time").html(time);
             articleDetail_local.find(".x-body").html(articleDetail["article_content"]);
-
+            // console.log(articleDetail["article_content"]);
 
             var post_detail_page=articleDetail_local.find("#x_post_detail_page");
             post_detail_page.find(".x-comment-number").text(articleDetail["comment_number"]);
-
 
             var posts_list_ul=post_detail_page.find(".posts-list-ul");
             posts_list_ul.children(".new").remove();
@@ -315,9 +350,9 @@ function  add_comment() {
         window.alert("回复内容不能为空");
         return;
     }
-    // alert(content);
+    // console.log(content);
     var current_time=getNowFormatDate();
-    // alert(current_time);
+    // console.log(current_time);
 
     $.ajax({
         type:"GET",
@@ -485,6 +520,7 @@ function add_second_comment() {
                 var post_comment_area_body=post_comments_area.find(".post-comment-area-body");
                 var tmp = post_comment_area_body.children(".old").clone().removeClass("old").addClass("new").show();
                 tmp.find(".x-name").html(user_name);
+                // console.log(user_name);
                 tmp.find(".x-content").html(content);
                 if(re_user_name!="0") {//有回复人
                     tmp.find(".x-re-name").html(re_user_name);
