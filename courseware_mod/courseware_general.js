@@ -18,7 +18,7 @@ $(document).ready(
 
         $("a[href='#courseware_pane']").click(function () {
             $.ajax({
-                url: "get_courseware.php?courseID=" + course_id,
+                url: "get_courseware.php?courseID=" + courseID,
                 async: false,
                 success: function (result, status) {
                     $("#courseware_nonpreview_area").show();

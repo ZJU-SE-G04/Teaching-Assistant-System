@@ -33,7 +33,7 @@ function  articleUpdate(needed_title) {
         needed_title='';
     }
     $.ajax({
-        url:"../article_mod/php/show_article_list.php?lesson_id="+course_id+"&needed_title="+needed_title,
+        url:"../article_mod/php/show_article_list.php?lesson_id="+courseID+"&needed_title="+needed_title,
         success:function (result) {
             var articleRecords=result;
             var articleLoop=$("#articleLoop");
@@ -83,7 +83,7 @@ function  writeArticle() {
 
     $.ajax({
             type:"GET",
-            url:"../article_mod/php/add_article.php?lesson_id="+course_id+"&id="+user_id+"&title="+title+"&content="+content,
+            url:"../article_mod/php/add_article.php?lesson_id="+courseID+"&id="+user_id+"&title="+title+"&content="+content,
             success:function (result) {
                 var jsonObj=result;
                 if(jsonObj["if_success"]==1){

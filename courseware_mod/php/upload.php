@@ -1,6 +1,6 @@
 <?php
 include "../../connect.php";
-$course_id=$_POST['course_id'];
+$course_id=$_POST['courseID'];
 $kind=$_POST['courseware_kind'];
 //echo $kind;
 if ($_FILES["file"]["error"] > 0) {

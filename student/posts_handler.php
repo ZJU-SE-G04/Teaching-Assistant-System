@@ -29,7 +29,8 @@
 		session_start();
 		$uid=$_SESSION['user'];
 		//$lesson_id=$_SESSION['lesson_id'];
-		$lesson_id='ABCDE1';
+//		$lesson_id='ABCDE1';
+        $lesson_id = $_POST['course_id'];
 		//$uid='3140102222';
 		//$border_type=1;
 		//$title='发表测试';
