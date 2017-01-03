@@ -14,7 +14,7 @@
 		$x['title']=$row['title'];
 		$x['id']=$row['id'];
 		$x['user_name']=$row['name'];
-		$x['short_content']=mb_substr(htmlspecialchars_decode($row['content']),0,60,'utf-8')."...";
+		$x['short_content']=mb_substr(htmlspecialchars_decode($row['content']),0,150,'utf-8')."...";
 		$x['time']=$row['time'];
 		$arr[] = $x;
 	}

@@ -79,30 +79,27 @@ function  showWriteArticle() {
 
 function  writeArticle() {
     var title=document.getElementById("article_title").value;
-    console.log(title);
+    // console.log(title);
     var content=ue_write.getContent();
-    console.log(content);
-    var mydiv=$("<div></div>");
-    mydiv.innerHTML=content;
-    console.log(mydiv);
-    // console.log(mydiv.textContent);
+    // console.log(content);
 
     $.ajax({
-            type:"GET",
-            url:"../article_mod/php/add_article.php?lesson_id="+course_id+"&id="+user_id+"&title="+title+"&content="+content,
+            type:"POST",
+            data:{lesson_id:course_id,id:user_id,title:title,content:content},
+            url:"../article_mod/php/add_article.php",
             success:function (res) {
                 if(res["if_success"]==1){
-                    // var loop=$("#articleLoop");
-                    // var tmp = loop.children(".old").clone().removeClass("old").addClass("new").show();
-                    // tmp.find(".x-trash").click(deleteArticle);
-                    // tmp.find(".x-article-id").html(x.article_id);
-                    // tmp.find(".x-title").html(x.title);
-                    // tmp.find(".x-contentDigest").html(x.short_content);
-                    // tmp.find(".x-time").html(x.time);
-                    // tmp.find(".x-author").html(x.user_name);
+                    window.alert("文章发布成功");
+                    var loop=$("#articleLoop");
+                    var tmp = loop.children(".old").clone().removeClass("old").addClass("new").show();
+                    tmp.find(".x-trash").click(deleteArticle);
+                    tmp.find(".x-article-id").html(x.article_id);
+                    tmp.find(".x-title").html(x.title);
+                    tmp.find(".x-contentDigest").html(x.short_content);
+                    tmp.find(".x-time").html(x.time);
+                    tmp.find(".x-author").html(x.user_name);
 
                     
-                    window.alert("文章发布成功");
                     location.reload(true);
                     // loop.show();
                     // loop.append(tmp);
