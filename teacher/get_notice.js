@@ -42,10 +42,10 @@ function addNotice() {
     var content = document.getElementById("new_notice_content").value;
 
     // alert(title + "\n" + content);
-    var tmp_lesson_id = "ABCDE1";//bug未修复 
+    var tmp_lesson_id = "ABCDE1";//bug未修复
     $.post(
         "course_notice.php",
-        {action: "add", lesson_id: tmp_lesson_id, title: title, content: content},
+        {action: "add", lesson_id: course_id, title: title, content: content},
         function (data) {
             if (data) {
                 // alert("发布成功");
