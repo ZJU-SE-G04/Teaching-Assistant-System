@@ -58,7 +58,8 @@
         <td>发布测试</td>
         <td>release_quiz.php</td>
         <td>
-            {"option_num":"2","essay_num":"2","quiz_name":"001",<br>
+            action="release_quiz",
+            quiz_detail={"option_num":"2","essay_num":"2","quiz_name":"001",<br>
             "option_question":<br>
             [{"title":"111","a":"11","b":"12","c":"13","d":"14","answer":"c"},<br>
             {"title":"222","a":"21","b":"22","c":"23","d":"24","answer":"b"}],<br>
