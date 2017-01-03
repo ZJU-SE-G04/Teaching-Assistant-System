@@ -27,7 +27,7 @@ function editNotice() {
         {action: "edit", notice_id: notice_to_edit, title: title, content: content},
         function (data) {
             if (data) {
-                alert("修改成功");
+                // alert("修改成功");
                 location.reload();
             }
             else alert("修改失败");
@@ -38,14 +38,14 @@ function addNotice() {
     var title = document.getElementById("new_notice_title").value;
     var content = document.getElementById("new_notice_content").value;
 
-    alert(title + "\n" + content);
+    // alert(title + "\n" + content);
     var tmp_lesson_id = "ABCDE1";//bug未修复
     $.post(
         "course_notice.php",
         {action: "add", lesson_id: tmp_lesson_id, title: title, content: content},
         function (data) {
             if (data) {
-                alert("发布成功");
+                // alert("发布成功");
                 location.reload();
             }
             else alert("发布失败");
