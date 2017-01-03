@@ -33,7 +33,14 @@
 		$datetime=date('Y-m-d H:i:s');
 
 		$result=$conn->query('insert into article_table values(null,"'.$lesson_id.'","'.$id.'","'.$title.'","'.$content.'","'.$datetime.'");');
-		
+		$result=$conn->query('select article_id from article_table where time ="'.$datetime.'";');
+
+		$arr = [];
+		while($row = mysqli_fetch_assoc($result)) {
+			$erm=(int)$row['article_id'];
+		}
+
+
 		if($result==null){
 			$su=0;
 			$erm='发布失败,或许是网络连接问题';
