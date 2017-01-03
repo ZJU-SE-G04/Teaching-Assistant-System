@@ -1,6 +1,6 @@
 <?php
 	$action=$_POST['action'];
-	//$action='edit';
+	//$action='request';
 	if($action=='add'){
 		add();
 	}else if($action=='request'){
@@ -54,7 +54,7 @@
 		include '../connect.php';
 		$lesson_id=$_POST['lesson_id'];
 		//$lesson_id='ABCDE1';
-		$result = $conn->query("select * from notice_table where lesson_id='".$lesson_id."';");
+		$result = $conn->query("select * from notice_table where lesson_id='".$lesson_id."' order by notice_id DESC;");
 
 		$arr = [];
 		while($row = mysqli_fetch_assoc($result)) {
@@ -72,6 +72,7 @@
 		//$class_id=$_POST['class_id'];
 		$title=$_POST['title'];
 		$content=$_POST['content'];
+		session_start();
 		$uid=$_SESSION['user'];
 		$datetime=date('Y-m-d H:i:s');
 

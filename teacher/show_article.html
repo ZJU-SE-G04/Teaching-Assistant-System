@@ -40,7 +40,6 @@
     <script type="text/javascript" src="../ueditor/ueditor.all.js"></script>
 
 
-
 </head>
 
 <body>
@@ -78,40 +77,67 @@
     <div class="row" id="mainBody">
         <div class="col-md-2" id="left-side">
             <ul class="nav nav-pills nav-stacked">
-                <li class="tab-style"><a href="#notice" data-toggle="tab">公告</a></li>
+                <li class="tab-style active"><a href="#notice" data-toggle="tab">公告</a></li>
                 <li class="tab-style"><a href="#article" data-toggle="tab" onclick="articleUpdate()">最新文章</a></li>
-                <li class="tab-style active"><a href="#courseware_pane" data-toggle="tab">课程资料</a></li>
+                <li class="tab-style"><a href="#courseware_pane" data-toggle="tab">课程资料</a></li>
                 <li class="tab-style"><a href="#report" data-toggle="tab" onclick="correctReport()">报告与文档</a></li>
                 <!--<li class="tab-style"><a href="#correct_report" data-toggle="tab">批改实验报告</a></li>-->
                 <li class="tab-style"><a href="#exercise" data-toggle="tab">发布作业</a></li>
                 <li class="tab-style"><a href="#discuss_area_pane" data-toggle="tab">讨论区</a></li>
                 <li class="tab-style"><a href="#class" data-toggle="tab" onclick="show_class()">班级信息</a></li>
                 <li class="tab-style"><a href="#stuInfo" data-toggle="tab" onclick="showStuInfo()">学生信息</a></li>
-                <li class="tab-style  t-check" style="display: none"><a href="#TAInfo" data-toggle="tab" id="TA" onclick="showTAInfo()">助教信息</a></li>
+                <li class="tab-style  t-check" style="display: none"><a href="#TAInfo" data-toggle="tab" id="TA"
+                                                                        onclick="showTAInfo()">助教信息</a></li>
 
             </ul>
         </div>
         <div class="col-md-10 tab-content" id="tab_content_area">
-            <div id="notice" class="tab-pane">
+            <div id="notice" class="tab-pane in active">
                 <h3 class="page-header">发布通知</h3>
-                <form action="#" method="post">
-                    <div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="title" placeholder="输入通知标题">
-                        </div>
-                        <div class="form-group">
-                            <textarea name="content" id="content" rows="3" class="form-control"
-                                      placeholder="输入通知内容"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">
-                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 发布
-                            </button>
-                        </div>
+                <div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="new_notice_title" placeholder="输入通知标题">
                     </div>
-                </form>
+                    <div class="form-group">
+                            <textarea name="content" id="new_notice_content" rows="3" class="form-control"
+                                      placeholder="输入通知内容"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" onclick="addNotice()">
+                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 发布
+                        </button>
+                    </div>
+                </div>
                 <br>
 
+
+                <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="exampleModalLabel">编辑通知</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="edit-title" class="control-label">标题</label>
+                                        <input type="text" class="form-control" id="edit-title">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="edit-content" class="control-label">内容</label>
+                                        <textarea class="form-control" id="edit-content"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-primary" onclick="editNotice()">发布</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div id="noticeDiv">
                 </div>
 
@@ -165,7 +191,8 @@
                             <small>
                                 <span class="glyphicon glyphicon-user"></span> 作者：<span class="x-author"></span>&nbsp;&nbsp;
                                 <span class="glyphicon glyphicon-time"></span> 发表时间：<span class="x-time"></span>
-                                <span class="glyphicon glyphicon-edit x-edit" onclick="updateArticle()" style="display: none">编辑文章</span>
+                                <span class="glyphicon glyphicon-edit x-edit" onclick="updateArticle()"
+                                      style="display: none">编辑文章</span>
                                 <span class="glyphicon glyphicon-trash x-trash" style="display: none">删除文章</span>
 
                             </small>
@@ -197,7 +224,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="post-comments-area" >
+                                    <div class="post-comments-area">
                                         <div class="post-comment-area-body">
                                             <span class="x-second-comment-number" style="display: none"></span>
                                             <div class="post-comment old"><!-- loop start 二级回复区-->
@@ -237,7 +264,7 @@
 
                 </div>
 
-                <div id="write_article" >
+                <div id="write_article">
                     <p class="subtit">文章标题</p>
                     <input type="text" id="article_title" style="width:800px;">
                     <p class="subtit">文章内容</p>
@@ -290,7 +317,7 @@
                     </div>
                 </div>
             </div>
-            <div id="courseware_pane" class="tab-pane in active">
+            <div id="courseware_pane" class="tab-pane ">
                 <select id="c-kind-select" class="form-control">
                     <option>最新课件</option>
                     <option>往年课件</option>
@@ -777,7 +804,9 @@
                 </div>
                 <div class="row">
                     <div class="col-md-9"><select class="form-control " id="class_manage_select"></select></div>
-                    <div class="col-md-3"><button class="btn btn-primary  x-class-manage-btn">切换班级</button></div>
+                    <div class="col-md-3">
+                        <button class="btn btn-primary  x-class-manage-btn">切换班级</button>
+                    </div>
                 </div>
 
 
@@ -792,9 +821,21 @@
                 <input id="x-upload-file" name="file" type="file" class="file">
 
                 <table class="table table-striped" id="StuInfoTable">
-                    <tr><th>学号</th><th>姓名</th><th>院系</th><th>专业</th><th>团队</th></tr>
+                    <tr>
+                        <th>学号</th>
+                        <th>姓名</th>
+                        <th>院系</th>
+                        <th>专业</th>
+                        <th>团队</th>
+                    </tr>
                     <tbody class="stu_info_loop">
-                    <!-- loop start--><tr class="old s-one-info"><td class="s-stu-id"></td><td class="s-stu-name"></td><td class="s-depart"></td><td class="s-major"></td><td class="s-team-name"></td>
+                    <!-- loop start-->
+                    <tr class="old s-one-info">
+                        <td class="s-stu-id"></td>
+                        <td class="s-stu-name"></td>
+                        <td class="s-depart"></td>
+                        <td class="s-major"></td>
+                        <td class="s-team-name"></td>
                         <!--<td><a class='glyphicon glyphicon-trash s-delete'></a></td>-->
                         <!--<td><a class='glyphicon glyphicon-edit s-update'></a></td>-->
                     </tr> <!-- loop end-->
@@ -802,76 +843,104 @@
                     </tbody>
                 </table>
 
-                </div>
+            </div>
             <div id="TAInfo" class="tab-pane">
                 <div class="bs-callout bs-callout-info">
                     <h4>以下是<span id="TA_course_name"></span><span class="x-class-time"></span>班的助教信息</h4></div>
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#t-add-modal" style="margin-bottom: 10px">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#t-add-modal"
+                        style="margin-bottom: 10px">
                     录入助教信息
                 </button>
-                    <table class="table table-striped" id="t-table">
-                        <tr><th>学号</th><th>姓名</th><th>院系</th><th>专业</th><th>删除</th><th>修改</th></tr>
-                        <tbody id="t-info-loop">
-                        <!-- loop start--><tr class="old t-one-info"><td class="t-id"></td><td class="t-name"></td><td class="t-depart"></td><td class="t-major"></td>
-                            <td><a  data-toggle="modal"   class='glyphicon glyphicon-trash t-delete'></a></td>
-                            <td><a data-toggle="modal"  data-target="#t-update-modal" class='glyphicon glyphicon-edit t-update'></a></td>
-                        </tr> <!-- loop end-->
-                        </tbody>
-                    </table>
+                <table class="table table-striped" id="t-table">
+                    <tr>
+                        <th>学号</th>
+                        <th>姓名</th>
+                        <th>院系</th>
+                        <th>专业</th>
+                        <th>删除</th>
+                        <th>修改</th>
+                    </tr>
+                    <tbody id="t-info-loop">
+                    <!-- loop start-->
+                    <tr class="old t-one-info">
+                        <td class="t-id"></td>
+                        <td class="t-name"></td>
+                        <td class="t-depart"></td>
+                        <td class="t-major"></td>
+                        <td><a data-toggle="modal" class='glyphicon glyphicon-trash t-delete'></a></td>
+                        <td><a data-toggle="modal" data-target="#t-update-modal"
+                               class='glyphicon glyphicon-edit t-update'></a></td>
+                    </tr> <!-- loop end-->
+                    </tbody>
+                </table>
 
-                <div class="modal fade" id="t-update-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal fade" id="t-update-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <button type="button" class="close" data-dismiss="modal"><span
+                                        aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                 <h4 class="modal-title" id="t-update-modal-title">修改助教信息</h4>
                             </div>
                             <div class="modal-body">
                                 <div class="row">
                                     <div class='col-md-3'><label>学号</label></div>
-                                    <div class='col-md-3'><label >姓名</label> </div>
-                                    <div class='col-md-3'> <label>院系</label>  </div>
-                                    <div class='col-md-3'> <label >专业</label> </div>
+                                    <div class='col-md-3'><label>姓名</label></div>
+                                    <div class='col-md-3'><label>院系</label></div>
+                                    <div class='col-md-3'><label>专业</label></div>
                                 </div>
-                                <div class='row' id="t-update-in"> <div class='col-md-3'><input class='form-control t-update-id' >
-                                </div> <div class='col-md-3'> <input class='form-control t-update-name' >
-                                </div> <div class='col-md-3'> <input class='form-control t-update-depart' >
-                                </div> <div class='col-md-3'> <input class='form-control t-update-major'  ></div></div>
+                                <div class='row' id="t-update-in">
+                                    <div class='col-md-3'><input class='form-control t-update-id'>
+                                    </div>
+                                    <div class='col-md-3'><input class='form-control t-update-name'>
+                                    </div>
+                                    <div class='col-md-3'><input class='form-control t-update-depart'>
+                                    </div>
+                                    <div class='col-md-3'><input class='form-control t-update-major'></div>
+                                </div>
 
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">取消修改</button>
-                                <button type="button" class="btn btn-primary"  onclick="updateTA()">确定修改</button>
+                                <button type="button" class="btn btn-primary" onclick="updateTA()">确定修改</button>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="modal fade" id="t-add-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal fade" id="t-add-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                     aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <button type="button" class="close" data-dismiss="modal"><span
+                                        aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                                 <h4 class="modal-title" id="t-add-modal-title">添加助教信息</h4>
                             </div>
                             <div class="modal-body">
                                 <div class="row">
                                     <div class='col-md-3'><label>学号</label></div>
-                                    <div class='col-md-3'><label >姓名</label> </div>
-                                    <div class='col-md-3'> <label>院系</label>  </div>
-                                    <div class='col-md-3'> <label >专业</label> </div>
+                                    <div class='col-md-3'><label>姓名</label></div>
+                                    <div class='col-md-3'><label>院系</label></div>
+                                    <div class='col-md-3'><label>专业</label></div>
                                 </div>
 
-                                    <div class='row' id="t-add-in"><div class='col-md-3'><input class='form-control t-add-id' name='id[]' >
-                                    </div> <div class='col-md-3'> <input class='form-control t-add-name'  name='name[]' >
-                                    </div> <div class='col-md-3'> <input class='form-control t-add-depart'  name='department[]'>
-                                    </div> <div class='col-md-3'> <input class='form-control t-add-major' name='major[]' ></div></div>
+                                <div class='row' id="t-add-in">
+                                    <div class='col-md-3'><input class='form-control t-add-id' name='id[]'>
+                                    </div>
+                                    <div class='col-md-3'><input class='form-control t-add-name' name='name[]'>
+                                    </div>
+                                    <div class='col-md-3'><input class='form-control t-add-depart' name='department[]'>
+                                    </div>
+                                    <div class='col-md-3'><input class='form-control t-add-major' name='major[]'></div>
+                                </div>
 
 
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">取消录入</button>
-                                <button type="button" class="btn btn-primary"  onclick="addTA()">确定录入</button>
+                                <button type="button" class="btn btn-primary" onclick="addTA()">确定录入</button>
                             </div>
                         </div>
                     </div>
@@ -880,7 +949,6 @@
         </div>
     </div>
 </div>
-
 
 
 <!--以下是jQuery 和 bootstrap的js文件-->
