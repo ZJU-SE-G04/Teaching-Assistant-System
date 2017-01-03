@@ -12,12 +12,12 @@ function result() {
     jsObj.quiz_name = quiz_name;
     jsObj.option_question = [];
     jsObj.essay_question = [];
-    alert("this is result");
+    // alert("this is result");
 
     for (var i = 1; i <= option_num; i++) {
         var option_question = {};
         var title = document.getElementById("" + i).value;
-        alert(title);
+        // alert(title);
         option_question.title = title;
         option_question.a = document.getElementById(i + "_a").value;//未完成
         option_question.b = document.getElementById(i + "_b").value;
@@ -47,16 +47,17 @@ function result() {
     }
 
     var jsonStr = JSON.stringify(jsObj);
-    alert(jsonStr);
+    // alert(jsonStr);
 
 
     // alert("this is ready");
-    // $.post("test.php",
-    //     {name:"John",city:"Duckburg"},
-    //     function (data) {
-    //         alert("from js: " + data);
-    //     }
-    // );
+    $.post("course_notice.php",
+        {action:"release_quiz",quiz_detail:jsonStr},
+        function (data) {
+            if(data)alert("发布成功！");
+            else alert("发布失败！");
+        }
+    );
 
 }
 
@@ -83,7 +84,7 @@ function createDiv() {
 
     o.appendChild(form);
 
-    alert("hello");
+    // alert("hello");
     for (var i = 1; i <= optionQuestionCount; i++) {
         var divOp = document.createElement("div");
         divOp.className = "list-group-item-text bs-callout bs-callout-info";
