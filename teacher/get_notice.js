@@ -12,7 +12,10 @@ function deleteNotice(notice) {
         "course_notice.php",
         {action: "delete", notice_id: notice.getAttribute("data-id")},
         function (data) {
-            if (data) alert("删除成功");
+            if (data) {
+                alert("删除成功");
+                location.reload();
+            }
             else alert("删除失败");
         }
     );
