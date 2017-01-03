@@ -1,32 +1,41 @@
 <?php
-	include 'myconnect.php';
-	$article_id=(int)$_GET['article_id'];
-	$floor=(int)$_GET['floor'];
-//	$article_id=2;
-//	$floor=2;
+include '../../connect.php';
+error_reporting(E_ERROR|E_WARNING);
 
-	$arr = [];
-	//获取二级评论数量
-	$result=$conn->query("select count(*) from re_comment_table where article_id=".$article_id." and floor=".$floor.";");
-	$row=mysqli_fetch_assoc($result);
-	$arr['second_comment_number']=$row['count(*)'];
+$su=1;
+$erm='null';
 
-	$ar=[];
-	$result=$conn->query("select * from re_comment_table natural join user_table where article_id=".$article_id." and floor=".$floor." order by re_floor;");
-	while($row = mysqli_fetch_assoc($result)) {
-		$x['time']=$row['time'];
-		$x['id']=$row['id'];
-		$x['user_name']=$row['user_name'];
-		$x['re_floor']=$row['re_floor'];
-		$x['re_id']=$row['re_id'];
-		$resu=$conn->query("select user_name from user_table where id='".$x['re_id']."';");
-		$ro=mysqli_fetch_assoc($resu);
-		$x['re_user_name']=$ro['user_name'];
-		$x['content']=$row['content'];
-		$ar[] = $x;
+for($i=0;$i<1;$i++){
+	$old_id=(int)$_POST['article_id'];
+
+	$title=$_POST['title'];
+	//$title='测试时间';
+	if($title==null){
+		$su=0;
+		$erm='请输入文章标题';
+		break;
 	}
-	$arr['second_comment']=$ar;
-	echo json_encode($arr, JSON_UNESCAPED_UNICODE);
-	$conn->close();
+	$content=$_POST['content'];
+	$content=htmlspecialchars(stripcslashes($content));
+
+	//$content='时间应该是对的';
+	if($content==null){
+		$su=0;
+		$erm='文章内容不能为空';
+		break;
+	}
+
+	$result=$conn->query('update article_table set title="'.$title.'",content="'.$content.'"where article_id='.$old_id.';');
+
+	if($result==null){
+		$su=0;
+		$erm='发布失败，请检查网络连接后重试';
+	}
+}
+
+$arr['if_success']=$su;
+$arr['error_message']=$erm;
+echo json_encode($arr, JSON_UNESCAPED_UNICODE);
+$conn->close();
 
 ?>

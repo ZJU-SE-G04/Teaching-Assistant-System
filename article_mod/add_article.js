@@ -101,10 +101,10 @@ function  writeArticle() {
                     loop.show();
                     loop.prepend(tmp);
                     tmp.find(".panel-heading").click(articleShow);  //all heading created
-
-                    $("#articleDetail").show();
+                    $("#articleBack").hide();
+                    $("#write_article_button").show();
                     $('#write_article').hide();
-
+                    loop.show();
                 }
                 else {
                     window.alert(res["error_message"]);
@@ -140,22 +140,23 @@ function updateArticle(article_id) {
 
 function  submitUpdateArticle(article_id) {
     var title=$("#update_article").find("#article_title_update").val();
-    console.log(title);
+    // console.log(title);
     var content=ue_update.getContent();
-    console.log(content);
+    // console.log(content);
     $.ajax({
         type:'POST',
         data:{article_id:article_id,title:title,content:content},
         url:"../article_mod/php/update_article.php",
-        success:function (result) {
-            var jsonObj=result;
-            if(jsonObj["if_success"]==1){
+        success:function (res) {
+            if(res["if_success"]==1){
                 window.alert("修改成功");
-                location.reload();
+                $("#articleBack").hide();
+                $("#write_article_button").show();
+                $('#update_article').hide();
+                $('#articleLoop').show();
             }else {
             }
         }
-
     }
     );
 
@@ -166,8 +167,9 @@ function  submitUpdateArticle(article_id) {
 
 function cancelUpdateArticle() {
     $("#update_article").hide();
-    $("#articleLoop").show();
-    $("#write_article_button").show()
+    $("#articleDetail").show();
+    $("#write_article_button").hide();
+    $("#articleBack").show();
 }
 //-----------删除文章列表中的文章---------------------------
 function  deleteArticle() {
@@ -194,12 +196,12 @@ function  delete_article_in_detail() {
             url:"../article_mod/php/delete_article.php?article_id="+article_id,
             success:function (res) {
                 if(res["if_success"]==1){
-                    window.alert("删除成功");
                     var loop=$("#articleLoop");
                     loop.show();
                     loop.children(".x-chosen").remove();
                     $('#write_article_button').show();
                     $("#articleDetail").hide();
+                    $('#articleBack').hide();
                 }
                 else {
                     window.alert(res["error_message"]);
@@ -269,7 +271,6 @@ function articleShow() {
                     tmp.find(".glyphicon").click(deleteComment);
                 }
                 posts_list_ul.append(tmp);
-
                 showSecondComment(x.floor);
             }
 
