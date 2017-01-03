@@ -57,7 +57,7 @@ function  articleUpdate(needed_title) {
                 articleLoop.append(tmp);
             }
             articleLoop.find(".panel-heading").click(articleShow);  //all heading created
-            articleLoop.children(".old").hide();//隐藏old 
+            articleLoop.children(".old").hide();//隐藏old
 
         }
     });
@@ -79,35 +79,32 @@ function  showWriteArticle() {
 
 function  writeArticle() {
     var title=document.getElementById("article_title").value;
-    console.log(title);
+    // console.log(title);
     var content=ue_write.getContent();
-    console.log(content);
-    var mydiv=$("<div></div>");
-    mydiv.innerHTML=content;
-    console.log(mydiv);
-    // console.log(mydiv.textContent);
+    // console.log(content);
 
     $.ajax({
-            type:"GET",
-            url:"../article_mod/php/add_article.php?lesson_id="+course_id+"&id="+user_id+"&title="+title+"&content="+content,
+            type:"POST",
+            data:{lesson_id:course_id,id:user_id,title:title,content:content},
+            url:"../article_mod/php/add_article.php",
             success:function (res) {
                 if(res["if_success"]==1){
-                    // var loop=$("#articleLoop");
-                    // var tmp = loop.children(".old").clone().removeClass("old").addClass("new").show();
-                    // tmp.find(".x-trash").click(deleteArticle);
-                    // tmp.find(".x-article-id").html(x.article_id);
-                    // tmp.find(".x-title").html(x.title);
-                    // tmp.find(".x-contentDigest").html(x.short_content);
-                    // tmp.find(".x-time").html(x.time);
-                    // tmp.find(".x-author").html(x.user_name);
-
-                    
-                    window.alert("文章发布成功");
-                    location.reload(true);
-                    // loop.show();
-                    // loop.append(tmp);
-                    // $('#write_article_button').show();
-                    // $("#articleDetail").hide();
+                    // window.alert("文章发布成功");
+                    var loop=$("#articleLoop");
+                    var tmp = loop.children(".old").clone().removeClass("old").addClass("new").show();
+                    tmp.find(".x-trash").click(deleteArticle);
+                    var ar_id=res['error_message'];
+                    tmp.find(".x-article-id").html(ar_id);
+                    tmp.find(".x-title").html(title);
+                    tmp.find(".x-time").html(getNowFormatDate());
+                    tmp.find(".x-author").html(user_name);
+                    loop.show();
+                    loop.prepend(tmp);
+                    tmp.find(".panel-heading").click(articleShow);  //all heading created
+                    $("#articleBack").hide();
+                    $("#write_article_button").show();
+                    $('#write_article').hide();
+                    loop.show();
                 }
                 else {
                     window.alert(res["error_message"]);
@@ -137,26 +134,29 @@ function updateArticle(article_id) {
     update_article.find(".x-button").attr("onclick","submitUpdateArticle("+article_id+")");
 
     update_article.find("#article_title_update").val(tmp.find(".x-title").text());
-    ue_update.setContent(tmp.find(".x-body").text());
+    ue_update.setContent(tmp.find(".x-body").html());
 }
 
 
 function  submitUpdateArticle(article_id) {
     var title=$("#update_article").find("#article_title_update").val();
+    // console.log(title);
     var content=ue_update.getContent();
+    // console.log(content);
     $.ajax({
-      type:"GET",
-        url:"../article_mod/php/update_article.php?article_id="+article_id+"&title="+title+"&content="+content,
-        success:function (result) {
-            var jsonObj=result;
-            if(jsonObj["if_success"]==1){
+        type:'POST',
+        data:{article_id:article_id,title:title,content:content},
+        url:"../article_mod/php/update_article.php",
+        success:function (res) {
+            if(res["if_success"]==1){
                 window.alert("修改成功");
-                location.reload();
+                $("#articleBack").hide();
+                $("#write_article_button").show();
+                $('#update_article').hide();
+                $('#articleLoop').show();
             }else {
-                window.alert(jsonObj["error_message"]);
             }
         }
-
     }
     );
 
@@ -167,8 +167,9 @@ function  submitUpdateArticle(article_id) {
 
 function cancelUpdateArticle() {
     $("#update_article").hide();
-    $("#articleLoop").show();
-    $("#write_article_button").show()
+    $("#articleDetail").show();
+    $("#write_article_button").hide();
+    $("#articleBack").show();
 }
 //-----------删除文章列表中的文章---------------------------
 function  deleteArticle() {
@@ -195,12 +196,12 @@ function  delete_article_in_detail() {
             url:"../article_mod/php/delete_article.php?article_id="+article_id,
             success:function (res) {
                 if(res["if_success"]==1){
-                    window.alert("删除成功");
                     var loop=$("#articleLoop");
                     loop.show();
                     loop.children(".x-chosen").remove();
                     $('#write_article_button').show();
                     $("#articleDetail").hide();
+                    $('#articleBack').hide();
                 }
                 else {
                     window.alert(res["error_message"]);
@@ -235,10 +236,9 @@ function articleShow() {
             var title=parent.find(".x-title").text();
             var author=parent.find(".x-author").text();
             var time=parent.find(".x-time").text();
-
             articleDetail_local.find(".x-title").html(title);
             articleDetail_local.find(".x-author").html(author);
-            if(level==3) {//教师才可以删除和编辑文章
+            if(level==3&&articleDetail['id']==user_id) {//教师且自己发表的才可以删除和编辑文章
                 articleDetail_local.find(".x-edit").attr("onclick", "updateArticle(" + article_id + ")");
                 articleDetail_local.find(".x-trash").click(delete_article_in_detail);
                 articleDetail_local.find(".x-edit").show();
@@ -271,7 +271,6 @@ function articleShow() {
                     tmp.find(".glyphicon").click(deleteComment);
                 }
                 posts_list_ul.append(tmp);
-
                 showSecondComment(x.floor);
             }
 
