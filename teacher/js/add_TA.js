@@ -73,7 +73,7 @@ function addTA(){
                 var t_info_loop=$("#t-info-loop");
                 var tmp=t_info_loop.children(".old").clone().removeClass("old").addClass("new").show();
                 tmp.find(".t-id").html(id);
-                tmp.find(".t-name").html(name);
+                tmp.find(".t-name").html(name+'助教');
                 tmp.find(".t-depart").html(depart);
                 tmp.find(".t-major").html(major);
                 tmp.find(".t-delete").click(deleteTA);

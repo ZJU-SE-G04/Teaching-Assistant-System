@@ -9,6 +9,7 @@
 	$arr = [];
 	//获取文章内容
 	$arr['article_content']=htmlspecialchars_decode($row['content']);
+	$arr['id']=$row['id'];//阿超增加的参数
 	//获取评论数量
 	$result=$conn->query("select count(*) from comment_table where article_id=".$article_id.";");
 	$row=mysqli_fetch_assoc($result);

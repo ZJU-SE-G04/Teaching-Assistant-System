@@ -18,6 +18,7 @@
 			break;
 		}
 		$name=$_GET['name'][$i];
+		$name=$name.'助教';
 		if($name==null){
 			$su=0;
 			$erm='姓名不能为空!';
