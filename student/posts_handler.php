@@ -162,20 +162,20 @@
 		$count=(int)$_GET['count'];
 		$search=$_GET['search'];
 		//$lesson_id='ABCDE1';
-		//$post_kind=2;
+		//$post_kind=1;
 		//$offset=0;
 		//$count=10;
 		//$search='';
 
 		if($post_kind!=3){	
 			if($post_kind==2){
-				$uid=$_SESSION['user'];
-				//$uid='3140108888';
+				//$uid=$_SESSION['user'];
+				$uid='3140108888';
 				$result=$conn->query("select * from orgnize_table where id='".$uid."' and flag>0;");
 				$row = mysqli_fetch_assoc($result);
 				$thetid=$row['team_id'];
 				$result = $conn->query("select * from topic_table natural join user_table natural join team_table where lesson_id='".$lesson_id."' and topic_kind=".$post_kind." and team_id=".$thetid." and title like '%".$search."%' order by topic_id DESC;");
-				echo "select * from topic_table natural join user_table natural join team_table where lesson_id='".$lesson_id."' and topic_kind=".$post_kind." and team_id=".$thetid." and title like '%".$search."%' order by topic_id DESC;";
+				//echo "select * from topic_table natural join user_table natural join team_table where lesson_id='".$lesson_id."' and topic_kind=".$post_kind." and team_id=".$thetid." and title like '%".$search."%' order by topic_id DESC;";
 			}else
 				$result = $conn->query("select * from topic_table natural join user_table where lesson_id='".$lesson_id."' and topic_kind=".$post_kind." and title like '%".$search."%' order by topic_id DESC;");
 		}
