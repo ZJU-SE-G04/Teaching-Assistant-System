@@ -94,6 +94,7 @@ function init() {
             }
         );
     }
+    get_friend_link();
 }
 
 
@@ -191,4 +192,17 @@ function  resetPwd() {
         }
     });
 
+}
+
+function get_friend_link() {
+    $.ajax({
+        url: "index/php/get_friend_link.php",
+        success: function (res) {
+            $("#footer").html("");
+            for(var i = 0; i < res.length; i++) {
+                var link_ele = $("<a></a>").attr("href", res[i].link_address).text(res[i].link_name);
+                $("#footer").append(link_ele);
+            }
+        }
+    })
 }
