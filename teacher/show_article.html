@@ -32,6 +32,8 @@
     <link rel="stylesheet" href="../css/stu_learn.css">
     <link rel="stylesheet" href="../css/docs.css">
 
+    <!--由谢俊东导入的css样式-->
+    <link rel="stylesheet" href="css/discuss_area.css">
 
     <!--发布文章的编辑器要用到的样式..这个js放到后面就就失效了,摔-->
     <script type="text/javascript" src="../ueditor/ueditor.config.js"></script>
@@ -903,6 +905,10 @@
 
 
 <!--以下是谢俊东导入的js文件-->
+<script type="text/javascript">
+    var ue = UE.getEditor('submitPost_editor');
+    var uec = UE.getEditor('submitRe_editor')
+</script>
 <script src="js/discuss_area.js"></script>
 <script src="../js/jquery-validation-1.14.0_dist_jquery.validate.js"></script>
 <script src="../js/jquery-validation-1.14.0_dist_localization_messages_zh.js"></script>

@@ -240,7 +240,7 @@ $(document).ready(
 
         function fetch_post_rere(post_id, floor, re_li) {
             $.ajax({
-                url: "/student/posts_handler.php?action=fetchReRe&topic_id=" + post_id + "&floor=" + floor,
+                url: "posts_handler.php?action=fetchReRe&topic_id=" + post_id + "&floor=" + floor,
                 async: false,   //很重要！如果是异步的ajax的话，后面引用re_li就不一定是同一个re_li了
                 success: function (results) {
                     var rereAreaBody = $("<div class='rere-area-body'></div>");
@@ -281,7 +281,7 @@ $(document).ready(
                                     var id_be_re = comment_form.prev().attr("userid");
                                     var name_be_re = comment_form.prev().find(".rere-username").text();
 
-                                    $.post("/student/posts_handler.php?action=submitReRe", {
+                                    $.post("posts_handler.php?action=submitReRe", {
                                         topic_id: topic_id,
                                         floor: floor,
                                         id_be_re: id_be_re,
@@ -319,7 +319,7 @@ $(document).ready(
 
         function fetch_post_re(post_id, offset, count) {
             $.ajax({
-                url: "/student/posts_handler.php?action=fetchRe&topic_id=" + post_id + "&offset=" + offset + "&count=" + count,
+                url: "posts_handler.php?action=fetchRe&topic_id=" + post_id + "&offset=" + offset + "&count=" + count,
                 success: function (results) {
                     $(".re-list-ul").children().remove();   //清空原有的内容
                     // var topic_id = $(".post-detail").attr("title");
@@ -347,7 +347,7 @@ $(document).ready(
                                     var content = comment_form.children("textarea").val();
                                     var id_be_re = comment_form.parent().parent().attr("userid");
                                     var name_be_re = comment_form.parent().parent().find(".re-username").text();
-                                    $.post("/student/posts_handler.php?action=submitReRe", {
+                                    $.post("posts_handler.php?action=submitReRe", {
                                         action: "submitReRe",
                                         topic_id: topic_id,
                                         floor: floor,
@@ -430,7 +430,7 @@ $(document).ready(
 
         function fetch_border_posts(border_name, border_type, offset, count, search) {
             $.ajax({
-                url: "/student/posts_handler.php?action=fetchAll&courseID=" + courseID + "&post_kind=" + border_type + "&offset=" + offset + "&count=" + count + "&search=" + search,
+                url: "posts_handler.php?action=fetchAll&courseID=" + courseID + "&post_kind=" + border_type + "&offset=" + offset + "&count=" + count + "&search=" + search,
                 success: function (result) {
                     //界面切换
                     $("#discuss_home_page").hide();
@@ -449,7 +449,7 @@ $(document).ready(
                             //获取该帖子的内容详情
                             var post_id = $(this).parent().attr("id");
                             $.ajax({
-                                url: "/student/posts_handler.php?action=fetchDetail&topic_id=" + post_id,
+                                url: "posts_handler.php?action=fetchDetail&topic_id=" + post_id,
                                 async: false,
                                 success: function (result) {
                                     $("#posts_border_page").hide();
@@ -487,7 +487,7 @@ $(document).ready(
             //获取该帖子板块的帖子数量
 
             $.ajax({
-                url: "/student/posts_handler.php?action=fetchNum&courseID=" + courseID + "&post_kind=" + border_type,
+                url: "posts_handler.php?action=fetchNum&courseID=" + courseID + "&post_kind=" + border_type,
                 success: function (result) {
                     var num = result['num'];
                     $("#posts_border_page .pagination").children().remove();
@@ -564,7 +564,7 @@ $(document).ready(
 
                 var ueContent = UE.getEditor('submitPost_editor').getContent();
                 if (ueContent === "") return false;
-                $.post("/student/posts_handler.php?action=submitPost", {
+                $.post("posts_handler.php?action=submitPost", {
                     border_type: border_name,
                     title: title,
                     content: ueContent
@@ -586,7 +586,7 @@ $(document).ready(
             }
             var topic_id = $(this).parent().parent().children(".post-detail").attr("topic_id");
 
-            $.post("/student/posts_handler.php?action=submitRe", {
+            $.post("posts_handler.php?action=submitRe", {
                 topic_id: topic_id,
                 content: content
             }, function (data, status) {
@@ -646,7 +646,13 @@ $(document).ready(
         $("#post_detail_page").hide();
 
 
-        //设置
+
+        //如果是游客，隐藏一部分功能
+        if(user_id == "null" || user_id == undefined) {
+
+            $("#tabs>ul>li>a[href='#discuss_area_pane']").parent().remove();
+            $("#tabs>ul>li>a[href='#examin_pane']").parent().remove();
+        }
     })
 ;
 
