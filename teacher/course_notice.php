@@ -72,6 +72,7 @@
 		//$class_id=$_POST['class_id'];
 		$title=$_POST['title'];
 		$content=$_POST['content'];
+		session_start();
 		$uid=$_SESSION['user'];
 		$datetime=date('Y-m-d H:i:s');
 
