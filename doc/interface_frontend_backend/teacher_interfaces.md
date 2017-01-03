@@ -26,13 +26,13 @@
     <tr>
         <td>删除某一条通知</td>
         <td>course_notice.php</td>
-        <td>action=delete, lesson_id=xxx, notice_id=xxx</td>
+        <td>action=delete, notice_id=xxx</td>
         <td>成功/失败</td>
     </tr>
     <tr>
         <td>编辑某一条通知</td>
         <td>course_notice.php</td>
-        <td>action=edit, lesson_id=xxx, class_id=xxx, noticeID=xxx, title=xxx, content=xxx</td>
+        <td>action=edit, notice_id=xxx,<br> title=xxx, content=xxx</td>
         <td>成功/失败</td>
     </tr>
     </tbody>
@@ -58,15 +58,12 @@
         <td>发布测试</td>
         <td>release_quiz.php</td>
         <td>
-            ⚠由于js复杂，若出现bug，<br>
-            请用echo检查我代码中的问题，并告诉我哪里有bug<br>
-            action=releaseQuiz,<br>
-            quizName=xxx,<br>
-            option_num=3,essay_num=4<br>
-            1_question=第一题题目,<br>
-            1_a=第一题选项A的内容,1_b=xxx,1_c,1_d,<br>
-            1_answer=d(第一题答案为d)<br>
-            2_question=... <br>
+            action="release_quiz",
+            quiz_detail={"option_num":"2","essay_num":"2","quiz_name":"001",<br>
+            "option_question":<br>
+            [{"title":"111","a":"11","b":"12","c":"13","d":"14","answer":"c"},<br>
+            {"title":"222","a":"21","b":"22","c":"23","d":"24","answer":"b"}],<br>
+            "essay_question":[{"title":"333"},{"title":"444"}]}
         </td>
         <td>成功/失败</td>
     </tr>
