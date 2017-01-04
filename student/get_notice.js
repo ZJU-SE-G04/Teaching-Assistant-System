@@ -39,7 +39,7 @@ function getNotice() {
 
                 divContent.className = "panel-body";
                 divContent.innerHTML = notice[i].content;
-
+ 
             }
 
         }
