@@ -3,6 +3,7 @@
  */
 
 function getNotice() {
+
     var JSON_STR = [{
         "notice_id": "10",
         "title": "第10周学习提示",
@@ -15,25 +16,36 @@ function getNotice() {
 
     var notice = JSON_STR;
 
-    var o = document.getElementById("noticeDiv");
+    $.post(
+        "../teacher/course_notice.php",
+        {action: "request", lesson_id: "ABCDE1"},
+        function (data) {
+            notice=data;
+            var o = document.getElementById("noticeDiv");
 
-    for (var i in notice) {
-        var div = document.createElement("div");
-        o.appendChild(div);
+            for (var i in notice) {
+                var div = document.createElement("div");
+                o.appendChild(div);
 
-        div.className = "panel panel-default";
-        var divTitle = document.createElement("div");
-        var divContent = document.createElement("div");
-        div.appendChild(divTitle);
-        div.appendChild(divContent);
+                div.className = "panel panel-default";
+                var divTitle = document.createElement("div");
+                var divContent = document.createElement("div");
+                div.appendChild(divTitle);
+                div.appendChild(divContent);
 
-        divTitle.className = "panel-heading";
-        divTitle.innerHTML = notice[i].title;
+                divTitle.className = "panel-heading";
+                divTitle.innerHTML = notice[i].title;
 
 
-        divContent.className = "panel-body";
-        divContent.innerHTML = notice[i].content;
+                divContent.className = "panel-body";
+                divContent.innerHTML = notice[i].content;
 
-    }
+            }
+
+        }
+
+    );
+
+
 }
 window.onload = getNotice;
