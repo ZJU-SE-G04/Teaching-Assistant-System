@@ -44,7 +44,7 @@ function correctReport() {
             "filename": "report_001.zip",
             "ddl": "2016-11-15 22:00:00",
             "score": "-1",
-            "file": "http://www.baidu.com",
+            "file": "../file/report/res.doc",
             "state": "0"
         },
         {
