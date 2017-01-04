@@ -10,7 +10,8 @@
 	    $row1 = mysqli_fetch_assoc($a);
 		$x['author']=$row1['user_name'];
 		$x['time']=$row['time'];
-		$x['body']=$row['content'];	
+		$s=$row['content'];
+        $x['body']=htmlspecialchars_decode($s);
 	}
 	
 	echo json_encode($x, JSON_UNESCAPED_UNICODE);
