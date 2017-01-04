@@ -12,7 +12,7 @@ use teaching_db;
 #用户表
 create table user_table(
 	id varchar(10),#用户ID
-	password varchar(16) not null,#用户密码
+	password varchar(32) not null,#用户密码
 	user_name varchar(20) not null,#用户名
 	level int not null,#权限级别（身份）
 	email varchar(30),#邮箱地址
@@ -89,7 +89,8 @@ create table student_table(
 	name varchar(20),#学生真名
 	department varchar(60),#学生院系
 	major varchar(20),#学生专业
-	constraint foreign key (id) references user_table(id) on delete cascade on update cascade,
+  if_quit varchar(1) DEFAULT '0',#这个变量用于重置学生信息,具体作用可以问章世超
+  constraint foreign key (id) references user_table(id) on delete cascade on update cascade,
 	primary key(id)
 	)ENGINE=InnoDB DEFAULT CHARSET=utf8;
 create table study_table(

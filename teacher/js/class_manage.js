@@ -1,7 +1,3 @@
-/**
- * Created by achao_zju on 26/11/2016.
- */
-
 //--------- 一些全局变量 ------
 //这些全局变量在get_notice.js中初始化初始化
 
@@ -13,15 +9,6 @@ var course_id;
 var user_name;
 var user_id;
 var level;
-
-
-
-window.onload = function() { //在前端存_id的值
-    $(".c-course-id").attr("value",course_id);
-};
-window.onload = function() { //在前端存_id的值
-    $(".c-class-id").attr("value",class_id);
-};
 
 
 
@@ -39,8 +26,6 @@ function show_class() {
         url:"show_class.php?lesson_id="+course_id,
         success:function(result){
             jsonObj=result;
-
-
 
             var class_manage_select=document.getElementById("class_manage_select");
 

@@ -18,6 +18,7 @@
 			break;
 		}
 		$name=$_GET['name'][$i];
+		$name=$name.'助教';
 		if($name==null){
 			$su=0;
 			$erm='姓名不能为空!';
@@ -27,7 +28,8 @@
 		$maj=$_GET['major'][$i];
 		//echo 'insert into assit_talbe values("'.$id.'","'.$lesson_id.'",'.$class_id.');';
 		//如果没有这个账号就先在USER表中增加该账号
-		$result=$conn->query('insert into user_table values("'.$id.'","'.$id.'","'.$name.'",2,null,null,null);');
+		$pwd=md5($id);
+		$result=$conn->query('insert into user_table values("'.$id.'","'.$pwd.'","'.$name.'",2,null,null,null);');
 		$result=$conn->query('insert into assitant_table values("'.$id.'","'.$name.'","'.$dep.'","'.$maj.'");');
 		$result=$conn->query('insert into assit_table values("'.$id.'","'.$lesson_id.'",'.$class_id.');');
 		if($result==null){

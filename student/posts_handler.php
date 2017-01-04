@@ -1,6 +1,6 @@
 <?php
 	$action=$_GET["action"];//获取行为
-	//$action="submitReRe";
+	//$action="fetchAll";
 	if($action=='fetchAll'){
 		fetchAll();
 	}else if($action=='fetchDetail'){
@@ -29,7 +29,8 @@
 		session_start();
 		$uid=$_SESSION['user'];
 		//$lesson_id=$_SESSION['lesson_id'];
-		$lesson_id='ABCDE1';
+//		$lesson_id='ABCDE1';
+        $lesson_id = $_POST['course_id'];
 		//$uid='3140102222';
 		//$border_type=1;
 		//$title='发表测试';
@@ -162,13 +163,26 @@
 		$count=(int)$_GET['count'];
 		$search=$_GET['search'];
 		//$lesson_id='ABCDE1';
-		//$post_kind=3;
+		//$post_kind=1;
 		//$offset=0;
 		//$count=10;
 		//$search='';
 
-		if($post_kind!=3)
-			$result = $conn->query("select * from topic_table natural join user_table where lesson_id='".$lesson_id."' and topic_kind=".$post_kind." and title like '%".$search."%' order by topic_id DESC;");
+		if($post_kind!=3){	
+			if($post_kind==2){
+				session_start();
+				$uid=$_SESSION['user'];
+				//$uid='3140104444';
+				
+				$result=$conn->query("select * from orgnize_table where id='".$uid."' and flag>0;");
+				$row = mysqli_fetch_assoc($result);
+				$thetid=$row['team_id'];
+				
+				$result = $conn->query("select * from topic_table natural join user_table natural join orgnize_table where topic_kind=".$post_kind." and team_id=".$thetid." and title like '%".$search."%' order by topic_id DESC;");
+				
+			}else
+				$result = $conn->query("select * from topic_table natural join user_table where lesson_id='".$lesson_id."' and topic_kind=".$post_kind." and title like '%".$search."%' order by topic_id DESC;");
+		}
 		else
 			$result=$conn->query("select * from topic_table natural join user_table where lesson_id='".$lesson_id."' and title like '%".$search."%' order by topic_id DESC;");
 

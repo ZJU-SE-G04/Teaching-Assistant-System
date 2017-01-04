@@ -3,16 +3,21 @@
  * Created by dddong on 16/11/17.
  */
 
+//added by zhangshichao
+var courseID='ABCDE1';
+var level=0;
+var user_name;
+var user_id;
+
+
 let POSTNUM_PER_PAGE = 10;
 let POSTRE_NUM_PER_PAGE = 10;
 
-function gotoFirstPage() {
-    window.location("/index.html");
-}
 $(document).ready(
     function () {
         //课程号，从首页传过来的参数获得
-        var courseID = getQueryString("lesson_id");
+        courseID = getQueryString("lesson_id");
+
 
         //获取课程信息，包括课程所有老师
         function get_course_intro() {
@@ -65,6 +70,7 @@ $(document).ready(
 
 
         /******************************课件资料部分************************************/
+        
 
         //课件资料页面改变下拉列表项的箭头
         $(".titleBox").click(function () {
@@ -92,8 +98,11 @@ $(document).ready(
                         var item_kind = item["courseware_kind"];
                         var list_ele;
                         switch (item_kind) {
-                            case "课件":
+                            case "最新课件":
                                 list_ele = $("#course_ppts_list");
+                                break;
+                            case "往年课件":
+                                list_ele = $("#c_old_ppt_list");
                                 break;
                             case "模板":
                                 list_ele = $("#tpls_list");
@@ -120,7 +129,9 @@ $(document).ready(
                         //如果是视频
                         if (item_kind === "教学视频") {
                             preview_link.click(function () {
-                                window.open("watch_video.html?vid=" + $(this).attr("title"));
+                                window.open("/Teaching-Assistant-System/courseware_mod/watch_video.html?vid=" + $(this).attr("title")+$(this).text());
+                                // window.open("watch_video/watch_video.html?vid=/Teaching-Assistant-System/file/video/seven.mp4");
+
                             })
                         }
                         // //如果是ppt
@@ -130,30 +141,32 @@ $(document).ready(
                         // }
                         item_ele.append(preview_link);
                         var download_area = $("<div class='download-btn right'></div>");
-                        var download_link = $("<a></a>").attr("href", item['courseware_link']).attr("download", item['courseware_name']);
+                        var download_link = $("<a></a>").attr("href", item['courseware_link']+item['courseware_name']).attr("download", item['courseware_name']);
                         download_link.append($("<span class='glyphicon-download glyphicon'></span>"));
                         download_area.append(download_link);
 
                         //-----add by achao----
-                        var c_delete_area = $("<div class='download-btn right'></div>");
-                        c_delete_area.append($("<span class='glyphicon-trash glyphicon c-trash'></span>"));
-                        c_delete_area.find(".c-trash").click(function () {
-                            $(this).parent().parent().remove()
-                            $.ajax({
-                                url: "delete_courseware.php?courseware_id=" + xxx,
-                                success: function (result) {
-                                    if (result["if_success"] == 0) {
-                                        alert(result["err_message"]);
-                                    }
-
-                                }
-                            });
-                        });
-                        item_ele.append(c_delete_area);
+                        // var c_delete_area = $("<div class='download-btn right' style='margin-left: 10px;margin-top: 5px'></div>");
+                        // c_delete_area.append($("<span class='glyphicon-trash glyphicon c-trash'></span>"));
+                        // c_delete_area.find(".c-trash").click(function () {
+                        //     $(this).parents(".each_datum").remove();
+                        //     var id=$(this).parents(".each_datum").find(".c-id").text();
+                        //     $.ajax({
+                        //         url: "../courseware_mod/php/delete_ware.php?ware_id=" + id,
+                        //         success: function (result) {
+                        //
+                        //         }
+                        //     });
+                        // });
+                        // item_ele.append(c_delete_area);
+                        // var c_id=$("<div class='c-id' style='display: none'></div>");//c-id存储课件id
+                        // c_id.html(item['courseware_id']);
+                        // item_ele.append(c_id);
                         //----------------
 
-
-                        item_ele.append(download_area);
+                        if(level==1) {//游客看不见下载区……
+                            item_ele.append(download_area);
+                        }
                         list_ele.append(item_ele);
 
                     }
@@ -162,6 +175,11 @@ $(document).ready(
             });
             $(".courseware_list").hide();
         });
+        
+        
+
+
+
 
 
         /************************************* 讨论区 ******************************************/
@@ -203,7 +221,7 @@ $(document).ready(
             var topic_id = $("#post_detail_page .post-detail").attr("topic_id");
             var num;
             $.ajax({
-                url: "/student/fetch_post_re_num.php?topic_id=" + topic_id,
+                url: "fetch_post_re_num.php?topic_id=" + topic_id,
                 async: false,
                 success: function (data) {
                     num = data['num'];
@@ -218,7 +236,7 @@ $(document).ready(
 
         function fetch_post_rere(post_id, floor, re_li) {
             $.ajax({
-                url: "/student/posts_handler.php?action=fetchReRe&topic_id=" + post_id + "&floor=" + floor,
+                url: "posts_handler.php?action=fetchReRe&topic_id=" + post_id + "&floor=" + floor,
                 async: false,   //很重要！如果是异步的ajax的话，后面引用re_li就不一定是同一个re_li了
                 success: function (results) {
                     var rereAreaBody = $("<div class='rere-area-body'></div>");
@@ -259,7 +277,7 @@ $(document).ready(
                                     var id_be_re = comment_form.prev().attr("userid");
                                     var name_be_re = comment_form.prev().find(".rere-username").text();
 
-                                    $.post("/student/posts_handler.php?action=submitReRe", {
+                                    $.post("posts_handler.php?action=submitReRe", {
                                         topic_id: topic_id,
                                         floor: floor,
                                         id_be_re: id_be_re,
@@ -297,7 +315,7 @@ $(document).ready(
 
         function fetch_post_re(post_id, offset, count) {
             $.ajax({
-                url: "/student/posts_handler.php?action=fetchRe&topic_id=" + post_id + "&offset=" + offset + "&count=" + count,
+                url: "posts_handler.php?action=fetchRe&topic_id=" + post_id + "&offset=" + offset + "&count=" + count,
                 success: function (results) {
                     $(".re-list-ul").children().remove();   //清空原有的内容
                     // var topic_id = $(".post-detail").attr("title");
@@ -325,7 +343,7 @@ $(document).ready(
                                     var content = comment_form.children("textarea").val();
                                     var id_be_re = comment_form.parent().parent().attr("userid");
                                     var name_be_re = comment_form.parent().parent().find(".re-username").text();
-                                    $.post("/student/posts_handler.php?action=submitReRe", {
+                                    $.post("posts_handler.php?action=submitReRe", {
                                         action: "submitReRe",
                                         topic_id: topic_id,
                                         floor: floor,
@@ -408,7 +426,7 @@ $(document).ready(
 
         function fetch_border_posts(border_name, border_type, offset, count, search) {
             $.ajax({
-                url: "/student/posts_handler.php?action=fetchAll&courseID=" + courseID + "&post_kind=" + border_type + "&offset=" + offset + "&count=" + count + "&search=" + search,
+                url: "posts_handler.php?action=fetchAll&courseID=" + courseID+ "&post_kind=" + border_type + "&offset=" + offset + "&count=" + count + "&search=" + search,
                 success: function (result) {
                     //界面切换
                     $("#discuss_home_page").hide();
@@ -427,7 +445,7 @@ $(document).ready(
                             //获取该帖子的内容详情
                             var post_id = $(this).parent().attr("id");
                             $.ajax({
-                                url: "/student/posts_handler.php?action=fetchDetail&topic_id=" + post_id,
+                                url: "posts_handler.php?action=fetchDetail&topic_id=" + post_id,
                                 async: false,
                                 success: function (result) {
                                     $("#posts_border_page").hide();
@@ -465,7 +483,7 @@ $(document).ready(
             //获取该帖子板块的帖子数量
 
             $.ajax({
-                url: "/student/posts_handler.php?action=fetchNum&courseID=" + courseID + "&post_kind=" + border_type,
+                url: "posts_handler.php?action=fetchNum&courseID=" + courseID + "&post_kind=" + border_type,
                 success: function (result) {
                     var num = result['num'];
                     $("#posts_border_page .pagination").children().remove();
@@ -542,10 +560,20 @@ $(document).ready(
 
                 var ueContent = UE.getEditor('submitPost_editor').getContent();
                 if (ueContent === "") return false;
-                $.post("/student/posts_handler.php?action=submitPost", {
-                    border_type: border_name,
+
+                var border_type = -1;
+                if(border_name == "老师答疑区") {
+                    border_type = 0;
+                } else if(border_name == "综合讨论区") {
+                    border_type = 1;
+                } else if(border_name == "小组讨论区") {
+                    border_type = 2;
+                }
+                $.post("posts_handler.php?action=submitPost", {
+                    border_type: border_type,
                     title: title,
-                    content: ueContent
+                    content: ueContent,
+                    course_id: courseID,
                 }, function (result, status) {
                     alert(result['msg']);
                     $("#test_div").html(result);
@@ -564,7 +592,7 @@ $(document).ready(
             }
             var topic_id = $(this).parent().parent().children(".post-detail").attr("topic_id");
 
-            $.post("/student/posts_handler.php?action=submitRe", {
+            $.post("posts_handler.php?action=submitRe", {
                 topic_id: topic_id,
                 content: content
             }, function (data, status) {
@@ -624,7 +652,14 @@ $(document).ready(
         $("#post_detail_page").hide();
 
 
-        //设置
+
+        //如果是游客，隐藏一部分功能
+        if(user_id == "null" || user_id == undefined) {
+
+            $("#tabs>ul>li>a[href='#discuss_area_pane']").parent().remove();
+            $("#tabs>ul>li>a[href='#examin_pane']").parent().remove();
+        }
     })
 ;
+
 

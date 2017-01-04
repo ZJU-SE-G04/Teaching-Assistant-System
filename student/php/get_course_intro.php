@@ -1,7 +1,7 @@
 <?php
 	include 'connect.php';
 	$course_id=_GET['courseID'];//获取教师账号
-	//$course_id="ABCDE1";
+	//$courseID="ABCDE1";
 
 
 	//这里注意，需要提醒管理员处将课程介绍处理成对应格式

@@ -7,7 +7,7 @@
 	$su=1;
 	$erm='null';
 
-	$result=$conn->query('delete from student_table where id='.$id.';');
+	$result=$conn->query('delete from user_table where id='.$id.';');
 	if(!$result){ $su=0;$erm=mysql_error();}
 	
 	

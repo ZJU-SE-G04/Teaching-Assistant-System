@@ -9,11 +9,10 @@
     <link rel="stylesheet" href="../css/header.css">
 
 
-    <link rel="stylesheet" href="css/show_article.css">
+    <link rel="stylesheet" href="../article_mod/show_article.css">
     <link rel="stylesheet" href="css/add_TA.css">
     <link rel="stylesheet" href="css/add_stu.css">
     <link rel="stylesheet" href="css/class_manage.css">
-    <link rel="stylesheet" href="css/courseware.css">
 
     <!--以下两个样式：文章区用到的样式-->
     <link rel="stylesheet" href="../administrator/w3.css">
@@ -24,6 +23,7 @@
     <link href="../bootstrap-3.3.7-dist/bootstrap-fileinput/css/fileinput.min.css" media="all" rel="stylesheet"
           type="text/css"/>
 
+
     <!--以下是Li Boao导入的css文件-->
     <link rel="stylesheet" href="../css/content.css">
 
@@ -32,6 +32,8 @@
     <link rel="stylesheet" href="../css/stu_learn.css">
     <link rel="stylesheet" href="../css/docs.css">
 
+    <!--由谢俊东导入的css样式-->
+    <link rel="stylesheet" href="css/discuss_area.css">
 
     <!--发布文章的编辑器要用到的样式..这个js放到后面就就失效了,摔-->
     <script type="text/javascript" src="../ueditor/ueditor.config.js"></script>
@@ -44,12 +46,12 @@
 <!--这个部分复制自header.html,不能直接include,因为要改其中的课程名-->
 <div class="container-fluid">
     <div class="row" id="header_topBar">
-        <div class="col-md-6"><a href="/index.html" target="_self"><img src="../img/logo_gray_large.png" alt="258x71" class="img-responsive"></a></div>
+        <div class="col-md-6"><a href="../index.html" target="_self"><img src="../img/logo_gray_large.png" alt="258x71" class="img-responsive"></a></div>
         <div class="col-md-2 col-md-offset-4" id="nameLink">
             <div style="margin-left: 50px">
                 <div class="nickname f-f0 f-fc-gray f-thide">
                     你好,
-                    <a id="username" class="f-fc-gray" href="/student/student_home.html" target="_blank"></a>
+                    <a id="username" class="f-fc-gray" href="teacher_home.html" target="_blank"></a>
                 </div>
             </div>
         </div>
@@ -63,63 +65,86 @@
             <div class="col-md-9" id="header_courseName">
                 <div class="coursename f-f0 f-fc-black"><strong></strong><br>
                 </div>
+                <div class="f-fc-black f-f0 teacherName">金波</div>
             </div>
         </div>
     </div>
 </div>
 
-<script src="/jquery/jquery-3.1.1.min.js"></script>
-<script src="/jquery/jquery.cookie.js"></script>
-<script>
-//    $("#username").text($.cookie("user_name"));
-</script>
 <!--以上部分复制自header.html,不能直接include,因为要改其中的课程名-->
 
 <div class="container-fluid">
     <div class="row" id="mainBody">
         <div class="col-md-2" id="left-side">
             <ul class="nav nav-pills nav-stacked">
-                <li class="tab-style"><a href="#notice" data-toggle="tab">公告</a></li>
+                <li class="tab-style active"><a href="#notice" data-toggle="tab">公告</a></li>
                 <li class="tab-style"><a href="#article" data-toggle="tab" onclick="articleUpdate()">最新文章</a></li>
                 <li class="tab-style"><a href="#courseware_pane" data-toggle="tab">课程资料</a></li>
                 <li class="tab-style"><a href="#report" data-toggle="tab" onclick="correctReport()">报告与文档</a></li>
                 <!--<li class="tab-style"><a href="#correct_report" data-toggle="tab">批改实验报告</a></li>-->
                 <li class="tab-style"><a href="#exercise" data-toggle="tab">发布作业</a></li>
-                <li class="tab-style active"><a href="#discuss_area_pane" data-toggle="tab">讨论区</a></li>
-                <li class="tab-style"><a href="#class" data-toggle="tab" onclick="show_class()">班级信息管理</a></li>
+                <li class="tab-style"><a href="#discuss_area_pane" data-toggle="tab">讨论区</a></li>
+                <li class="tab-style"><a href="#class" data-toggle="tab" onclick="show_class()">班级信息</a></li>
                 <li class="tab-style"><a href="#stuInfo" data-toggle="tab" onclick="showStuInfo()">学生信息</a></li>
-                <li class="tab-style  t-check" style="display: none"><a href="#TAInfo" data-toggle="tab" id="TA" onclick="showTAInfo()">助教信息</a></li>
+                <li class="tab-style  t-check" style="display: none"><a href="#TAInfo" data-toggle="tab" id="TA"
+                                                                        onclick="showTAInfo()">助教信息</a></li>
 
             </ul>
         </div>
         <div class="col-md-10 tab-content" id="tab_content_area">
-            <div id="notice" class="tab-pane">
+            <div id="notice" class="tab-pane in active">
                 <h3 class="page-header">发布通知</h3>
-                <form action="#" method="post">
-                    <div>
-                        <div class="form-group">
-                            <input type="text" class="form-control" id="title" placeholder="输入通知标题">
-                        </div>
-                        <div class="form-group">
-                            <textarea name="content" id="content" rows="3" class="form-control"
-                                      placeholder="输入通知内容"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">
-                                <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 发布
-                            </button>
-                        </div>
+                <div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="new_notice_title" placeholder="输入通知标题">
                     </div>
-                </form>
+                    <div class="form-group">
+                            <textarea name="content" id="new_notice_content" rows="3" class="form-control"
+                                      placeholder="输入通知内容"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary" onclick="addNotice()">
+                            <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 发布
+                        </button>
+                    </div>
+                </div>
                 <br>
 
+
+                <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                                        aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="exampleModalLabel">编辑通知</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="edit-title" class="control-label">标题</label>
+                                        <input type="text" class="form-control" id="edit-title">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="edit-content" class="control-label">内容</label>
+                                        <textarea class="form-control" id="edit-content"></textarea>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-primary" onclick="editNotice()">发布</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div id="noticeDiv">
                 </div>
 
 
             </div>
             <div id="article" class="tab-pane">
-                <div class="row">
+                <div class="row" style="margin-top: 15px">
                     <div class="col-md-9">
                         <div class="input-group">
                             <input type="text" class="form-control input-lg"><span
@@ -135,13 +160,13 @@
                     </div>
                 </div>
                 <div class="panel-group" style="padding-top:35px" id="articleLoop">
-                    <div class="panel panel-default old w3-hover-shadow ">  <!--loop start-->
+                    <div class="panel panel-default old w3-hover-xshadow ">  <!--loop start-->
                         <div class="panel-heading w3-hover-grey clickable">
                             <span class="glyphicon glyphicon-file"></span>&nbsp;<strong class="x-title"></strong>
                             <span class="x-article-id" style="display: none"></span>
                         </div>
-                        <div class="panel-body"><p class="x-contentDigest"></p></div>
-                        <div class="panel-footer">
+                        <!--<div class="panel-body"><p class="x-contentDigest"></p></div>-->
+                        <div class="panel-footer w3-white" >
                             <div class="row">
                                 <div class="col-md-1 right"><a class="glyphicon glyphicon-trash x-trash"></a></div>
 
@@ -166,8 +191,9 @@
                             <small>
                                 <span class="glyphicon glyphicon-user"></span> 作者：<span class="x-author"></span>&nbsp;&nbsp;
                                 <span class="glyphicon glyphicon-time"></span> 发表时间：<span class="x-time"></span>
-                                <span class="glyphicon glyphicon-edit x-edit" onclick="updateArticle()">编辑文章</span>
-                                <span class="glyphicon glyphicon-trash x-trash">删除文章</span>
+                                <span class="glyphicon glyphicon-edit x-edit" onclick="updateArticle()"
+                                      style="display: none">编辑文章</span>
+                                <span class="glyphicon glyphicon-trash x-trash" style="display: none">删除文章</span>
 
                             </small>
                         </h5>
@@ -177,12 +203,12 @@
                     </div>
 
                     <!--帖子详情页面-->
-                    <div id="post_detail_page">
+                    <div id="x_post_detail_page">
                         <p class="f-post-comment-num">评论数:<span class="x-comment-number"></span></p>
                         <div class="posts-list-container">
                             <ul class="posts-list-ul">
                                 <li class="posts-list-item old ">  <!-- loop start-->
-                                    <div class="">
+                                    <div>
                                         <div class="posts-list-item-title x-content"></div>
                                         <div class="posts-list-item-btm">
                                             <span class="posts-list-item-nick inline x-name"></span>
@@ -219,11 +245,6 @@
                                                 </div>
                                             </div> <!-- loop end-->
                                         </div>
-
-                                        <div class="add-post-comment">
-                                            添加评论...
-                                        </div>
-                                        <!--<textarea name="post-comment" id="" cols="30" rows="10" placeholder="添加评论..."></textarea>-->
                                     </div>
                                 </li><!-- loop end-->
 
@@ -253,11 +274,11 @@
                         <script id="container_write" name="content" type="text/plain" style="height:700px">
                         </script>
                         <script type="text/javascript">
-                            var ue = UE.getEditor('container_write');
+                            var ue_write = UE.getEditor('container_write');
                         </script>
                     </div>
                     <div class="row">
-                        <div class='col-sm-9'>
+                        <div class='col-md-9'>
                             <button class='btn btn-primary' id="cancel_write_article" onclick='cancelArticle()'>取消发布
                             </button>
                         </div>
@@ -296,60 +317,54 @@
                     </div>
                 </div>
             </div>
-            <div id="courseware_pane" class="tab-pane">
-                <form action="upload_coureseware.php" method="get">
-                    <input class="c-course-id" name="lesson_id" style="display: none">
-                    <select name="courseware_kind" class="form-control">
-                        <option>课件</option>
-                        <option>模板</option>
-                        <option>参考资料</option>
-                        <option>以往优秀作业</option>
-                        <option>教学视频</option>
-                        <option>教学音频</option>
-                    </select>
-
-                    <input id="input-id" name="file" type="file" class="file" multiple>
-                </form>
-
-
-                <div class="titleBox" id="ppt_btn">
-                    <span class="glyphicon glyphicon-menu-down"></span><span class="f-title">课件</span>
-                </div>
-
-                <div id="course_ppt" class="datum-content">
-                    <div class="each_datum">
-                        <a class="x-blue">第一章ppt</a>
-                        <div class="download-btn">
-                            <a class="x-blue"> <span class="glyphicon glyphicon-download"></span> </a>
-                        </div>
+            <div id="courseware_pane" class="tab-pane ">
+                <select id="c-kind-select" class="form-control">
+                    <option>最新课件</option>
+                    <option>往年课件</option>
+                    <option>模板</option>
+                    <option>参考资料</option>
+                    <option>以往优秀作业</option>
+                    <option>教学视频</option>
+                    <option>教学音频</option>
+                </select>
+                <input id="c-upload-file" name="file" type="file" class="file">
+                <div id="courseware_nonpreview_area">
+                    <div class="titleBox" id="ppt_ddMenu_title">
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-title c-kind">最新课件</span>
                     </div>
-                    <div class="each_datum">
-                        <a class="x-blue">第二章ppt</a>
-                        <div class="download-btn">
-                            <a class="x-blue"><span class="glyphicon glyphicon-download"></span></a>
-                        </div>
+
+                    <div id="course_ppts_list" class="courseware_list">
+                        <!--<div class="each_datum">-->
+                        <!--<a>第一章ppt</a>-->
+                        <!--<div class="download-btn">-->
+                        <!--<a> <span class="glyphicon glyphicon-download"></span> </a>-->
+                        <!--</div>-->
+                        <!--</div>-->
                     </div>
-                    <div class="each_datum">
-                        <a class="x-blue">第三章ppt</a>
-                        <div class="download-btn">
-                            <a class="x-blue"><span class="glyphicon glyphicon-download"></span></a>
-                        </div>
+                    <div class="titleBox" id="c_old_ppt">
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0 c-kind">往年课件</span>
                     </div>
-                </div>
-                <div class="titleBox">
-                    <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">模板</span>
-                </div>
-                <div class="titleBox">
-                    <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">参考资料</span>
-                </div>
-                <div class="titleBox">
-                    <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">以往优秀作业</span>
-                </div>
-                <div class="titleBox">
-                    <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">教学视频</span>
-                </div>
-                <div class="titleBox">
-                    <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0">教学音频</span>
+                    <div id="c_old_ppt_list" class="courseware_list"></div>
+                    <div class="titleBox" id="tpl_ddMenu_title">
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0 c-kind">模板</span>
+                    </div>
+                    <div id="tpls_list" class="courseware_list"></div>
+                    <div class="titleBox" id="refMaterial_ddMenu_title">
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0 c-kind">参考资料</span>
+                    </div>
+                    <div id="refMaterial_list" class="courseware_list"></div>
+                    <div class="titleBox" id="past_hw_ddMenu_title">
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0 c-kind">以往优秀作业</span>
+                    </div>
+                    <div id="past_hw_list" class="courseware_list"></div>
+                    <div class="titleBox" id="teach_video_ddMenu_title">
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0 c-ware-kind">教学视频</span>
+                    </div>
+                    <div id="teach_video_list" class="courseware_list"></div>
+                    <div class="titleBox" id="teach_audio_ddMenu_title">
+                        <span class="glyphicon glyphicon-menu-down"></span><span class="f-f0 c-ware-kind">教学音频</span>
+                    </div>
+                    <div id="teach_audio_list" class="courseware_list"></div>
                 </div>
             </div>
             <div id="report" class="tab-pane">
@@ -551,7 +566,7 @@
 
             </div>
 
-            <div id="discuss_area_pane" class="tab-pane in active">
+            <div id="discuss_area_pane" class="tab-pane">
                 <div id="discuss_home_page">
                     <div class="bottom-line" id="discuss_header">
                         <span class="left f-discuss-header">讨论区</span>
@@ -783,95 +798,201 @@
             </div>
 
             <div id="class" class="tab-pane">
-                <!--<h3>你当前所在的班级是:<span id="course_name">xxx</span><span id="class_time">xxx</span></h3><h3>你当前所在的班级是:<span id="course_name">xxx</span><span id="class_time">xxx</span></h3>-->
                 <div class="bs-callout bs-callout-info">
                     <h4>你当前所在的班级是:</h4>
                     <span id="class_manage_course_name"></span><span id="class_manage_class_time"></span>
                 </div>
                 <div class="row">
                     <div class="col-md-9"><select class="form-control " id="class_manage_select"></select></div>
-                    <div class="col-md-3"><button class="btn btn-primary  x-class-manage-btn">切换班级</button></div>
+                    <div class="col-md-3">
+                        <button class="btn btn-primary  x-class-manage-btn">切换班级</button>
+                    </div>
                 </div>
 
 
             </div>
+
             <div id="stuInfo" class="tab-pane">
                 <div class="bs-callout bs-callout-info">
                     <h4>以下是<span id="stu_course_name"></span><span class="x-class-time"></span>班的学生信息</h4>
                 </div>
 
-
-                <form action="add_stu_excel.php" method="get" style="margin-bottom: 15px">
-                    <input class="c-class-id" name="class_id" style="display: none">
-
-                    <label>用Excel重置学生信息</label>
-                    <input name="file" type="file" class="file">
-                </form>
-
+                <label>用Excel重置学生信息</label>
+                <input id="x-upload-file" name="file" type="file" class="file">
 
                 <table class="table table-striped" id="StuInfoTable">
-                    <tr><th>学号</th><th>姓名</th><th>院系</th><th>专业</th><th>团队</th><th>删除</th><th>修改</th></tr>
+                    <tr>
+                        <th>学号</th>
+                        <th>姓名</th>
+                        <th>院系</th>
+                        <th>专业</th>
+                        <th>团队</th>
+                    </tr>
                     <tbody class="stu_info_loop">
-                    <!-- loop start--><tr class="old"><th class="s-stu-id"></th><th class="s-stu-name"></th><th class="s-depart"></th><th class="s-major"></th><th class="s-team-name"></th>
-                        <th><a class='glyphicon glyphicon-trash s-delete'></a></th>
-                        <th><a class='glyphicon glyphicon-edit s-update'></a></th>
+                    <!-- loop start-->
+                    <tr class="old s-one-info">
+                        <td class="s-stu-id"></td>
+                        <td class="s-stu-name"></td>
+                        <td class="s-depart"></td>
+                        <td class="s-major"></td>
+                        <td class="s-team-name"></td>
+                        <!--<td><a class='glyphicon glyphicon-trash s-delete'></a></td>-->
+                        <!--<td><a class='glyphicon glyphicon-edit s-update'></a></td>-->
                     </tr> <!-- loop end-->
 
                     </tbody>
                 </table>
-                <div class="row" id="stu_info_row">
-                    <div  class='col-sm-3' id='add_stu_hint'>
-                        <p  style='float: right'>手动添加学生数量:</p></div>
-                    <div  class='col-sm-1' id='add_stu_select' >  <div class='form-group'>
-                    <select id='addStuNumberSelect' class='form-control' onchange='addStuInput()'>
-                        <option>0</option><option>1</option><option>2</option><option>3</option>
-                    </select></div> </div>
-                </div>
 
-                <div class="modal fade bs-example-modal-sm" id="myModal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-sm">
+            </div>
+            <div id="TAInfo" class="tab-pane">
+                <div class="bs-callout bs-callout-info">
+                    <h4>以下是<span id="TA_course_name"></span><span class="x-class-time"></span>班的助教信息</h4></div>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#t-add-modal"
+                        style="margin-bottom: 10px">
+                    录入助教信息
+                </button>
+                <table class="table table-striped" id="t-table">
+                    <tr>
+                        <th>学号</th>
+                        <th>姓名</th>
+                        <th>院系</th>
+                        <th>专业</th>
+                        <th>删除</th>
+                        <th>修改</th>
+                    </tr>
+                    <tbody id="t-info-loop">
+                    <!-- loop start-->
+                    <tr class="old t-one-info">
+                        <td class="t-id"></td>
+                        <td class="t-name"></td>
+                        <td class="t-depart"></td>
+                        <td class="t-major"></td>
+                        <td><a data-toggle="modal" class='glyphicon glyphicon-trash t-delete'></a></td>
+                        <td><a data-toggle="modal" data-target="#t-update-modal"
+                               class='glyphicon glyphicon-edit t-update'></a></td>
+                    </tr> <!-- loop end-->
+                    </tbody>
+                </table>
+
+                <div class="modal fade" id="t-update-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
                         <div class="modal-content">
-                            ...
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span
+                                        aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title" id="t-update-modal-title">修改助教信息</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class='col-md-3'><label>学号</label></div>
+                                    <div class='col-md-3'><label>姓名</label></div>
+                                    <div class='col-md-3'><label>院系</label></div>
+                                    <div class='col-md-3'><label>专业</label></div>
+                                </div>
+                                <div class='row' id="t-update-in">
+                                    <div class='col-md-3'><input class='form-control t-update-id'>
+                                    </div>
+                                    <div class='col-md-3'><input class='form-control t-update-name'>
+                                    </div>
+                                    <div class='col-md-3'><input class='form-control t-update-depart'>
+                                    </div>
+                                    <div class='col-md-3'><input class='form-control t-update-major'></div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消修改</button>
+                                <button type="button" class="btn btn-primary" onclick="updateTA()">确定修改</button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-            </div>
-            <div id="TAInfo" class="tab-pane">
+                <div class="modal fade" id="t-add-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                     aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span
+                                        aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <h4 class="modal-title" id="t-add-modal-title">添加助教信息</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class='col-md-3'><label>学号</label></div>
+                                    <div class='col-md-3'><label>姓名</label></div>
+                                    <div class='col-md-3'><label>院系</label></div>
+                                    <div class='col-md-3'><label>专业</label></div>
+                                </div>
+
+                                <div class='row' id="t-add-in">
+                                    <div class='col-md-3'><input class='form-control t-add-id' name='id[]'>
+                                    </div>
+                                    <div class='col-md-3'><input class='form-control t-add-name' name='name[]'>
+                                    </div>
+                                    <div class='col-md-3'><input class='form-control t-add-depart' name='department[]'>
+                                    </div>
+                                    <div class='col-md-3'><input class='form-control t-add-major' name='major[]'></div>
+                                </div>
 
 
-                <div class="bs-callout bs-callout-info">
-                    <h4>以下是<span id="TA_course_name"></span><span class="x-class-time"></span>班的助教信息</h4>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消录入</button>
+                                <button type="button" class="btn btn-primary" onclick="addTA()">确定录入</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</div>
-</div>
 
-
-<!--以下是bootstrap file input的js文件-->
-<script src="../bootstrap-3.3.7-dist/bootstrap-fileinput/jquery.min.js"></script>
-<script src="../bootstrap-3.3.7-dist/bootstrap-fileinput/js/fileinput.min.js"></script>
 
 <!--以下是jQuery 和 bootstrap的js文件-->
 <script src="../jquery/jquery-3.1.1.min.js"></script>
 <script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 <script src="../jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 
+<!--以下是bootstrap file input的js文件-->
+<script src="../bootstrap-3.3.7-dist/bootstrap-fileinput/jquery.min.js"></script>
+<script> var jq211 = jQuery.noConflict(true); </script>
+<!--重命名jquery,防止覆盖引入的jQuery-->
+<script src="../bootstrap-3.3.7-dist/bootstrap-fileinput/js/fileinput.min.js"></script>
+<script src="../bootstrap-3.3.7-dist/bootstrap-fileinput/js/locales/zh.js"></script>
+
+
 <!--以下是zhang shichao导入的js文件-->
 <script src="js/add_TA.js"></script>
 <script src="js/add_stu.js"></script>
-<script src="js/add_article.js"></script>
+<script src="../article_mod/add_article.js"></script>
 <script src="js/class_manage.js"></script>
-<script src="js/courseware.js"></script>
+<script src="../courseware_mod/courseware.js"></script>
+<script src="../courseware_mod/courseware_general.js"></script>
+
 
 <!--以下是谢俊东导入的js文件-->
+<script type="text/javascript">
+    var ue = UE.getEditor('submitPost_editor');
+    var uec = UE.getEditor('submitRe_editor')
+</script>
 <script src="js/discuss_area.js"></script>
 <script src="../js/jquery-validation-1.14.0_dist_jquery.validate.js"></script>
 <script src="../js/jquery-validation-1.14.0_dist_localization_messages_zh.js"></script>
-
+<script>
+    $.ajax({
+        url: "../student/get_course_teacher.php?courseID=" + courseID, async: true,
+        success: function (result) {
+            var jsonObj = result;
+            $(".teacherName").text("");
+            for (var i = 0; i < jsonObj.length; i++) {
+                $(".teacherName").append(jsonObj[i].name + " ");
+            }
+        }
+    });
+</script>
 <!--以下是Li Boao导入的js文件-->
 <script src="get_notice.js"></script>
 <script src="release_quiz_detail.js"></script>

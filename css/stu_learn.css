@@ -218,6 +218,9 @@ input:focus {
 
 /*-----------------------------------讨论区-----------------------------*/
 
+#discuss_area_pane {
+    padding-top: 20px;
+}
 .f-discuss-header {
     font-size: 18px;
     line-height: 35px;

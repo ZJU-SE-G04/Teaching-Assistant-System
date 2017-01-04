@@ -1,86 +1,58 @@
-
-#add_TA_button{
-    float: right;
-    margin-top: 10px;
-}
-
-
-#add_TA_select{
-    margin-top: 10px;
-}
-
-#add_TA_hint{
-    margin-top: 15px;
-}
 /*/添加助教信息样式*/
-#add_TA_final{
-    margin-top: 10px;
-    float: right;
 
-}
 
-#cancel_TA_button{
+.my-btn{
     float: right;
     margin-top: 10px;
 }
 
- /*修改助教信息css*/
-#cancel_TA_button_update{
-    float: right;
-    margin-top: 10px;
-}
-
-#update_TA_final{
-    margin-top: 10px;
-    float: right;
-}
 
 
-.d_post_content_main {
-    float: left;
-    width: 588px;
-    padding: 0 0 7px 20px;
-}
+/*.d_post_content_main {*/
+    /*float: left;*/
+    /*width: 588px;*/
+    /*padding: 0 0 7px 20px;*/
+/*}*/
 
-.d_post_content_main .p_content {
-    height: auto!important;
-    min-height: 170px;
-}
+/*.d_post_content_main .p_content {*/
+    /*height: auto!important;*/
+    /*min-height: 170px;*/
+/*}*/
 
-.save_face_bg_0 {
-    background: url(http://tb2.bdstatic.com/tb/static-ppb/img/save_face/save_btn_bg_0_df0288f.png) no-repeat;
-}
-.save_face_card {
-    position: absolute;
-    width: 47px;
-    height: 20px;
-    top: 4px;
-    right: 6px;
-    cursor: pointer;
-    background: url(http://tb2.bdstatic.com/tb/static-ppb/img/save_face/save_face_btn_6808a0f.png) no-repeat;
-}
-.d_post_content {
-    line-height: 24px;
-    font-size: 14px;
-    word-wrap: break-word;
-}
-.clearfix {
-    zoom: 1;
-}
-.user-hide-post-down {
-    position: absolute;
-    width: 17px;
-    height: 17px;
-    right: -2px;
-    top: 20px;
-    z-index: 2;
-    background: url(http://tb2.bdstatic.com/tb/static-ppb/img/user_hide_post_c1433d6.png) no-repeat -6px -6px;
-}
-.achievement_medal_section {
-    width: 100%;
-    height: 90px;
-}
+/*.save_face_bg_0 {*/
+    /*background: url(http://tb2.bdstatic.com/tb/static-ppb/img/save_face/save_btn_bg_0_df0288f.png) no-repeat;*/
+/*}*/
+/*.save_face_card {*/
+    /*position: absolute;*/
+    /*width: 47px;*/
+    /*height: 20px;*/
+    /*top: 4px;*/
+    /*right: 6px;*/
+    /*cursor: pointer;*/
+    /*background: url(http://tb2.bdstatic.com/tb/static-ppb/img/save_face/save_face_btn_6808a0f.png) no-repeat;*/
+/*}*/
+/*.d_post_content {*/
+    /*line-height: 24px;*/
+    /*font-size: 14px;*/
+    /*word-wrap: break-word;*/
+/*}*/
+/*.clearfix {*/
+    /*zoom: 1;*/
+/*}*/
+/*.user-hide-post-down {*/
+    /*position: absolute;*/
+    /*width: 17px;*/
+    /*height: 17px;*/
+    /*right: -2px;*/
+    /*top: 20px;*/
+    /*z-index: 2;*/
+    /*background: url(http://tb2.bdstatic.com/tb/static-ppb/img/user_hide_post_c1433d6.png) no-repeat -6px -6px;*/
+/*}*/
+/*.achievement_medal_section {*/
+    /*width: 100%;*/
+    /*height: 90px;*/
+/*}*/
 
-.core_reply {
-    margin-right: 13px;
-}
+/*.core_reply {*/
+    /*margin-right: 13px;*/
+/*}*/

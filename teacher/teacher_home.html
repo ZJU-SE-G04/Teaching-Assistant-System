@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:equalTo="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>教师个人主页</title>
+    <link href="../bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <!--<link href="http://vjs.zencdn.net/5.8/video-js.css" rel="stylesheet">-->
+    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../css/stu_home.css">
+</head>
+<body>
+
+
+<div class="container-fluid">
+    <div class="row" id="header_topBar">
+        <div class="col-md-6"><a href="../index.html" target="_self"><img src="../img/logo_gray_large.png" alt="258x71"
+                                                                          class="img-responsive"></a></div>
+        <div class="col-md-2 col-md-offset-4" id="nameLink">
+            <div style="margin-left: 50px">
+                <div class="nickname f-f0 f-fc-gray f-thide">
+                    你好,
+                    <a id="username" class="f-fc-gray" href="../student/student_home.html" target="_blank"></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="row" id="header_courseNameBar">
+        <div style="margin: 5px 0 5px 0;">
+            <div class="col-md-2 right-border">
+                <img src="../img/logo_zju.png" alt="134x50" class="img-responsive"/>
+            </div>
+            <div class="col-md-9" id="header_courseName">
+                <div class="coursename f-f0 f-fc-black"><strong>软件工程管理</strong><br>
+                </div>
+                <div class="f-fc-black f-f0 teacherName">金波</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <div id="tabs" class="">
+                <ul class="nav-pills nav nav-stacked">
+                    <li class="active"><a data-toggle="tab" href="#modify_pass_pane">修改密码</a></li>
+                    <li class=""><a data-toggle="tab" href="#setup_pass_protect_pane">设置密保</a></li>
+                    <!--<li class=""><a data-toggle="tab" href="#notice_pane">通知</a></li>-->
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-10 tab-content" id="tab_content_area">
+            <div id="modify_pass_pane" class="tab-pane in active">
+                <form action="../personal_mod/modify_pass.php" method="post" id="modify_pass_form">
+                    <div class="form-field">
+                        <div class="field-label-margin">
+                            <em class="f-sign">*</em>
+                            <div class="inline">请输入原密码</div>
+                        </div>
+                        <input type="password" name="origin_pass" class="" maxlength="16" minlength="6" required/>
+                    </div>
+                    <div class="form-field">
+                        <div class="field-label-margin">
+                            <em class="f-sign">*</em>
+                            <div class="inline">请输入新密码</div>
+                        </div>
+                        <input type="password" name="new_pass" class="" placeholder="6-16位字母、数字" maxlength="16"
+                               minlength="6" id="new_pass" required/>
+                    </div>
+                    <div class="form-field">
+                        <div class="field-label-margin">
+                            <em class="f-sign">*</em>
+                            <div class="inline">请再次输入新密码</div>
+                        </div>
+                        <input type="password" name="re_new_pass" class="" placeholder="6-16位字母、数字" maxlength="16"
+                               minlength="6" equalTo="#new_pass" required/>
+                    </div>
+                    <div>
+                        <button class="p-btn" id="mod_pass_submit_btn">提交</button>
+                    </div>
+                </form>
+            </div>
+
+            <div id="setup_pass_protect_pane" class="tab-pane">
+
+                <form action="../personal_mod/set_passpro.php" method="post" id="setup_pass_protect_form">
+                    <div class="form-field">
+                        <div class="field-label-margin">
+                            <em class="f-sign">*</em>
+                            <div class="inline">请输入密保问题</div>
+                        </div>
+                        <!--<input type="password" name="origin_pass" class="" required/>-->
+                        <select class="" name="question" required>
+                            <option>您母亲的名字是?</option>
+                            <option>您第一次做飞机是去哪里?</option>
+                            <option>您小学班主任的名字是？</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <div class="field-label-margin">
+                            <em class="f-sign">*</em>
+                            <div class="inline">请输入密保问题的答案</div>
+                        </div>
+                        <input type="text" name="answer" class="" placeholder="" required/>
+                    </div>
+                    <div>
+                        <button class="p-btn" id="setup_pass_protect_submit_btn">提交</button>
+                    </div>
+                </form>
+            </div>
+
+
+
+            <!--<div id="notice_pane" class="tab-pane">-->
+                <!--&lt;!&ndash;<div class="alert alert-info">&ndash;&gt;-->
+                <!--&lt;!&ndash;<a type="button" class="close" data-dismiss="alert">&times;</a>&ndash;&gt;-->
+                <!--&lt;!&ndash;<strong>Warning!</strong> Best check yo self, you're not looking too good.&ndash;&gt;-->
+                <!--&lt;!&ndash;</div>&ndash;&gt;-->
+            <!--</div>-->
+        </div>
+    </div>
+</div>
+
+<script src="../jquery/jquery-3.1.1.js"></script>
+<script src="../bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+
+<script src="../js/jquery-validation-1.14.0_dist_jquery.validate.js"></script>
+<script src="../js/jquery-validation-1.14.0_dist_localization_messages_zh.js"></script>
+<script src="../jquery/jquery.cookie.js"></script>
+<script src="../js/header.js"></script>
+<script src="../js/student_home.js"></script>
+
+
+<script>
+    $("#modify_pass_form").validate({
+        submitHandler: function () {
+            var origin_pass = $("input[name='origin_pass']").val();
+            var new_pass = $("input[name='new_pass']").val();
+            var re_new_pass = $("input[name='re_new_pass']").val();
+            $.get("../personal_mod/modify_pass.php", {
+                        oldpass: origin_pass,
+                        newpass: new_pass,
+//                        re_new_pass: re_new_pass,
+                    }, function (data, status) {
+                        console.log(data);
+                        if (data['state'] == 0) {
+                            alert(data['msg']);
+                        } else if (data['state'] == 1) {
+                            alert(data['msg']);
+                        } else if (date['state'] == 2) {
+                            alert(date['msg'])
+                        }
+                    }
+            );
+        }
+    });
+
+    $("#setup_pass_protect_form").validate({
+        submitHandler: function () {
+            var question = $("select[name='question']").val();
+            var answer = $("input[name='answer']").val();
+            $.post("../personal_mod/set_passpro.php", {
+                question: question,
+                answer: answer,
+            }, function (data, status) {
+                alert(data['msg']);
+            })
+        }
+    });
+
+</script>
+</body>
+</html>

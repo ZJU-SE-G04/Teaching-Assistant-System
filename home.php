@@ -20,7 +20,9 @@
 		//$uid='3140102222';
 		//$lesson_id='ABCDE1';
 		if($uid=='null'){
-			echo '/student/student_learn.html?lesson_id='.$lesson_id;
+			$result=$conn->query('select * from lesson_table where lesson_id="'.$lesson_id.'"');
+			$row=mysqli_fetch_assoc($result);
+			echo 'student/student_learn.html?lesson_id='.$lesson_id.'&lesson_name='.$row['lesson_name'];
 			return;
 		}
 		$result=$conn->query('select * from user_table where id="'.$uid.'"');
@@ -32,7 +34,7 @@
 				//echo 'Location:/student/student_learn.html?lesson_id='.$lesson_id;
 					$result=$conn->query('select * from lesson_table where lesson_id="'.$lesson_id.'"');
 					$row=mysqli_fetch_assoc($result);
-					echo '/student/student_learn.html?lesson_id='.$lesson_id.'lesson_name='.$row['lesson_name'];
+					echo 'student/student_learn.html?lesson_id='.$lesson_id.'&lesson_name='.$row['lesson_name'];
 					break;
 				}
 				case 2:{
@@ -69,6 +71,9 @@
 	function login(){
 		$uid=$_POST['user_id'];
 		$pwd=$_POST['password'];
+		$pwd = md5($pwd);//md5加密
+//		echo $pwd;
+
 		//$uid='111111';
 		//$pwd='1111';
 		//echo 'select * from user_table where id="'.$uid.'" and pasword="'.$pwd.'";';

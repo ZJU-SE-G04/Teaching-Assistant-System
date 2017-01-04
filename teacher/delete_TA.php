@@ -7,7 +7,8 @@
 	$su=1;
 	$erm='null';
 
-	$result=$conn->query('delete from assitant_table where id='.$id.';');
+	$result=$conn->query('delete from user_table where id='.$id.';');//级联删除助教表
+
 	if(!$result){ $su=0;$erm=mysql_error();}
 	
 	
