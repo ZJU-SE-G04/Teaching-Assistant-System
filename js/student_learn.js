@@ -5,6 +5,7 @@
 
 //added by zhangshichao
 var courseID='ABCDE1';
+var course_id;
 var level=0;
 var user_name;
 var user_id;
