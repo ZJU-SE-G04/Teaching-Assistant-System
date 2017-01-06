@@ -12,7 +12,8 @@ function getQueryString(name) {
     }
 }
 $(document).ready(function () {
-    var courseID = getQueryString("lesson_id");
+    courseID = getQueryString("lesson_id");
+    course_id=courseID;
     var lesson_name = getQueryString("lesson_name");
     if($.cookie("user_id") == "null") {
         var num=1+Math.round(99*Math.random());

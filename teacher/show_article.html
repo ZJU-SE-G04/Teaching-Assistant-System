@@ -369,7 +369,7 @@
             </div>
             <div id="report" class="tab-pane">
                 <div id="report_main">
-                    <form action="http://www.baidu.com" class="form-horizontal">
+                    <div class="form-horizontal">
                         <div class="">
                             <h3 class="page-header">发布新实验报告</h3>
                         </div>
@@ -386,6 +386,12 @@
                             </div>
                         </div>
                         <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label margin-left--10">课程人数</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" id="re-report-number" placeholder="输入课程人数">
+                            </div>
+                        </div>
+                        <div class="form-group">
                             <label for="deadline" class="col-sm-2 control-label margin-left--10">截止日期</label>
                             <div class="col-sm-3">
                                 <input type="date" class="form-control" id="deadline">
@@ -399,20 +405,20 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="fileTemplate" class="col-sm-2 control-label margin-left--10">实验报告模板</label>
-                            <div class="col-sm-9">
-                                <input style="margin-top: 1mm;" type="file" id="fileTemplate">
-                            </div>
+                            <!--<label for="fileTemplate" class="col-sm-2 control-label margin-left&#45;&#45;10">实验报告模板</label>-->
+                            <!--<div class="col-sm-9">-->
+                                <!--<input style="margin-top: 1mm;" type="file" id="fileTemplate">-->
+                            <!--</div>-->
                         </div>
                         <div class="form-group">
                             <div class="col-sm-2 control-label margin-left--10"></div>
                             <div class="col-sm-9">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn btn-primary" onclick="add_report()">
                                     <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 发布
                                 </button>
                             </div>
                         </div>
-                    </form>
+                    </div>
 
                     <div class="">
                         <h3 class="page-header">批改实验报告</h3>
@@ -433,7 +439,7 @@
                                 <td>实验报告1</td>
                                 <td>学习使用网桥</td>
                                 <td>2016-11-05</td>
-                                <td>15/90</td>
+                                <td>2/3</td>
                                 <td>
                                     <a class="icon-black" onclick="displayCorrect()">
                                         <span class="glyphicon glyphicon-arrow-right"></span>
@@ -444,18 +450,18 @@
                                 <td>实验报告2</td>
                                 <td>学习使用路由器</td>
                                 <td>2016-11-10</td>
-                                <td>90/90</td>
+                                <td>3/3</td>
                                 <td>
                                     <a class="icon-black" onclick="displayCorrect()">
                                         <span class="glyphicon glyphicon-arrow-right"></span>
                                     </a>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>实验报告3</td>
-                                <td>学习使用服务器</td>
-                                <td>2016-12-15</td>
-                                <td>90/90</td>
+                            <tr class="re-to-show" style="display: none;">
+                                <td class='re-show-id'>实验报告3</td>
+                                <td class='re-show-name'>学习使用服务器</td>
+                                <td class='re-show-time'>2016-12-15</td>
+                                <td class='re-show-number'>3/3</td>
                                 <td>
                                     <span class="glyphicon glyphicon-time"></span>
                                 </td>
@@ -472,7 +478,7 @@
                         <table class="table text-center">
                             <thead>
                             <tr class="">
-                                <th class="text-center">姓名</th>
+                                <th class="text-center ">姓名</th>
                                 <th class="text-center">学号</th>
                                 <th class="text-center">实验报告名称</th>
                                 <th class="text-center">最后提交时间</th>
@@ -484,7 +490,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <form action="http://www.baidu.com" class="form-horizontal">
+                    <div  class="re-correct form-horizontal">
                         <div class="form-group">
                             <label for="score" class="col-sm-1 control-label">打分</label>
                             <div class="col-sm-1">
@@ -501,12 +507,12 @@
                         <div class="form-group">
                             <div class="col-sm-1 control-label"></div>
                             <div class="col-sm-3">
-                                <button type="submit" class="btn btn-primary">
-                                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span> 提交并批改下一份
+                                <button type="submit" onclick="cheat()" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-ok"  aria-hidden="true"></span> 提交并批改下一份
                                 </button>
                             </div>
                         </div>
-                    </form>
+                    </div>
                     <br>
 
                     <!--姓名 学号 实验报告名称 完成状态 提交时间 成绩 批改-->

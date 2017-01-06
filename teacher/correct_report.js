@@ -27,6 +27,40 @@ function test2() {
 function test3() {
     alert("hello3");
 }
+function cheat() {
+    // console.log("xxx")
+    // console.log($("#reportAllStudent"));
+    var correct=$(".re-correct");
+    var score=correct.find("input").val();
+    // console.log(score);
+    $("#correct_report1").find(".re-score").text(score);
+    $("#correct_report1").find(".if-correct").text("已批改");
+    $("#firstCorrect").find(".re-co-id").text("3140101003");
+    $("#firstCorrect").find(".re-co-name").text("谢俊西");
+
+}
+function add_report() {
+    var re_to_show=$(".re-to-show")
+    re_to_show.show();
+    var id=$('#report_main').find("#id").val();
+    var name=$('#report_main').find("#name").val();
+    var time=$('#report_main').find("#deadline").val();
+    var number=$('#report_main').find("#re-report-number").val();
+
+
+    console.log(id);
+    re_to_show.find(".re-show-id").text(id);
+    re_to_show.find(".re-show-name").text(name);
+    re_to_show.find(".re-show-time").text(time);
+    re_to_show.find(".re-show-number").text(number+'/'+number);
+
+
+    // re_to_show.find(".re-show-i").text("实验报告名称");
+
+
+
+
+}
 function correctReport() {
     var JSON_STR = [
         {
@@ -40,7 +74,7 @@ function correctReport() {
         },
         {
             "name": "谢俊南",
-            "id": "3140101002",
+            "id": "3140100000",
             "filename": "report_001.zip",
             "ddl": "2016-11-15 22:00:00",
             "score": "-1",
@@ -67,7 +101,9 @@ function correctReport() {
     for(var i in stuReport) {
         if(stuReport[i].state=="0"){
             var name = document.createElement("td");
+            name.className+='re-co-name';
             var id = document.createElement("td");
+            id.className+='re-co-id';
             var filename = document.createElement("td");
             var ddl = document.createElement("td");
             var file = document.createElement("td");
@@ -116,6 +152,10 @@ function correctReport() {
         tr.appendChild(filename);
         tr.appendChild(ddl);
         tr.appendChild(score);
+        if(stuReport[i].name=='谢俊南'){
+            score.className+="re-score";
+            correct.className+='if-correct';
+        }
         tr.appendChild(correct);
 
         name.innerHTML = stuReport[i].name;
