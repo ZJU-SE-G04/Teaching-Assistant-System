@@ -60,6 +60,7 @@
             <div class="col-md-9" id="header_courseName">
                 <div class="coursename f-f0 f-fc-black"><strong>软件工程管理</strong><br>
                 </div>
+                <div class="teacherName"></div>
             </div>
         </div>
     </div>
@@ -70,9 +71,9 @@
         <div class="col-md-2" id="left-side">
             <div id="tabs" class="">
                 <ul class="nav-pills nav nav-stacked">
-                    <li class=""><a href="#notice_pane" data-toggle="tab">公告</a></li>
+                    <li class="active"><a href="#notice_pane" data-toggle="tab">公告</a></li>
                     <li class=""><a href="#course_intro_pane" data-toggle="tab">课程介绍</a></li>
-                    <li class="active"><a href="#courseware_pane" data-toggle="tab">课件资料</a></li>
+                    <li class=""><a href="#courseware_pane" data-toggle="tab">课件资料</a></li>
                     <li class=""><a href="#article_pane" onclick="articleUpdate()" data-toggle="tab">教师文章</a></li>
                     <li class=""><a href="#examin_pane" data-toggle="tab">测验与作业</a></li>
                     <li class=""><a href="#discuss_area_pane" data-toggle="tab">讨论区</a></li>
@@ -86,7 +87,7 @@
             </div>
         </div>
         <div class="col-md-10 tab-content" id="tab_content_area">
-            <div id="notice_pane" class="tab-pane">
+            <div id="notice_pane" class="tab-pane in active">
                 <h3 class="page-header">公告</h3>
 
                 <div id="noticeDiv"></div>
@@ -153,7 +154,7 @@
                     <p></p>
                 </div>
             </div>
-            <div id="courseware_pane" class="tab-pane in active">
+            <div id="courseware_pane" class="tab-pane">
                 <div id="courseware_nonpreview_area">
                     <div class="titleBox" id="ppt_ddMenu_title">
                         <span class="glyphicon glyphicon-menu-down"></span><span class="f-title c-kind">最新课件</span>
@@ -668,7 +669,6 @@
         </div>
     </div>
 </div>
-<div id="test_div">test div</div>
 <!--<video id="my-video" class="video-js" controls preload="auto" width="640" height="264"-->
 <!--poster="MY_VIDEO_POSTER.jpg" data-setup="{}">-->
 <!--<source src="../fushanxing.mp4">-->
