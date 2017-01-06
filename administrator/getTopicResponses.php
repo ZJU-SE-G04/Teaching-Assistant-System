@@ -19,7 +19,7 @@
 			$row4 = mysqli_fetch_assoc($b);            
 			$x['floorMaster']= $row4['user_name'];
 			$x['time']=$row2['time'];
-			$x['content']=$row2['content'];
+			$x['content']=htmlspecialchars_decode($row2['content']);
 			$reResponses=[];
             $result2 = $conn->query("select * from re_response_table where topic_id = '".$topicId."' and floor = '".$x['floor']."';");
 			while($row5 = mysqli_fetch_assoc($result2)){
@@ -31,7 +31,7 @@
 				$row7 = mysqli_fetch_assoc($d); 
 				$y['reto']= $row7['user_name'];
 				$y['time']=$row5['time'];
-				$y['content']=$row5['content'];	
+				$y['content']=htmlspecialchars_decode($row5['content']);
 				$reResponses[]=$y;		
 	        }
 			$x['reResponses']=$reResponses;

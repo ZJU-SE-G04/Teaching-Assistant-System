@@ -116,31 +116,28 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
-<!--<div id="fe_answer_question" class="modal fade" tabindex="-1" role="dialog" style="margin-top: 8%">-->
-    <!--<div class="modal-dialog" role="document" style="width: 500px;">-->
-        <!--<div class="modal-content">-->
-            <!--<div class="modal-header">-->
-                <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span-->
-                        <!--aria-hidden="true">&times;</span></button>-->
-                <!--<h4 class="modal-title">取回密码</h4>-->
-            <!--</div>-->
-            <!--<div class="modal-body" style="padding-left: 60px; padding-right: 60px; padding-top: 20px;">-->
-
-                <!--<form action="#" method="get" class="form-horizontal">-->
-                    <!--<div id="fe_question">后端返回的问题</div>-->
-                    <!--<div class="form-group">-->
-                        <!--<input type="text" class="form-control" id="fe_answer" placeholder="回答">-->
-                    <!--</div>-->
-                    <!--<div class="form-group">-->
-                        <!--<button type="button" class="btn btn-primary" onclick="answerQuestion()" >下一步</button>-->
-                    <!--</div>-->
-                    <!--&lt;!&ndash;&ndash;&gt;-->
-                <!--</form>-->
-            <!--</div>-->
-        <!--</div>&lt;!&ndash; /.modal-content &ndash;&gt;-->
-    <!--</div>&lt;!&ndash; /.modal-dialog &ndash;&gt;-->
-<!--</div>&lt;!&ndash; /.modal &ndash;&gt;-->
+<div id="note" class="modal fade" tabindex="-1" role="dialog" style="margin-top: 8%">
+    <div class="modal-dialog" role="document" style="width: 500px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">留言板</h4>
+            </div>
+            <div class="modal-body" style="padding-left: 60px; padding-right: 60px; padding-top: 20px;">
+                <form action="#" method="get" class="form-horizontal">
+                    <div class="form-group">
+                        <textarea class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" onclick="leaveNote()" >确认</button>
+                    </div>
+                    <!---->
+                </form>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 <nav class="navbar navbar-inverse" style="margin-bottom: 0">
     <div class="container-fluid">
@@ -157,6 +154,8 @@
             <ul class="nav navbar-nav">
                 <!--<li><a href="#">Home <span class="sr-only">(current)</span></a></li>-->
                 <li><a href="file/网站指南.docx">网站指南</a></li>
+                <li><a href="#" data-toggle="modal" data-target="#note">我要留言</a></li>
+
                 <!--<li class="dropdown">-->
                     <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"-->
                        <!--aria-expanded="false">Dropdown <span class="caret"></span></a>-->

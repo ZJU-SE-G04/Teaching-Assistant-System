@@ -20,7 +20,7 @@
 			$row4 = mysqli_fetch_assoc($b);            
 			$x['floorMaster']= $row4['user_name'];
 			$x['time']=$row2['time'];
-			$x['content']=$row2['content'];
+			$x['content']=htmlspecialchars_decode($row2['content']);
 			$reComments=[];
             $result2 = $conn->query("select * from re_comment_table where article_id = '".$article_id."' and floor = '".$x['floor']."';");
 			while($row5 = mysqli_fetch_assoc($result2)){
@@ -29,7 +29,7 @@
 				$row6 = mysqli_fetch_assoc($c);            
 				$y['Master']= $row6['user_name'];
 				$y['time']=$row5['time'];
-				$y['content']=$row5['content'];	
+				$y['content']=htmlspecialchars_decode($row5['content']);
 				$reComments[]=$y;		
 	        }
 			$x['reComments']=$reComments;

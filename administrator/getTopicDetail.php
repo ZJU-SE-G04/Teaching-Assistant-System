@@ -9,7 +9,7 @@
 	$b=$conn->query("select user_name from  user_table where id = '".$row['id']."';");
     $row2 = mysqli_fetch_assoc($b);
 	$x['author']=$row2['user_name'];
-	$x['content']=$row['content'];
+	$x['content']=htmlspecialchars_decode($row['content']);
 //	$x['lesson']=$row['topic_id'];
     $a=$conn->query("select lesson_name from lesson_table where lesson_id = '".$row['lesson_id']."';");
     $row2 = mysqli_fetch_assoc($a);

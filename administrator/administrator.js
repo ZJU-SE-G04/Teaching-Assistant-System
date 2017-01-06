@@ -352,6 +352,8 @@ $(document).ready(function(){
         data["lessonAddress1"] = $("#lessonAddress1").val();
         data["lessonAddress2"] = $("#lessonAddress2").val();
         $.post("addClass.php", data);
+
+        alert("班级添加成功！")
     });
 
 //teacher//////////////////////////////////////////////////////////////////////////////////////////////////
@@ -366,6 +368,8 @@ $(document).ready(function(){
         data["teacherName"] = $("#teacherName").val()
         data["teacherIntroduction"] = teacherIntroductionEditor.getContent()
         $.post("addTeacher.php", data)
+
+        alert("教师添加成功！")
     })
 
 //lesson//////////////////////////////////////////////////////////////////////////////////////////////////
@@ -419,6 +423,8 @@ $(document).ready(function(){
         lessonInfo["考核方式"] = UE.getEditor("evaluationEditor").getContent()
         data["lessonInfo"] = JSON.stringify(lessonInfo)
         $.post("addLesson.php", data)
+
+        alert("课程添加成功！")
     })
 
 //link//////////////////////////////////////////////////////////////////////////////////////////////////
@@ -429,6 +435,8 @@ $(document).ready(function(){
         data["linkName"] = $("#linkName").val()
         data["linkAddress"] = $("#linkAddress").val()
         $.post("addLink.php", data)
+
+        alert("链接添加成功!")
         linkUpdate()
     })
 
@@ -492,6 +500,8 @@ $(document).ready(function(){
         var data = {}
         data["updateInfo"] = updateInfoEditor.getContent()
         $.post("addUpdateInfo.php", data)
+
+        alert("更新日志以保存，可在administrator/update_log.json中查看。")
     })
 
 });

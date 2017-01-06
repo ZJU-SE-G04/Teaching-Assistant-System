@@ -80,7 +80,7 @@ if (!($_SESSION['user'] != null && $_SESSION['level'] == 4)) {
                     <div class="content-blk message">
 
                         <div class="panel-group" id="messageLoop">
-                            <div class="panel panel-default old w3-hover-shadow w3-animate-zoom"> <!--loop start-->
+                            <div class="panel panel-info old w3-hover-shadow w3-animate-zoom"> <!--loop start-->
                                 <div class="panel-heading">
                                     <div class="row">
                                         <div class="col-xs-11">
@@ -100,12 +100,12 @@ if (!($_SESSION['user'] != null && $_SESSION['level'] == 4)) {
                     <div class="content-blk article">
 
                         <div class="panel-group" id="articleLoop">
-                            <div class="panel panel-default old w3-hover-shadow w3-animate-zoom">  <!--loop start-->
+                            <div class="panel panel-info old w3-hover-shadow w3-animate-zoom">  <!--loop start-->
                                 <div class="panel-heading w3-hover-grey clickable">
                                     <span class="glyphicon glyphicon-file"></span>&nbsp;<strong class="x-title"></strong>
                                 </div>
-                                <div class="panel-body"><p class="x-contentDigest"></p></div>
-                                <div class="panel-footer">
+                                <div class="panel-body hide"><p class="x-contentDigest"></p></div>
+                                <div class="panel-footer w3-white">
                                     <div class="row">
                                         <div class="col-md-3 col-md-offset-7 col-xs-8 col-xs-offset-0">
                                             <span class="x-time"></span>
@@ -133,7 +133,7 @@ if (!($_SESSION['user'] != null && $_SESSION['level'] == 4)) {
                                 <p class="x-body"></p>
                                 <hr id="commentBegin">
                                 <div class="panel-group" id="commentLoop">
-                                    <div class="panel panel-default old w3-hover-shadow">  <!--loop start-->
+                                    <div class="panel panel-success old w3-hover-shadow">  <!--loop start-->
                                         <div class="panel-heading">
                                             <div class="row">
                                                 <div class="col-md-1">第&nbsp;<strong class="x-floor"></strong>&nbsp;楼</div>
@@ -169,7 +169,7 @@ if (!($_SESSION['user'] != null && $_SESSION['level'] == 4)) {
                     <div class="content-blk topic">
 
                         <div class="panel-group" id="topicLoop">
-                            <div class="panel panel-default old w3-hover-shadow w3-animate-zoom">  <!--loop start-->
+                            <div class="panel panel-info old w3-hover-shadow w3-animate-zoom">  <!--loop start-->
                                 <div class="panel-heading w3-hover-grey clickable">
                                     <div class="row">
                                         <div class="col-md-10">
@@ -205,7 +205,7 @@ if (!($_SESSION['user'] != null && $_SESSION['level'] == 4)) {
                                 </button>
                             </div>
                             <div class="row">
-                                <div class="panel panel-info w3-hover-shadow w3-animate-zoom">
+                                <div class="panel panel-danger w3-hover-shadow w3-animate-zoom">
                                     <div class="panel-heading">
                                         <div class="row">
                                             <div class="col-md-9">
@@ -244,7 +244,7 @@ if (!($_SESSION['user'] != null && $_SESSION['level'] == 4)) {
 
                             <div class="row">
                                 <div class="panel-group" id="topicResponseLoop">
-                                    <div class="panel panel-default old w3-hover-shadow w3-animate-zoom">  <!--loop start-->
+                                    <div class="panel panel-success old w3-hover-shadow w3-animate-zoom">  <!--loop start-->
                                         <div class="panel-heading">
                                             <div class="row">
                                                 <div class="col-md-1">第&nbsp;<strong class="x-floor"></strong>&nbsp;楼</div>
