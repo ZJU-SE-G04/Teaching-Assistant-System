@@ -27,21 +27,21 @@ $(document).ready(
             $.ajax({
                 url: "get_course_intro.php?courseID=" + courseID, async: true,
                 success: function (result) {
-                    $("#course_detail p[title='course_background']").text(result['国际国内背景']);
-                    $("#course_detail p[title='teach_plan']").text(result['课时安排']);
-                    $("#course_detail p[title='teaching_material']").text(result['使用教材']);
-                    $("#course_detail p[title='examine_method']").text(result['考核方式']);
+                    $("#course_detail p[title='course_background']").html(result['国际国内背景']);
+                    $("#course_detail p[title='teach_plan']").html(result['课时安排']);
+                    $("#course_detail p[title='teaching_material']").html(result['使用教材']);
+                    $("#course_detail p[title='examine_method']").html(result['考核方式']);
                 }
             });
             $.ajax({
                 url: "get_course_teacher.php?courseID=" + courseID, async: true,
                 success: function (result) {
                     var jsonObj = result;
+                    $("#teacher_list ul").html("");
                     for (var i = 0; i < jsonObj.length; i++) {
                         var teacher_id = jsonObj[i].id;
                         var name = jsonObj[i].name;
                         console.log("teacher id:" + teacher_id);
-                        $("#teacher_list ul").html("");
                         $("#teacher_list ul").append($("<li></li>").append($("<a></a>").attr("id", teacher_id).text(name)));
                     }
                     $("#teacher_list ul li a").click(function () {
@@ -58,7 +58,7 @@ $(document).ready(
                                 $("#teacher_list").hide();
                                 $("#teacher_info_detail").show();
                                 $("#teacher_info_detail div h3").text(teacher_name);
-                                $("#teacher_info_detail p").text(teacher_info_detail);
+                                $("#teacher_info_detail p").html(teacher_info_detail);
                             }
                         });
                     });

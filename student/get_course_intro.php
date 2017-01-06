@@ -10,7 +10,7 @@
 	//$arr = [];
 	
 	while($row = mysqli_fetch_assoc($result)) {
-		$arr = '{'.$row["lesson_info"].'}';
+		$arr = $row["lesson_info"];
 	}
 	echo $arr;
 	$conn->close();
