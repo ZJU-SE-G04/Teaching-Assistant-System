@@ -52,7 +52,7 @@
 					break;
 				}
 				case 4:{
-					echo 'administrator/administrator.html';
+					echo 'administrator/administrator.php';
 					break;
 				}
 			}
@@ -85,6 +85,7 @@
 		}
 		else{
 			$_SESSION['user']=$uid;
+            $_SESSION['level'] = $row['level'];
 			echo $row['user_name'];
 		}
 	}
