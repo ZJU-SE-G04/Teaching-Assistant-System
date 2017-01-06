@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!($_SESSION['user'] != null && $_SESSION['level'] == 4)) {
+    header("Location: /Teaching-Assistant-System/index.html");
+    return;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +36,7 @@
 
 <div class="container-fluid">
     <div class="row" id="header_topBar">
-        <div class="col-sm-6"><img src="../img/logo_gray_large.png" alt="258x71" class="img-responsive"></div>
+        <div class="col-sm-6"><a href="../index.html"><img src="../img/logo_gray_large.png" alt="258x71" class="img-responsive"></a></div>
         <div class="col-sm-2 col-sm-offset-4" id="nameLink">
             <div style="margin-left: 20px">
                 <div class="nickname f-f0 f-fc-gray f-thide">
@@ -505,5 +512,6 @@
     </div>
 </div>
 
+<script src="../js/header.js"></script>
 </body>
 </html>
