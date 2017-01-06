@@ -609,11 +609,16 @@ $(document).ready(
 
 //显示发布帖子的界面
         $("#goto_issue_post_page_btn").click(function () {
-            $("#discuss_home_page").hide();
             $("#issue_post_page").show();
+            $("#discuss_home_page").hide();
             $("#post_detail_page").hide();
             $("#posts_border_page").hide();
-
+            $.get("check_if_stu_in_team.php", function (data) {
+                if(data['state'] != 0) {
+                    //没有加入队伍
+                    $("#select_posts_catagory ul li:last").remove();
+                }
+            })
         });
 
 //后退按钮，返回讨论区主界面
